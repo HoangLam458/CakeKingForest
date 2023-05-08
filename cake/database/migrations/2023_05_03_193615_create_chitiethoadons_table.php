@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('chitiethoadons', function (Blueprint $table) {
             $table->increments('stt');
-            $table->integer('idsize');
             $table->integer('soluong');
             $table->string('ghichu',300);
             $table->decimal('giatien');

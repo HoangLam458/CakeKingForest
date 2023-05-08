@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('email',50);
             $table->string('matkhau',50);
             $table->integer('loai');
+            $table->string('tenkhachhang',50);
+            $table->string('diachi',255);
+            $table->string('sdt',10);
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('hoadons', function (Blueprint $table) {
             $table->id();
+            $table->string('mahd',10);
             $table->dateTime('ngaylaphd');
+            $table->string('tenkhachhang',50);
             $table->string('diachigiaohang',255);
             $table->string('sdtkhachhang',10);
             $table->string('hinhthucnhanhang',50);
