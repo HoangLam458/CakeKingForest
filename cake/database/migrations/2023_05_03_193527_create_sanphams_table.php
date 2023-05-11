@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('tensp',255);
             $table->string('mota',300);
-            $table->string('hinhanh1',255);
+            $table->string('hinhanh',255);
+            $table->decimal('giatien');
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();
