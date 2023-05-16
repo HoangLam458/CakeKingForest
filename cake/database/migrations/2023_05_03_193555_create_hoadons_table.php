@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('hinhthucnhanhang',50);
             $table->date('ngaynhanhang');
             $table->string('phuongthucthanhtoan',20);
-            $table->decimal('giatien');      
+            //$table->decimal('giatien');      
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();
