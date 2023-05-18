@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sanphams', function (Blueprint $table) {
             $table->id();
             $table->string('tensp',255);
-            $table->string('mota',300);
+            $table->text('mota');
             $table->string('hinhanh',255);
-            $table->decimal('giatien');
+            $table->unsignedInteger('giatien');
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();

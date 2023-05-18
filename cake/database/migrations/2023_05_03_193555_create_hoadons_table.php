@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('hoadons', function (Blueprint $table) {
             $table->id();
             $table->string('mahd',10);
-            $table->dateTime('ngaylaphd');
+            //$table->dateTime('ngaylaphd');
+            $table->string('ngaylaphd');
             $table->string('tenkhachhang',50);
-            $table->string('diachigiaohang',255);
+            $table->text('diachigiaohang');
             $table->string('sdtkhachhang',10);
             $table->string('hinhthucnhanhang',50);
-            $table->date('ngaynhanhang');
+            //$table->date('ngaynhanhang');
+            $table->string('ngaynhanhang');
             $table->string('phuongthucthanhtoan',20);
             //$table->decimal('giatien');      
             $table->integer('trangthai');

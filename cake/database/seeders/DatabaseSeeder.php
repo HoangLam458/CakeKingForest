@@ -19,10 +19,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            SizeSeeder::class,
             LoaisanphamSeeder::class,
             SanphamSeeder::class,
             TaikhoanSeeder::class,
-            
+            Hoadonseeder::class,
+            ChitiethoadonSeeder::class,
         ]);
     }
 }
