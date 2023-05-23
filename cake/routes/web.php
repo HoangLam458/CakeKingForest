@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaikhoanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,5 @@ Route::group(['middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user', [TaikhoanController::class, 'index'])->name('user.index');
+Route::get('/user/detail/{id?}', [TaikhoanController::class, 'show'])->name('user.detail');

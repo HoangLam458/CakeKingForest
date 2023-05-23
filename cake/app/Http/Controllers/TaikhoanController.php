@@ -13,7 +13,8 @@ class TaikhoanController extends Controller
      */
     public function index()
     {
-        //
+        $lsUsers = TaiKhoan::all();
+        return view('acc', ['lsUsers'=> $lsUsers]);
     }
 
     /**
@@ -35,9 +36,19 @@ class TaikhoanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(taikhoan $taikhoan)
+    public function show($id)
     {
-        //
+        if($id){
+            $user = TaiKhoan::find($id);
+            if($user){
+                return view('accdetails',[
+                    'taikhoan'=>$user
+                ]);
+            }
+            return redirect()->back();
+        }
+
+        return redirect()->back();
     }
 
     /**
