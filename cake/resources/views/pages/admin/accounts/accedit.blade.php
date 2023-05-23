@@ -9,7 +9,7 @@
              <div class="col-12">
                  <div class="card">
                      <div class="card-header pb-0">
-                         <h4 class="card-title">Edit a user</h4>
+                         <h4 class="card-title">Chỉnh sửa thông tin tài khoản</h4>
                      </div>
                      <div class="card-content">
                          <div class="card-body">
