@@ -45,7 +45,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
 });
 Auth::routes();
-
+// route admin account
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/user', [TaikhoanController::class, 'index'])->name('user.index');
-Route::get('/user/detail/{id?}', [TaikhoanController::class, 'show'])->name('user.detail');
+Route::get('/manages/user', [TaikhoanController::class, 'index'])->name('user.index');
+Route::get('/manages/user/detail/{id?}', [TaikhoanController::class, 'show'])->name('user.detail');
+Route::get('/manages/user/create', [TaikhoanController::class, 'createform'])->name('user.create.form');
+Route::post('/manages/user/create', [TaikhoanController::class, 'create'])->name('user.create');
+Route::get('/manages/user/edit/{id?}', [TaikhoanController::class, 'edit'])->name('user.edit.form');
+Route::post('/manages/user/edit/{id?}', [TaikhoanController::class, 'update'])->name('user.edit');
+Route::get('/manages/user/delete/{id?}', [TaikhoanController::class, 'destroy'])->name('user.delete');
+

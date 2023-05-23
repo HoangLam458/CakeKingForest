@@ -2,6 +2,9 @@
     'class' => 'login-page',
     'elementActive' => ''
 ])
+
+<a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary"> Create new user
+</a>
 <div class="page-content">
     <section id="multiple-column-form">
         <div class="row match-height">
@@ -40,7 +43,7 @@
                                                                 d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                                                         </svg>
                                                     </a>
-                                                    <a href="" type="button" class="btn btn-primary">
+                                                    <a href="{{ route('user.edit.form', $item->id) }}" type="button" class="btn btn-primary">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             fill="currentColor" class="bi bi-pencil-square"
                                                             viewBox="0 0 16 16">
@@ -75,7 +78,7 @@
                                                                         <i class="bx bx-x d-block d-sm-none"></i>
                                                                         <span class="d-none d-sm-block">Cancel</span>
                                                                     </a>
-                                                                    <a href="" type="button" class="btn btn-primary ml-1">
+                                                                    <a href="{{ route('user.delete', $item->id) }}" type="button" class="btn btn-primary ml-1">
                                                                         <i class="bx bx-check d-block d-sm-none"></i>
                                                                         <span class="d-none d-sm-block">Accept</span>
                                                                     </a>
@@ -98,3 +101,4 @@
         </div>
     </section>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
