@@ -72,10 +72,10 @@
                     <p>{{ __('Typography') }}</p>
                 </a>
             </li>
-            <li class="active-pro {{ $elementActive == 'upgrade' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'upgrade') }}" class="bg-danger">
-                    <i class="nc-icon nc-spaceship text-white"></i>
-                    <p class="text-white">{{ __('Upgrade to PRO') }}</p>
+            <li class="{{ $elementActive == 'acc' ? 'active' : '' }}">
+                <a href="{{ route('user.index', 'acc') }}">
+                    <i class="nc-icon nc-caps-small"></i>
+                    <p>{{ __('Tài khoản') }}</p>
                 </a>
             </li>
         </ul>

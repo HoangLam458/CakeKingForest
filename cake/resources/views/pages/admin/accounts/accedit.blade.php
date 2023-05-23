@@ -1,9 +1,9 @@
 @extends('layouts.app', [
-    'class' => 'login-page',
-    'elementActive' => ''
+    'class' => '',
+    'elementActive' => 'acc'
 ])
-
-<div class="page-content">
+@section('content')
+<div class="content">
     <section id="multiple-column-form">
          <div class="row match-height">
              <div class="col-12">
@@ -62,3 +62,4 @@
  </div>
  <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary"> Back to list
 </a>
+@endsection

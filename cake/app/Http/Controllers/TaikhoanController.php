@@ -16,7 +16,7 @@ class TaikhoanController extends Controller
     public function index()
     {
         $lsUsers = TaiKhoan::all();
-        return view('acc', ['lsUsers'=> $lsUsers]);
+        return view('pages.admin.accounts.acc', ['lsUsers'=> $lsUsers]);
     }
 
     /**
@@ -24,7 +24,7 @@ class TaikhoanController extends Controller
      */
     public function createform()
     {
-        return view('acccreate');
+        return view('pages.admin.accounts.acccreate');
     }
     public function create(Request $request)
     {
@@ -63,7 +63,7 @@ class TaikhoanController extends Controller
         if($id){
             $user = TaiKhoan::find($id);
             if($user){
-                return view('accdetails',[
+                return view('pages.admin.accounts.accdetails',[
                     'taikhoan'=>$user
                 ]);
             }
@@ -81,7 +81,7 @@ class TaikhoanController extends Controller
         if($id){
             $user = TaiKhoan::find($id);
             if($user){
-                return view('accedit',[
+                return view('pages.admin.accounts.accedit',[
                     'staff'=>$user
                 ]);
             }
