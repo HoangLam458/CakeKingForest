@@ -13,7 +13,7 @@ class LoaisanphamController extends Controller
      */
     public function index()
     {
-        //
+  //
     }
 
     /**

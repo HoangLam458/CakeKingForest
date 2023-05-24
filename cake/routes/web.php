@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaikhoanController;
+use App\Http\Controllers\SanphamController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,4 +55,10 @@ Route::post('/manages/user/create', [TaikhoanController::class, 'create'])->name
 Route::get('/manages/user/edit/{id?}', [TaikhoanController::class, 'edit'])->name('user.edit.form');
 Route::post('/manages/user/edit/{id?}', [TaikhoanController::class, 'update'])->name('user.edit');
 Route::get('/manages/user/delete/{id?}', [TaikhoanController::class, 'destroy'])->name('user.delete');
-
+// route admin sản phẩm
+Route::get('/manages/sanpham', [SanphamController::class, 'index'])->name('sanpham.index');
+Route::get('/manages/sanpham/detail/{id?}', [SanphamController::class, 'show'])->name('sanpham.detail');
+Route::get('/manages/sanpham/edit/{id?}', [SanphamController::class, 'edit'])->name('sanpham.edit.form');
+Route::post('/manages/sanpham/edit/{id?}', [SanphamController::class, 'update'])->name('sanpham.edit');
+Route::get('/manages/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
+Route::post('/manages/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');

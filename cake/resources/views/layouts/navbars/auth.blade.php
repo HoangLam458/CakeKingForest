@@ -27,7 +27,7 @@
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
-                            {{ __('Laravel examples') }}
+                        {{ __('Laravel examples') }}
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -76,6 +76,12 @@
                 <a href="{{ route('page.index', 'typography') }}">
                     <i class="nc-icon nc-caps-small"></i>
                     <p>{{ __('Typography') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'sanpham' ? 'active' : '' }}">
+                <a href="{{ route('sanpham.index', 'sanpham') }}">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>{{ __('Sản Phẩm') }}</p>
                 </a>
             </li>
 
