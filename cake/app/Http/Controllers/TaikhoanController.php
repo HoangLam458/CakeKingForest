@@ -110,9 +110,6 @@ class TaikhoanController extends Controller
      */
     public function destroy($id)
     {
-        // if($id || $id!=auth()->user()->id){
-        //     }
-        // }
         $user = TaiKhoan::find($id);
         if($user){
             $user->delete();
