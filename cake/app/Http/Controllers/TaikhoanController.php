@@ -16,17 +16,22 @@ class TaikhoanController extends Controller
     public function index()
     {
         $lsUsers = TaiKhoan::all();
-        return view('pages.admin.accounts.acc', ['lsUsers'=> $lsUsers]);
+        return view('pages.admin.accounts.index', ['lsUsers'=> $lsUsers]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function createform()
-    {
-        return view('pages.admin.accounts.acccreate');
-    }
+
     public function create(Request $request)
+    {
+        return view('pages.admin.accounts.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $this->validate($request,[
             'email'=>'unique:taikhoans',
@@ -48,14 +53,6 @@ class TaikhoanController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoretaikhoanRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show($id)
@@ -63,7 +60,7 @@ class TaikhoanController extends Controller
         if($id){
             $user = TaiKhoan::find($id);
             if($user){
-                return view('pages.admin.accounts.accdetails',[
+                return view('pages.admin.accounts.details',[
                     'taikhoan'=>$user
                 ]);
             }
@@ -81,13 +78,12 @@ class TaikhoanController extends Controller
         if($id){
             $user = TaiKhoan::find($id);
             if($user){
-                return view('pages.admin.accounts.accedit',[
+                return view('pages.admin.accounts.edit',[
                     'staff'=>$user
                 ]);
             }
             return redirect()->back();
         }
-
         return redirect()->back();
     }
 
