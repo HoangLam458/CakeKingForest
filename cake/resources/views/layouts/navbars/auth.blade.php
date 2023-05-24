@@ -1,12 +1,12 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="" class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="{{ asset('paper') }}/img/logo-small.png">
             </div>
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            {{ __('Creative Tim') }}
+            {{ __('Cake King Forest') }}
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -14,7 +14,13 @@
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'dashboard') }}">
                     <i class="nc-icon nc-bank"></i>
-                    <p>{{ __('Dashboard') }}</p>
+                    <p>{{ __('Thống Kê') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'acc' ? 'active' : '' }}">
+                <a href="{{ route('user.index', 'acc') }}">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>{{ __('Tài Khoản') }}</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
@@ -72,12 +78,7 @@
                     <p>{{ __('Typography') }}</p>
                 </a>
             </li>
-            <li class="active-pro {{ $elementActive == 'upgrade' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'upgrade') }}" class="bg-danger">
-                    <i class="nc-icon nc-spaceship text-white"></i>
-                    <p class="text-white">{{ __('Upgrade to PRO') }}</p>
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>

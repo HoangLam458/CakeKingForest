@@ -21,7 +21,7 @@ class HoadonSeeder extends Seeder
                 'diachigiaohang' => '64 Huỳnh Thúc Kháng Quận 1, TP HCM',
                 'sdtkhachhang' => '0348575810',
                 'hinhthucnhanhang' => 'Trực Tiếp Tại Cửa Hàng',
-                'ngaynhanhang'=>'2023-05-17',
+                'ngaynhanhang'=>'2023-04-23',
                 'phuongthucthanhtoan'=>'Tiền Mặt',
                 'trangthai'=>'4',
                 'taikhoan_id'=>2
