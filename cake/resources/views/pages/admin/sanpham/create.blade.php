@@ -18,6 +18,22 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
+                                        <div class="mb-3">
+                                        <label class="form-label" for="inputImage">Hình ảnh</label>
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            id="inputImage"
+                                            class="form-control @error('image') is-invalid @enderror">
+
+                                        @error('image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-10">
                                         <div class="form-group">
                                             <label class="mb-2" for="first-name-column">Tên Bánh</label>
                                             <input required maxlength="255" type="text" id="first-name-column"
@@ -26,14 +42,16 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label class="mb-2" for="city-column">Loại Bánh</label>
-                                            <select class="form-select" name="loaisanpham_id" id="basicSelect">
+                                            <label class="mb-2">Loại Bánh</label>
+                                            <select class="form-control" name="loaisanpham_id" id="basicSelect">
                                                 @foreach ($loaisanpham as $lsanpham)
                                                 <option value="{{ $lsanpham->id }}"> {{ $lsanpham->tenloaisp }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row ">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label class="mb-2" for="first-name-column">Mô Tả</label>
@@ -41,26 +59,12 @@
                                                 id="exampleFormControlTextarea1" rows="3"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label class="mb-2" for="city-column">Giá Tiền</label>
                                             <input required value="80000" min="80000" max="2000000" step="1000"
                                                 type="number" id="last-name-column" class="form-control" name="giatien">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                    <div class="mb-3">
-                <label class="form-label" for="inputImage">Image:</label>
-                <input 
-                    type="file" 
-                    name="image" 
-                    id="inputImage"
-                    class="form-control @error('image') is-invalid @enderror">
-  
-                @error('image')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
                                     </div>
                                 </div>
                                 <hr />

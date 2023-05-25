@@ -76,7 +76,7 @@ class SanphamController extends Controller
      */
     public function edit($id)
     {
-   
+
         if($id){
             $sanpham = Sanpham::find($id);
             $loaisanpham = loaisanpham::all();
@@ -96,7 +96,7 @@ class SanphamController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $sanpham = Sanpham::find($id);
+        $sanpham = Sanpham::find($id);
          $sanpham->tensp = $request->get('tensp');
          $sanpham->mota= $request->get('mota');
          $sanpham->giatien = $request->get('giatien');
@@ -116,6 +116,7 @@ class SanphamController extends Controller
          }
          $sanpham->save();
          return redirect()->back()->with('status','Cập nhật thành công');
+
     }
 
     /**
