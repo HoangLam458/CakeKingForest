@@ -16,8 +16,9 @@ class SanphamController extends Controller
     public function index()
     {
         $loaisanpham = loaisanpham::all();
-        $lsSanpham = Sanpham::all();
-        return view('pages.admin.sanpham.index', ['loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
+       
+        $lsSanpham = Sanpham::simplePaginate(10);
+        return view('pages.admin.sanpham.index', [ 'loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
     }
 
     /**

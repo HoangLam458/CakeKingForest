@@ -24,7 +24,7 @@ class HoadonSeeder extends Seeder
                 'ngaynhanhang'=>'2023-04-23',
                 'phuongthucthanhtoan'=>'Tiền Mặt',
                 'trangthai'=>'4',
-                'taikhoan_id'=>2
+                'users_id'=>2
             ]
         );
         Hoadon::create(
@@ -38,7 +38,7 @@ class HoadonSeeder extends Seeder
                 'ngaynhanhang'=>'2023-05-20',
                 'phuongthucthanhtoan'=>'MoMo',
                 'trangthai'=>'1',
-                'taikhoan_id'=>1
+                'users_id'=>1
             ]
         );
         Hoadon::create(
@@ -52,7 +52,7 @@ class HoadonSeeder extends Seeder
                 'ngaynhanhang'=>'2023-04-27',
                 'phuongthucthanhtoan'=>'VnPay',
                 'trangthai'=>'4',
-                'taikhoan_id'=>3
+                'users_id'=>3
             ]
         );
         Hoadon::create(
@@ -66,7 +66,7 @@ class HoadonSeeder extends Seeder
                 'ngaynhanhang'=>'2023-05-05',
                 'phuongthucthanhtoan'=>'Tiền Mặt',
                 'trangthai'=>'5',
-                'taikhoan_id'=>4
+                'users_id'=>4
             ]
         );
         Hoadon::create(
@@ -80,7 +80,7 @@ class HoadonSeeder extends Seeder
                 'ngaynhanhang'=>'2023-05-25',
                 'phuongthucthanhtoan'=>'MoMo',
                 'trangthai'=>'3',
-                'taikhoan_id'=>5
+                'users_id'=>5
             ]
         );
     }

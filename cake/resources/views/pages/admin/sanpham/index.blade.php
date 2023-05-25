@@ -85,6 +85,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                      {{  $lsSanpham->links() }}
                     </div>
                 </div>
             </div>
