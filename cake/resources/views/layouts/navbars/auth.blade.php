@@ -1,11 +1,11 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="" class="simple-text logo-mini">
+        <a href="{{route('cake')}}" class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="{{ asset('paper') }}/img/logo-small.png">
             </div>
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="{{route('cake')}}" class="simple-text logo-normal">
             {{ __('Cake King Forest') }}
         </a>
     </div>
@@ -17,13 +17,25 @@
                     <p>{{ __('Thống Kê') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'acc' ? 'active' : '' }}">
-                <a href="{{ route('user.index', 'acc') }}">
+            <li class="{{ $elementActive == 'user' ? 'active' : '' }}">
+                <a href="{{ route('user.index', 'index') }}">
                     <i class="nc-icon nc-single-02"></i>
                     <p>{{ __('Tài Khoản') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
+            <li class="{{ $elementActive == 'catagory' ? 'active' : '' }}">
+                <a href="{{ route('catagory.index', 'index') }}">
+                    <i class="nc-icon nc-bullet-list-67"></i>
+                    <p>{{ __('Loại sản phẩm') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'invoice' ? 'active' : '' }}">
+                <a href="{{ route('invoice.index', 'index') }}">
+                    <i class="nc-icon nc-paper"></i>
+                    <p>{{ __('Hóa đơn') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -39,7 +51,7 @@
                                 <span class="sidebar-normal">{{ __(' User Profile ') }}</span>
                             </a>
                         </li>
-                        <li class="{{ $elementActive == 'user' ? 'active' : '' }}">
+                        <li class="{{ $elementActive == 'doc' ? 'active' : '' }}">
                             <a href="{{ route('page.index', 'user') }}">
                                 <span class="sidebar-mini-icon">{{ __('U') }}</span>
                                 <span class="sidebar-normal">{{ __(' User Management ') }}</span>

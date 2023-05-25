@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use App\Http\Requests\StorehoadonRequest;
 use App\Http\Requests\UpdatehoadonRequest;
+use Illuminate\Support\Facades\DB;
 
 class HoadonController extends Controller
 {
@@ -13,7 +15,8 @@ class HoadonController extends Controller
      */
     public function index()
     {
-        //
+        $lsHoaDon = HoaDon::where('trangthai','<>', 0)->orderBy('mahd')->get();
+        return view('pages.admin.invoice.index', ['lsHoaDon'=> $lsHoaDon]);
     }
 
     /**
@@ -35,9 +38,28 @@ class HoadonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(hoadon $hoadon)
+    public function show( $id)
     {
-        //
+        // if($id){
+        //     $invoice = HoaDon::find($id)->get();
+        //     if($invoice){
+        //         $lsdetails = chitiethoadon::where('hoadon_id',$id)->get();
+        //         return view('pages.admin.invoice.details',[
+        //             'invoice'=>$invoice, 'lsdetails'=>$lsdetails
+        //         ]);
+        //     }
+        //     return redirect()->back();
+        // }
+        // return redirect()->back();
+        $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
+            ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
+            ->where('hoadon_id', $id)
+            ->select('*', 'sanphams.tensp as tensanpham', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
+        $user = Hoadon::where('id', $id)->get();
+        return view('pages.admin.invoice.details', [], [
+            'lsInD' => $lsInD,
+            'user' => $user
+        ]);
     }
 
     /**

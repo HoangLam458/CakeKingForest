@@ -1,34 +1,24 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'acc'
+    'elementActive' => 'catagory'
 ])
 
 
 @section('content')
-
 <div class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách tài khoản</h4>
-                    <a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary"> Tạo user mới</a>
+                    <h4 class="card-title"> Danh sách loại sản phẩm</h4>
+                    <a href="{{ route('catagory.create.form') }}" type="button" class="btn btn-primary"> Tạo loại sản phẩm mới</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>
-                                    Họ và tên
-                                </th>
-                                <th>
-                                    Email
-                                </th>
-                                <th>
-                                    Số điện thoại
-                                </th>
-                                <th >
-                                    Địa chỉ
+                                    Tên loại sản phẩm
                                 </th>
                                 <th>
                                     Chức năng
@@ -37,21 +27,10 @@
                             <tbody>
                                 @foreach ( $lsUsers as $item  )
                                 <tr>
-                                    <td class="text-bold-500">{{ $item->tenkhachhang }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td class="text-bold-500">{{ $item->sdt }}</td>
-                                    <td>{{ explode(", ", $item->diachi)[0] }}</td>
+                                    <td class="col-md-4">{{ $item->tenloaisp }}</td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('user.detail', $item->id) }}" type="button" class="btn btn-secondary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-three-dots"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                </svg>
-                                            </a>
-                                            <a href="{{ route('user.edit.form', $item->id) }}" type="button" class="btn btn-primary">
+                                        <div  class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route('catagory.edit.form', $item->id) }}" type="button" class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square"
                                                     viewBox="0 0 16 16">
@@ -61,7 +40,7 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
                                             </a>
-                                            {{-- @if ($item->id!=auth()->user()->id) --}}
+
                                             <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#animation-{{ $item->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3"
@@ -86,7 +65,7 @@
                                                                 <i class="bx bx-x d-block d-sm-none"></i>
                                                                 <span class="d-none d-sm-block">Cancel</span>
                                                             </a>
-                                                            <a href="{{ route('user.delete', $item->id) }}" type="button" class="btn btn-primary ml-1">
+                                                            <a href="{{ route('catagory.delete', $item->id) }}" type="button" class="btn btn-primary ml-1">
                                                                 <i class="bx bx-check d-block d-sm-none"></i>
                                                                 <span class="d-none d-sm-block">Accept</span>
                                                             </a>
@@ -94,7 +73,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- @endif --}}
+
                                         </div>
                                     </td>
                                 </tr>
@@ -105,4 +84,6 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
  @endsection

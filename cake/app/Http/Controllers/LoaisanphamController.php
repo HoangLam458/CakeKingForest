@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\loaisanpham;
 use App\Http\Requests\StoreloaisanphamRequest;
 use App\Http\Requests\UpdateloaisanphamRequest;
+use Illuminate\Http\Request;
 
 class LoaisanphamController extends Controller
 {
@@ -13,7 +14,8 @@ class LoaisanphamController extends Controller
      */
     public function index()
     {
-  //
+        $lsUsers = Loaisanpham::all();
+        return view('pages.admin.catagory.index', ['lsUsers'=> $lsUsers]);
     }
 
     /**
@@ -21,15 +23,24 @@ class LoaisanphamController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.catagory.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreloaisanphamRequest $request)
+    public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'tenloaisp'=>'unique:loaisanphams',
+        ]);
+        $request = $request->all();
+        Loaisanpham::create([
+            'tenloaisp'=> $request['name'],
+            'trangthai'=> 1
+        ]);
+
+        return redirect()->route('catagory.index');
     }
 
     /**
@@ -43,9 +54,18 @@ class LoaisanphamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(loaisanpham $loaisanpham)
+    public function edit($id)
     {
-        //
+        if($id){
+            $user = Loaisanpham::find($id);
+            if($user){
+                return view('pages.admin.catagory.edit',[
+                    'staff'=>$user
+                ]);
+            }
+            return redirect()->back();
+        }
+        return redirect()->back();
     }
 
     /**
