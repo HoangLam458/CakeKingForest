@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\TaikhoanController;
 use App\Http\Controllers\SanphamController;
 use Illuminate\Support\Facades\Auth;
@@ -62,3 +63,12 @@ Route::get('/manages/sanpham/edit/{id?}', [SanphamController::class, 'edit'])->n
 Route::post('/manages/sanpham/edit/{id?}', [SanphamController::class, 'update'])->name('sanpham.edit');
 Route::get('/manages/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
 Route::post('/manages/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');
+Route::get('/manages/sanpham/delete/{id?}', [SanphamController::class, 'destroy'])->name('sanpham.delete');
+// route admin size
+Route::get('/manages/size', [SizeController::class, 'index'])->name('size.index');
+Route::get('/manages/size/detail/{id?}', [SizeController::class, 'show'])->name('size.detail');
+Route::get('/manages/size/edit/{id?}', [SizeController::class, 'edit'])->name('size.edit.form');
+Route::post('/manages/size/edit/{id?}', [SizeController::class, 'update'])->name('size.edit');
+Route::get('/manages/size/create', [SizeController::class, 'create'])->name('size.create');
+Route::post('/manages/size/store', [SizeController::class, 'store'])->name('size.store');
+Route::get('/manages/size/delete/{id?}', [SizeController::class, 'destroy'])->name('size.delete');

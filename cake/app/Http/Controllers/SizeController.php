@@ -13,7 +13,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $lsSize = Size::all();
+        return view('pages.admin.sizes.size', ['lsSize'=> $lsSize]);
     }
 
     /**
@@ -21,7 +22,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.sizes.sizecreate');
     }
 
     /**
@@ -29,7 +30,11 @@ class SizeController extends Controller
      */
     public function store(StoresizeRequest $request)
     {
-        //
+        Size::create([
+            'tensize'=> $request['tensize'],
+            'phantram'=> $request['phantram'],
+        ]);
+        return redirect()->route('size.index');
     }
 
     /**
@@ -43,24 +48,42 @@ class SizeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(size $size)
+    public function edit($id)
     {
-        //
+        if($id){
+            $size = size::find($id);
+            if($size){
+                return view('pages.admin.sizes.sizeedit',['size'=> $size,
+                ]);
+            }
+            return redirect()->back();
+        }
+
+        return redirect()->back();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatesizeRequest $request, size $size)
+    public function update(UpdatesizeRequest $request, $id)
     {
-        //
+        $size = Size::find($id);
+        $size->tensize = $request->get('tensize');
+        $size->phantram= $request->get('phantram');
+       
+        $size->save();
+        return redirect()->back()->with('status','Cập nhật thành công');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(size $size)
+    public function destroy($id)
     {
-        //
+        $size = Size::find($id);
+        if($size){
+            $size->delete();
+        return redirect()->back();
+         }
     }
 }

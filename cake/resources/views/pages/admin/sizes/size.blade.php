@@ -1,6 +1,6 @@
 @extends('layouts.app', [
 'class' => '',
-'elementActive' => 'sanpham'
+'elementActive' => 'size'
 ])
 <header>
   <script language="JavaScript" type="text/javascript">
@@ -15,56 +15,30 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách bánh</h4>
-                    <a href="{{ route('sanpham.create') }}" type="button" class="btn btn-primary"> Thêm bánh
-                        mới</a>
+                    <h4 class="card-title"> Danh sách kích thước bánh</h4>
+                    <a href="{{ route('size.create') }}" type="button" class="btn btn-primary"> Thêm kích thước</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>
-                                    Hình Ảnh
+                                    Tên Kích Thước
                                 </th>
                                 <th>
-                                    Tên Bánh
+                                    Phần Trăm tăng
                                 </th>
                                 <th>
-                                    Loại Bánh
-                                </th>
-                                <th>
-                                    Mô Tả
-                                </th>
-                                <th>
-                                    Giá Tiền
-                                </th>
+                                    Ch
                             </thead>
                             <tbody>
-                                @foreach ( $lsSanpham as $item )
+                                @foreach ( $lsSize as $item )
                                 <tr>
-                                    <td class="text-bold-500">
-                                        <img width="150px" height="150px" src="{{asset('/images/'.$item->hinhanh)}}" alt="">
-                                    </td>
-                                    <td class="text-bold-500">{{ $item->tensp }}</td>
-                                    <td>
-                                        @foreach($loaisanpham as $loaibanh)
-                                        @if($loaibanh->id == $item->loaisanpham_id)
-                                        <p>{{$loaibanh->tenloaisp}}</p>
-                                        @endif
-                                        @endforeach
-                                    </td>
-                                    <td class="text-bold-500">{{ $item->mota }}</td>
-                                    <td class="text-bold-500">{{ $item->giatien }} VNĐ</td>
+                                    <td class="text-bold-500">{{ $item->tensize }}</td>
+                                    <td class="text-bold-500">{{ $item->phantram }} %</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('sanpham.detail', $item->id) }}" type="button"
-                                                class="btn btn-secondary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                </svg>
-                                            </a>
+                                           
                                             <a href="{{ route('sanpham.edit.form', $item->id) }}" type="button"
                                                 class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -76,7 +50,7 @@
                                                 </svg>
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
-                                            <a href="{{ route('sanpham.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            <a href="{{ route('size.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#animation-{{ $item->id }}" onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

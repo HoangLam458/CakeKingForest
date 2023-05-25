@@ -7,6 +7,7 @@ use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
 use App\Http\Requests\UpdatesanphamRequest;
 use Database\Factories\SanphamFactory;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
 
 class SanphamController extends Controller
@@ -97,21 +98,37 @@ class SanphamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sanpham = Sanpham::find($id);
+         $sanpham = Sanpham::find($id);
          $sanpham->tensp = $request->get('tensp');
          $sanpham->mota= $request->get('mota');
          $sanpham->giatien = $request->get('giatien');
          $sanpham->loaisanpham_id = $request->get('loaisanpham_id');
+         if($request ->hasFile('image'))
+         {
+            $destination ='images/'.$sanpham->hinhanh;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+             $file = $request->file('image');
+             $extension =$file->getClientOriginalExtension();
+             $filename =time().'.'.$extension;
+             $file->move('images/',$filename);
+             $sanpham->hinhanh = $filename;
+         }
          $sanpham->save();
-
-         return redirect()->route('sanpham.index');
+         return redirect()->back()->with('status','Cập nhật thành công');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(sanpham $sanpham)
+    public function destroy( $id)
     {
-        //
+        $sanpham = sanpham::find($id);
+        if($sanpham){
+            $sanpham->delete();
+        return redirect()->back();
+         }
     }
 }

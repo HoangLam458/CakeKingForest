@@ -84,6 +84,12 @@
                     <p>{{ __('Sản Phẩm') }}</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
+                <a href="{{ route('size.index', 'size') }}">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>{{ __('Kích Thước Bánh') }}</p>
+                </a>
+            </li>
 
         </ul>
     </div>
