@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
-use App\Http\Requests\UpdatesanphamRequest;
-use Database\Factories\SanphamFactory;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,7 +17,7 @@ class SanphamController extends Controller
     {
         $loaisanpham = loaisanpham::all();
         $lsSanpham = Sanpham::all();
-        return view('pages.admin.sanphams.sanpham', ['loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
+        return view('pages.admin.sanpham.index', ['loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
     }
 
     /**
@@ -28,7 +26,7 @@ class SanphamController extends Controller
     public function create()
     {
         $loaisanpham = loaisanpham::all();
-        return view('pages.admin.sanphams.sanphamcreate', ['loaisanpham'=> $loaisanpham]);
+        return view('pages.admin.sanpham.create', ['loaisanpham'=> $loaisanpham]);
     }
 
     /**
@@ -63,7 +61,7 @@ class SanphamController extends Controller
             $loaisanpham = loaisanpham::all();
             $sanpham = Sanpham::find($id);
             if($sanpham){
-                return view('pages.admin.sanphams.sanphamdetail',['loaisanpham'=> $loaisanpham,
+                return view('pages.admin.sanpham.detail',['loaisanpham'=> $loaisanpham,
                     'sanpham'=>$sanpham
                 ]);
             }
@@ -83,7 +81,7 @@ class SanphamController extends Controller
             $sanpham = Sanpham::find($id);
             $loaisanpham = loaisanpham::all();
             if($sanpham){
-                return view('pages.admin.sanphams.sanphamedit',['loaisanpham'=> $loaisanpham,
+                return view('pages.admin.sanpham.edit',['loaisanpham'=> $loaisanpham,
                     'sanpham'=>$sanpham
                 ]);
             }

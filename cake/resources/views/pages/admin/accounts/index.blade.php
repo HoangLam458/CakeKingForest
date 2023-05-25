@@ -3,9 +3,7 @@
     'elementActive' => 'user'
 ])
 
-
 @section('content')
-
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -81,11 +79,12 @@
                 </div>
             </div>
         </div>
- @endsection
- <header>
+        <header>
     <script language="JavaScript" type="text/javascript">
       function checkDelete(){
           return confirm('Bạn có chắc chắn muốn xóa');
       }
     </script>
   </header>
+
+ @endsection

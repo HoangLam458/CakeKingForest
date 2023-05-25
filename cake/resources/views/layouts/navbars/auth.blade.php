@@ -2,7 +2,7 @@
     <div class="logo">
         <a href="{{route('cake')}}" class="simple-text logo-mini">
             <div class="logo-image-small">
-                <img src="{{ asset('paper') }}/img/logo-small.png">
+                <img src="{{ asset('paper') }}/img/final_logo.png">
             </div>
         </a>
         <a href="{{route('cake')}}" class="simple-text logo-normal">
@@ -33,6 +33,18 @@
                 <a href="{{ route('invoice.index', 'index') }}">
                     <i class="nc-icon nc-paper"></i>
                     <p>{{ __('Hóa đơn') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'sanpham' ? 'active' : '' }}">
+                <a href="{{ route('sanpham.index', 'index') }}">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>{{ __('Sản Phẩm') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
+                <a href="{{ route('size.index', 'index') }}">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
@@ -66,43 +78,6 @@
                     <p>{{ __('Icons') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'map' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'map') }}">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __('Maps') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'notifications' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'notifications') }}">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>{{ __('Notifications') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'tables' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'tables') }}">
-                    <i class="nc-icon nc-tile-56"></i>
-                    <p>{{ __('Table List') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'typography' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'typography') }}">
-                    <i class="nc-icon nc-caps-small"></i>
-                    <p>{{ __('Typography') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'sanpham' ? 'active' : '' }}">
-                <a href="{{ route('sanpham.index', 'sanpham') }}">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>{{ __('Sản Phẩm') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
-                <a href="{{ route('size.index', 'size') }}">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>{{ __('Kích Thước Bánh') }}</p>
-                </a>
-            </li>
-
         </ul>
     </div>
 </div>

@@ -79,8 +79,12 @@ class LoaisanphamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(loaisanpham $loaisanpham)
+    public function destroy( $id)
     {
-        //
+        $category = loaisanpham::find($id);
+        if($category){
+            $category->delete();
+        return redirect()->back();
+         }
     }
 }

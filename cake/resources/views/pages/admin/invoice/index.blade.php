@@ -74,5 +74,12 @@
         </div>
     </section>
 </div>
+<header>
+  <script language="JavaScript" type="text/javascript">
+    function checkDelete(){
+        return confirm('Bạn có chắc chắn muốn xóa');
+    }
+  </script>
+</header>
  @endsection
 

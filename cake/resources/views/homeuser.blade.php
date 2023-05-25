@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+ 
     <title>Cake King Forest</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,10 +33,13 @@
 </head>
 
 <body class="goto-here">
+
     <div class="py-1 bg-primary">
         <div class="container">
+
             <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
                 <div class="col-lg-12 d-block">
+       
                     <div class="row d-flex">
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -57,6 +61,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
+        <a class="navbar-brand" href="{{ route('cake') }}"><img src="{{ asset('paper') }}/img/final_logo.png" width="55" height="55"></img></a>
             <a class="navbar-brand" href="{{ route('cake') }}">Cake King Forest</a>
             <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

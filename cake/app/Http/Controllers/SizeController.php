@@ -14,7 +14,7 @@ class SizeController extends Controller
     public function index()
     {
         $lsSize = Size::all();
-        return view('pages.admin.sizes.size', ['lsSize'=> $lsSize]);
+        return view('pages.admin.size.index', ['lsSize'=> $lsSize]);
     }
 
     /**
@@ -22,7 +22,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.sizes.sizecreate');
+        return view('pages.admin.size.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class SizeController extends Controller
         if($id){
             $size = size::find($id);
             if($size){
-                return view('pages.admin.sizes.sizeedit',['size'=> $size,
+                return view('pages.admin.size.edit',['size'=> $size,
                 ]);
             }
             return redirect()->back();

@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
+
 @section('content')
 <div class="content">
     <section id="multiple-column-form">
