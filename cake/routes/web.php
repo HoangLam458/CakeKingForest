@@ -31,6 +31,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('Login');
 
+
+Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
+Route::get('/detail{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -87,3 +91,4 @@ Route::post('/manages/catagory/create', [LoaisanphamController::class, 'store'])
 Route::get('/manages/catagory/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('catagory.edit.form');
 Route::post('/manages/catagory/edit/{id?}', [LoaisanphamController::class, 'update'])->name('catagory.edit');
 Route::get('/manages/catagory/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('catagory.delete');
+

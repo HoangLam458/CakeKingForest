@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
+use App\Models\size;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -124,10 +125,36 @@ class SanphamController extends Controller
      */
     public function destroy( $id)
     {
+      
         $sanpham = sanpham::find($id);
         if($sanpham){
             $sanpham->delete();
         return redirect()->back();
          }
     }
+
+    public function shop()
+    {       
+        $lsloaisp = loaisanpham::all();
+        $lsSanpham = Sanpham::simplePaginate(12);
+        return view('pages.user.shop', ['lsSanpham'=> $lsSanpham, 'lsloaisp' =>$lsloaisp]);
+    }
+
+    public function detail($id)
+    {      
+        if($id){
+        $size = size::all();
+        $loaisanpham = loaisanpham::all();
+        $sanpham = Sanpham::find($id);
+        if($sanpham){
+            return view('pages.user.detail',['loaisanpham'=> $loaisanpham,
+                'sanpham'=>$sanpham, 'size'=> $size
+            ]);
+        }
+        return redirect()->back();
+    }
+    return redirect()->back(); 
+    }
+
+
 }
