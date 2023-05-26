@@ -40,13 +40,15 @@
                                              <textarea required name="address" maxlength="255" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                          </div>
                                      </div>
-                                 </div><hr/>
+                                 </div>
+                                 <div class="row">
                                  <div class="col-md-6 col-12">
                                          <div class="form-group">
                                              <label class="mb-2" for="last-name-column">Mật khẩu</label>
                                              <input required maxlength="20" type="text" id="last-name-column" class="form-control" name="password">
                                          </div>
                                      </div>
+                                 </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">
                                          <button type="submit" class="btn btn-primary me-1 mb-1">Xác nhận</button>
                                          <a onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</a>

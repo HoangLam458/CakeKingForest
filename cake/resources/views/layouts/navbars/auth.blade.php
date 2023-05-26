@@ -12,7 +12,7 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'home') }}">
+                <a href="{{ route('page.index', 'admin') }}">
                     <i class="nc-icon nc-bank"></i>
                     <p>{{ __('Thống Kê') }}</p>
                 </a>
@@ -47,6 +47,7 @@
                     <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
+            
             <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>

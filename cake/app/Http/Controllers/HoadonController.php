@@ -6,6 +6,8 @@ use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use App\Http\Requests\StorehoadonRequest;
 use App\Http\Requests\UpdatehoadonRequest;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 
 class HoadonController extends Controller
@@ -40,17 +42,6 @@ class HoadonController extends Controller
      */
     public function show( $id)
     {
-        // if($id){
-        //     $invoice = HoaDon::find($id)->get();
-        //     if($invoice){
-        //         $lsdetails = chitiethoadon::where('hoadon_id',$id)->get();
-        //         return view('pages.admin.invoice.details',[
-        //             'invoice'=>$invoice, 'lsdetails'=>$lsdetails
-        //         ]);
-        //     }
-        //     return redirect()->back();
-        // }
-        // return redirect()->back();
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $id)
@@ -85,4 +76,48 @@ class HoadonController extends Controller
     {
         //
     }
+    public function update_status_success($id,Request $request)
+    {
+        $request = $request->all();
+
+            $hd = Hoadon::find($id);
+            $hd->trangthai = 4;
+            $hd->save();
+            return redirect()->back();
+    }
+    public function update_status_ship($id,Request $request)
+    {
+        $request = $request->all();
+
+            $hd = Hoadon::find($id);
+            $hd->trangthai = 3;
+            $hd->save();
+            return redirect()->back();
+
+
+    }
+    public function update_status_cancel($id,Request $request)
+    {
+        $request = $request->all();
+
+            $hd = Hoadon::find($id);
+            $hd->trangthai = 5;
+            $hd->save();
+            return redirect()->back();
+
+
+    }
+    public function update_status_approved($id,Request $request)
+    {
+        $request = $request->all();
+
+            $hd = Hoadon::find($id);
+            $hd->trangthai = 2;
+            $hd->save();
+            return redirect()->back();
+
+
+    }
+
+
 }

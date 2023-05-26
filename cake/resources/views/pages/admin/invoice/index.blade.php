@@ -9,20 +9,19 @@
 <div class="content">
     <section id="multiple-column-form">
         <div class="row match-height">
-            <div class="col-12">
+            <div class="col-md col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">The list of orders</h4>
+                        <h4 class="card-title">Danh sách hóa đơn</h4>
                     </div>
                     <div class="card-content">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
+                        <div class="card-body" >
+                            <div class="table-responsive" >
+                                <table class="table table-hover mb-0 " >
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th>Mã hóa đơn</th>
                                             <th>Tên khách hàng</th>
-                                            <th>Ngày lập</th>
                                             <th>Số điện thoại</th>
                                             <th>Ngày nhận</th>
                                             <th>Trạng thái</th>
@@ -32,9 +31,8 @@
                                     <tbody>
                                         @foreach ($lsHoaDon as $item)
                                         <tr>
-                                            <td style="width:20%" class="text-bold-500">{{ $item->mahd }}</td>
+                                            <td style="width:20%" class="col-md-3 col-12">{{ $item->mahd }}</td>
                                             <td style="width:20%">{{ $item->tenkhachhang }}</td>
-                                            <td style="width:20%">{{ $item->ngaylaphd }}</td>
                                             <td style="width:20%">{{ $item->sdtkhachhang }}</td>
                                             <td style="width:20%">{{ $item->ngaynhanhang }}</td>
                                             {{-- <td>{{ $item->total }} VND</td> --}}
@@ -46,7 +44,7 @@
                                                 <td><span class="badge bg-primary">Đã duyệt</span></td>
                                                 @break
                                                 @case(3)
-                                                <td><span class="badge badge-info">Chờ nhận</span></td>
+                                                <td><span class="badge badge-info">Đang giao</span></td>
                                                 @break
                                                 @case(4)
                                                 <td><span class="badge bg-success">Đã hoàn thành</span></td>
@@ -61,6 +59,46 @@
                                                         <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                                       </svg>
                                                 </a>
+                                                @switch($item->trangthai)
+                                                @case(1)
+                                                <a href="{{ route('invoice.status.approved', $item->id ) }}" type="button" class="btn btn-primary" method="POST">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+
+                                                </a>
+                                                <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button" class="btn btn-danger" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg>
+
+                                                </a>
+                                                @break
+                                                @case(2)
+                                                <a href="{{ route('invoice.status.ship', $item->id) }}" type="button" class="btn btn-info">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                                                      </svg>
+                                                </a>
+                                                <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg>
+                                                </a>
+                                                @break
+                                                @case(3)
+                                                <a href="{{ route('invoice.status.success', $item->id) }}" type="button" class="btn btn-success">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                      </svg>
+                                                </a>
+                                                <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg>
+                                                </a>
+                                                @break
+                                                @endswitch
                                             </td>
                                         </tr>
                                         @endforeach

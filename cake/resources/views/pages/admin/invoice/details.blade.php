@@ -9,14 +9,21 @@
     <div class="col-md-5 col-12">
         <div class="card">
             <div class="card-header pb-0">
-                <h4 class="card-title">Invoice information</h4>
+            <div class="row col-md">
+                <h4 class="card-title">Thông tin hóa đơn</h4>
+                <a href="" type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                      </svg>
+                </a>
+            </div>
             </div>
             <div class="card-content">
                 <div class="card-body">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label>Code</label>
+                                    <label>Mã hóa đơn</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
                                     <label>{{ $u->mahd }}</label>
@@ -78,6 +85,7 @@
                                     <label>{{ $u->phuongthucthanhtoan }}</label>
                                 </div>
                             </div>
+
                         </div>
                 </div>
             </div>
@@ -87,7 +95,7 @@
 
    <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Invoice details list</h4>
+                        <h4 class="card-title">Chi tiết hóa đơn</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
