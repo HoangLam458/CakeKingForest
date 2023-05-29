@@ -50,14 +50,13 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                     <div class="mb-3">
-                <label class="form-label" for="inputImage">Image:</label>
+                <label class="form-label" for="inputImage">Hình Ảnh</label>
                 <input 
                     type="file" 
                     name="image" 
                     id="inputImage"
                     class="form-control @error('image') is-invalid @enderror">
-  
-                @error('image')
+                               @error('image')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>

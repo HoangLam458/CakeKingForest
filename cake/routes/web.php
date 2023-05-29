@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\HoadonController;
 use App\Http\Controllers\LoaisanphamController;
@@ -19,28 +21,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', function () {
     return view('homeuser');
 })->name('cake');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('Login');
-
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/detail{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
@@ -48,13 +43,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
-
+Route::post('/login2', [LoginController::class, 'login'])->name('login2');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
 });
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// route admin account
+
+Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
+Route::group(['middleware' => 'bulkhead.check', 'prefix' => null], function () {
+	Auth::routes();
+	Route::get('/home', [HomeController::class, 'index'])->name('home');
+	// route admin account
 Route::get('/manages/user', [TaikhoanController::class, 'index'])->name('user.index');
 Route::get('/manages/user/detail/{id?}', [TaikhoanController::class, 'show'])->name('user.detail');
 Route::get('/manages/user/create', [TaikhoanController::class, 'create'])->name('user.create.form');
@@ -92,3 +90,4 @@ Route::get('/manages/catagory/edit/{id?}', [LoaisanphamController::class, 'edit'
 Route::post('/manages/catagory/edit/{id?}', [LoaisanphamController::class, 'update'])->name('catagory.edit');
 Route::get('/manages/catagory/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('catagory.delete');
 
+});});

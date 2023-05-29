@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+<style>
+.center {
+  text-align: center;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+
+</style>
+
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -99,8 +112,7 @@
     				<ul class="product-category">
     					<li><a href="#" class="active">All</a></li>
               @foreach ($lsloaisp as $loaisp)
-              <li><a href="#" class="active"> {{ $loaisp->tenloaisp }}</a></li>
-                            
+              <li><a href="#" class="active"> {{ $loaisp->tenloaisp }}</a></li>  
               @endforeach
     				</ul>
     			</div>
@@ -143,18 +155,14 @@
           @endforeach
           </div>
     		</div>
-    		<div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-              {{  $lsSanpham->links() }}
-              </ul>
-            </div>
-          </div>
+    		<div class="center">
+          <div class="pagination">
+              {{  $lsSanpham->onEachSide(1)->links() }}
+        </div>
+        </div>
         </div>
     	</div>
     </section>
-
 		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
@@ -251,8 +259,8 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js" integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>

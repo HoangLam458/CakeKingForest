@@ -8,6 +8,7 @@ use App\Http\Requests\StoresanphamRequest;
 use App\Models\size;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
+use Termwind\Components\BreakLine;
 
 class SanphamController extends Controller
 {
@@ -17,8 +18,7 @@ class SanphamController extends Controller
     public function index()
     {
         $loaisanpham = loaisanpham::all();
-       
-        $lsSanpham = Sanpham::simplePaginate(10);
+        $lsSanpham = Sanpham::Paginate(8);
         return view('pages.admin.sanpham.index', [ 'loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
     }
 
@@ -50,6 +50,9 @@ class SanphamController extends Controller
                 $file->move('images/',$filename);
                 $sanphams->hinhanh = $filename;
             }
+            if($request->hasFile('image')==null){
+                 $sanphams->hinhanh = 'Default.jpg';
+             }
             $sanphams->save();
         return redirect()->route('sanpham.index');
     }
@@ -106,12 +109,12 @@ class SanphamController extends Controller
          if($request ->hasFile('image'))
          {
             $destination ='images/'.$sanpham->hinhanh;
-            if(File::exists($destination))
+            if(File::exists($destination) )
             {
                 File::delete($destination);
             }
              $file = $request->file('image');
-             $extension =$file->getClientOriginalExtension();
+             $extension =$file->getClientOriginalExtension(); 
              $filename =time().'.'.$extension;
              $file->move('images/',$filename);
              $sanpham->hinhanh = $filename;
@@ -136,7 +139,7 @@ class SanphamController extends Controller
     public function shop()
     {       
         $lsloaisp = loaisanpham::all();
-        $lsSanpham = Sanpham::simplePaginate(12);
+        $lsSanpham = Sanpham::Paginate(12);
         return view('pages.user.shop', ['lsSanpham'=> $lsSanpham, 'lsloaisp' =>$lsloaisp]);
     }
 

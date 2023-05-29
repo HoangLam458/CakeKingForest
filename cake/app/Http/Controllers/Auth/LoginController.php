@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -36,5 +37,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|exists:users',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+         if(\Illuminate\Support\Facades\Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+            ]))
+        {
+            $user=\Illuminate\Foundation\Auth\User::where('email', $request->email)->first();
+
+            $request->session()->put('email', $user);
+            if($user->loai==0){
+                return redirect()->route('cake');
+            }
+            return redirect()->route('home');
+
+        }
+        return redirect()->back();
     }
 }
