@@ -8,6 +8,7 @@ use App\Http\Requests\StoresanphamRequest;
 use App\Models\size;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
+use Termwind\Components\BreakLine;
 
 class SanphamController extends Controller
 {
@@ -50,6 +51,9 @@ class SanphamController extends Controller
                 $file->move('images/',$filename);
                 $sanphams->hinhanh = $filename;
             }
+            if($request->hasFile('image')==null){
+                 $sanphams->hinhanh = 'Default.jpg';
+             }
             $sanphams->save();
         return redirect()->route('sanpham.index');
     }
@@ -106,7 +110,7 @@ class SanphamController extends Controller
          if($request ->hasFile('image'))
          {
             $destination ='images/'.$sanpham->hinhanh;
-            if(File::exists($destination))
+            if(File::exists($destination) )
             {
                 File::delete($destination);
             }
@@ -138,7 +142,7 @@ class SanphamController extends Controller
     public function shop()
     {
         $lsloaisp = loaisanpham::all();
-        $lsSanpham = Sanpham::simplePaginate(12);
+        $lsSanpham = Sanpham::Paginate(12);
         return view('pages.user.shop', ['lsSanpham'=> $lsSanpham, 'lsloaisp' =>$lsloaisp]);
     }
 

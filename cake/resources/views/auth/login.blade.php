@@ -7,7 +7,7 @@
     <div class="content">
         <div class="container">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-                <form class="form" method="POST" action="{{ route('login') }}">
+                <form class="form" method="POST" action="{{ route('login2') }}">
                     @csrf
                     <div class="card card-login">
                         <div class="card-header ">
@@ -65,12 +65,7 @@
                         </div>
                     </div>
                 </form>
-                <a href="{{ route('password.request') }}" class="btn btn-link">
-                    {{ __('Forgot password') }}
-                </a>
-                <a href="{{ route('register') }}" class="btn btn-link float-right">
-                    {{ __('Create Account') }}
-                </a>
+               <!-- Ở đây -->
             </div>
         </div>
     </div>
