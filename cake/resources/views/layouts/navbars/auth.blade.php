@@ -11,13 +11,8 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-<<<<<<< HEAD
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'home') }}">
-=======
-            <li class="{{ $elementActive = 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'dashboard') }}">
->>>>>>> hoanglam
                     <i class="nc-icon nc-bank"></i>
                     <p>{{ __('Thống Kê') }}</p>
                 </a>

@@ -111,6 +111,6 @@ class UserController extends Controller
     {
         Auth::logout();
         $request->session()->flush();
-        return redirect()->back();
+        return redirect()->route('cake');
     }
 }

@@ -12,7 +12,7 @@
                     <div class="card card-login">
                         <div class="card-header ">
                             <div class="card-header ">
-                                <h3 class="header text-center">{{ __('Login') }}</h3>
+                                <h3 class="header text-center">{{ __('Đăng nhập') }}</h3>
                             </div>
                         </div>
                         <div class="card-body ">
@@ -24,7 +24,7 @@
                                     </span>
                                 </div>
                                 <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') }}" required autofocus>
-                                
+
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -38,8 +38,8 @@
                                         <i class="nc-icon nc-single-02"></i>
                                     </span>
                                 </div>
-                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" required>
-                                
+                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Mật khẩu') }}" type="password" required>
+
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -60,7 +60,7 @@
 
                         <div class="card-footer">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Sign in') }}</button>
+                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Đăng nhập') }}</button>
                             </div>
                         </div>
                     </div>

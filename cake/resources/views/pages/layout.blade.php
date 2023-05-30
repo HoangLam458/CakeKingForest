@@ -76,7 +76,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="{{ route('user.index') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -90,14 +90,14 @@
                     <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
                                 class="icon-shopping_cart"></span>[0]</a></li>
                     @if (auth()->user()==null)
-                    <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
+                    <li class="nav-item"> <a href="{{ route('Login') }}" class="nav-link">Đăng nhập</a>
                     </li>
                     @else
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{auth()->user()->tenkhachhang}}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @if (auth()->user()->loai == 0)
+                            @if (auth()->user()->loai == 1)
                             <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
                             @endif
                             <a class="dropdown-item" href="">Trang cá nhân</a>
