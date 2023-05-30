@@ -58,7 +58,7 @@ class HoadonController extends Controller
      */
     public function edit(hoadon $hoadon)
     {
-        //
+
     }
 
     /**
@@ -66,7 +66,7 @@ class HoadonController extends Controller
      */
     public function update(UpdatehoadonRequest $request, hoadon $hoadon)
     {
-        //
+        
     }
 
     /**

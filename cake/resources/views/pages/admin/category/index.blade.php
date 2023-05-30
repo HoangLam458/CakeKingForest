@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'catagory'
+    'elementActive' => 'category'
 ])
 
 
@@ -11,7 +11,11 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Danh sách loại sản phẩm</h4>
-                    <a href="{{ route('catagory.create.form') }}" type="button" class="btn btn-primary"> Tạo loại sản phẩm mới</a>
+                    <a href="{{ route('category.create.form') }}" type="button" class="btn btn-round btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -30,7 +34,7 @@
                                     <td class="col-md-4">{{ $item->tenloaisp }}</td>
                                     <td>
                                         <div  class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('catagory.edit.form', $item->id) }}" type="button" class="btn btn-primary">
+                                            <a href="{{ route('category.edit.form', $item->id) }}" type="button" class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square"
                                                     viewBox="0 0 16 16">
@@ -41,7 +45,7 @@
                                                 </svg>
                                             </a>
 
-                                            <a href="{{ route('catagory.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            <a href="{{ route('category.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#animation-{{ $item->id }}" onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

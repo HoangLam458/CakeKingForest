@@ -14,7 +14,7 @@ return new class extends Migration
 
         
         Schema::table('hoadons', function (Blueprint $table) {
-            $table->foreignId('taikhoan_id')->constrained();
+            $table->foreignId('users_id')->constrained();
         });
 
         Schema::table('chitiethoadons', function (Blueprint $table) {

@@ -13,29 +13,29 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-                            <label>Name</label>
+                        <div class="col-md-3" style="font-size:20px; font-weight: bold;" >
+                            <label>Tên khách hàng</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3">
-                            <label>{{ $taikhoan->tenkhachhang }}</label>
+                        <div class="col-md-9 form-group mb-3" style="font-size:20px">
+                            <label>{{ $user->tenkhachhang }}</label>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Email</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3">
-                            <label>{{ $taikhoan->email }}</label>
+                        <div class="col-md-9 form-group mb-3" style="font-size:20px">
+                            <label>{{ $user->email }}</label>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Phone</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3">
-                            <label>{{ $taikhoan->sdt }}</label>
+                        <div class="col-md-9 form-group mb-3" style="font-size:20px">
+                            <label>{{ $user->sdt }}</label>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Address</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3">
-                            <label>{{ $taikhoan->diachi }}</label>
+                        <div class="col-md-9 form-group mb-3" style="font-size:20px">
+                            <label>{{ $user->diachi }}</label>
                         </div>
 
                     </div>

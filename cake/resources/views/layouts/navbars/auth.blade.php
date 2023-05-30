@@ -12,7 +12,7 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'admin') }}">
+                <a href="{{ route('page.index', 'home') }}">
                     <i class="nc-icon nc-bank"></i>
                     <p>{{ __('Thống Kê') }}</p>
                 </a>
@@ -23,8 +23,8 @@
                     <p>{{ __('Tài Khoản') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'catagory' ? 'active' : '' }}">
-                <a href="{{ route('catagory.index', 'index') }}">
+            <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
+                <a href="{{ route('category.index', 'index') }}">
                     <i class="nc-icon nc-bullet-list-67"></i>
                     <p>{{ __('Loại sản phẩm') }}</p>
                 </a>
@@ -47,7 +47,7 @@
                     <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
-            
+
             <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>

@@ -13,12 +13,12 @@
                      </div>
                      <div class="card-content">
                          <div class="card-body">
-                             <form action="{{ route('catagory.create') }}" method="POST" class="form">
+                             <form action="{{ route('category.create') }}" method="POST" class="form">
                                  @csrf
                                  <div class="row">
                                      <div class="col-md-6 col-12">
                                          <div class="form-group">
-                                             <label class="mb-2" for="first-name-column">Tên loại sản phẩm</label>
+                                             <label class="mb-2" for="first-name-column" style="font-size:15px">Tên loại sản phẩm</label>
                                              <input required maxlength="20" type="text" id="first-name-column" class="form-control" name="name">
                                          </div>
                                      </div>

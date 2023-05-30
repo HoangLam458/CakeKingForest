@@ -26,10 +26,10 @@
                             <a href="#">
                                 <img class="avatar border-gray" src="{{ asset('paper/img/mike.jpg') }}" alt="...">
 
-                                <h5 class="title">{{ __(auth()->user()->name)}}</h5>
+                                <h5 class="title">{{ __(auth()->user()->tenkhachhang)}}</h5>
                             </a>
                             <p class="description">
-                            @ {{ __(auth()->user()->name)}}
+                            @ {{ __(auth()->user()->tenkhachhang)}}
                             </p>
                         </div>
                         <p class="description text-center">
@@ -150,7 +150,7 @@
                                 <label class="col-md-3 col-form-label">{{ __('Name') }}</label>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ auth()->user()->name }}" required>
+                                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ auth()->user()->tenkhachhang }}" required>
                                     </div>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">

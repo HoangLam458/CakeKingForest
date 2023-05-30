@@ -17,24 +17,24 @@
                     <div class="card-content">
                         <div class="card-body" >
                             <div class="table-responsive" >
-                                <table class="table table-hover mb-0 " >
+                                <table class="table table-hover" >
                                     <thead>
-                                        <tr >
-                                            <th>Mã hóa đơn</th>
-                                            <th>Tên khách hàng</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Ngày nhận</th>
-                                            <th>Trạng thái</th>
-                                            <th>Chức năng</th>
+                                        <tr>
+                                            <th class="col-2">Mã hóa đơn</th>
+                                            <th class="col-2">Tên khách hàng</th>
+                                            <th class="col-2">Số điện thoại</th>
+                                            <th class="col-2">Ngày nhận</th>
+                                            <th class="col-2">Trạng thái</th>
+                                            <th class="col-2">Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($lsHoaDon as $item)
                                         <tr>
-                                            <td style="width:20%" class="col-md-3 col-12">{{ $item->mahd }}</td>
-                                            <td style="width:20%">{{ $item->tenkhachhang }}</td>
-                                            <td style="width:20%">{{ $item->sdtkhachhang }}</td>
-                                            <td style="width:20%">{{ $item->ngaynhanhang }}</td>
+                                            <td style="width:20%" class="col-2">{{ $item->mahd }}</td>
+                                            <td style="width:20%" class="col-2">{{ $item->tenkhachhang }}</td>
+                                            <td style="width:20%" class="col-2">{{ $item->sdtkhachhang }}</td>
+                                            <td style="width:20%" class="col-2">{{ $item->ngaynhanhang }}</td>
                                             {{-- <td>{{ $item->total }} VND</td> --}}
                                                 @switch($item->trangthai)
                                                 @case(1)

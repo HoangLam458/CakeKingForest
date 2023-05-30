@@ -15,7 +15,7 @@ class LoaisanphamController extends Controller
     public function index()
     {
         $lsUsers = Loaisanpham::all();
-        return view('pages.admin.catagory.index', ['lsUsers'=> $lsUsers]);
+        return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
     }
 
     /**
@@ -23,7 +23,7 @@ class LoaisanphamController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.catagory.create');
+        return view('pages.admin.category.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class LoaisanphamController extends Controller
             'trangthai'=> 1
         ]);
 
-        return redirect()->route('catagory.index');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -59,7 +59,7 @@ class LoaisanphamController extends Controller
         if($id){
             $user = Loaisanpham::find($id);
             if($user){
-                return view('pages.admin.catagory.edit',[
+                return view('pages.admin.category.edit',[
                     'staff'=>$user
                 ]);
             }
