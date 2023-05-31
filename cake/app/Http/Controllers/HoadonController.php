@@ -45,7 +45,7 @@ class HoadonController extends Controller
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $id)
-            ->select('*', 'sanphams.tensp as tensanpham', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
+            ->select('*','chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
         $user = Hoadon::where('id', $id)->get();
         return view('pages.admin.invoice.details', [], [
             'lsInD' => $lsInD,
@@ -58,15 +58,23 @@ class HoadonController extends Controller
      */
     public function edit(hoadon $hoadon)
     {
-
+        return redirect()->back();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatehoadonRequest $request, hoadon $hoadon)
+    public function update(Request $request, $id)
     {
-        
+        $user = hoadon::find($id);
+         $user->sdtkhachhang = $request->get('phone');
+         $user->diachigiaohang= $request->get('address');
+         $user->tenkhachhang = $request->get('fullname');
+         $user->ngaynhanhang = $request->get('date');
+
+         $user->save();
+
+         return redirect()->route('invoice.detail',$id);
     }
 
     /**

@@ -34,7 +34,7 @@ Route::get('/', function () {
     return view('homeuser');
 })->name('cake');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/detail{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
 Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
-
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 	// route admin account
 Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
