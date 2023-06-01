@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'lamhoangtruong202@gmail.com',
             'password' => Hash::make('123456'),
-            'loai' => 0,
+            'loai' => 1,
             'tenkhachhang' => 'Trương Hoàng Lâm',
             'diachi' => '43 An Bình Phường 6 quận 5',
             'sdt' => '0348575810',
@@ -35,27 +35,27 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'usertest01@gmail.com',
             'password' => Hash::make('123456'),
-            'loai' => 1,
+            'loai' => 0,
             'tenkhachhang' => 'Nguyễn Ngân',
             'diachi' => '110 trần hưng đạo Quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1
         ]);
-       
+
         DB::table('users')->insert([
             'email' => 'usertest02@gmail.com',
             'password' => Hash::make('123456'),
-            'loai' => 1,
+            'loai' => 0,
             'tenkhachhang' => 'Hải',
             'diachi' => '210 Huỳnh Mẫn Đạt Quận 5',
             'sdt' => '0348575810',
             'trangthai' => 1
         ]);
-  
+
         DB::table('users')->insert([
             'email' => 'usertest03@gmail.com',
             'password' => Hash::make('123456'),
-                'loai' => 1,
+                'loai' => 0,
                 'tenkhachhang' => 'Trần Bình',
                 'diachi' => '65 huỳnh thúc kháng quận 1',
                 'sdt' => '0348575810',

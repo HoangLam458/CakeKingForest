@@ -17,6 +17,7 @@ class HoadonController extends Controller
      */
     public function index()
     {
+
         $lsHoaDon = HoaDon::where('trangthai','<>', 0)->orderBy('mahd')->get();
         return view('pages.admin.invoice.index', ['lsHoaDon'=> $lsHoaDon]);
     }
@@ -42,14 +43,20 @@ class HoadonController extends Controller
      */
     public function show( $id)
     {
+        $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $id)
             ->select('*','chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
         $user = Hoadon::where('id', $id)->get();
+        foreach ($lsInD as $in)
+        {
+            $total = $total + $in->thanhtien;
+        }
         return view('pages.admin.invoice.details', [], [
             'lsInD' => $lsInD,
-            'user' => $user
+            'user' => $user,
+            'total'=>$total
         ]);
     }
 

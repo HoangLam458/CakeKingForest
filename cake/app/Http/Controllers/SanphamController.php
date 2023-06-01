@@ -6,6 +6,7 @@ use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
 use App\Models\size;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
 use Termwind\Components\BreakLine;
@@ -20,7 +21,7 @@ class SanphamController extends Controller
         $loaisanpham = loaisanpham::all();
 
         $lsSanpham = Sanpham::simplePaginate(10);
-        return view('pages.admin.sanpham.index', [ 'loaisanpham'=> $loaisanpham,'lsSanpham'=> $lsSanpham]);
+        return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
     /**
@@ -29,7 +30,7 @@ class SanphamController extends Controller
     public function create()
     {
         $loaisanpham = loaisanpham::all();
-        return view('pages.admin.sanpham.create', ['loaisanpham'=> $loaisanpham]);
+        return view('pages.admin.sanpham.create', ['loaisanpham' => $loaisanpham]);
     }
 
     /**
@@ -37,24 +38,23 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
-        $sanphams =new sanpham;
-        $sanphams-> tensp = $request->input('tensp');
-        $sanphams-> mota = $request->input('mota');
-        $sanphams-> giatien = $request->input('giatien');
-        $sanphams-> loaisanpham_id = $request->input('loaisanpham_id');
-        $sanphams-> trangthai = 1;
-        if($request ->hasFile('image'))
-            {
-                $file = $request->file('image');
-                $extension =$file->getClientOriginalExtension();
-                $filename =time().'.'.$extension;
-                $file->move('images/',$filename);
-                $sanphams->hinhanh = $filename;
-            }
-            if($request->hasFile('image')==null){
-                 $sanphams->hinhanh = 'Default.jpg';
-             }
-            $sanphams->save();
+        $sanphams = new sanpham;
+        $sanphams->tensp = $request->input('tensp');
+        $sanphams->mota = $request->input('mota');
+        $sanphams->giatien = $request->input('giatien');
+        $sanphams->loaisanpham_id = $request->input('loaisanpham_id');
+        $sanphams->trangthai = 1;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/', $filename);
+            $sanphams->hinhanh = $filename;
+        }
+        if ($request->hasFile('image') == null) {
+            $sanphams->hinhanh = 'Default.jpg';
+        }
+        $sanphams->save();
         return redirect()->route('sanpham.index');
     }
 
@@ -63,12 +63,13 @@ class SanphamController extends Controller
      */
     public function show($id)
     {
-        if($id){
+        if ($id) {
             $loaisanpham = loaisanpham::all();
             $sanpham = Sanpham::find($id);
-            if($sanpham){
-                return view('pages.admin.sanpham.detail',['loaisanpham'=> $loaisanpham,
-                    'sanpham'=>$sanpham
+            if ($sanpham) {
+                return view('pages.admin.sanpham.detail', [
+                    'loaisanpham' => $loaisanpham,
+                    'sanpham' => $sanpham
                 ]);
             }
             return redirect()->back();
@@ -83,12 +84,13 @@ class SanphamController extends Controller
     public function edit($id)
     {
 
-        if($id){
+        if ($id) {
             $sanpham = Sanpham::find($id);
             $loaisanpham = loaisanpham::all();
-            if($sanpham){
-                return view('pages.admin.sanpham.edit',['loaisanpham'=> $loaisanpham,
-                    'sanpham'=>$sanpham
+            if ($sanpham) {
+                return view('pages.admin.sanpham.edit', [
+                    'loaisanpham' => $loaisanpham,
+                    'sanpham' => $sanpham
                 ]);
             }
             return redirect()->back();
@@ -103,63 +105,71 @@ class SanphamController extends Controller
     public function update(Request $request, $id)
     {
         $sanpham = Sanpham::find($id);
-         $sanpham->tensp = $request->get('tensp');
-         $sanpham->mota= $request->get('mota');
-         $sanpham->giatien = $request->get('giatien');
-         $sanpham->loaisanpham_id = $request->get('loaisanpham_id');
-         if($request ->hasFile('image'))
-         {
-            $destination ='images/'.$sanpham->hinhanh;
-            if(File::exists($destination) )
-            {
+        $sanpham->tensp = $request->get('tensp');
+        $sanpham->mota = $request->get('mota');
+        $sanpham->giatien = $request->get('giatien');
+        $sanpham->loaisanpham_id = $request->get('loaisanpham_id');
+        if ($request->hasFile('image')) {
+            $destination = 'images/' . $sanpham->hinhanh;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
-             $file = $request->file('image');
-             $extension =$file->getClientOriginalExtension();
-             $filename =time().'.'.$extension;
-             $file->move('images/',$filename);
-             $sanpham->hinhanh = $filename;
-         }
-         $sanpham->save();
-         return redirect()->back()->with('status','Cập nhật thành công');
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/', $filename);
+            $sanpham->hinhanh = $filename;
+        }
+        $sanpham->save();
+        return redirect()->back()->with('status', 'Cập nhật thành công');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
 
         $sanpham = sanpham::find($id);
-        if($sanpham){
+        if ($sanpham) {
             $sanpham->delete();
-        return redirect()->back();
-         }
+            return redirect()->back();
+        }
     }
 
 
     public function shop()
     {
         $lsloaisp = loaisanpham::all();
+        $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        return view('pages.user.shop', ['lsSanpham'=> $lsSanpham, 'lsloaisp' =>$lsloaisp]);
+        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);
+    }
+    public function shop_category($id)
+    {
+        $lsSanpham = sanpham::where('loaisanpham_id', $id)->get();
+        $lsloaisp = loaisanpham::all();
+        $size = size::all();
+        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);
     }
 
     public function detail($id)
     {
-        if($id){
-        $size = size::all();
-        $loaisanpham = loaisanpham::all();
-        $sanpham = Sanpham::find($id);
-        if($sanpham){
-            return view('pages.user.detail',['loaisanpham'=> $loaisanpham,
-                'sanpham'=>$sanpham, 'size'=> $size
-            ]);
+        if ($id) {
+            $size = size::all();
+            $loaisanpham = loaisanpham::all();
+            $sanpham = Sanpham::find($id);
+            if ($sanpham) {
+                return view('pages.user.detail', [
+                    'loaisanpham' => $loaisanpham,
+                    'sanpham' => $sanpham,
+                    'size' => $size
+                ]);
+            }
+            return redirect()->back();
         }
         return redirect()->back();
-    }
-    return redirect()->back();
     }
 
 

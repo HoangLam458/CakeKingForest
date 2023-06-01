@@ -27,7 +27,7 @@
                                 @csrf
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin</h5>
@@ -84,7 +84,7 @@
                     <div class="card-body">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Mã hóa đơn</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Tên Khách Hàng</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -100,15 +100,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Ngày lập</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
-                                    <label style="font-size:15px" type="date">{{ $u->ngaylaphd }}</label>
+                                    <label style="font-size:15px" type="date">{{ \Carbon\Carbon::parse($u->ngaylaphd)->format('d/m/Y')}}</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Số điện thoại</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Địa chỉ nhận hàng</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Hình thức nhận hàng</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -132,15 +132,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Ngày nhận</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
-                                    <label style="font-size:15px">{{ $u->ngaynhanhang }}</label>
+                                    <label style="font-size:15px">{{ \Carbon\Carbon::parse($u->ngaynhanhang)->format('d/m/Y')}}</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
+                                    <label style="font-size:15px">Tổng tiền</label>
+                                </div>
+                                <div class="col-md-7 form-group mb-3">
+                                    <label style="font-size:15px"> {{number_format($total)}} VND</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label style="font-size:15px">Phương thức thanh toán</label>
                                 </div>
                                 <div class="col-md-7 form-group mb-3">
@@ -181,10 +189,10 @@
                                                 alt="">
                                         </td>
                                         <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
-                                        <td style="width:10%" class="col-1">{{ $item->giaban}}</td>
+                                        <td style="width:10%" class="col-1">{{number_format($item->giaban)}} VND</td>
                                         <td style="width:30%" class="col-1">{{ $item->s_name }} ({{$item->phantram}}%)</td>
                                         <td class="col-1">{{ $item->soluong }}</td>
-                                        <td class="col-1"> {{ $item->thanhtien }}</td>
+                                        <td class="col-1"> {{number_format($item->thanhtien)}} VND</td>
                                         <td class="col-2">{{ $item->ghichu }}</td>
                                     </tr>
                                 @endforeach
