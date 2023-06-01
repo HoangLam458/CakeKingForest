@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [HomeController::class, 'cart'])->name('cart');
+Route::post('/add_to_cart/{id?}', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 
