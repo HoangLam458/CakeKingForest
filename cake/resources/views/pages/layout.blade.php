@@ -93,7 +93,10 @@
                     <li class="nav-item"> <a href="{{ route('Login') }}" class="nav-link">Đăng nhập</a>
                     </li>
                     @else
+                    <li class="nav-item cta cta-colored"><a href="{{ route('cart',auth()->user()->id)}}" class="nav-link"><span
+                        class="icon-shopping_cart"></span>[0]</a></li>
                     <li class="nav-item dropdown">
+
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{auth()->user()->tenkhachhang}}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
