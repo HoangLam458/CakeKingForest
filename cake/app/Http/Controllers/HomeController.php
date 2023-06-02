@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\hoadon;
+use App\Http\Requests\StorehoadonRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -46,4 +48,24 @@ class HomeController extends Controller
         ]);
 
     }
+    public function checkout($id, Request $request)
+    {
+        $user = hoadon::where('users_id', $id)->where('trangthai',0)->first();
+        if($user != Null)
+        {
+        $user->tenkhachhang = $request->get('name');
+        $user->sdtkhachhang = $request->get('phone');
+        $user->diachigiaohang= $request->get('address');
+        $user->ngaynhanhang = $request->get('date');
+        $user->hinhthucnhanhang = $request->get('ship');
+        $user->phuongthucthanhtoan = "Tiền Mặt";
+        $user->trangthai = 1;
+        $user->save();
+        return redirect()->route('cart',$id);
+        }
+        else return view('homeuser');
+
+
+    }
+
 }

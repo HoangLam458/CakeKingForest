@@ -24,11 +24,13 @@
                         </svg>
                     </div>
                 </div>
+                <div class="w-100"></div>
                 <div class="row col-md-12 col-12">
                     <div class="col d-flex justify-content-center">
                         <h3>Không có sản phẩm nào trong giỏ hàng !!</h3>
                     </div>
                 </div>
+                <div class="w-100"></div>
                 <div class="row col-md-12 col-12">
                     <div class="col d-flex justify-content-center">
                         <a href="{{route('cake')}}" type="button" class="btn btn-primary">
@@ -94,35 +96,52 @@
                     <div class="col-lg mt-5 cart-wrap ftco-animate">
                         <div class="cart-total mb-3">
                             <h3>Thông tin giao hàng</h3>
-                            <form action="#" class="info">
+                            <form action="{{route('checkout',auth()->user()->id)}}" class="info" id="checkout" method="POST" class="form"
+                            enctype="multipart/form-data">
+                            @csrf
                                 <div class="form-group">
                                     <label for="">Tên người nhận</label>
-                                    <input type="text" class="form-control text-left px-3"
-                                        placeholder="{{ $u->tenkhachhang }}">
+                                    <input type="text" class="form-control text-left px-3" required name="name"
+                                        value="{{ $u->tenkhachhang }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Số điện thoại</label>
-                                    <input type="text" class="form-control text-left px-3"
-                                        placeholder="{{ $u->sdtkhachhang }}">
+                                    <input type="text" class="form-control text-left px-3" required name="phone"
+                                        value="{{ $u->sdtkhachhang }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Địa chỉ</label>
-                                    <input type="text" class="form-control text-left px-3"
-                                        placeholder="{{ $u->diachigiaohang }}">
+                                    <input type="text" class="form-control text-left px-3" required name="address"
+                                        value="{{ $u->diachigiaohang }}">
                                 </div>
+                                <div class="form-group">
+                                    <label for="country">Ngày nhận hàng</label>
+                                    <input value="" maxlength="10" minlength="10"
+                                    required type="date" id="date" class="form-control"
+                                    name="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Hình thức nhận hàng</label>
+                                    <input value="Trực tiếp tại cửa hàng" readonly
+                                    required type="text" class="form-control"
+                                    name="ship">
+                                </div>
+                                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                                    <div class="cart-total mb-3">
+                                        <h3>Cart Totals</h3>
+                                        <p class="d-flex total-price">
+                                            <span>Total</span>
+                                            {{ number_format($total) }} VND
+                                </div>
+                                    {{-- <p><a href="{{route('checkout',auth()->user()->id)}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p> --}}
+                                </div>
+                                <button type="submit" id ="checkout" class="btn btn-primary">Thanh toán</button>
                             </form>
+
                         </div>
-                        <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Xác nhận</a></p>
+
                     </div>
-                    <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                        <div class="cart-total mb-3">
-                            <h3>Cart Totals</h3>
-                            <p class="d-flex total-price">
-                                <span>Total</span>
-                                {{ number_format($total) }} VND
-                        </div>
-                        <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-                    </div>
+
                 </div>
             @endif
 
