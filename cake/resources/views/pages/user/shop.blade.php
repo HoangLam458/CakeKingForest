@@ -46,21 +46,16 @@
                                             class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        @if (auth()->user() == null || auth()->user()->id == 5)
+                                        @if (auth()->user() == null)
+                                         <a type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></a>
+                                       
+                                        @else
                                         <form action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST" class="form" enctype="multipart/form-data">
                                      @csrf
                                      <input name="id" value="{{ $Sanpham->id }}" type="text" hidden required >
                                      <input name="quantity" value="1" type="number" hidden required>
                                      <input name="size" value="1"  type="number" hidden required>
                                      <button  type="submit"class="buy-now d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></button>
-                                 </form>
-                                        @else
-                                 <form action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST" class="form" enctype="multipart/form-data">
-                                     @csrf
-                                     <input name="id" value="{{ $Sanpham->id }}" type="text" hidden required>
-                                     <input name="quantity" value="1" type="number" hidden required>
-                                     <input name="size" value="1"  type="number" hidden required>
-                                     <a type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></a>
                                  </form>
                                     @endif
 

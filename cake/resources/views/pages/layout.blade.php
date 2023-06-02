@@ -87,9 +87,9 @@
                     </li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    @if (auth()->user() == null || auth()->user()->id == 5)
-                    <li class="nav-item cta cta-colored"><a href="{{ route('cart',5)}}" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
+                    @if (auth()->user() == null)
+                    <!-- <li class="nav-item cta cta-colored"><a href="{{ route('cart',5)}}" class="nav-link"><span
+                        class="icon-shopping_cart"></span>[0]</a></li> -->
                     <li class="nav-item"> <a href="{{ route('Login') }}" class="nav-link">Đăng nhập</a>
                     </li>
                     @else
