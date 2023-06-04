@@ -55,7 +55,7 @@
                                      <input name="id" value="{{ $Sanpham->id }}" type="text" hidden required >
                                      <input name="quantity" value="1" type="number" hidden required>
                                      <input name="size" value="1"  type="number" hidden required>
-                                     <button  type="submit"class="buy-now d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></button>
+                                     <button type="submit"class="btn btn-primary d-flex justify-content-center align-items-center mx-1"><span><i class="ion-ios-cart"></i></span></button>
                                  </form>
                                     @endif
 

@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach ( $lsInD as $lsCart)
                           <tr class="text-center">
-                            <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                            <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span class="ion-ios-close"></span></a></td>
 
                             <td class="image-prod"><div class="img" style="background-image:url({{asset('/images/'.$lsCart->img)}});"></div></td>
 
