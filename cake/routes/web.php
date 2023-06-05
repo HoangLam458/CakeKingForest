@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\HoadonController;
 use App\Http\Controllers\LoaisanphamController;
-use App\Http\Controllers\TaikhoanController;
+use App\Http\Controllers\ChitiethoadonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +42,7 @@ Route::get('/contact', function () {
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [HomeController::class, 'cart'])->name('cart');
 Route::post('/add_to_cart/{id?}', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
+Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('remove');
 Route::post('/checkout/{id?}', [HomeController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');

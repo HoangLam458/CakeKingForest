@@ -59,8 +59,12 @@ class ChitiethoadonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(chitiethoadon $chitiethoadon)
+    public function destroy($id)
     {
-        //
+        $cart = chitiethoadon::find($id);
+        if($cart){
+            $cart->delete();
+        return redirect()->back();
+         }
     }
 }

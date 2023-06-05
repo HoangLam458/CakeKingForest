@@ -19,6 +19,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guarded=[]; 
+    public function hoadons(){
+        return $this->hasMany(hoadon::class);
+    }
+    
     protected $fillable = [
         'name',
         'email',

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class chitiethoadon extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $guarded=[]; 
     public function hoadons(){
