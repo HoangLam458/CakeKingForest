@@ -33,14 +33,18 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('homeuser');
 })->name('cake');
+Route::get('/contact', function () {
+    return view('pages.user.contact');
+})->name('contact');
 
 
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [HomeController::class, 'cart'])->name('cart');
+Route::post('/add_to_cart/{id?}', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
 Route::post('/checkout/{id?}', [HomeController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
-Route::get('/detail{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
+Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

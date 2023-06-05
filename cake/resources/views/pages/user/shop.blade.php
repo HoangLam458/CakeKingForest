@@ -18,7 +18,7 @@
                     <ul class="product-category">
                         <li><a href="{{ route('shop') }}" class="active">All</a></li>
                         @foreach ($lsloaisp as $loaisp)
-                            <li><a href="{{ route('shop.category', $loaisp->id) }}" class="active">
+                            <li><a class="active" href="{{ route('shop.category', $loaisp->id) }}">
                                     {{ $loaisp->tenloaisp }}</a></li>
                         @endforeach
                     </ul>
@@ -29,29 +29,50 @@
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="product">
                             <a href="{{ route('shop.detail', $Sanpham->id) }}" class="img-prod"><img class="img-fluid"
-                                    src="{{ asset('/images/' . $Sanpham->hinhanh) }}" alt="Colorlib Template"
-                                    width="250" height="250">
+                                    src="{{ asset('/images/' . $Sanpham->hinhanh) }}" alt="Colorlib Template" width="250"
+                                    height="200">
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></h3>
+                                <label style="font-size: 13px"><a href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></label>
                                 <div class="d-flex">
                                     <div class="pricing">
-                                        <p class="price"><span>{{ $Sanpham->giatien }} VNĐ</span></p>
-                                        <!-- <span class="price-sale">$80.00</span> -->
+                                        <p class="price"><span>{{ number_format($Sanpham->giatien) }} VND</span></p>
                                     </div>
                                 </div>
                                 <div class="bottom-area d-flex px-3">
                                     <div class="m-auto d-flex">
+
                                         <a type="button" href="{{ route('shop.detail', $Sanpham->id) }}"
-                                            class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                            class="d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        <a type="button"
-                                            href=""class="buy-now d-flex justify-content-center align-items-center mx-1"
-                                            data-toggle="modal" data-target="#exampleModal">
-                                            <span><i class="ion-ios-cart"></i></span>
-                                        </a>
 
+                                        @if (auth()->user() == null)
+                                        <form action="{{ route('add_to_cart', null) }}" method="POST"
+                                            class="form" enctype="multipart/form-data">
+                                            @csrf
+                                            <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
+                                                required>
+                                            <input name="quantity" value="1" type="number" hidden required>
+                                            <input name="size" value="1" type="number" hidden required>
+                                                <button type="submit"class="btn btn-primary d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </button>
+
+                                        </form>
+                                        @else
+                                            <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
+                                                class="form" enctype="multipart/form-data">
+                                                @csrf
+                                                <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
+                                                    required>
+                                                <input name="quantity" value="1" type="number" hidden required>
+                                                <input name="size" value="1" type="number" hidden required>
+                                                    <button  type="submit" class="btn btn-primary btn-lg justify-content-center align-items-center mx-2">
+                                                    <i  style="font-size: 15px" class="ion-ios-cart"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -103,6 +124,13 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+    function submitForm() {
+        let form = document.getElementById("form__submit");
+        form.submit();
+    }
+</script>
 
 <script>
     $(document).ready(function() {

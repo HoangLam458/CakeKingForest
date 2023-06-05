@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('tenkhachhang',50);
             $table->text('diachigiaohang');
             $table->string('sdtkhachhang',10);
-            $table->string('hinhthucnhanhang',50);
-            $table->date('ngaynhanhang');
-            $table->string('phuongthucthanhtoan',20);
+            $table->string('hinhthucnhanhang',50)->nullable();
+            $table->date('ngaynhanhang')->nullable();
+            $table->string('phuongthucthanhtoan',20)->nullable();
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
 use App\Models\size;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -144,7 +145,8 @@ class SanphamController extends Controller
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);
+        
+        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size, ]);
     }
     public function shop_category($id)
     {

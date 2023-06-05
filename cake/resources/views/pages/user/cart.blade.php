@@ -1,4 +1,25 @@
 @extends('pages.layout')
+<style>
+    #datepicker {
+        width: 100%;
+        margin: 0 20px 10px 0px;
+    }
+
+    #datepicker>span:hover {
+        cursor: pointer;
+    }
+</style>
+<style>
+    .cart {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -120px;
+        margin-left: -120px;
+    }
+</style>
 @section('body')
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
@@ -13,9 +34,9 @@
     </div>
 
     <section class="ftco-section ftco-cart">
-        <div class="container">
-            @if ($lsInD->count() == 0)
-                <div class="row col-md-12 col-12">
+        <div class="container-fluid">
+            @if ($ls == null)
+                <div class="row">
                     <div class="col d-flex justify-content-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="red"
                             class="bi bi-cart-x-fill" viewBox="0 0 16 16">
@@ -23,19 +44,21 @@
                                 d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z" />
                         </svg>
                     </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="row col-md-12 col-12">
-                    <div class="col d-flex justify-content-center">
-                        <h3>Không có sản phẩm nào trong giỏ hàng !!</h3>
+                    <div class="w-100"></div>
+                    <div class="w-100"></div>
+                    <div class="col-md-12 col-12">
+                        <div class="col d-flex justify-content-center">
+                            <h2>Không có sản phẩm nào trong giỏ hàng !!</h2>
+                        </div>
                     </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="row col-md-12 col-12">
-                    <div class="col d-flex justify-content-center">
-                        <a href="{{route('cake')}}" type="button" class="btn btn-primary">
-                           Trở về trang chủ
-                        </a>
+                    <div class="w-100"></div>
+                    <div class="w-100"></div>
+                    <div class="col-md-12 col-12">
+                        <div class="col d-flex justify-content-center">
+                            <a href="{{ route('shop') }}" type="button" class="btn btn-primary">
+                                <h2> Tiếp tục mua sắm</h2>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @else
@@ -52,6 +75,7 @@
                                         <th>Kích cở</th>
                                         <th>Số lượng</th>
                                         <th>Thành tiền</th>
+                                        <th>Ghi chú</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,15 +97,34 @@
                                             <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
                                             <td class="total">{{ $lsCart->s_name }}</td>
 
-                                            <td class="quantity">
+                                            <td class="quantity" class="col-md-2">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="quantity"
-                                                        class="quantity form-control input-number"
-                                                        value="{{ $lsCart->soluong }}" min="1" max="100">
+                                                    <span class="input-group-btn mr-2">
+                                                        <button type="button" class="quantity-left-minus btn"
+                                                            data-type="minus" data-field="">
+                                                            <i class="ion-ios-remove"></i>
+                                                        </button>
+                                                    </span>
+                                                    <input type="text" id="quantity" name="quantity"
+                                                        class="form-control input-number" value="{{ $lsCart->soluong }}"
+                                                        min="1" max="100" required>
+                                                    <span class="input-group-btn ml-2">
+                                                        <button type="button" class="quantity-right-plus btn"
+                                                            data-type="plus" data-field="">
+                                                            <i class="ion-ios-add"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </td>
 
                                             <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
+                                            {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
+                                            <td class="">
+                                                <div>
+                                                    <textarea type="text" name="ghichu" value="">
+                                                    </textarea>
+                                                </div>
+                                            </td>
                                         </tr><!-- END TR-->
                                     @endforeach
                                 </tbody>
@@ -94,54 +137,60 @@
                 @endforeach
                 <div class="row justify-content-end">
                     <div class="col-lg mt-5 cart-wrap ftco-animate">
-                        <div class="cart-total mb-3">
+                        <div class="cart-total mb-3 col-md-12">
                             <h3>Thông tin giao hàng</h3>
-                            <form action="{{route('checkout',auth()->user()->id)}}" class="info" id="checkout" method="POST" class="form"
-                            enctype="multipart/form-data">
-                            @csrf
-                                <div class="form-group">
-                                    <label for="">Tên người nhận</label>
-                                    <input type="text" class="form-control text-left px-3" required name="name"
-                                        value="{{ $u->tenkhachhang }}">
+                            <form action="{{ route('checkout', auth()->user()->id) }}" id="form__submit" method="POST"
+                                class="form" enctype="multipart/form-data">
+                                @csrf
+                                <div class="">
+                                    <div class="col-md-6 form-group">
+                                        <label for="">Tên người nhận</label>
+                                        <input type="text" class="form-control text-left px-3" required name="name"
+                                            value="{{ $u->tenkhachhang }}">
+                                    </div>
                                 </div>
-                                <div class="form-group">
+
+                                <div class="col-md-6  form-group">
                                     <label for="country">Số điện thoại</label>
                                     <input type="text" class="form-control text-left px-3" required name="phone"
                                         value="{{ $u->sdtkhachhang }}">
                                 </div>
-                                <div class="form-group">
+                                <div class="col form-group">
                                     <label for="country">Địa chỉ</label>
                                     <input type="text" class="form-control text-left px-3" required name="address"
                                         value="{{ $u->diachigiaohang }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="country">Ngày nhận hàng</label>
-                                    <input value="" maxlength="10" minlength="10"
-                                    required type="date" id="date" class="form-control"
-                                    name="date">
+                                <div class="col-md-6 form-group">
+                                    <label>Ngày nhận hàng</label>
+                                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                        <input class="form-control" type="text" name="date">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="country">Hình thức nhận hàng</label>
-                                    <input value="Trực tiếp tại cửa hàng" readonly
-                                    required type="text" class="form-control"
-                                    name="ship">
+                                    <input value="Trực tiếp tại cửa hàng" readonly required type="text"
+                                        class="form-control" name="ship">
                                 </div>
-                                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                                    <div class="cart-total mb-3">
-                                        <h3>Cart Totals</h3>
-                                        <p class="d-flex total-price">
-                                            <span>Total</span>
-                                            {{ number_format($total) }} VND
-                                </div>
-                                    {{-- <p><a href="{{route('checkout',auth()->user()->id)}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p> --}}
-                                </div>
-                                <button type="submit" id ="checkout" class="btn btn-primary">Thanh toán</button>
+
                             </form>
 
                         </div>
 
                     </div>
-
+                    <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                        <div class="cart-total mb-3">
+                            <h3>Cart Totals</h3>
+                            <p class="d-flex total-price">
+                                <span>Total</span>
+                                {{ number_format($total) }} VND
+                        </div>
+                        <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
+                                onclick="submitForm()">
+                                <label style="font-size: 15px">Thanh toán</label>
+                            </a></p>
+                    </div>
                 </div>
             @endif
 
@@ -167,24 +216,33 @@
         </div>
     </section>
 @endsection
-
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="js/google-map.js"></script>
-<script src="js/main.js"></script>
-
+<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('js/aos.js') }}"></script>
+<script src="{{ asset('js/jquery.animateNumber.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('js/scrollax.min.js') }}"></script>
+<script
+    src="{{ asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false') }}">
+</script>
+<script src="{{ asset('js/google-map.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', new Date());
+    });
+</script>
 <script>
     $(document).ready(function() {
 
@@ -227,5 +285,9 @@
         return tt;
     }
 </script>
-
-</body>
+<script>
+    function submitForm() {
+        let form = document.getElementById("form__submit");
+        form.submit();
+    }
+</script>
