@@ -19,9 +19,7 @@ class CartController extends Controller
     {
 
         $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
-
         $user1 = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
-
         if ($user1 == null) {
             return view('pages.user.cart', [], [
                 'ls' => $user1
@@ -32,10 +30,9 @@ class CartController extends Controller
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
-            ->where('hoadon_id', $user1->id)->where('hoadons.trangthai',0)
-            ->select('*','chitiethoadons.id as idchitiet','chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
-        foreach ($lsInD as $in)
-        {
+            ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
+            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
+        foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
         return view('pages.user.cart', [], [
@@ -43,7 +40,7 @@ class CartController extends Controller
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
-            'datenow' =>$currentTime
+            'datenow' => $currentTime
         ]);
 
     }
@@ -59,7 +56,7 @@ class CartController extends Controller
                 if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
                     $chitiet->soluong = $chitiet->soluong + $request['quantity'];
                     $total = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100);
-                    $chitiet->giatien =$chitiet->giatien + $total;
+                    $chitiet->giatien = $chitiet->giatien + $total;
                     $chitiet->save();
                     return redirect()->back();
                 }
@@ -104,7 +101,7 @@ class CartController extends Controller
                 'size_id' => 1,
                 'sanpham_id' => $request['id']
             ]);
-            return redirect()->route('shop');
+            return redirect()->back();
         }
         return redirect()->route('cake');
     }
@@ -126,38 +123,23 @@ class CartController extends Controller
         } else
             return view('homeuser');
     }
-    /**
-     * Summary of setCookie
-     * @param mixed $code
-     * @return Response
-     */
-    public function setCookie($code){
-        $response = new Response;
-        $response->cookie('mahd',  $code);
-        return redirect()->action([CartController::class, 'add_to_cartss']);
-    }
-
-    public function getCookie(Request $request){
-        return $request->cookie('mahd');
-    }
 
 
     public function add_to_cartss(Request $request)
-    {       
-            $code = 'HD' . '' . (string)(7);    
-            $getCookie = $this->getCookie($request);
-            $sanpham = sanpham::find($request->get('id'));         
-            $currentTime = Carbon::now();
-            $phantram = size::find($request->get('size'));
-            $user = hoadon::where('mahd', $getCookie)->where('trangthai', 0)->first();
-           
-            if($user != null){
-                $chitiethoadon = chitiethoadon::where('hoadon_id',  $user->id)->get();
+    {
+        $sanpham = sanpham::find($request->get('id'));
+        $currentTime = Carbon::now();
+        $phantram = size::find($request->get('size'));
+        $code_cookie = $request->cookie('code');
+        $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
+        if ($user != null)
+        {
+            $chitiethoadon = chitiethoadon::where('hoadon_id', $user->id)->get();
             foreach ($chitiethoadon as $chitiet) {
                 if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
                     $chitiet->soluong = $chitiet->soluong + $request['quantity'];
                     $total = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100);
-                    $chitiet->giatien =$chitiet->giatien + $total;
+                    $chitiet->giatien = $chitiet->giatien + $total;
                     $chitiet->save();
                     return redirect()->back();
                 }
@@ -169,14 +151,18 @@ class CartController extends Controller
                         'soluong' => $request['quantity'],
                         'ghichu' => "",
                         'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
-                        'hoadon_id' =>   $user->id,
+                        'hoadon_id' => $user->id,
                         'size_id' => $request['size'],
                         'sanpham_id' => $request['id']
                     ]);
                     return redirect()->back();
                 }
-            }}
-            else{
+            }
+        }
+        else
+        {
+            $hoadon = hoadon::orderBy('id', 'DESC')->first();
+            $code = 'HD' . '' . (string) ($hoadon->id + 1);
             hoadon::create([
                 'mahd' => $code,
                 'ngaylaphd' => $currentTime,
@@ -189,17 +175,17 @@ class CartController extends Controller
                 'trangthai' => 0,
                 'users_id' => null
             ]);
-            $this->setCookie($code);
-            $hoadon_id2=hoadon::where('mahd',$code)->first();
+            $hoadon_id2 = hoadon::where('mahd', $code)->first();
             chitiethoadon::create([
-                'soluong' => 1,
+                'soluong' => $request['quantity'],
                 'ghichu' => "",
                 'giatien' => $sanpham->giatien,
-                'hoadon_id' =>$hoadon_id2->id,
-                'size_id' => 1,
+                'hoadon_id' => $hoadon_id2->id,
+                'size_id' => $request['size'],
                 'sanpham_id' => $request['id']
             ]);
-            return redirect()->route('shop');
+            $test = Cookie::make('code', $code, 120);
+            return response()->back()->withCookie($test);
         }
     }
 }

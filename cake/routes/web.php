@@ -48,8 +48,7 @@ Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('
 Route::post('/checkout/{id?}', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
-Route::get('/set', [CartController::class, 'setCookie']);
-Route::get('/get', [CartController::class, 'getCookie']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
