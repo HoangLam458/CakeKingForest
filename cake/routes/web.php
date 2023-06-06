@@ -48,7 +48,8 @@ Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('
 Route::post('/checkout/{id?}', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
-
+Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
+Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

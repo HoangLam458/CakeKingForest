@@ -135,6 +135,85 @@
                 </div>
                 @foreach ($user as $u)
                 @endforeach
+                @if(auth()->user() == null)
+                <div class="row justify-content-end">
+                    <div class="col-lg mt-5 cart-wrap ftco-animate">
+                        <div class="cart-total mb-3 col-md-12">
+                            <h3>Thông tin giao hàng</h3>
+                            <form action="{{ route('checkoutss')}}" id="form__submit" method="POST"
+                                class="form" enctype="multipart/form-data">
+                                @csrf
+                               
+                                <div class="">
+                                    <div class="col-md-6 form-group">
+                                        <label for="">Tên người nhận</label>
+                                        <input required maxlength="20" type="text" class="form-control text-left px-3" required name="tenkhachhang"
+                                            value="Vui">
+                                    </div>
+                                </div>
+                           
+                              
+                                <div class="col-md-6 form-group">
+                                    <label for="country">Số điện thoại</label>
+                                    <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text" class="form-control text-left px-3" required name="sdtkhachhang"
+                                        value="Vui">
+                                </div>
+                            
+                                <div class="col-md-6 form-group">
+                                    <label for="country">Địa chỉ</label>
+                                    <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required name="diachigiaohang"
+                                        value=""></textarea>
+                                </div>
+                            
+                                <div class="col-md-6 form-group">
+                                    <label>Ngày nhận hàng</label>
+                                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                        <input class="form-control" type="text" name="date">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="country">Hình thức nhận hàng</label>
+                                    <select name="ship" id="ship" class="form-control">
+                                            <option required value="Nhận hàng tại cửa hàng">
+                                                Nhận hàng tại cửa hàng
+                                            </option>
+                                            <option required value="Giao đến địa chỉ">
+                                                Giao đến địa chỉ
+                                            </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="cart-total mb-3">
+                                        <h3>Cart Totals</h3>
+                                        <p class="d-flex total-price">
+                                            <span>Total</span>
+                                            {{ number_format($total) }} VND
+
+                                    </div> 
+                                     
+                            <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>   
+                      
+                       
+                                </div>
+                       
+                               
+                            </form>
+
+                        </div>
+
+                    </div>
+                   
+                       
+                        <!-- <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
+                                onclick="submitForm()">
+                                <label style="font-size: 15px">Thanh toán</label>
+                            </a></p> -->
+                   
+                </div>
+                @else
+                    @foreach ($user as $u)@endforeach
                 <div class="row justify-content-end">
                     <div class="col-lg mt-5 cart-wrap ftco-animate">
                         <div class="cart-total mb-3 col-md-12">
@@ -144,21 +223,22 @@
                                 @csrf
                                 <div class="">
                                     <div class="col-md-6 form-group">
-                                        <label for="">Tên người nhận</label>
-                                        <input type="text" class="form-control text-left px-3" required name="name"
+                                        <label for="">Họ Tên người nhận</label>
+                                        <input required maxlength="20" type="text" class="form-control text-left px-3" required name="tenkhachhang"
                                             value="{{ $u->tenkhachhang }}">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6  form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="country">Số điện thoại</label>
-                                    <input type="text" class="form-control text-left px-3" required name="phone"
+                                    <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text" class="form-control text-left px-3" required name="sdtkhachhang"
                                         value="{{ $u->sdtkhachhang }}">
                                 </div>
-                                <div class="col form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="country">Địa chỉ</label>
-                                    <input type="text" class="form-control text-left px-3" required name="address"
-                                        value="{{ $u->diachigiaohang }}">
+                                    <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required name="diachigiaohang"
+                                    value="">{{ $u->diachigiaohang }}</textarea>
+                                       
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Ngày nhận hàng</label>
@@ -170,28 +250,36 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="country">Hình thức nhận hàng</label>
-                                    <input value="Trực tiếp tại cửa hàng" readonly required type="text"
-                                        class="form-control" name="ship">
+                                    <select name="ship" id="ship" class="form-control">
+                                            <option required value="Nhận hàng tại cửa hàng">
+                                                Nhận hàng tại cửa hàng
+                                            </option>
+                                            <option required value="Giao đến địa chỉ">
+                                                Giao đến địa chỉ
+                                            </option>
+                                    </select>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="cart-total mb-3">
+                                        <h3>Cart Totals</h3>
+                                        <p class="d-flex total-price">
+                                            <span>Total</span>
+                                            {{ number_format($total) }} VND
 
+                                    </div> 
+                                     
+                            <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>   
+                      
+                       
+                                </div>
                             </form>
 
                         </div>
 
                     </div>
-                    <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                        <div class="cart-total mb-3">
-                            <h3>Cart Totals</h3>
-                            <p class="d-flex total-price">
-                                <span>Total</span>
-                                {{ number_format($total) }} VND
-                        </div>
-                        <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
-                                onclick="submitForm()">
-                                <label style="font-size: 15px">Thanh toán</label>
-                            </a></p>
-                    </div>
+                   
                 </div>
+                @endif
             @endif
 
         </div>

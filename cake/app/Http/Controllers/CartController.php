@@ -111,9 +111,9 @@ class CartController extends Controller
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         if ($user != Null) {
             $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
-            $user->tenkhachhang = $request->get('name');
-            $user->sdtkhachhang = $request->get('phone');
-            $user->diachigiaohang = $request->get('address');
+            $user->tenkhachhang = $request->get('tenkhachhang');
+            $user->sdtkhachhang = $request->get('sdtkhachhang');
+            $user->diachigiaohang = $request->get('diachigiaohang');
             $user->ngaynhanhang = $currentTime;
             $user->hinhthucnhanhang = $request->get('ship');
             $user->phuongthucthanhtoan = "Tiền Mặt";
@@ -185,7 +185,54 @@ class CartController extends Controller
                 'sanpham_id' => $request['id']
             ]);
             $test = Cookie::make('code', $code, 120);
-            return response()->back()->withCookie($test);
+            return response()->redirectToRoute('shop')->withCookie($test);
         }
+    }
+    public function cartss(Request $request)
+    {
+        $code_cookie = $request->cookie('code');
+        $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
+        $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
+        if ($user1 == null) {
+            return view('pages.user.cart', [], [
+                'ls' => $user1
+            ]);
+        }
+        $user = hoadon::where('mahd', $code_cookie)->get();
+        $total = 0;
+        $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
+            ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
+            ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
+            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
+        foreach ($lsInD as $in) {
+            $total = $total + $in->thanhtien;
+        }
+        return view('pages.user.cart', [], [
+            'ls' => $user1,
+            'lsInD' => $lsInD,
+            'user' => $user,
+            'total' => $total,
+            'datenow' => $currentTime
+        ]);
+    }
+    public function checkoutss(Request $request)
+    {
+        $code_cookie = $request->cookie('code');
+        $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
+        if ($user != Null) {
+            $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
+            $user->tenkhachhang = $request->get('tenkhachhang');
+            $user->sdtkhachhang = $request->get('sdtkhachhang');
+            $user->diachigiaohang = $request->get('diachigiaohang');
+            $user->ngaynhanhang = $currentTime;
+            $user->hinhthucnhanhang = $request->get('ship');
+            $user->phuongthucthanhtoan = "Tiền Mặt";
+            $user->trangthai = 1;
+            $user->save();
+            $request->cookie('code');
+            Cookie::forget('code');
+            return redirect()->route('cartss');
+        } else
+            return view('homeuser');
     }
 }
