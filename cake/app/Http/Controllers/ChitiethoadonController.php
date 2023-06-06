@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\chitiethoadon;
 use App\Http\Requests\StorechitiethoadonRequest;
 use App\Http\Requests\UpdatechitiethoadonRequest;
+use App\Models\hoadon;
 
 class ChitiethoadonController extends Controller
 {
@@ -61,10 +62,19 @@ class ChitiethoadonController extends Controller
      */
     public function destroy($id)
     {
+        $user1 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
+
+
         $cart = chitiethoadon::find($id);
         if($cart){
             $cart->delete();
-        return redirect()->back();
+            $item = chitiethoadon::where('hoadon_id',$user1->id)->first();
+            if($item == null)
+            {
+                $user1->delete();
+                return redirect()->back();
+            }
+            return redirect()->back();
          }
     }
 }

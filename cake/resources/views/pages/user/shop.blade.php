@@ -55,8 +55,8 @@
                                                 required>
                                             <input name="quantity" value="1" type="number" hidden required>
                                             <input name="size" value="1" type="number" hidden required>
-                                                <button type="submit"class="btn btn-primary d-flex justify-content-center align-items-center mx-1">
-                                                <span><i class="ion-ios-cart"></i></span>
+                                            <button  type="submit" class="btn btn-primary btn-lg justify-content-center align-items-center mx-2">
+                                                <i  style="font-size: 25px" class="ion-ios-cart"></i>
                                             </button>
 
                                         </form>
@@ -69,7 +69,7 @@
                                                 <input name="quantity" value="1" type="number" hidden required>
                                                 <input name="size" value="1" type="number" hidden required>
                                                     <button  type="submit" class="btn btn-primary btn-lg justify-content-center align-items-center mx-2">
-                                                    <i  style="font-size: 15px" class="ion-ios-cart"></i>
+                                                    <i  style="font-size: 25px" class="ion-ios-cart"></i>
                                                 </button>
                                             </form>
                                         @endif

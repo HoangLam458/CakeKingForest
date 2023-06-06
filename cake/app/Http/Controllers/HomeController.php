@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
-use App\Http\Requests\StorehoadonRequest;
 use App\Models\sanpham;
 use App\Models\size;
 use Carbon\Carbon;
@@ -52,7 +51,9 @@ class HomeController extends Controller
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $user1->id)->where('hoadons.trangthai',0)
-            ->select('*','chitiethoadons.id as idchitiet','chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
+            ->select('*','chitiethoadons.id as idchitiet','chitiethoadons.giatien as thanhtien',
+             'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sizes.id as sizeid','sizes.phantram as sizeptr',
+             'sanphams.hinhanh as img')->get();
         foreach ($lsInD as $in)
         {
             $total = $total + $in->thanhtien;
@@ -68,6 +69,7 @@ class HomeController extends Controller
     }
     public function add_to_cart(Request $request, $id)
     {
+
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         $taikhoan = User::find($id);
         $sanpham = sanpham::find($request->get('id'));
@@ -116,14 +118,14 @@ class HomeController extends Controller
             $user2 = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
             $request = $request->all();
             Chitiethoadon::create([
-                'soluong' => 1,
+                'soluong' => $request['quantity'],
                 'ghichu' => "",
-                'giatien' => $sanpham->giatien,
+                'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                 'hoadon_id' => $user2->id,
-                'size_id' => 1,
+                'size_id' => $request['size'],
                 'sanpham_id' => $request['id']
             ]);
-            return redirect()->route('shop');
+            return redirect()->back();
         }
         return redirect()->route('cake');
     }

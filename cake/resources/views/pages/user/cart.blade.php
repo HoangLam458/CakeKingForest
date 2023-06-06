@@ -34,7 +34,7 @@
     </div>
 
     <section class="ftco-section ftco-cart">
-        <div class="container-fluid">
+        <div class="container-fluid" style="max-width: 1366px">
             @if ($ls == null)
                 <div class="row">
                     <div class="col d-flex justify-content-center">
@@ -71,17 +71,18 @@
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                         <th>Tên bánh</th>
-                                        <th>Giá bán</th>
+                                        <th>Giá bán (VND)</th>
                                         <th>Kích cở</th>
                                         <th>Số lượng</th>
-                                        <th>Thành tiền</th>
+                                        <th>Thành tiền (VND)</th>
                                         <th>Ghi chú</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($lsInD as $lsCart)
                                         <tr class="text-center">
-                                            <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span
+                                            <td class="product-remove"><a
+                                                    href="{{ route('remove', $lsCart->idchitiet) }}"><span
                                                         class="ion-ios-close"></span></a></td>
 
                                             <td class="image-prod">
@@ -93,35 +94,45 @@
                                             <td class="product-name">
                                                 <h3>{{ $lsCart->tensanpham }}</h3>
                                             </td>
-
-                                            <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
-                                            <td class="total">{{ $lsCart->s_name }}</td>
-
-                                            <td class="quantity" class="col-md-2">
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-btn mr-2">
-                                                        <button type="button" class="quantity-left-minus btn"
-                                                            data-type="minus" data-field="">
-                                                            <i class="ion-ios-remove"></i>
-                                                        </button>
-                                                    </span>
-                                                    <input type="text" id="quantity" name="quantity"
-                                                        class="form-control input-number" value="{{ $lsCart->soluong }}"
-                                                        min="1" max="100" required>
-                                                    <span class="input-group-btn ml-2">
-                                                        <button type="button" class="quantity-right-plus btn"
-                                                            data-type="plus" data-field="">
-                                                            <i class="ion-ios-add"></i>
-                                                        </button>
-                                                    </span>
+                                            <td class="price" name="price">
+                                                <div id="price">
+                                                    {{ number_format($lsCart->giaban) }}
                                                 </div>
                                             </td>
+                                            <td class="total">
+                                                {{ $lsCart->s_name }} ({{ $lsCart->sizeptr }}%)
+                                            </td>
+                                            <td class="quantity">
+                                                <div class="input-group mb-3">
 
-                                            <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
-                                            {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
+
+                                                    <button type="button" class="quantity-left-minus btn" data-type="minus"
+                                                        data-field="">
+                                                        <i class="ion-ios-remove"></i>
+                                                    </button>
+
+
+                                                    <input type="text" id="quantity" name="quantity"
+                                                        class="form-control input-number" value="{{ $lsCart->soluong }}"
+                                                        min="1" max="9" required>
+
+
+                                                    <button type="button" class="quantity-right-plus btn" data-type="plus"
+                                                        data-field="">
+                                                        <i class="ion-ios-add"></i>
+                                                    </button>
+
+
+                                                </div>
+                                            </td>
+                                            <td class="total" name="total">
+                                                <div id="total2">
+                                                    {{ number_format($lsCart->thanhtien) }}
+                                                </div>
+                                            </td>
                                             <td class="">
                                                 <div>
-                                                    <textarea type="text" name="ghichu" value="">
+                                                    <textarea type="text" name="ghichu" value="{{ $lsCart->ghichu }}">
                                                     </textarea>
                                                 </div>
                                             </td>
@@ -170,8 +181,14 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="country">Hình thức nhận hàng</label>
-                                    <input value="Trực tiếp tại cửa hàng" readonly required type="text"
-                                        class="form-control" name="ship">
+                                    <select name="ship" id="ship" class="form-control">
+                                            <option required value="Nhận hàng tại cửa hàng">
+                                                Nhận hàng tại cửa hàng
+                                            </option>
+                                            <option required value="Giao đến địa chỉ">
+                                                Giao đến địa chỉ
+                                            </option>
+                                    </select>
                                 </div>
 
                             </form>
@@ -181,12 +198,12 @@
                     </div>
                     <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                         <div class="cart-total mb-3">
-                            <h3>Cart Totals</h3>
+                            <h3>Tổng tiền giỏ hàng</h3>
                             <p class="d-flex total-price">
-                                <span>Total</span>
+                                <span>Tổng tiền</span>
                                 {{ number_format($total) }} VND
                         </div>
-                        <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
+                        <p style="margin-left: 50%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
                                 onclick="submitForm()">
                                 <label style="font-size: 15px">Thanh toán</label>
                             </a></p>
@@ -246,20 +263,18 @@
 <script>
     $(document).ready(function() {
 
-        var quantitiy = 0;
+        var quantity = 0;
         $('.quantity-right-plus').click(function(e) {
 
             // Stop acting like a button
             e.preventDefault();
             // Get the field name
             var quantity = parseInt($('#quantity').val());
-
             // If is not undefined
+            if (quantity < 9) {
+                $('#quantity').val(quantity + 1);
 
-            $('#quantity').val(quantity + 1);
-
-
-            // Increment
+            }
 
         });
 
@@ -272,18 +287,12 @@
             // If is not undefined
 
             // Increment
-            if (quantity > 0) {
+            if (quantity > 1) {
                 $('#quantity').val(quantity - 1);
             }
         });
 
     });
-</script>
-<script>
-    function format2(n) {
-        var tt = $ '#n'.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " VND";
-        return tt;
-    }
 </script>
 <script>
     function submitForm() {
