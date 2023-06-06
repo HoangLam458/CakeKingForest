@@ -88,14 +88,14 @@
                             aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
-                            {{-- <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a> --}}
+                            <!-- <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a> -->
                         </div>
                     </li>
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                     @if (auth()->user() == null)
-                        <!-- <li class="nav-item cta cta-colored"><a href="{{ route('cart', 5) }}" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li> -->
-                        <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
+                        <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
+                        class="icon-shopping_cart"></span>[0]</a></li>
+                        <li class="nav-item"> <a href="{{ route('Login') }}" class="nav-link">Đăng nhập</a>
                         </li>
                     @else
                         <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"

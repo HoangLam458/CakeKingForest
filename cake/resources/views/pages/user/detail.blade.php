@@ -11,69 +11,61 @@
             </div>
         </div>
     </div>
-    @if (auth()->user() == null)
-        <form id="form__submit" action="{{ route('add_to_cart', 'null') }}" method="POST" class="form"
-            enctype="multipart/form-data">
-            @csrf
-            <section class="ftco-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 mb-5 ftco-animate">
-                            <a href="{{ asset('/images/' . $sanpham->hinhanh) }}" class="image-popup"><img
-                                    src="{{ asset('/images/' . $sanpham->hinhanh) }}" class="img-fluid"
-                                    alt="Colorlib Template"></a>
-                        </div>
-                        <input name="id" value="{{ $sanpham->id }}" type="text" hidden required>
-                        <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                            <h3>{{ $sanpham->tensp }}</h3>
-                            <p class="price"><span> Giá bán: {{ number_format($sanpham->giatien) }} VND</span></p>
-                            <p>{{ $sanpham->mota }}
-                            </p>
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group d-flex">
-                                        <div class="select-wrap">
-                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                            <select name="size" id="size" class="form-control">
-                                                @foreach ($size as $size)
-                                                    <option required value="{{ $size->id }}">
-                                                        {{ $size->tensize }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-100"></div>
-                                <div class="input-group col-md-6 d-flex mb-3">
-                                    <div class="col-md-2"><span class="input-group-btn mr-2">
-                                            <button type="button" class="quantity-left-minus btn" data-type="minus"
-                                                data-field="">
-                                                <i class="ion-ios-remove"></i>
-                                            </button>
-                                        </span></div>
-                                    <div class="col-md-4">
-                                        <input type="text" id="quantity" name="quantity"
-                                            class="form-control input-number" value="1" min="1" max="100"
-                                            required>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <span class="input-group-btn ml-2">
-                                            <button type="button" class="quantity-right-plus btn" data-type="plus"
-                                                data-field="">
-                                                <i class="ion-ios-add"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="w-100"></div>
-                            </div>
-                            <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Add to Cart</a></p>
-                        </div>
-                    </div>
+    <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
+        class="form" enctype="multipart/form-data">
+        @csrf
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 ftco-animate">
+                    <a href="{{ asset('/images/' . $sanpham->hinhanh) }}" class="image-popup"><img
+                            src="{{ asset('/images/' . $sanpham->hinhanh) }}" class="img-fluid" alt="Colorlib Template"></a>
                 </div>
-            </section>
-        </form>
+                <input name="id" value="{{ $sanpham->id }}" type="text" hidden
+                required>
+                <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                    <h3>{{ $sanpham->tensp }}</h3>
+                    <p class="price"><span>{{ number_format($sanpham->giatien) }} VND</span></p>
+                    <p>{{ $sanpham->mota }}
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group d-flex">
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="size"  id="size" class="form-control">
+                                        @foreach ($size as $size)
+                                            <option  required value="{{ $size->id }}">
+                                                {{ $size->tensize }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="form-group col-md-6 d-flex mb-6">
+                            <span class="form-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                    <i class="ion-ios-remove"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="form-control input-number"
+                                value="1" min="1" max="100" required>
+                            <span class="form-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                    <i class="ion-ios-add"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                    <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Add to Cart</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </form>
 
         <section class="ftco-section">
             <div class="container">

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('mahd',10);
             $table->dateTime('ngaylaphd');
-            $table->string('tenkhachhang',50);
-            $table->text('diachigiaohang');
-            $table->string('sdtkhachhang',10);
+            $table->string('tenkhachhang',50)->nullable();
+            $table->text('diachigiaohang')->nullable();
+            $table->string('sdtkhachhang',10)->nullable();
             $table->string('hinhthucnhanhang',50)->nullable();
             $table->date('ngaynhanhang')->nullable();
             $table->string('phuongthucthanhtoan',20)->nullable();

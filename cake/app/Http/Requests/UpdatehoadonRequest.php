@@ -19,10 +19,20 @@ class UpdatehoadonRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules():array
     {
         return [
             //
+            'tenkhachhang'=>['required'],
+            'diachigiaohang'=>['required'],
+            'sdtkhachhang'=>['required'],
+        ];
+    }
+    public function messages(){
+        return [
+            'tenkhachhang.required'=>'Chưa nhập họ tên',
+            'diachigiaohang.required'=>'Chưa nhập địa chỉ',
+            'sdtkhachhang.required'=>'Chưa nhập số điện thoại',
         ];
     }
 }
