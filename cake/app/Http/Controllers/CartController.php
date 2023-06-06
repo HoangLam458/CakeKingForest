@@ -193,6 +193,7 @@ class CartController extends Controller
         $code_cookie = $request->cookie('code');
         $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
         $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
+        $sizes = size::all();
         if ($user1 == null) {
             return view('pages.user.cart', [], [
                 'ls' => $user1
@@ -203,7 +204,7 @@ class CartController extends Controller
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
-            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
+            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.id as idsize','sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
         foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
@@ -212,6 +213,7 @@ class CartController extends Controller
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
+            'size'=>$sizes,
             'datenow' => $currentTime
         ]);
     }
