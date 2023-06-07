@@ -50,6 +50,7 @@ Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('sh
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
 Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
+Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

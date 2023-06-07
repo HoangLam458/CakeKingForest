@@ -145,12 +145,11 @@ class SanphamController extends Controller
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        
         return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size, ]);
     }
     public function shop_category($id)
     {
-        $lsSanpham = sanpham::where('loaisanpham_id', $id)->get();
+        $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(2);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);

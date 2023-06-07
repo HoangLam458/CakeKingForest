@@ -8,10 +8,9 @@ use App\Models\sanpham;
 use App\Models\size;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
@@ -236,5 +235,35 @@ class CartController extends Controller
             return redirect()->route('cartss');
         } else
             return view('homeuser');
+    }
+
+    public function updateqty($id, Request $request){
+        $code_cookie = $request->cookie('code');
+        $chitiet = chitiethoadon::find($id);
+        $chitiettrung = chitiethoadon::where('hoadon_id',$code_cookie)->get();
+        $sanpham = sanpham::find($chitiet->sanpham_id);
+        $phantrams = size::find($request->get('size_id'));
+        if($chitiet){
+            // foreach ($chitiettrung as $trung) {
+            //     if($trung->id == $id && $trung->size_id == $request->get('size_id')){
+            //         $giusl = $request->get('quantity');
+            //         $idsp = $chitiet->sanpham_id;
+            //         $chitiet->delete();
+            //         $timchitiet = chitiethoadon::where('sanpham_id',$idsp)->where('hoadon_id',$code_cookie)->first();
+            //         $timchitiet->soluong = $timchitiet->soluong + $giusl;
+            //         $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
+            //         $timchitiet->save();
+            //         return redirect()->back();
+            //     }else 
+                $chitiet->soluong = $request->get('quantity');
+                $chitiet->size_id = $request->get('size_id');
+                $chitiet->giatien = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantrams->phantram / 100);
+                $chitiet->ghichu = $request->get('ghichu');
+                $chitiet->save();
+                return redirect()->back();
+            }      
+        
+        else
+        return redirect()->back();
     }
 }

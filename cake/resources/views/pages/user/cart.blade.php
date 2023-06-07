@@ -8,6 +8,7 @@
     #datepicker>span:hover {
         cursor: pointer;
     }
+
 </style>
 <style>
     .cart {
@@ -19,6 +20,7 @@
         margin-right: -120px;
         margin-left: -120px;
     }
+
 </style>
 @section('body')
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
@@ -74,56 +76,60 @@
                                 <th>Tên bánh</th>
                                 <th>Giá bán</th>
                                 <th>Kích cỡ</th>
-                                <th>Số lượng</th>
+                                <th class="col">Số lượng</th>
                                 <th>Thành tiền</th>
                                 <th>Ghi chú</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($lsInD as $lsCart)
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span
-                                            class="ion-ios-close"></span></a></td>
+                            <form action="{{ route('update',$lsCart->idchitiet)}}"method="POST" class="form"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <tr class="text-center">
+                                    <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span
+                                                class="ion-ios-close"></span></a></td>
 
-                                <td class="image-prod">
-                                    <div class="img"
-                                        style="background-image:url({{ asset('/images/' . $lsCart->img) }});">
-                                    </div>
-                                </td>
+                                    <td class="image-prod">
+                                        <div class="img"
+                                            style="background-image:url({{ asset('/images/' . $lsCart->img) }});">
+                                        </div>
+                                    </td>
 
-                                <td class="product-name">
-                                    <h3>{{ $lsCart->tensanpham }}</h3>
-                                </td>
+                                    <td class="product-name">
+                                        <h3>{{ $lsCart->tensanpham }}</h3>
+                                    </td>
 
-                                <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
-                                <!-- <td class="size">{{ $lsCart->s_name }}
+                                    <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
+                                    <!-- <td class="size">{{ $lsCart->s_name }}
                                
                                 </td> -->
-                                <td class="total">
-                                <select name="size" id="size" class="form-control">
-                                        @foreach ($size as $sizes)
-                                        <option required value="{{ $sizes->id }}" 
-                                        {{ $lsCart->idsize==$sizes->id? "selected":"" }}>
-                                        {{ $sizes->tensize }}
-                                            
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td class="cart-product-quantity" width="130px">
-                                    <div class="input-group quantity">
-                                        <div class="input-group-prepend decrement-btn" style="cursor: pointer">
-                                            <span class="input-group-text">-</span>
-                                        </div>
-                                        <input type="text" class="qty-input form-control" maxlength="2" max="10"
-                                            value="{{ $lsCart->soluong }}">
-                                        <div class="input-group-append increment-btn" style="cursor: pointer">
-                                            <span class="input-group-text">+</span>
-                                        </div>
-                                    </div>
-                                </td>
+                                    <td>
+                                        <select name="size_id" id="selectBasic" class="form-control">
+                                            @foreach ($size as $sizes)
+                                            <option required value="{{ $sizes->id }}"
+                                                {{ $lsCart->idsize==$sizes->id? "selected":"" }}>
+                                                {{ $sizes->tensize }}
 
-                                <!-- 
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="cart-product-quantity" width="130px">
+                                        <div class="input-group quantity">
+                                            <div class="input-group-prepend decrement-btn" style="cursor: pointer">
+                                                <span class="input-group-text">-</span>
+                                            </div>
+                                            <input type="text" class="qty-input form-control" maxlength="2" max="10"
+                                                value="{{ $lsCart->soluong }}" name="quantity">
+                                            <div class="input-group-append increment-btn" style="cursor: pointer">
+                                                <span class="input-group-text">+</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- 
                                             <td class="quantity" class="col-md-2">
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-btn mr-2">
@@ -144,15 +150,18 @@
                                                 </div>
                                             </td> -->
 
-                                <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
-                                {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
-                                <td class="">
-                                    <div>
-                                        <textarea type="text" name="ghichu" value="">
+                                    <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
+                                    {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
+                                    <td class="">
+                                        <div>
+                                            <textarea type="text" name="ghichu" value="">
                                                     </textarea>
-                                    </div>
-                                </td>
-                            </tr><!-- END TR-->
+                                        </div>
+                                    </td>
+                                    <td><button type="submit"><span>Update</span></a></td>
+
+                                </tr><!-- END TR-->
+                            </form>
                             @endforeach
                         </tbody>
                     </table>
@@ -342,6 +351,7 @@
             todayHighlight: true
         }).datepicker('update', new Date());
     });
+
 </script>
 
 <script>
@@ -370,16 +380,19 @@
             }
         });
     });
+
 </script>
 <script>
     function format2(n) {
         var tt = $ '#n'.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " VND";
         return tt;
     }
+
 </script>
 <script>
     function submitForm() {
         let form = document.getElementById("form__submit");
         form.submit();
     }
+
 </script>
