@@ -9,6 +9,7 @@ use App\Http\Controllers\ChitiethoadonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,18 @@ Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('sh
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
 Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
+
+//payment
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
+Route::get('/paymentsuccess', function () {
+    return view('pages.user.payment.paymentsuccess');
+});
+
+Route::get('/paymentfailed', function () {
+    return view('pages.user.payment.paymentfailed');
+});
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

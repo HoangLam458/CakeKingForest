@@ -146,150 +146,161 @@
                 </div>
                 @foreach ($user as $u)
                 @endforeach
-                @if(auth()->user() == null)
-                <div class="row justify-content-end">
-                    <div class="col-lg mt-5 cart-wrap ftco-animate">
-                        <div class="cart-total mb-3 col-md-12">
-                            <h3>Thông tin giao hàng</h3>
-                            <form action="{{ route('checkoutss')}}" id="form__submit" method="POST"
-                                class="form" enctype="multipart/form-data">
-                                @csrf
+                @if (auth()->user() == null)
+                    <div class="row justify-content-end">
+                        <div class="col-lg mt-5 cart-wrap ftco-animate">
+                            <div class="cart-total mb-3 col-md-12">
+                                <h3>Thông tin giao hàng</h3>
+                                <form action="{{ route('checkoutss') }}" id="form__submit" method="POST" class="form"
+                                    enctype="multipart/form-data">
+                                    @csrf
 
-                                <div class="">
+                                    <div class="">
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Tên khách hàng</label>
+                                            <input required maxlength="20" type="text"
+                                                class="form-control text-left px-3" required name="tenkhachhang"
+                                                value="" placeholder="Tên khách hàng">
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-6 form-group">
-                                        <label for="">Tên người nhận</label>
-                                        <input required maxlength="20" type="text" class="form-control text-left px-3" required name="tenkhachhang"
-                                            value="Vui">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Số điện thoại</label>
-                                    <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text" class="form-control text-left px-3" required name="sdtkhachhang"
-                                        value="Vui">
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Địa chỉ</label>
-                                    <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required name="diachigiaohang"
-                                        value=""></textarea>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label>Ngày nhận hàng</label>
-                                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                        <input class="form-control" type="text" name="date">
-                                        <span class="input-group-addon"></span>
+                                        <label for="country">Số điện thoại</label>
+                                        <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
+                                            class="form-control text-left px-3" required name="sdtkhachhang"
+                                            value="" placeholder="Số điện thoại">
                                     </div>
 
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Hình thức nhận hàng</label>
-                                    <select name="ship" id="ship" class="form-control">
+                                    <div class="col-md-6 form-group">
+                                        <label for="country">Địa chỉ</label>
+                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
+                                            name="diachigiaohang" value=""></textarea>
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label>Ngày nhận hàng</label>
+                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                            <input class="form-control" type="text" name="date">
+                                            <span class="input-group-addon"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="country">Hình thức nhận hàng</label>
+                                        <select name="ship" id="ship" class="form-control">
                                             <option required value="Nhận hàng tại cửa hàng">
                                                 Nhận hàng tại cửa hàng
                                             </option>
                                             <option required value="Giao đến địa chỉ">
                                                 Giao đến địa chỉ
                                             </option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="cart-total mb-3">
-                                        <h3>Cart Totals</h3>
-                                        <p class="d-flex total-price">
-                                            <span>Total</span>
-                                            {{ number_format($total) }} VND
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="cart-total mb-3">
+                                            <h3>Cart Totals</h3>
+                                            <p class="d-flex total-price">
+                                                <span>Total</span>
+                                                {{ number_format($total) }} VND
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh
+                                            Toán</button>
+
 
                                     </div>
 
-                            <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>
 
-
-                                </div>
-
-
-                            </form>
+                                </form>
+                                <form action="{{url('/vnpay_payment')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="total_vnpay" value="{{$total}}"><br>
+                                    <button style="margin-right: 15px" name="redirect" class="glow-on-hover" type="submit">Thanh toán VNPAY</button>
+                                </form>
+                            </div>
 
                         </div>
-
-                    </div>
 
 
                         <!-- <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
-                                onclick="submitForm()">
-                                <label style="font-size: 15px">Thanh toán</label>
-                            </a></p> -->
+                                    onclick="submitForm()">
+                                    <label style="font-size: 15px">Thanh toán</label>
+                                </a></p> -->
 
-                </div>
+                    </div>
                 @else
-                    @foreach ($user as $u)@endforeach
-                <div class="row justify-content-end">
-                    <div class="col-lg mt-5 cart-wrap ftco-animate">
-                        <div class="cart-total mb-3 col-md-12">
-                            <h3>Thông tin giao hàng</h3>
-                            <form action="{{ route('checkout', auth()->user()->id) }}" id="form__submit" method="POST"
-                                class="form" enctype="multipart/form-data">
-                                @csrf
-                                <div class="">
+                    @foreach ($user as $u)
+                    @endforeach
+                    <div class="row justify-content-end">
+                        <div class="col-lg mt-5 cart-wrap ftco-animate">
+                            <div class="cart-total mb-3 col-md-12">
+                                <h3>Thông tin giao hàng</h3>
+                                <form action="{{ route('checkout', auth()->user()->id) }}" id="form__submit"
+                                    method="POST" class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="">
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Họ Tên khách hàng</label>
+                                            <input required maxlength="20" type="text"
+                                                class="form-control text-left px-3" required name="tenkhachhang"
+                                                value="{{ $u->tenkhachhang }}">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 form-group">
-                                        <label for="">Họ Tên người nhận</label>
-                                        <input required maxlength="20" type="text" class="form-control text-left px-3" required name="tenkhachhang"
-                                            value="{{ $u->tenkhachhang }}">
+                                        <label for="country">Số điện thoại</label>
+                                        <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
+                                            class="form-control text-left px-3" required name="sdtkhachhang"
+                                            value="{{ $u->sdtkhachhang }}">
                                     </div>
-                                </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="country">Địa chỉ</label>
+                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
+                                            name="diachigiaohang" value="">{{ $u->diachigiaohang }}</textarea>
 
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Số điện thoại</label>
-                                    <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text" class="form-control text-left px-3" required name="sdtkhachhang"
-                                        value="{{ $u->sdtkhachhang }}">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Địa chỉ</label>
-                                    <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required name="diachigiaohang"
-                                    value="">{{ $u->diachigiaohang }}</textarea>
-
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Ngày nhận hàng</label>
-                                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                        <input class="form-control" type="text" name="date">
-                                        <span class="input-group-addon"></span>
                                     </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Ngày nhận hàng</label>
+                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                            <input class="form-control" type="text" name="date">
+                                            <span class="input-group-addon"></span>
+                                        </div>
 
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="country">Hình thức nhận hàng</label>
-                                    <select name="ship" id="ship" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="country">Hình thức nhận hàng</label>
+                                        <select name="ship" id="ship" class="form-control">
                                             <option required value="Nhận hàng tại cửa hàng">
                                                 Nhận hàng tại cửa hàng
                                             </option>
                                             <option required value="Giao đến địa chỉ">
                                                 Giao đến địa chỉ
                                             </option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="cart-total mb-3">
-                                        <h3>Cart Totals</h3>
-                                        <p class="d-flex total-price">
-                                            <span>Total</span>
-                                            {{ number_format($total) }} VND
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="cart-total mb-3">
+                                            <h3>Cart Totals</h3>
+                                            <p class="d-flex total-price">
+                                                <span>Total</span>
+                                                {{ number_format($total) }} VND
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh
+                                            Toán</button>
+
 
                                     </div>
+                                </form>
 
-                            <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>
-
-
-                                </div>
-                            </form>
+                            </div>
 
                         </div>
 
                     </div>
-
-                </div>
                 @endif
             @endif
 

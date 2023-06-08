@@ -11,7 +11,8 @@
             </div>
         </div>
     </div>
-    <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
+    @if(auth()->user()==null)
+    <form id="form__submit" action="{{ route('add_to_cartss')}}" method="POST"
         class="form" enctype="multipart/form-data">
         @csrf
     <section class="ftco-section">
