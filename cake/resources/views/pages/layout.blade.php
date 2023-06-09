@@ -93,8 +93,12 @@
                     </li>
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                     @if (auth()->user() == null)
-                        <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
+                        <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link">
+                        <span
+                        class="icon-shopping_cart">
+                    </span>[
+                       0
+                    ]</a></li>
                         <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
                         </li>
                     @else
@@ -109,7 +113,7 @@
                                 @if (auth()->user()->loai == 1)
                                     <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
                                 @endif
-                                <a class="dropdown-item" href="">Trang cá nhân</a>
+                                <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá nhân</a>
                                 <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
 
                             </div>
@@ -123,13 +127,6 @@
     @yield('body')
     <footer class="ftco-footer ftco-section">
         <div class="container">
-            <div class="row">
-                <div class="mouse">
-                    <a href="#" class="mouse-icon">
-                        <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-                    </a>
-                </div>
-            </div>
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
@@ -183,6 +180,13 @@
                                             class="text">info@yourdomain.com</span></a></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mouse">
+                        <a href="#" class="mouse-icon">
+                            <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                        </a>
                     </div>
                 </div>
             </div>

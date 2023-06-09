@@ -1,4 +1,11 @@
 @extends('pages.layout')
+<header>
+    <style>
+    .pagination {
+        justify-content: center;
+    }
+    </style>
+</header>
 @section('body')
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
@@ -79,11 +86,11 @@
                 @endforeach
             </div>
         </div>
-        {{-- <div class="center">
+        <div class="center">
           <div class="pagination">
               {{  $lsSanpham->onEachSide(1)->links() }}
         </div>
-        </div> --}}
+        </div> 
         </div>
         </div>
     </section>

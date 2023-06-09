@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\HoadonController;
 use App\Http\Controllers\LoaisanphamController;
@@ -27,12 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/', function () {
-    return view('homeuser');
-})->name('cake');
+Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', function () {
     return view('pages.user.contact');
 })->name('contact');
+
+
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
@@ -44,6 +45,7 @@ Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('sh
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
 Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
+Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 
 //payment
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
@@ -58,6 +60,8 @@ Route::get('/paymentfailed', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/user-edit/{id?}', [UserController::class, 'User_update'])->name('User_edit');
+    Route::get('/trang-ca-nhan/{id?}', [UserController::class, 'profile'])->name('trang-ca-nhan');
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -70,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
+
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         // route admin account

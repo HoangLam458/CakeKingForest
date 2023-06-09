@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\chitiethoadon;
+use App\Models\hoadon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +15,35 @@ class UserController extends Controller
     {
         $lsUsers = User::all();
         return view('pages.admin.accounts.index', ['lsUsers'=> $lsUsers]);
+    }
+    public function homepage()
+    {
+        $count = 0;
+        if(auth()->user()==null)
+        {
+            $hd = hoadon::where('user_id',null)->where('trangthai',0)->first();
+            $cthd = chitiethoadon::where('hoadon_id',$hd->id);
+            foreach($cthd as $item)
+            {
+                $count = $count + $item->soluong;
+            }
+            return view('pages.layout',[
+                'count'=>$count
+            ]);
+        }
+        else
+        {
+            $hd = hoadon::where('user_id',Auth::user()->id)->where('trangthai',0)->first();
+            $cthd = chitiethoadon::where('hoadon_id',$hd->id);
+            foreach($cthd as $item)
+            {
+                $count = $count + $item->soluong;
+            }
+            return view('pages.layout',[
+                'count'=>$count
+            ]);
+        }
+
     }
 
     /**
@@ -111,4 +143,24 @@ class UserController extends Controller
         $request->session()->flush();
         return redirect()->route('cake');
     }
+    public function profile($id)
+    {
+        $user = User::find($id);
+        $cart = hoadon::where('users_id',$id)->where('trangthai','<>',0)->get();
+        return view('pages.user.profile',[
+            'user'=>$user, 'cart'=>$cart
+        ]);
+    }
+    public function User_update(Request $request, $id)
+    {
+        $user = User::find($id);
+         $user->sdt = $request->get('phone');
+         $user->diachi= $request->get('address');
+         $user->tenkhachhang = $request->get('fullname');
+
+         $user->save();
+
+         return redirect()->route('trang-ca-nhan',$id);
+    }
+
 }

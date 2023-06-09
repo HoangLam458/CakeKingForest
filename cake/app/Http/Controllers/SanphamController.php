@@ -7,6 +7,7 @@ use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
 use App\Models\size;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -142,15 +143,15 @@ class SanphamController extends Controller
 
     public function shop()
     {
+        Cookie::make('count',0);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        
         return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size, ]);
     }
     public function shop_category($id)
     {
-        $lsSanpham = sanpham::where('loaisanpham_id', $id)->get();
+        $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(2);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);

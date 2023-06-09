@@ -57,7 +57,6 @@ class LoginController extends Controller
             ]))
         {
             $user=\Illuminate\Foundation\Auth\User::where('email', $request->email)->first();
-
             $request->session()->put('email', $user);
             if($user->loai==0){
                 return redirect()->route('cake');
