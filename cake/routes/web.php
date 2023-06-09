@@ -42,6 +42,7 @@ Route::get('/contact', function () {
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
+Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
 Route::post('/add_to_cartss/{id?}', [CartController::class, 'add_to_cartss'])->name('add_to_cartss');
 Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('remove');
@@ -51,6 +52,10 @@ Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.de
 Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
 Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
+Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
+Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
+Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
+Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
