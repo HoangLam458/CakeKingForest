@@ -37,7 +37,7 @@
 </div>
 
 <section class="ftco-section ftco-cart">
-    <div class="container-fluid">
+    <div class="container">
         @if ($ls == null)
         <div class="row">
             <div class="col d-flex justify-content-center">
@@ -72,11 +72,11 @@
                         <thead class="thead-primary">
                             <tr class="text-center">
                                 <th>&nbsp;</th>
-                                <th>&nbsp;</th>
+                                <th>Ảnh bánh</th>
                                 <th>Tên bánh</th>
                                 <th>Giá bán</th>
-                                <th>Kích cỡ</th>
-                                <th class="col">Số lượng</th>
+                                <th class="col-md-2">Kích cỡ</th>
+                                <th class="col-md-1">Số lượng</th>
                                 <th>Thành tiền</th>
                                 <th>Ghi chú</th>
                                 <th>&nbsp;</th>
