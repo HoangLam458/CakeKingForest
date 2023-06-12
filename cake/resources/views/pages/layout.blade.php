@@ -4,6 +4,8 @@
 <head>
     <title>Cake King Forest</title>
     <meta charset="utf-8">
+    <link sizes="76x76" href="{{ asset('paper') }}/img/final_logo.png">
+    <link rel="icon" type="image/png" href="{{ asset('paper') }}/img/final_logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap') }}"
         rel="stylesheet">
@@ -45,8 +47,8 @@
                         </div>
                         <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right ">
                             <a href="https://www.facebook.com/7sep.02/" type="button" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-facebook" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
                                     <path
                                         d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
                                 </svg>
@@ -67,51 +69,73 @@
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
-
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <div class="dropdown-item">
+                                <form action="{{ route('searchdh') }}" method="POST" class="search-form">
+                                    @csrf
+                                    <div class="form-group">
+                                        <span class="icon ion-ios-search"></span>
+                                        <input style="width:350px" type="text" class="form-control"
+                                            placeholder="Nhập thông tin bánh cần tìm..." name="search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item "><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
                             @foreach ($category as $cate)
-                            <a class="dropdown-item" href="{{ route('shop.category',$cate->id) }}">
-                            {{$cate->tenloaisp}}
-                            </a>
+                                <a class="dropdown-item" href="{{ route('shop.category', $cate->id) }}">
+                                    {{ $cate->tenloaisp }}
+                                </a>
                             @endforeach
                         </div>
                     </li>
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                     @if (auth()->user() == null)
-                    <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
-                    <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
-                                class="icon-shopping_cart"></span>[@php
-                                echo Session::has('cate')? count(Session::get('cate')) :0;
-                                @endphp]
+                        <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
+                        <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
+                                    class="icon-shopping_cart"></span>[@php
+                                        echo Session::has('cate') ? count(Session::get('cate')) : 0;
+                                    @endphp]
                             </a></li>
-                    <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
-                    </li>
+                        <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
+                        </li>
                     @else
-                    <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
-                    <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"
-                            class="nav-link"><span class="icon-shopping_cart"></span>
-                            [@php
-                            echo Session::has('cate')? count(Session::get('cate')) :0;
-                            @endphp]</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @if (auth()->user()->loai == 1)
-                            <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá
-                                nhân</a>
-                            <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
-                        </div>
-                    </li>
+                        <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
+                        <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"
+                                class="nav-link"><span class="icon-shopping_cart"></span>
+                                [@php
+                                    echo Session::has('cate') ? count(Session::get('cate')) : 0;
+                                @endphp]</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                @if (auth()->user()->loai == 1)
+                                    <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
+                                @endif
+                                <a class="dropdown-item" href="{{ route('trang-ca-nhan', auth()->user()->id) }}">Trang
+                                    cá
+                                    nhân</a>
+                                <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
+
+                            </div>
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -194,9 +218,9 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-
-                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger"
-                            aria-hidden="true"></i> by <a href="" target="_blank">Colorlib</a>
+                        </script> All rights reserved | This template is made with <i
+                            class="icon-heart color-danger" aria-hidden="true"></i> by <a href=""
+                            target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -208,9 +232,10 @@
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>

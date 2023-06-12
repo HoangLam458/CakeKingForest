@@ -2,10 +2,6 @@
 @section('body')
     <header>
         <style>
-            .pagination {
-                justify-content: center;
-            }
-
             .button {
                 background-color: #4CAF50;
                 /* Green */
@@ -44,7 +40,6 @@
             </div>
         </div>
     </div>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
@@ -127,12 +122,12 @@
             </div>
         </div>
         <div class="center">
-            <div class="pagination">
-                {{ $lsSanpham->onEachSide(1)->links() }}
-            </div>
+          <div class="pagination">
+              {{  $lsSanpham->onEachSide(1)->links() }}
+        </div>
         </div>
     </section>
-    <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+    <!-- <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
         <div class="container py-4">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-md-6">
@@ -150,16 +145,4 @@
             </div>
         </div>
     </section>
-    <script>
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("myDIV");
-        var btns = header.getElementsByClassName("button");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function() {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script>
 @endsection

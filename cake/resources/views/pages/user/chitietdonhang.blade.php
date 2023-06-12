@@ -13,7 +13,7 @@
 </div>
 
 <section class="ftco-section ftco-cart">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="cart-list">
@@ -34,39 +34,39 @@
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                <td>
+                                <td class="col-md-1">
 
-                                    <h3>{{ $mahd->mahd }}</h3>
+                                    <p>{{ $mahd->mahd }}</p>
                                 </td>
-                                <td>
+                                <td class="col-md-2">
 
-                                    <h3>{{ $mahd->tenkhachhang }}</h3>
-                                </td>
-                                <td>
-
-                                    <h3>{{ $mahd->sdtkhachhang }}</h3>
+                                    <p>{{ $mahd->tenkhachhang }}</p>
                                 </td>
                                 <td>
 
-                                    <h3>{{ $mahd->diachigiaohang }}</h3>
+                                    <p>{{ $mahd->sdtkhachhang }}</p>
+                                </td>
+                                <td class="col-md-2">
+
+                                    <p>{{ $mahd->diachigiaohang }}</p>
+                                </td>
+                                <td class="col-md-2">
+
+                                    <p>{{ $mahd->hinhthucnhanhang }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ \Carbon\Carbon::parse($mahd->ngaylaphd)->format('d/m/Y')}}</p>
+                                </td>
+                                <td>
+                                    <p>{{ \Carbon\Carbon::parse($mahd->ngaynhanhang)->format('d/m/Y')}}</p>
+                                </td>
+                                <td class="col-md-2">
+
+                                    <p>{{ $mahd->phuongthucthanhtoan }}</p>
                                 </td>
                                 <td>
 
-                                    <h3>{{ $mahd->hinhthucnhanhang }}</h3>
-                                </td>
-                                <td>
-                                    <h3>{{ \Carbon\Carbon::parse($mahd->ngaylaphd)->format('d/m/Y')}}</h3>
-                                </td>
-                                <td>
-                                    <h3>{{ \Carbon\Carbon::parse($mahd->ngaynhanhang)->format('d/m/Y')}}</h3>
-                                </td>
-                                <td>
-
-                                    <h3>{{ $mahd->phuongthucthanhtoan }}</h3>
-                                </td>
-                                <td>
-
-                                    <h3>{{number_format($total)}} VND</h3>
+                                    <p>{{number_format($total)}} VND</p>
                                 </td>
 
                                 @switch($mahd->trangthai)
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="cart-list">
@@ -123,11 +123,11 @@
                                     enctype="multipart/form-data">
                                     @csrf
                             <tr>
-                                <td class="col-2">
-                                    <img width="150px" height="150px" src="{{ asset('/images/' . $item->img) }}" alt="">
+                                <td >
+                                    <img width="130px" height="130px" src="{{ asset('/images/' . $item->img) }}" alt="">
                                 </td>
-                                <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
-                                <td style="width:10%" class="col-1">{{number_format($item->giaban)}} VND</td>
+                                <td class="col-md-3">{{ $item->tensanpham }}</td>
+                                <td class="col-mr-2">{{number_format($item->giaban)}} VND</td>
                                 <td>
                                     {{$item->s_name}}
                                 </td>

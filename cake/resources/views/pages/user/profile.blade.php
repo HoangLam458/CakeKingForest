@@ -18,8 +18,8 @@ enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="col-md col-12">
                     <div class="form-group">
-                        <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
-                        <div class="col-md-9">
+                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <input type="password" name="old_password" class="form-control" placeholder="Mật khẩu hiện tại" required>
                             </div>
@@ -34,8 +34,8 @@ enctype="multipart/form-data">
 
                 <div class="col-md col-12">
                     <div class="form-group">
-                        <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
-                        <div class="col-md-9">
+                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
                             </div>
@@ -49,8 +49,8 @@ enctype="multipart/form-data">
                 </div>
                 <div class="col-md col-12">
                     <div class="form-group">
-                        <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
-                        <div class="col-md-9">
+                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu" required>
                             </div>
@@ -76,7 +76,7 @@ enctype="multipart/form-data">
 @csrf
 <div class="modal" id="Modal2" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Thay đổi thông tin</h5>
@@ -169,8 +169,9 @@ enctype="multipart/form-data">
             </div>
         </div>
     </div>
-
-    <div class="row ">
+        <div class="w-100"></div>
+        <div class="w-100"></div>
+    <div class="row col-md-12 ">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -214,7 +215,15 @@ enctype="multipart/form-data">
                                         @break
                                         @endswitch
                                         <td class="col-2">
-                                            Update
+
+                                                <a href="{{route('ctdonhang', $item->id)}}" type="button" class="btn btn-secondary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                                    </svg>
+                                                    </button>
+
                                         </td>
                                 </tr>
                                 @endforeach

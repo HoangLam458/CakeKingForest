@@ -4037,8 +4037,9 @@ input[type="button"].btn-block {
   display: flex;
   padding-left: 0;
   list-style: none;
-  border-radius: 0.25rem; }
-
+  border-radius: 0.25rem; 
+  justify-content: center;}
+  
 .page-link {
   position: relative;
   display: block;
