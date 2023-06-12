@@ -143,18 +143,27 @@ class SanphamController extends Controller
 
     public function shop()
     {
-        Cookie::make('count',0);
+        $category = loaisanpham::all();
+        $act = 0;
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size, ]);
+        return response()->view('pages.user.shop',
+         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
+         'act'=>$act,'category'=>$category
+        ]);
     }
     public function shop_category($id)
     {
+        $category = loaisanpham::all();
+         $act = $id;
         $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(2);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
-        return view('pages.user.shop', ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size]);
+        return response()->view('pages.user.shop',
+         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
+         'act'=>$act,'category'=>$category
+        ]);
     }
 
     public function detail($id)
@@ -172,7 +181,8 @@ class SanphamController extends Controller
                     'loaisanpham' => $loaisanpham,
                     'sanpham' => $sanpham,
                     'size' => $size,
-                    'relate' =>$relate
+                    'relate' =>$relate,
+                    'category'=>$loaisanpham
                 ]);
             }
             return redirect()->back();

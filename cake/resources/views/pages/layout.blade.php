@@ -88,27 +88,37 @@
                                 </form>
                             </div>
                         </div>
-                    </li>
-                    <li class="nav-item active"><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
+                    </li>   
+                    <li class="nav-item"><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
-                            <!-- <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a> -->
+                            @foreach ($category as $cate)
+                            <a class="dropdown-item" href="{{ route('shop.category',$cate->id) }}">
+                            {{$cate->tenloaisp}}
+                            </a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                     @if (auth()->user() == null)
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
-                                class="icon-shopping_cart"></span>[0]</a></li>
+                                class="icon-shopping_cart"></span>[@php
+                                echo Session::has('cate')? count(Session::get('cate')) :0;
+                                @endphp]
+                            </a></li>
                     <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
                     </li>
                     @else
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"
-                            class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                            class="nav-link"><span class="icon-shopping_cart"></span>
+                            [@php
+                            echo Session::has('cate')? count(Session::get('cate')) :0;
+                            @endphp]</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
@@ -119,7 +129,6 @@
                             <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá
                                 nhân</a>
                             <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
-
                         </div>
             </div>
             </li>

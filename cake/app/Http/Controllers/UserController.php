@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
+use App\Models\loaisanpham;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,35 +17,7 @@ class UserController extends Controller
         $lsUsers = User::all();
         return view('pages.admin.accounts.index', ['lsUsers'=> $lsUsers]);
     }
-    public function homepage()
-    {
-        $count = 0;
-        if(auth()->user()==null)
-        {
-            $hd = hoadon::where('user_id',null)->where('trangthai',0)->first();
-            $cthd = chitiethoadon::where('hoadon_id',$hd->id);
-            foreach($cthd as $item)
-            {
-                $count = $count + $item->soluong;
-            }
-            return view('pages.layout',[
-                'count'=>$count
-            ]);
-        }
-        else
-        {
-            $hd = hoadon::where('user_id',Auth::user()->id)->where('trangthai',0)->first();
-            $cthd = chitiethoadon::where('hoadon_id',$hd->id);
-            foreach($cthd as $item)
-            {
-                $count = $count + $item->soluong;
-            }
-            return view('pages.layout',[
-                'count'=>$count
-            ]);
-        }
 
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -145,10 +118,11 @@ class UserController extends Controller
     }
     public function profile($id)
     {
+        $category = loaisanpham::all();
         $user = User::find($id);
         $cart = hoadon::where('users_id',$id)->where('trangthai','<>',0)->get();
         return view('pages.user.profile',[
-            'user'=>$user, 'cart'=>$cart
+            'user'=>$user, 'cart'=>$cart,'category'=>$category
         ]);
     }
     public function User_update(Request $request, $id)
