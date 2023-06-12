@@ -96,7 +96,7 @@
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                         <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
                         class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item"> <a href="{{ route('Login') }}" class="nav-link">Đăng nhập</a>
+                        <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
                         </li>
                     @else
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
