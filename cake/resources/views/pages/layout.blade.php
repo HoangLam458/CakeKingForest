@@ -2,35 +2,23 @@
 <html lang="en">
 
 <head>
-
     <title>Cake King Forest</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')}}">
-
-    <link rel="stylesheet prefetch" href="{{asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css')}}">
-
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap') }}"
         rel="stylesheet">
-    <link
-        href="{{ asset('https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap') }}"rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap') }}"
+        rel="stylesheet">
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery.timepicker.css') }}">
-
-
     <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -57,8 +45,8 @@
                         </div>
                         <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right ">
                             <a href="https://www.facebook.com/7sep.02/" type="button" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-facebook" viewBox="0 0 16 16">
                                     <path
                                         d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
                                 </svg>
@@ -94,27 +82,27 @@
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
                     @if (auth()->user() == null)
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
-                        <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
-                        </li>
+                    <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
+                                class="icon-shopping_cart"></span>[0]</a></li>
+                    <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
+                    </li>
                     @else
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
-                        <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"
-                                class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04"
-                                data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                @if (auth()->user()->loai == 1)
-                                    <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
-                                @endif
-                                <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá nhân</a>
-                                <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
+                    <li class="nav-item cta cta-colored"><a href="{{ route('cart', auth()->user()->id) }}"
+                            class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            @if (auth()->user()->loai == 1)
+                            <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá
+                                nhân</a>
+                            <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
 
-                            </div>
-                        </li>
+                        </div>
+                    </li>
                     @endif
                 </ul>
             </div>
@@ -131,8 +119,10 @@
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="https://www.facebook.com/7sep.02/"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="https://www.instagram.com/hnh7.s/?theme=dark"><span class="icon-instagram"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.facebook.com/7sep.02/"><span
+                                        class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/hnh7.s/?theme=dark"><span
+                                        class="icon-instagram"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -195,9 +185,9 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i
-                            class="icon-heart color-danger" aria-hidden="true"></i> by <a href=""
-                            target="_blank">Colorlib</a>
+
+                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger"
+                            aria-hidden="true"></i> by <a href="" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -209,14 +199,10 @@
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke-miterlimit="10" stroke="#F96D00" />
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
         </svg></div>
-
-    <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>

@@ -1,4 +1,5 @@
 @extends('pages.layout')
+@section('body')
 <header>
     <style>
     .pagination {
@@ -6,7 +7,6 @@
     }
     </style>
 </header>
-@section('body')
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -61,9 +61,9 @@
                                                     required>
                                                 <input name="quantity" value="1" type="number" hidden required>
                                                 <input name="size" value="1" type="number" hidden required>
-                                                    <button  type="submit" class="btn btn-primary btn-lg justify-content-center align-items-center mx-2">
-                                                    <i  style="font-size: 15px" class="ion-ios-cart"></i>
-                                                </button>
+                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                <i class="ion-ios-cart"></i>
+                                            </button>
                                             </form>
                                         @else
                                             <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
@@ -73,9 +73,9 @@
                                                     required>
                                                 <input name="quantity" value="1" type="number" hidden required>
                                                 <input name="size" value="1" type="number" hidden required>
-                                                    <button  type="submit" class="btn btn-primary btn-lg justify-content-center align-items-center mx-2">
-                                                    <i  style="font-size: 25px" class="ion-ios-cart"></i>
-                                                </button>
+                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                <i class="ion-ios-cart"></i>
+                                            </button>
                                             </form>
                                         @endif
                                     </div>
@@ -113,78 +113,3 @@
         </div>
     </section>
 @endsection
-<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('js/aos.js') }}"></script>
-<script src="{{ asset('js/jquery.animateNumber.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('js/scrollax.min.js') }}"></script>
-<script
-    src="{{ asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false') }}">
-</script>
-<script src="{{ asset('js/google-map.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script type="text/javascript">
-    $(function() {
-        $("#datepicker").datepicker({
-            autoclose: true,
-            todayHighlight: true
-        }).datepicker('update', new Date());
-    });
-</script>
-<script>
-    $(document).ready(function() {
-
-        var quantitiy = 0;
-        $('.quantity-right-plus').click(function(e) {
-
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
-
-            // If is not undefined
-
-            $('#quantity').val(quantity + 1);
-
-
-            // Increment
-
-        });
-
-        $('.quantity-left-minus').click(function(e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
-
-            // If is not undefined
-
-            // Increment
-            if (quantity > 0) {
-                $('#quantity').val(quantity - 1);
-            }
-        });
-
-    });
-</script>
-<script>
-    function format2(n) {
-        var tt = $ '#n'.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " VND";
-        return tt;
-    }
-</script>
-<script>
-    function submitForm() {
-        let form = document.getElementById("form__submit");
-        form.submit();
-    }
-</script>
