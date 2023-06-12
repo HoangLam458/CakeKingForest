@@ -14,13 +14,14 @@
 
 <section class="ftco-section ftco-cart bg-light">
     <div class="container col-md-6">
-            <form action="{{ route('searchdh')}}" method="POST" class="search-form">
-                @csrf
-                <div class="form-group">
-                    <span class="icon ion-ios-search"></span>
-                    <input type="text" class="form-control" placeholder="Nhập mã đơn hàng..." name="search">
-                </div>
-            </form>
+        <form action="{{ route('searchdh')}}" method="POST" class="search-form">
+            @csrf
+            <div class="form-group">
+                <span class="icon ion-ios-search"></span>
+                <input type="text" class="form-control" placeholder="Nhập mã đơn hàng hoặc số điện thoại..."
+                    name="search">
+            </div>
+        </form>
     </div>
     <div class="container">
         <div class="row">
@@ -39,40 +40,47 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if($hd ==null)
+                            <tr class="text-center">
+                                <td>
+                                </td>
+                                @else
+                                @foreach($hd as $hdf)
                             <tr class="text-center">
                                 @if($hd ==null)
                                 <td>
                                 </td>
                                 @else
+
                                 <td></td>
                                 <td>
-                                    <p>{{ $hd->mahd }}</p>
+                                    <p>{{ $hdf->mahd }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ \Carbon\Carbon::parse($hd->ngaylaphd)->format('d/m/Y')}}</p>
+                                    <p>{{ \Carbon\Carbon::parse($hdf->ngaylaphd)->format('d/m/Y')}}</p>
                                 </td>
                                 <td>
-                                    <p>{{ \Carbon\Carbon::parse($hd->ngaynhanhang)->format('d/m/Y')}}</p>
+                                    <p>{{ \Carbon\Carbon::parse($hdf->ngaynhanhang)->format('d/m/Y')}}</p>
                                 </td>
-                                @switch($hd->trangthai)
+                                @switch($hdf->trangthai)
                                 @case(1)
-                                <td><span class="badge bg-warning">Chờ duyệt</span></td>
+                                <td><span style="color:white" class="badge bg-warning">Chờ duyệt</span></td>
                                 @break
                                 @case(2)
-                                <td><span class="badge bg-primary">Đã duyệt</span></td>
+                                <td><span style="color:white" class="badge bg-primary">Đã duyệt</span></td>
                                 @break
                                 @case(3)
-                                <td><span class="badge badge-info">Đang giao</span></td>
+                                <td><span style="color:white" class="badge badge-info">Đang giao</span></td>
                                 @break
                                 @case(4)
-                                <td><span class="badge bg-success">Đã hoàn thành</span></td>
+                                <td><span style="color:white" class="badge bg-success">Đã hoàn thành</span></td>
                                 @break
                                 @case(5)
-                                <td><span class="badge badge-danger">Đã hủy</span></td>
+                                <td><span style="color:white" class="badge badge-danger">Đã hủy</span></td>
                                 @break
                                 @endswitch
                                 <td>
-                                    <a href="{{route('ctdonhang', $hd->id)}}" type="button" class="btn btn-secondary">
+                                    <a href="{{route('ctdonhang', $hdf->id)}}" type="button" class="btn btn-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
@@ -80,9 +88,11 @@
                                         </svg>
                                         </button>
                                 </td>
+
                                 @endif
-                                    
                             </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

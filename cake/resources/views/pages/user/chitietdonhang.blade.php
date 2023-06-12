@@ -71,19 +71,19 @@
 
                                 @switch($mahd->trangthai)
                                 @case(1)
-                                <td><span class="badge bg-warning">Chờ duyệt</span></td>
+                                <td><span style="color:white" class="badge bg-warning">Chờ duyệt</span></td>
                                 @break
                                 @case(2)
-                                <td><span class="badge bg-primary">Đã duyệt</span></td>
+                                <td><span style="color:white" class="badge bg-primary">Đã duyệt</span></td>
                                 @break
                                 @case(3)
-                                <td><span class="badge badge-info">Đang giao</span></td>
+                                <td><span style="color:white" class="badge badge-info">Đang giao</span></td>
                                 @break
                                 @case(4)
-                                <td><span class="badge bg-success">Đã hoàn thành</span></td>
+                                <td><span style="color:white" class="badge bg-success">Đã hoàn thành</span></td>
                                 @break
                                 @case(5)
-                                <td><span class="badge badge-danger">Đã hủy</span></td>
+                                <td><span style="color:white" class="badge badge-danger">Đã hủy</span></td>
                                 @break
                                 @endswitch
 

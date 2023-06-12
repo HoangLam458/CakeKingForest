@@ -120,8 +120,8 @@
                                         <div class="input-group-prepend decrement-btn" style="cursor: pointer">
                                             <i class=" input-group-text ion-ios-remove"></i>
                                         </div>
-                                        <input type="text" class="qty-input form-control" maxlength="2" max="10"
-                                            value="{{ $lsCart->soluong }}" readonly>
+                                        <input type="text" class="qty-input form-control input-number" maxlength="2" max="10"
+                                            name="quantity" id="quantity" value="{{ $lsCart->soluong }}" required readonly>
                                         <div class="input-group-append increment-btn" style="cursor: pointer">
                                         <i class=" input-group-text ion-ios-add"></i>
                                         </div>

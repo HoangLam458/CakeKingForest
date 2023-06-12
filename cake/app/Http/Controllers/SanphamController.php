@@ -165,7 +165,18 @@ class SanphamController extends Controller
          'act'=>$act,'category'=>$category
         ]);
     }
-
+    public function searchpr (Request $request)
+    {
+        $act = 0;
+        $category = loaisanpham::all();
+        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%{$request->get('searchpr')}%")->orWhere('mota','LIKE',"%{$request->get('searchpr')}%")->Paginate(8);
+        $lsloaisp = loaisanpham::all();
+        $size = size::all();
+        return response()->view('pages.user.shop',
+         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
+         'act'=>$act,'category'=>$category
+        ]);
+    }
     public function detail($id)
     {
         if ($id) {
