@@ -1,12 +1,5 @@
 @extends('pages.layout')
 @section('body')
-<header>
-    <style>
-    .pagination {
-        justify-content: center;
-    }
-    </style>
-</header>
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -17,7 +10,6 @@
             </div>
         </div>
     </div>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -91,10 +83,8 @@
               {{  $lsSanpham->onEachSide(1)->links() }}
         </div>
         </div> 
-        </div>
-        </div>
     </section>
-    <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+    <!-- <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
         <div class="container py-4">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-md-6">
@@ -111,5 +101,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 @endsection

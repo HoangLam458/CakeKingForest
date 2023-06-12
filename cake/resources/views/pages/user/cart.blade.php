@@ -8,7 +8,6 @@
     #datepicker>span:hover {
         cursor: pointer;
     }
-
 </style>
 <style>
     .cart {
@@ -22,14 +21,6 @@
     }
 
 </style>
-
-<head>
-    <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')}}">
-
-    <link rel="stylesheet prefetch"
-        href="{{asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css')}}">
-
-</head>
 @section('body')
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
     <div class="container">
@@ -82,11 +73,11 @@
                                 <th>&nbsp;</th>
                                 <th>Ảnh bánh</th>
                                 <th>Tên bánh</th>
-                                <th class="col-mr-1">Giá bán</th>
-                                <th class="col-md-3">Kích cỡ</th>
-                                <th class="col-mr-1 text-right">Số lượng</th>
-                                <th class="col-md-6">Thành tiền</th>
-                                <th class="col-md-1">Ghi chú</th>
+                                <th >Giá bán</th>
+                                <th >Kích cỡ</th>
+                                <th class="col-mr-6">Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Ghi chú</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -113,7 +104,7 @@
                                     <!-- <td class="size">{{ $lsCart->s_name }}
 
                                 </td> -->
-                                    <td>
+                                    <td class="col-md-2" >
                                         <select name="size_id" id="selectBasic" class="form-control">
                                             @foreach ($size as $sizes)
                                             <option required value="{{ $sizes->id }}"
@@ -124,55 +115,18 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
-                                        <div class="quantity d-flex">
-                                            <span class="input-group input-group-btn decrement-btn">
-                                                <button type="button" class="quantity-left-minus btn" data-type="minus"
-                                                    data-field="">
-                                                    <i class="ion-ios-remove"></i>
-                                                </button>
-                                            </span>
-                                            <input type="text" name="quantity" class="form-control qty-input"
-                                                value="{{ $lsCart->soluong }}" min="1" max="10" name="quantity"
-                                                readonly>
-                                            <span class="input-group-btn increment-btn ">
-                                                <button type="button" class="quantity-right-plus btn" data-type="plus"
-                                                    data-field="">
-                                                    <i class="ion-ios-add"></i>
-                                                </button>
-                                            </span>
-                                            <!-- ///
-                                            <div class="input-group-prepend decrement-btn" style="cursor: pointer">
-                                                <span class="input-group-text">-</span>
-                                            </div>
-                                            <input type="text" class="qty-input form-control" maxlength="2" max="10"
-                                                value="{{ $lsCart->soluong }}" name="quantity" readonly>
-                                            <div class="input-group-append increment-btn" style="cursor: pointer">
-                                                <span class="input-group-text">+</span>
-                                            </div> -->
+                                    <td class="cart-product-quantity col-md-2">
+                                    <div class="input-group quantity">
+                                        <div class="input-group-prepend decrement-btn" style="cursor: pointer">
+                                            <i class=" input-group-text ion-ios-remove"></i>
                                         </div>
-                                    </td>
-
-                                    <!--
-                                            <td class="quantity" class="col-md-2">
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-btn mr-2">
-                                                        <button type="button" class="quantity-left-minus btn"
-                                                            data-type="minus" data-field="">
-                                                            <i class="ion-ios-remove"></i>
-                                                        </button>
-                                                    </span>
-                                                    <input type="text" id="quantity" name="quantity"
-                                                        class="form-control input-number" value="{{ $lsCart->soluong }}"
-                                                        min="1" max="100" required>
-                                                    <span class="input-group-btn ml-2">
-                                                        <button type="button" class="quantity-right-plus btn"
-                                                            data-type="plus" data-field="">
-                                                            <i class="ion-ios-add"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                            </td> -->
+                                        <input type="text" class="qty-input form-control" maxlength="2" max="10"
+                                            value="{{ $lsCart->soluong }}" readonly>
+                                        <div class="input-group-append increment-btn" style="cursor: pointer">
+                                        <i class=" input-group-text ion-ios-add"></i>
+                                        </div>
+                                    </div>
+                                </td>
 
                                     <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
                                     {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
@@ -182,7 +136,7 @@
                                                 value="">{{$lsCart->ghichu}}</textarea>
                                         </div>
                                     </td>
-                                    <td><button type="submit"><span>Update</span></a></td>
+                                    <td><button type="submit"class="btn"><span>Update</span></a></td>
 
                                 </tr><!-- END TR-->
                             </form>
@@ -205,7 +159,7 @@
                         @csrf
 
                         <div class="">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label for="">Tên người nhận</label>
                                 <input required maxlength="20" type="text" class="form-control text-left px-3" required
                                     name="tenkhachhang" value="" placeholder="">
@@ -213,20 +167,20 @@
                         </div>
 
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Số điện thoại</label>
                             <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
                                 class="form-control text-left px-3" required name="sdtkhachhang" value=""
                                 placeholder="">
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Địa chỉ</label>
                             <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
                                 name="diachigiaohang" value=""></textarea>
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label>Ngày nhận hàng</label>
                             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                                 <input class="form-control" type="text" name="date">
@@ -234,7 +188,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Hình thức nhận hàng</label>
                             <select name="ship" id="ship" class="form-control">
                                 <option required value="Nhận hàng tại cửa hàng">
@@ -245,9 +199,15 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-lg-6">
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg mt-5 cart-wrap ftco-animate">
                             <div class="cart-total mb-3">
                                 <h3>Cart Totals</h3>
+                                <p class="d-flex total-price">
+                                <span>Phí vận chuyển</span>
+                                Miễn phí
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
@@ -256,9 +216,6 @@
 
                             <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>
                         </div>
-                    </form>
-                </div>
-            </div>
             <!-- <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
                                 onclick="submitForm()">
                                 <label style="font-size: 15px">Thanh toán</label>
@@ -274,26 +231,26 @@
                         class="form" enctype="multipart/form-data">
                         @csrf
                         <div class="">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label for="">Họ Tên người nhận</label>
                                 <input required maxlength="20" type="text" class="form-control text-left px-3" required
                                     name="tenkhachhang" value="{{ $u->tenkhachhang }}">
                             </div>
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Số điện thoại</label>
                             <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
                                 class="form-control text-left px-3" required name="sdtkhachhang"
                                 value="{{ $u->sdtkhachhang }}">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Địa chỉ</label>
                             <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
                                 name="diachigiaohang" value="">{{ $u->diachigiaohang }}</textarea>
 
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label>Ngày nhận hàng</label>
                             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                                 <input class="form-control" type="text" name="date">
@@ -301,7 +258,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="country">Hình thức nhận hàng</label>
                             <select name="ship" id="ship" class="form-control">
                                 <option required value="Nhận hàng tại cửa hàng">
@@ -312,19 +269,23 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-lg-6">
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg mt-5 cart-wrap ftco-animate">
                             <div class="cart-total mb-3">
                                 <h3>Cart Totals</h3>
+                                <p class="d-flex total-price">
+                                <span>Phí vận chuyển</span>
+                                Miễn phí
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
 
                             </div>
+
                             <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>
                         </div>
-                    </form>
-                </div>
-            </div>
         </div>
         @endif
         @endif

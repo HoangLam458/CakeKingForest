@@ -13,8 +13,7 @@
 </div>
 
 <section class="ftco-section ftco-cart bg-light">
-    <div class="container-fluid">
-        <div class="sidebar-box">
+    <div class="container col-md-6">
             <form action="{{ route('searchdh')}}" method="POST" class="search-form">
                 @csrf
                 <div class="form-group">
@@ -22,9 +21,8 @@
                     <input type="text" class="form-control" placeholder="Nhập mã đơn hàng..." name="search">
                 </div>
             </form>
-        </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="cart-list">
@@ -48,13 +46,13 @@
                                 @else
                                 <td></td>
                                 <td>
-                                    <h3>{{ $hd->mahd }}</h3>
+                                    <p>{{ $hd->mahd }}</p>
                                 </td>
                                 <td>
-                                    <h3>{{ \Carbon\Carbon::parse($hd->ngaylaphd)->format('d/m/Y')}}</h3>
+                                    <p>{{ \Carbon\Carbon::parse($hd->ngaylaphd)->format('d/m/Y')}}</p>
                                 </td>
                                 <td>
-                                    <h3>{{ \Carbon\Carbon::parse($hd->ngaynhanhang)->format('d/m/Y')}}</h3>
+                                    <p>{{ \Carbon\Carbon::parse($hd->ngaynhanhang)->format('d/m/Y')}}</p>
                                 </td>
                                 @switch($hd->trangthai)
                                 @case(1)

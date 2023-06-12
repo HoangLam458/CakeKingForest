@@ -32,7 +32,7 @@ class CartController extends Controller
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
-            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
+            ->select('*', 'chitiethoadons.id as idchitiet', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name','sizes.tensize as idsize', 'sanphams.hinhanh as img')->get();
         foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
             $cart = $cart + $in->soluong;
@@ -42,6 +42,7 @@ class CartController extends Controller
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
+            'size'=>$sizes,
             'datenow' => $currentTime
         ]);
 
