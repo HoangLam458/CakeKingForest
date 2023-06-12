@@ -63,8 +63,6 @@ class ChitiethoadonController extends Controller
     public function destroy($id)
     {
         $user1 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
-
-
         $cart = chitiethoadon::find($id);
         if($cart){
             $cart->delete();

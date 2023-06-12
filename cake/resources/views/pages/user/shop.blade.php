@@ -1,12 +1,39 @@
 @extends('pages.layout')
 @section('body')
-<header>
-    <style>
-    .pagination {
-        justify-content: center;
-    }
-    </style>
-</header>
+    <header>
+        <style>
+            .pagination {
+                justify-content: center;
+            }
+
+            .button {
+                background-color: #4CAF50;
+                /* Green */
+                border: none;
+                color: white;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button1 {
+                background-color: white;
+                color: black;
+                border: 2px solid #4CAF50;
+            }
+
+            .active,
+            .button1:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+        </style>
+    </header>
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -20,13 +47,23 @@
 
     <section class="ftco-section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12 mb-5 text-center">
+            <div class="row">
+                <div class="text-center">
                     <ul class="product-category">
-                        <li><a href="{{ route('shop') }}" class="active">All</a></li>
+                        @if ($act == 0)
+                            <li><a class="button button1 focus active" href="{{ route('shop') }}" class="active">All</a>
+                            </li>
+                        @elseif($act != 0)
+                            <li><a class="button button1 focus" href="{{ route('shop') }}" class="active">All</a></li>
+                        @endif
                         @foreach ($lsloaisp as $loaisp)
-                            <li><a class="active" href="{{ route('shop.category', $loaisp->id) }}">
-                                    {{ $loaisp->tenloaisp }}</a></li>
+                            @if ($loaisp->id == $act)
+                                <li><a class="button button1 focus active" href="{{ route('shop.category', $loaisp->id) }}">
+                                        {{ $loaisp->tenloaisp }} </a></li>
+                            @else
+                                <li><a class="button button1 focus" href="{{ route('shop.category', $loaisp->id) }}">
+                                        {{ $loaisp->tenloaisp }} </a></li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -40,7 +77,8 @@
                                     height="200">
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <label style="font-size: 13px"><a href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></label>
+                                <label style="font-size: 13px"><a
+                                        href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></label>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         <p class="price"><span>{{ number_format($Sanpham->giatien) }} VND</span></p>
@@ -54,28 +92,30 @@
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
                                         @if (auth()->user() == null)
-                                        <form id="form__submit" action="{{ route('add_to_cartss') }}" method="POST"
+                                            <form id="form__submit" action="{{ route('add_to_cartss') }}" method="POST"
                                                 class="form" enctype="multipart/form-data">
                                                 @csrf
                                                 <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
                                                     required>
                                                 <input name="quantity" value="1" type="number" hidden required>
                                                 <input name="size" value="1" type="number" hidden required>
-                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
-                                                <i class="ion-ios-cart"></i>
-                                            </button>
+                                                <button type="submit"
+                                                    class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                    <i class="ion-ios-cart"></i>
+                                                </button>
                                             </form>
                                         @else
-                                            <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
-                                                class="form" enctype="multipart/form-data">
+                                            <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}"
+                                                method="POST" class="form" enctype="multipart/form-data">
                                                 @csrf
                                                 <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
                                                     required>
                                                 <input name="quantity" value="1" type="number" hidden required>
                                                 <input name="size" value="1" type="number" hidden required>
-                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
-                                                <i class="ion-ios-cart"></i>
-                                            </button>
+                                                <button type="submit"
+                                                    class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                    <i class="ion-ios-cart"></i>
+                                                </button>
                                             </form>
                                         @endif
                                     </div>
@@ -87,11 +127,9 @@
             </div>
         </div>
         <div class="center">
-          <div class="pagination">
-              {{  $lsSanpham->onEachSide(1)->links() }}
-        </div>
-        </div> 
-        </div>
+            <div class="pagination">
+                {{ $lsSanpham->onEachSide(1)->links() }}
+            </div>
         </div>
     </section>
     <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
@@ -112,4 +150,16 @@
             </div>
         </div>
     </section>
+    <script>
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("myDIV");
+        var btns = header.getElementsByClassName("button");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function() {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
 @endsection

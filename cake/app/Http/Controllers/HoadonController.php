@@ -6,6 +6,7 @@ use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use App\Http\Requests\StorehoadonRequest;
 use App\Http\Requests\UpdatehoadonRequest;
+use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Models\size;
 use Illuminate\Http\Request;
@@ -137,18 +138,21 @@ class HoadonController extends Controller
     }
 
     public function donhang(Request $request,){
+        $category = loaisanpham::all();
         $hd = hoadon::where('mahd',$request->get('search'))->where('trangthai','<>', 0)->first();
         return view('pages.user.donhang',[
-            'hd' => $hd,
+            'hd' => $hd,'category'=>$category
         ]);
     }
     public function searchdonhang(Request $request){
+        $category = loaisanpham::all();
         $hd = hoadon::where('mahd',$request->get('search'))->where('trangthai','<>', 0)->first();
         return view('pages.user.donhang',[
-            'hd' => $hd,
+            'hd' => $hd,'category'=>$category
         ]);
     }
     public function chitietdonhang($idhd, Request $request){
+        $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
@@ -160,7 +164,10 @@ class HoadonController extends Controller
         {
             $total = $total + $in->thanhtien;
         }
-        return view('pages.user.chitietdonhang',['size'=>$size, 'mahd'=>$mahd, 'total'=>$total,'lsInD' =>$lsInD]);
+        return view('pages.user.chitietdonhang',
+        ['size'=>$size, 'mahd'=>$mahd,
+         'total'=>$total,'lsInD' =>$lsInD,'category'=>$category
+        ]);
     }
     public function updateghichu($id, Request $request){
         $chitiet = chitiethoadon::find($id);

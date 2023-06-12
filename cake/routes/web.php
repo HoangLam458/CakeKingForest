@@ -29,9 +29,8 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
-Route::get('/contact', function () {
-    return view('pages.user.contact');
-})->name('contact');
+Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
+
 
 
 
