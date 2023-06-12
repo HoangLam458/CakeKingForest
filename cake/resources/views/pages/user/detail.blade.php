@@ -108,7 +108,7 @@
                                 </button>
                             </span>
                             <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
-                                min="1" max="100" required>
+                                min="1" max="10" required readonly>
                             <span class="form-group-btn ml-2">
                                 <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                                     <i class="ion-ios-add"></i>
@@ -136,128 +136,58 @@
     </div>
     <div class="container">
         <div class="row">
+            @foreach($relate as $pdrelate)       
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg"
-                            alt="Colorlib Template">
-                        <span class="status">30%</span>
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Bell Pepper</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span class="mr-2 price-dc">$120.00</span><span
-                                        class="price-sale">$80.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg"
+                    <a href="{{ route('shop.detail', $pdrelate->id) }}" class="img-prod"><img class="img-fluid" src="{{ asset('/images/' . $pdrelate->hinhanh) }}"
                             alt="Colorlib Template">
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Strawberry</a></h3>
+                        <h3><a href="{{ route('shop.detail', $pdrelate->id) }}">{{ $pdrelate->tensp }}</a></h3>
                         <div class="d-flex">
                             <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
+                                <p class="price"><span>{{ number_format($pdrelate->giatien) }} VND</span></p>
                             </div>
                         </div>
                         <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
+                                    <div class="m-auto d-flex">
+
+                                        <a type="button" href="{{ route('shop.detail', $pdrelate->id) }}"
+                                            class="d-flex justify-content-center align-items-center text-center">
+                                            <span><i class="ion-ios-menu"></i></span>
+                                        </a>
+                                        @if (auth()->user() == null)
+                                        <form id="form__submit" action="{{ route('add_to_cartss') }}" method="POST"
+                                                class="form" enctype="multipart/form-data">
+                                                @csrf
+                                                <input name="id" value="{{ $pdrelate->id }}" type="text" hidden
+                                                    required>
+                                                <input name="quantity" value="1" type="number" hidden required>
+                                                <input name="size" value="1" type="number" hidden required>
+                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                <i class="ion-ios-cart"></i>
+                                            </button>
+                                            </form>
+                                        @else
+                                            <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
+                                                class="form" enctype="multipart/form-data">
+                                                @csrf
+                                                <input name="id" value="{{ $pdrelate->id }}" type="text" hidden
+                                                    required>
+                                                <input name="quantity" value="1" type="number" hidden required>
+                                                <input name="size" value="1" type="number" hidden required>
+                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
+                                                <i class="ion-ios-cart"></i>
+                                            </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg"
-                            alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Green Beans</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg"
-                            alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Purple Cabbage</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -281,35 +211,7 @@
         </div>
     </section>
     <!-- loader -->
-@endsection
-<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('js/aos.js') }}"></script>
-<script src="{{ asset('js/jquery.animateNumber.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('js/scrollax.min.js') }}"></script>
-<script
-    src="{{ asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false') }}">
-</script>
-<script src="{{ asset('js/google-map.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#datepicker").datepicker({
-            autoclose: true,
-            todayHighlight: true
-        }).datepicker('update', new Date());
-    });
-
-</script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script>
     $(document).ready(function () {
 
@@ -322,9 +224,9 @@
             var quantity = parseInt($('#quantity').val());
 
             // If is not undefined
-
-            $('#quantity').val(quantity + 1);
-
+            if (quantity < 10) {
+                $('#quantity').val(quantity + 1);
+            }
 
             // Increment
 
@@ -345,14 +247,6 @@
         });
 
     });
-
-</script>
-<script>
-    function format2(n) {
-        var tt = $ '#n'.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " VND";
-        return tt;
-    }
-
 </script>
 <script>
     function submitForm() {
@@ -361,3 +255,4 @@
     }
 
 </script>
+@endsection

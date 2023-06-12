@@ -160,20 +160,23 @@ class SanphamController extends Controller
     public function detail($id)
     {
         if ($id) {
+
             $size = size::all();
             $loaisanpham = loaisanpham::all();
             $sanpham = Sanpham::find($id);
             if ($sanpham) {
+                $getrelate = Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get();
+                $count = $getrelate->count();
+                $relate= Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get()->random($count>4?4:$count);
                 return view('pages.user.detail', [
                     'loaisanpham' => $loaisanpham,
                     'sanpham' => $sanpham,
-                    'size' => $size
+                    'size' => $size,
+                    'relate' =>$relate
                 ]);
             }
             return redirect()->back();
         }
         return redirect()->back();
     }
-
-
 }

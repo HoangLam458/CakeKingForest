@@ -22,6 +22,14 @@
     }
 
 </style>
+
+<head>
+    <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet prefetch"
+        href="{{asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css')}}">
+
+</head>
 @section('body')
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
     <div class="container">
@@ -74,17 +82,17 @@
                                 <th>&nbsp;</th>
                                 <th>Ảnh bánh</th>
                                 <th>Tên bánh</th>
-                                <th>Giá bán</th>
-                                <th class="col-md-2">Kích cỡ</th>
-                                <th class="col-md-1">Số lượng</th>
-                                <th>Thành tiền</th>
-                                <th>Ghi chú</th>
+                                <th class="col-mr-1">Giá bán</th>
+                                <th class="col-md-3">Kích cỡ</th>
+                                <th class="col-mr-1 text-right">Số lượng</th>
+                                <th class="col-md-6">Thành tiền</th>
+                                <th class="col-md-1">Ghi chú</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($lsInD as $lsCart)
-                            <form action="{{ route('update',$lsCart->idchitiet)}}"method="POST" class="form"
+                            <form action="{{ route('update',$lsCart->idchitiet)}}" method="POST" class="form"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <tr class="text-center">
@@ -116,8 +124,24 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td class="cart-product-quantity" width="130px">
-                                        <div class="input-group quantity">
+                                    <td>
+                                        <div class="quantity d-flex">
+                                            <span class="input-group input-group-btn decrement-btn">
+                                                <button type="button" class="quantity-left-minus btn" data-type="minus"
+                                                    data-field="">
+                                                    <i class="ion-ios-remove"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" name="quantity" class="form-control qty-input"
+                                                value="{{ $lsCart->soluong }}" min="1" max="10" name="quantity"
+                                                readonly>
+                                            <span class="input-group-btn increment-btn ">
+                                                <button type="button" class="quantity-right-plus btn" data-type="plus"
+                                                    data-field="">
+                                                    <i class="ion-ios-add"></i>
+                                                </button>
+                                            </span>
+                                            <!-- ///
                                             <div class="input-group-prepend decrement-btn" style="cursor: pointer">
                                                 <span class="input-group-text">-</span>
                                             </div>
@@ -125,7 +149,7 @@
                                                 value="{{ $lsCart->soluong }}" name="quantity" readonly>
                                             <div class="input-group-append increment-btn" style="cursor: pointer">
                                                 <span class="input-group-text">+</span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </td>
 
@@ -154,7 +178,8 @@
                                     {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
                                     <td class="total">
                                         <div>
-                                            <textarea rows="3" maxlength="255" type="text" name="ghichu" value="">{{$lsCart->ghichu}}</textarea>
+                                            <textarea rows="3" maxlength="255" type="text" name="ghichu"
+                                                value="">{{$lsCart->ghichu}}</textarea>
                                         </div>
                                     </td>
                                     <td><button type="submit"><span>Update</span></a></td>
@@ -191,7 +216,8 @@
                         <div class="col-md-6 form-group">
                             <label for="country">Số điện thoại</label>
                             <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
-                                class="form-control text-left px-3" required name="sdtkhachhang" value="" placeholder="">
+                                class="form-control text-left px-3" required name="sdtkhachhang" value=""
+                                placeholder="">
                         </div>
 
                         <div class="col-md-6 form-group">
@@ -323,26 +349,12 @@
         </div>
     </div>
 </section>
-@endsection
+<script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js')}}">
+</script>
 <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('js/aos.js') }}"></script>
-<script src="{{ asset('js/jquery.animateNumber.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('js/scrollax.min.js') }}"></script>
-<script
-    src="{{ asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false') }}">
-</script>
-<script src="{{ asset('js/google-map.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+
 <script type="text/javascript">
     $(function () {
         $("#datepicker").datepicker({
@@ -395,3 +407,5 @@
     }
 
 </script>
+
+@endsection
