@@ -48,6 +48,7 @@ Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkou
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
 Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
+Route::post('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
 Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 

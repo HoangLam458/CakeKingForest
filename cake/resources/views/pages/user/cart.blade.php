@@ -111,24 +111,22 @@
                                                                 {{ $lsCart->idsize == $sizes->id ? 'selected' : '' }}>
                                                                 {{ $sizes->tensize }}
 
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td class="cart-product-quantity col-md-2">
-                                                    <div class="input-group quantity">
-                                                        <div class="input-group-prepend decrement-btn"
-                                                            style="cursor: pointer">
-                                                            <i class=" input-group-text ion-ios-remove"></i>
-                                                        </div>
-                                                        <input type="text" class="qty-input form-control" maxlength="2"
-                                                            max="10" value="{{ $lsCart->soluong }}" readonly>
-                                                        <div class="input-group-append increment-btn"
-                                                            style="cursor: pointer">
-                                                            <i class=" input-group-text ion-ios-add"></i>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="cart-product-quantity col-md-2">
+                                    <div class="input-group quantity">
+                                        <div class="input-group-prepend decrement-btn" style="cursor: pointer">
+                                            <i class=" input-group-text ion-ios-remove"></i>
+                                        </div>
+                                        <input type="text" class="qty-input form-control input-number" maxlength="2" max="10"
+                                            name="quantity" id="quantity" value="{{ $lsCart->soluong }}" required readonly>
+                                        <div class="input-group-append increment-btn" style="cursor: pointer">
+                                        <i class=" input-group-text ion-ios-add"></i>
+                                        </div>
+                                    </div>
+                                </td>
 
                                                 <td class="total">{{ number_format($lsCart->thanhtien) }} VND</td>
                                                 {{-- <td class="">{{$lsCart->ghichu}}</td> --}}
@@ -215,12 +213,9 @@
                                     {{ number_format($total) }} VND
 
                             </div>
-                            <button type="submit" class="btn btn-primary btn-ground py-4 px-5">Thanh Toán</button>
+                            <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a></p>
                         </div>
-                        <!-- <p style="margin-left: 65%;"><a href="#" class="btn btn-primary btn-ground py-4 px-5"
-                                    onclick="submitForm()">
-                                    <label style="font-size: 15px">Thanh toán</label>
-                               </a></p> -->
+
                     </div>
                 @else
                     @foreach ($user as $u)
