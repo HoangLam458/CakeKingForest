@@ -1,10 +1,10 @@
 @extends('layouts.app', [
     'class' => 'login-page',
-    'backgroundImagePath' => 'img/bg/fabio-mangione.jpg'
+    'backgroundImagePath' =>'img/bg/muffins-candles-aalaw-sprinkles-corner-pink-background.jpg'
 ])
 
 @section('content')
-    <div class="content">
+    <div class="content-login">
         <div class="container">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                 <form class="form" method="POST" action="{{ route('login2') }}">
@@ -46,7 +46,6 @@
                                     </span>
                                 @endif
                             </div>
-
                             <div class="form-group">
                                 <div class="form-check">
                                      <label class="form-check-label">
@@ -65,7 +64,11 @@
                         </div>
                     </div>
                 </form>
-               <!-- Ở đây -->
+              <!-- ở đây
+                </a> -->
+                <a href="{{ route('register') }}" class="btn btn-link float-right">
+                    {{ ('Create Account') }}
+                </a>
             </div>
         </div>
     </div>

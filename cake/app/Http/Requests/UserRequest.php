@@ -29,12 +29,17 @@ class UserRequest extends FormRequest
             'name' => [
                 'required', 'min:3'
             ],
-            'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-            ],
+            // 'email' => [
+            //     'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+            // ],
+            'email'=>['required','unique:users'],
             'password' => [
                 $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
             ]
         ];
+        
+    }
+    public function messages(){
+        return ['email.required'=>'Email đã được sử dụng'];
     }
 }

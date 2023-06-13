@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+Use Alert;
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use App\Models\loaisanpham;
@@ -9,11 +10,10 @@ use App\Models\sanpham;
 use App\Models\size;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -73,11 +73,16 @@ class CartController extends Controller
             $chitiethoadon = chitiethoadon::where('hoadon_id', $user->id)->get();
             foreach ($chitiethoadon as $chitiet) {
                 if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
+                    if($chitiet->soluong+ $request['quantity']>10){
+                        alert()->warning('Title','Lorem Lorem Lorem');
+                        return redirect()->back();
+                    }else{
                     $chitiet->soluong = $chitiet->soluong + $request['quantity'];
                     $total = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100);
                     $chitiet->giatien = $chitiet->giatien + $total;
                     $chitiet->save();
                     return redirect()->back();
+                    }
                 }
             }
             foreach ($chitiethoadon as $chitiet) {
