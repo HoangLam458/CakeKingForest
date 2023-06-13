@@ -7,7 +7,9 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreregisterRequest;
 
 class RegisterController extends Controller
 {
@@ -56,18 +58,17 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+    public function create(StoreregisterRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        User::create([
+            'tenkhachhang' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'diachi'=>$request['address'],
+            'sdt'=>$request['phone'],
+            'loai' => 0,
+            'trangthai'=>1
         ]);
+        return view('auth.login');
     }
 }

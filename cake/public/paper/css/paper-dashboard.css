@@ -6634,6 +6634,14 @@ License - nucleoapp.com/license/
 .full-page > .content {
   padding-top: 21vh; }
 
+.full-page > .content2{
+    padding-top: 13vh;
+}
+
+.full-page > .content-login{
+  padding-top: 20vh;
+}
+
 .full-page .footer {
   position: absolute;
   width: 100%;
