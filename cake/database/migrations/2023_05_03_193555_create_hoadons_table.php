@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hoadons', function (Blueprint $table) {
             $table->id();
             $table->string('mahd',10);
-            $table->dateTime('ngaylaphd');
+            $table->date('ngaylaphd');
             $table->string('tenkhachhang',50)->nullable();
             $table->text('diachigiaohang')->nullable();
             $table->string('sdtkhachhang',10)->nullable();

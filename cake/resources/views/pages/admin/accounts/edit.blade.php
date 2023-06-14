@@ -86,10 +86,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu cũ') }}</label>
+                                        <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
                                         <div class="col-md-9">
                                             <div class="form-group">
-                                                <input type="password" name="password" class="form-control" placeholder="Mật khẩu cũ" required>
+                                                <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
                                             </div>
                                             @if ($errors->has('password'))
                                                 <span class="invalid-feedback" style="display: block;" role="alert">

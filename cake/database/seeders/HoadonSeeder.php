@@ -16,7 +16,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD001',
-                'ngaylaphd' => '2023-05-15 00:00:00',
+                'ngaylaphd' => '2023-05-15',
                 'tenkhachhang' => 'Huỳnh Hào',
                 'diachigiaohang' => '64 Huỳnh Thúc Kháng Quận 1, TP HCM',
                 'sdtkhachhang' => '0348575810',
@@ -30,7 +30,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD002',
-                'ngaylaphd' => '2023-05-16 00:00:00',
+                'ngaylaphd' => '2023-05-16',
                 'tenkhachhang' => 'Hoàng Lâm',
                 'diachigiaohang' => '43 An Bình P6, Quận 5, TP HCM',
                 'sdtkhachhang' => '0348575810',
@@ -44,7 +44,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD003',
-                'ngaylaphd' => '2023-04-25 00:00:00',
+                'ngaylaphd' => '2023-04-25',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
                 'sdtkhachhang' => '0348575810',
@@ -58,7 +58,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD004',
-                'ngaylaphd' => '2023-05-01 00:00:00',
+                'ngaylaphd' => '2023-05-01',
                 'tenkhachhang' => 'Hải',
                 'diachigiaohang' => '210 Huỳnh Mẫn Đạt Quận 5',
                 'sdtkhachhang' => '0348575810',
@@ -72,7 +72,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD005',
-                'ngaylaphd' => '2023-05-19 00:00:00',
+                'ngaylaphd' => '2023-05-19',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
                 'sdtkhachhang' => '0348575810',

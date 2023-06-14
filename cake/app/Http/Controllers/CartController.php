@@ -92,10 +92,10 @@ class CartController extends Controller
                         'sanpham_id' => $request['id']
                     ]);
                     $chitiet =
-                    chitiethoadon::where('hoadon_id', $user->id)
-                    ->where('size_id', $request['size'])
-                    ->where('sanpham_id', $request['id'])
-                    ->get();
+                        chitiethoadon::where('hoadon_id', $user->id)
+                            ->where('size_id', $request['size'])
+                            ->where('sanpham_id', $request['id'])
+                            ->get();
                     if ($chitiet != null)
                         foreach ($chitiet as $item) {
                             Session::push('cate', $item);
@@ -130,14 +130,14 @@ class CartController extends Controller
                 'sanpham_id' => $request['id']
             ]);
             $chitiet =
-                    chitiethoadon::where('hoadon_id', $user2->id)
+                chitiethoadon::where('hoadon_id', $user2->id)
                     ->where('size_id', $request['size'])
                     ->where('sanpham_id', $request['id'])
                     ->get();
-                    if ($chitiet != null)
-                        foreach ($chitiet as $item) {
-                            Session::push('cate', $item);
-                        }
+            if ($chitiet != null)
+                foreach ($chitiet as $item) {
+                    Session::push('cate', $item);
+                }
             return redirect()->back();
         }
         return redirect()->route('cake');
@@ -145,13 +145,15 @@ class CartController extends Controller
 
     public function checkout($id, Request $request)
     {
+        $currentTime = Carbon::now();
+
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         if ($user != Null) {
-            $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
+            $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
             $user->tenkhachhang = $request->get('tenkhachhang');
             $user->sdtkhachhang = $request->get('sdtkhachhang');
             $user->diachigiaohang = $request->get('diachigiaohang');
-            $user->ngaynhanhang = $currentTime;
+            $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
             $user->hinhthucnhanhang = $request->get('ship');
             $user->phuongthucthanhtoan = "Tiền Mặt";
             $user->trangthai = 1;
@@ -195,10 +197,10 @@ class CartController extends Controller
                     $hd = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
                     if ($hd != null) {
                         $chitiet =
-                        chitiethoadon::where('hoadon_id', $hd->id)
-                        ->where('size_id', $request['size'])
-                        ->where('sanpham_id', $request['id'])
-                        ->get();
+                            chitiethoadon::where('hoadon_id', $hd->id)
+                                ->where('size_id', $request['size'])
+                                ->where('sanpham_id', $request['id'])
+                                ->get();
                         if ($chitiet != null)
                             foreach ($chitiet as $item) {
                                 Session::push('cate', $item);
@@ -232,10 +234,10 @@ class CartController extends Controller
                 'sanpham_id' => $request['id']
             ]);
             $chitiet =
-            chitiethoadon::where('hoadon_id', $hoadon_id2->id)
-            ->where('size_id', $request['size'])
-            ->where('sanpham_id', $request['id'])
-            ->get();
+                chitiethoadon::where('hoadon_id', $hoadon_id2->id)
+                    ->where('size_id', $request['size'])
+                    ->where('sanpham_id', $request['id'])
+                    ->get();
             if ($chitiet != null)
                 foreach ($chitiet as $item) {
                     Session::push('cate', $item);
@@ -293,13 +295,14 @@ class CartController extends Controller
     public function checkoutss(Request $request)
     {
         $code_cookie = $request->cookie('code');
+        $currentTime = Carbon::now();
         $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
         if ($user != Null) {
-            $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
+            $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
             $user->tenkhachhang = $request->get('tenkhachhang');
             $user->sdtkhachhang = $request->get('sdtkhachhang');
             $user->diachigiaohang = $request->get('diachigiaohang');
-            $user->ngaynhanhang = $currentTime;
+            $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
             $user->hinhthucnhanhang = $request->get('ship');
             $user->phuongthucthanhtoan = "Tiền Mặt";
             $user->trangthai = 1;
@@ -316,29 +319,41 @@ class CartController extends Controller
     {
         $code_cookie = $request->cookie('code');
         $chitiet = chitiethoadon::find($id);
-        $chitiettrung = chitiethoadon::where('hoadon_id', $code_cookie)->get();
+        $hoadon = hoadon::where('mahd', $code_cookie)->first();
+        $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
         $sanpham = sanpham::find($chitiet->sanpham_id);
         $phantrams = size::find($request->get('size_id'));
-        if ($chitiet) {
-            // foreach ($chitiettrung as $trung) {
-            //     if($trung->id == $id && $trung->size_id == $request->get('size_id')){
-            //         $giusl = $request->get('quantity');
-            //         $idsp = $chitiet->sanpham_id;
-            //         $chitiet->delete();
-            //         $timchitiet = chitiethoadon::where('sanpham_id',$idsp)->where('hoadon_id',$code_cookie)->first();
-            //         $timchitiet->soluong = $timchitiet->soluong + $giusl;
-            //         $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
-            //         $timchitiet->save();
-            //         return redirect()->back();
-            //     }else
+
+        if ($chitiet != null) {
+            if ($chitiet->size_id != $request->get('size_id')) {
+                foreach ($chitiettrung as $trung) {
+                    if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id')) {
+                        $giusl = $request->get('quantity');
+                        $idsp = $chitiet->sanpham_id;
+                        $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
+                            ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
+                        $timchitiet->soluong = $timchitiet->soluong + $giusl;
+                        $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
+                        $timchitiet->save();
+                        $chitiet->delete();
+                    }
+                }
+                Session::forget('cate');
+                $chitiet =
+                    chitiethoadon::where('hoadon_id', $hoadon->id)
+                        ->get();
+                if ($chitiet != null)
+                    foreach ($chitiet as $item) {
+                        Session::push('cate', $item);
+                    }
+                return redirect()->back();
+            }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');
             $chitiet->giatien = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantrams->phantram / 100);
             $chitiet->ghichu = $request->get('ghichu');
             $chitiet->save();
             return redirect()->back();
-        } else
-            return redirect()->back();
+        }
     }
-
 }

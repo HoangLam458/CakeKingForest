@@ -82,6 +82,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
 
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::post('/filter-by-date',[HomeController::class,'filter_by_date']);
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
