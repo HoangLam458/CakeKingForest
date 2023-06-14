@@ -194,13 +194,13 @@
                 @foreach ($chart_data as $sale)
                     {
                         'date': '{{ \Carbon\Carbon::parse($sale->ngaylaphd)->format('d/m/Y') }} ',
-                        'amount': '{{ $sale->thanhtien }}'
+                        'total': '{{ $sale->thanhtien }}'
                     },
                 @endforeach
             ],
             parseTime: false,
             xkey: 'date',
-            ykeys: ['amount'],
+            ykeys: ['total'],
             labels: ['Doanh thu']
         });
     </script>
@@ -222,12 +222,11 @@
             });
         });
     </script>
-     <script>
+    <script>
         $('#btn-dashboard').click(function({
             var _token = $('input[name="_token"]').val();
             var from_date = $('#datepicker').val();
             var to_date = $('#datepicker2').val();
-
             $.ajax({
                 url: "{{url('/filter-by-date')}}",
                 method:"POST",

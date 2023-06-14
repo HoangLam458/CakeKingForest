@@ -67,8 +67,8 @@ class HomeController extends Controller
     public function filter_by_date(Request $request)
     {
         $data = $request->all();
-        $from_date = $data['form_date'];
-        $to_date = $data['to_date'];
+        $from_date = Carbon::parse($data['form_date'])->format('Y/m/d');
+        $to_date = Carbon::parse($data['to_date'])->format('Y/m/d');
         $get = DB::table('chitiethoadons')
         ->join('hoadons','hoadon_id','=','hoadons.id')
         ->where('hoadons.trangthai',4)->whereBetween('ngaylaphd',[$from_date,$to_date])
@@ -77,8 +77,10 @@ class HomeController extends Controller
         ->get();
         foreach ($get as $key => $value) {
             $chart_data[]= array(
-                'total'
+                'total' => $value->thanhtien,
+                'date' => Carbon::parse($value->ngaylaphd)->format('d/m/Y')
             );
         }
+        echo $data = json_encode($chart_data);
     }
 }
