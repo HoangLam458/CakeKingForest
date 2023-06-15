@@ -120,57 +120,115 @@ enctype="multipart/form-data">
 </header>
 @section('body')
 
-<div class="content">
-    <div class="row col-md-6">
-        <div class="col-md-12">
+<div class="container">
+    <div class="row col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Chi tiết tài khoản</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;" >
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;" >
                             <label>Tên khách hàng</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->tenkhachhang }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Email</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->email }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Số điện thoại</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->sdt }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Địa chỉ</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->diachi }}</label>
                         </div>
-                        <div class="col-auto">
+                        <div   class="col-md-12 text-center">
                             <button type="button" class="btn btn-round btn-primary" data-toggle="modal"
                                 data-target="#Modal2">
                                 Thay đổi thông tin
                             </button>
-                            <button type="button" class="btn btn-round btn-info" data-toggle="modal"
-                                data-target="#exampleModal">
-                                Đổi mật khẩu
-                            </button>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Đổi mật khẩu</h4>
+                </div>
+                <div class="card-body">
+                    <form class="col-md-12" action="{{ route('profile.password') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="old_password" class="form-control" placeholder="Mật khẩu hiện tại" required>
+                                        </div>
+                                        @if ($errors->has('old_password'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('old_password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
+                                        </div>
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                                        </div>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
+                                    </div>
+                                </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-        <div class="w-100"></div>
-        <div class="w-100"></div>
+
+
     <div class="row col-md-12 ">
         <div class="col-md-12">
             <div class="card">

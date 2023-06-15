@@ -35,6 +35,8 @@ Auth::routes();
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 
+Route::post('/back-to-home',[HoadonController::class, 'insertDB'])->name('back-to-home');
+
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
 Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
@@ -54,7 +56,9 @@ Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->nam
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 //payment
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('VNPay');
+Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->name('momoQR');
+
 Route::get('/paymentsuccess', function () {
     return view('pages.user.payment.paymentsuccess');
 });
@@ -83,6 +87,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
    
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::post('/filter-by-date',[HomeController::class,'filter_by_date']);
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');

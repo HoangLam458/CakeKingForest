@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hoadon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -12,9 +14,13 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data))
+                'Content-Length: ' . strlen($data)
+            )
         );
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -25,105 +31,134 @@ class PaymentController extends Controller
         return $result;
     }
 
-    public function momo_payment(Request $request){
+    public function momo_payment(Request $request)
+    {
 
 
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
         $amount = $request->total_momo;
-        $orderId = time() ."";
+        $orderId = time() . "";
         $redirectUrl = "http://localhost:8000/paymentfailed";
         $ipnUrl = "http://localhost:8000/paymentsuccess";
         $extraData = "";
 
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $secretKey);
-            $data = array('partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature);
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true); // decode json
 
-            //Just a example, please check more in there
-            return redirect()->to($jsonResult['payUrl']);
-            // header('Location: ' . $jsonResult['payUrl']);
+        //Just a example, please check more in there
+        return redirect()->to($jsonResult['payUrl']);
+        // header('Location: ' . $jsonResult['payUrl']);
 
     }
 
-    public function momo_payment_qr(Request $request){
-        //0919100100
+    public function momo_payment_qr(Request $request)
+    {
+        if(Session::has('hd_id')) {
+            Session::forget('hd_id');
+        } if(Session::has('path')) {
+            Session::forget('path');
+        }
+        else
+        Session::put('hd_id');
+        Session::put('path');
+        if(auth()->user() == null)
+        {
+            $code_cart = $request->cookie('code');
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+            Session::push('hd_id',$hd);
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+            Session::push('hd_id',$hd);
+        }
 
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBKUN20180529';
+        Session::push('path',$partnerCode);
+
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderInfo = "Thanh toán qua QR MoMo";
+        $orderId = time() . "";
+        $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
-        $orderId = time() ."";
-        $redirectUrl = "http://localhost:8000/pay";
+
+        $redirectUrl = "http://localhost:8000/paymentsuccess";
         $ipnUrl = "http://localhost:8000/paymentsuccess";
         $extraData = "";
 
-            $requestId = time() . "";
-            $requestType = "captureWallet";
-            // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .
+
+        $requestId = time() . "";
+        // $requestType = "captureWallet";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .
             $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode .
             "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $secretKey);
-            $data = array('partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature);
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true); // decode json
 
-            //Just a example, please check more in there
-            return redirect()->to($jsonResult['payUrl']);
-            // header('Location: ' . $jsonResult['payUrl']);
+        //Just a example, please check more in there
+        return redirect()->to($jsonResult['payUrl']);
+        // header('Location: ' . $jsonResult['payUrl']);
 
     }
 
-    public function vnpay_payment(Request $request){
+    public function vnpay_payment(Request $request)
+    {
         $data = $request->all();
-        $code_cart = $request->cookie('code');;
+        $code_cart = $request->cookie('code');
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:8000/paymentsuccess"; // url trả về view
-        $vnp_TmnCode = "FM9XJF5C";//Mã website tại VNPAY
+        $vnp_TmnCode = "FM9XJF5C"; //Mã website tại VNPAY
         $vnp_HashSecret = "NRDAOOOFDEKIQUFRBDSUMQOLIKIEAFPW";
 
         $vnp_TxnRef = $code_cart;
-        $vnp_OrderInfo = 'Thanh toán đơn hàng'. ' ' . (string) $code_cart;
+        $vnp_OrderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $data['total_vnpay'] * 100;
         $vnp_Locale = 'vn';
@@ -177,17 +212,22 @@ class PaymentController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        $returnData = array('code' => '00'
-            , 'message' => 'success'
-            , 'data' => $vnp_Url);
-            if (isset($_POST['redirect'])) {
-                header('Location: ' . $vnp_Url);
-                die();
-            } else {
-                echo json_encode($returnData);
-            }
+        $returnData = array(
+            'code' => '00'
+            ,
+            'message' => 'success'
+            ,
+            'data' => $vnp_Url
+        );
+        if (isset($_POST['redirect'])) {
+            header('Location: ' . $vnp_Url);
+            die();
+        } else {
+            echo json_encode($returnData);
+        }
     }
+
 }

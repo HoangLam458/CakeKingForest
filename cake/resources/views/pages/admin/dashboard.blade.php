@@ -1,8 +1,10 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'dashboard'
+    'elementActive' => 'dashboard',
 ])
-
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 @section('content')
     <div class="content">
         <div class="row">
@@ -12,24 +14,24 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="50" fill="DarkBlue"
+                                        class="bi bi-check-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path
+                                            d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                                    </svg>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Capacity</p>
-                                    <p class="card-title">150GB
-                                        <p>
+                                    <p class="card-category">đơn hoàn thành</p>
+                                    <p class="card-title"> {{ $hd_success }}
+                                    <p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update Now
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -43,17 +45,37 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Revenue</p>
-                                    <p class="card-title">$ 1,345
-                                        <p>
+                                    <p class="card-category">Tổng doanh thu (VND)</p>
+                                    <p class="card-title">
+                                        {{ number_format($doanhthu) }}
+                                    <p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5 col-md-4">
+                                <div class="icon-big text-center icon-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="50" fill="red"
+                                        class="bi bi-basket" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="col-7 col-md-8">
+                                <div class="numbers">
+                                    <p class="card-category">Đơn chờ duyệt</p>
+                                    <p class="card-title">{{ $hd_pending }}
+                                    <p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,48 +86,20 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="50" fill="Lime"
+                                        class="bi bi-truck" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                    </svg>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Errors</p>
-                                    <p class="card-title">23
-                                        <p>
+                                    <p class="card-category">Đơn đang giao</p>
+                                    <p class="card-title">{{ $hd_shipping }}
+                                    <p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> In the last hour
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-favourite-28 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Followers</p>
-                                    <p class="card-title">+45K
-                                        <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
                         </div>
                     </div>
                 </div>
@@ -114,18 +108,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card ">
-                    <div class="card-header ">
-                        <h5 class="card-title">Users Behavior</h5>
-                        <p class="card-category">24 Hours performance</p>
-                    </div>
-                    <div class="card-body ">
-                        <canvas id=chartHours width="400" height="100"></canvas>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                    <div class="card-header">
+                        <div class="row col">
+                            <h5 class="card-title">Thống kê</h5>
                         </div>
+                        <form >
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p>Từ ngày: <input type="text" id="datepicker" class="form-control" name="fromdate"></p>
+                                    <input type="button" id="btn-dashboard" class="btn btn-primary btn-sm btn-round" value="Lọc kết quả">
+                                </div>
+                                <div class="col-md-2">
+                                    <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" name="todate"></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <div id="myfirstchart" style="height: 400px;"></div>
                     </div>
                 </div>
             </div>
@@ -180,10 +181,62 @@
 @endsection
 
 @push('scripts')
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $(document).ready(function() {
-            // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-            demo.initChartsPages();
+       var chart = new Morris.Area({
+            element: 'myfirstchart',
+            fillOpacity: 0.3,
+            data: [
+                @foreach ($chart_data as $sale)
+                    {
+                        'date': '{{ \Carbon\Carbon::parse($sale->ngaylaphd)->format('d/m/Y') }} ',
+                        'total': '{{ $sale->thanhtien }}'
+                    },
+                @endforeach
+            ],
+            parseTime: false,
+            xkey: 'date',
+            ykeys: ['total'],
+            labels: ['Doanh thu']
         });
+    </script>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                prevText: "Tháng trước",
+                nextText: "Tháng trước",
+                dateFormat: "dd-mm-yy",
+                dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
+                duration: 'slow'
+            });
+            $("#datepicker2").datepicker({
+                prevText: "Tháng trước",
+                nextText: "Tháng trước",
+                dateFormat: "dd-mm-yy",
+                dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
+                duration: 'slow'
+            });
+        });
+    </script>
+    <script>
+        $('#btn-dashboard').click(function({
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            $.ajax({
+                url: "{{url('/filter-by-date')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{from_date:from_date,to_date:to_date,_token:_token},
+                success::function(data)
+                {
+                    chart.setData(data);
+                }
+            });
+        }));
     </script>
 @endpush

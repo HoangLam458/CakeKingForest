@@ -22,20 +22,21 @@ class CartController extends Controller
         $sizes = size::all();
         $category = loaisanpham::all();
         $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
-        $user1 = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
-        if ($user1 == null) {
+        $lstCart = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
+        if ($lstCart == null) {
+            Session::forget('cate');
             return view('pages.user.cart', [
-                'ls' => $user1,
+                'ls' => $lstCart,
                 'category' => $category
-
             ]);
         }
+
         $user = hoadon::where('users_id', $id)->get();
         $total = 0;
         $cart = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
-            ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
+            ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
             ->select(
                 '*',
                 'chitiethoadons.id as idchitiet',
@@ -52,8 +53,9 @@ class CartController extends Controller
             $total = $total + $in->thanhtien;
             $cart = $cart + $in->soluong;
         }
+
         return view('pages.user.cart', [], [
-            'ls' => $user1,
+            'ls' => $lstCart,
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
@@ -65,6 +67,10 @@ class CartController extends Controller
     }
     public function add_to_cart(Request $request, $id)
     {
+        if(Session::has('cate') == null)
+        {
+            Session::put('cate');
+        }
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         $taikhoan = User::find($id);
         $sanpham = sanpham::find($request->get('id'));
@@ -150,13 +156,15 @@ class CartController extends Controller
 
     public function checkout($id, Request $request)
     {
+        $currentTime = Carbon::now();
+
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         if ($user != Null) {
-            $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
+            $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
             $user->tenkhachhang = $request->get('tenkhachhang');
             $user->sdtkhachhang = $request->get('sdtkhachhang');
             $user->diachigiaohang = $request->get('diachigiaohang');
-            $user->ngaynhanhang = $currentTime;
+            $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
             $user->hinhthucnhanhang = $request->get('ship');
             $user->phuongthucthanhtoan = "Tiền Mặt";
             $user->trangthai = 1;
@@ -170,6 +178,10 @@ class CartController extends Controller
 
     public function add_to_cartss(Request $request)
     {
+        if(Session::has('cate') == null)
+        {
+            Session::put('cate');
+        }
         $sanpham = sanpham::find($request->get('id'));
         $currentTime = Carbon::now();
         $phantram = size::find($request->get('size'));
@@ -205,10 +217,10 @@ class CartController extends Controller
                     $hd = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
                     if ($hd != null) {
                         $chitiet =
-                        chitiethoadon::where('hoadon_id', $hd->id)
-                        ->where('size_id', $request['size'])
-                        ->where('sanpham_id', $request['id'])
-                        ->get();
+                            chitiethoadon::where('hoadon_id', $hd->id)
+                                ->where('size_id', $request['size'])
+                                ->where('sanpham_id', $request['id'])
+                                ->get();
                         if ($chitiet != null)
                             foreach ($chitiet as $item) {
                                 Session::push('cate', $item);
@@ -242,10 +254,10 @@ class CartController extends Controller
                 'sanpham_id' => $request['id']
             ]);
             $chitiet =
-            chitiethoadon::where('hoadon_id', $hoadon_id2->id)
-            ->where('size_id', $request['size'])
-            ->where('sanpham_id', $request['id'])
-            ->get();
+                chitiethoadon::where('hoadon_id', $hoadon_id2->id)
+                    ->where('size_id', $request['size'])
+                    ->where('sanpham_id', $request['id'])
+                    ->get();
             if ($chitiet != null)
                 foreach ($chitiet as $item) {
                     Session::push('cate', $item);
@@ -262,6 +274,7 @@ class CartController extends Controller
         $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
         $sizes = size::all();
         if ($user1 == null) {
+            Session::forget('cate');
             return view('pages.user.cart', [], [
                 'ls' => $user1,
                 'category' => $category
@@ -303,13 +316,14 @@ class CartController extends Controller
     public function checkoutss(Request $request)
     {
         $code_cookie = $request->cookie('code');
+        $currentTime = Carbon::now();
         $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
         if ($user != Null) {
-            $currentTime = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
+            $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
             $user->tenkhachhang = $request->get('tenkhachhang');
             $user->sdtkhachhang = $request->get('sdtkhachhang');
             $user->diachigiaohang = $request->get('diachigiaohang');
-            $user->ngaynhanhang = $currentTime;
+            $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
             $user->hinhthucnhanhang = $request->get('ship');
             $user->phuongthucthanhtoan = "Tiền Mặt";
             $user->trangthai = 1;
@@ -333,9 +347,11 @@ class CartController extends Controller
             $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
         }
         $chitiet = chitiethoadon::find($id);
+        $hoadon = hoadon::where('mahd', $code_cookie)->first();
+        $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
         $sanpham = sanpham::find($chitiet->sanpham_id);
         $phantrams = size::find($request->get('size_id'));
-  
+
         if ($chitiet != null) {
             if ($chitiet->size_id != $request->get('size_id')) {
                 foreach ($chitiettrung as $trung) {
