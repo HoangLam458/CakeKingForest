@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
@@ -28,11 +29,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
 
-Route::post('/register_create', [RegisterController::class, 'create'])->name('register_create');
+Auth::routes();
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
