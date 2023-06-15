@@ -380,7 +380,7 @@ class CartController extends Controller
                 if ($chitiet != null)
                     foreach ($chitiet as $item) {
                         Session::push('cate', $item);
-                    }
+                    }   
                 return redirect()->back();
             }
             $chitiet->soluong = $request->get('quantity');

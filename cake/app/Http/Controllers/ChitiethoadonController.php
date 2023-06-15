@@ -65,36 +65,6 @@ class ChitiethoadonController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        if(auth()->user() == null){
-            $cart = chitiethoadon::find($id);
-            $code_cookie = $request->cookie('code');
-            if($cart){
-                $cart->delete();
-                $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
-                $item = chitiethoadon::where('hoadon_id', $user1->id)->first();
-                if($item == null)
-                {
-                    $user1->delete();
-                    return redirect()->back();
-                }
-                return redirect()->back();
-             }
-        }else{
-            $user1 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
-            $cart = chitiethoadon::find($id);
-            if($cart){
-                $cart->delete();
-                $item = chitiethoadon::where('hoadon_id',$user1->id)->first();
-                if($item == null)
-                {
-                    $user1->delete();
-                    return redirect()->back();
-                }
-                return redirect()->back();
-             }
-        }    
-    }
-}
         if (auth()->user() == null) {
             $cart = chitiethoadon::find($id);
             $code_cookie = $request->cookie('code');
