@@ -103,7 +103,7 @@
                                                 <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
                                                 <!-- <td class="size">{{ $lsCart->s_name }}
 
-                                        </td> -->
+                                            </td> -->
                                                 <td class="col-md-2">
                                                     <select name="size_id" id="selectBasic" class="form-control">
                                                         @foreach ($size as $sizes)
@@ -216,8 +216,37 @@
                                     {{ number_format($total) }} VND
 
                             </div>
-                            <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
-                            </p>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                <a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
+                                </div>
+                                <div class="col-md-5">
+                                <form action="{{ route('VNPay') }}" method="POST" class="form"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="total_vnpay" value="{{ $total }}">
+                                    <input hidden name="payment" value="2">
+                                    <input hidden name="p_user_id" value="null">
+                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
+                                        Thanh toán VNP
+                                    </button>
+                                </form>
+                                </div>
+                                <div class="col-md-5">
+                                <form action="{{ route('momoQR') }}" method="POST" class="form"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="total_momo" value="{{ $total }}">
+                                    <input hidden name="payment" value="2">
+                                    <input hidden name="p_user_id" value="null">
+                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
+                                        Thanh toán MOMO
+                                    </button>
+                                </form>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -285,8 +314,35 @@
                                     {{ number_format($total) }} VND
 
                             </div>
-                            <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
-                            </p>
+                            <div class="row">
+                                <div class="col-md-5">
+                                <a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
+                                </div>
+                                <div class="col-md-5">
+                                <form action="{{ route('VNPay') }}" method="POST" class="form"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="total_vnpay" value="{{ $total }}">
+                                    <input hidden name="payment" value="2">
+                                    <input hidden name="p_user_id" value="null">
+                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
+                                        Thanh toán VNP
+                                    </button>
+                                </form>
+                                </div>
+                                <div class="col-md-5">
+                                <form action="{{ route('momoQR') }}" method="POST" class="form"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="total_momo" value="{{ $total }}">
+                                    <input hidden name="payment" value="2">
+                                    <input hidden name="p_user_id" value="null">
+                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
+                                        Thanh toán MOMO
+                                    </button>
+                                </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif

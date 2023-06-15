@@ -22,20 +22,21 @@ class CartController extends Controller
         $sizes = size::all();
         $category = loaisanpham::all();
         $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
-        $user1 = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
-        if ($user1 == null) {
+        $lstCart = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
+        if ($lstCart == null) {
+            Session::forget('cate');
             return view('pages.user.cart', [
-                'ls' => $user1,
+                'ls' => $lstCart,
                 'category' => $category
-
             ]);
         }
+
         $user = hoadon::where('users_id', $id)->get();
         $total = 0;
         $cart = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
-            ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
+            ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
             ->select(
                 '*',
                 'chitiethoadons.id as idchitiet',
@@ -52,8 +53,9 @@ class CartController extends Controller
             $total = $total + $in->thanhtien;
             $cart = $cart + $in->soluong;
         }
+
         return view('pages.user.cart', [], [
-            'ls' => $user1,
+            'ls' => $lstCart,
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
@@ -65,6 +67,10 @@ class CartController extends Controller
     }
     public function add_to_cart(Request $request, $id)
     {
+        if(Session::has('cate') == null)
+        {
+            Session::put('cate');
+        }
         $user = hoadon::where('users_id', $id)->where('trangthai', 0)->first();
         $taikhoan = User::find($id);
         $sanpham = sanpham::find($request->get('id'));
@@ -167,6 +173,10 @@ class CartController extends Controller
 
     public function add_to_cartss(Request $request)
     {
+        if(Session::has('cate') == null)
+        {
+            Session::put('cate');
+        }
         $sanpham = sanpham::find($request->get('id'));
         $currentTime = Carbon::now();
         $phantram = size::find($request->get('size'));
@@ -254,6 +264,7 @@ class CartController extends Controller
         $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
         $sizes = size::all();
         if ($user1 == null) {
+            Session::forget('cate');
             return view('pages.user.cart', [], [
                 'ls' => $user1,
                 'category' => $category

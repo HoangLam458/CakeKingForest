@@ -12,6 +12,7 @@ use App\Models\size;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HoadonController extends Controller
 {
@@ -159,6 +160,20 @@ class HoadonController extends Controller
         ]);
     }
     public function chitietdonhang($idhd, Request $request){
+        if(Session::has('path'))
+        {
+            $path = Session::get('path');
+            $id_update = Session::get('hd_id');
+            if( (string)$path[0] == "MOMOBKUN20180529")
+            {
+                $hd = hoadon::find($id_update[0]);
+                $hd->trangthai = 2 ;
+                $hd->phuongthucthanhtoan = 'MOMO';
+                $hd->save();
+                Session::forget('cate');
+            }
+        }
+
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
@@ -185,5 +200,10 @@ class HoadonController extends Controller
         }
         else
         return redirect()->back();
+    }
+    public function insertDB(Request $request)
+    {
+        dd($request->all());
+        return redirect()->route('donhang');
     }
 }

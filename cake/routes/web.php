@@ -31,8 +31,7 @@ Route::get('/login', function () {
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 
-
-
+Route::post('/back-to-home',[HoadonController::class, 'insertDB'])->name('back-to-home');
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
@@ -53,7 +52,9 @@ Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->nam
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 //payment
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('VNPay');
+Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->name('momoQR');
+
 Route::get('/paymentsuccess', function () {
     return view('pages.user.payment.paymentsuccess');
 });
