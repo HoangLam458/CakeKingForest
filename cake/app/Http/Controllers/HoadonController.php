@@ -168,12 +168,11 @@ class HoadonController extends Controller
             {
                 $hd = hoadon::find($id_update[0]);
                 $hd->trangthai = 2 ;
-                $hd->phuongthucthanhtoan = 'MOMO';
+                $hd->phuongthucthanhtoan = 'MoMo';
                 $hd->save();
                 Session::forget('cate');
             }
         }
-
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();

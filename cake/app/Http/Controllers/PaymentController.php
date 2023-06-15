@@ -33,8 +33,6 @@ class PaymentController extends Controller
 
     public function momo_payment(Request $request)
     {
-
-
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
@@ -97,7 +95,7 @@ class PaymentController extends Controller
             $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
             Session::push('hd_id',$hd);
         }
-
+   
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBKUN20180529';

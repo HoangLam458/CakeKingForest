@@ -347,11 +347,8 @@ class CartController extends Controller
             $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
         }
         $chitiet = chitiethoadon::find($id);
-        $hoadon = hoadon::where('mahd', $code_cookie)->first();
-        $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
         $sanpham = sanpham::find($chitiet->sanpham_id);
         $phantrams = size::find($request->get('size_id'));
-
         if ($chitiet != null) {
             if ($chitiet->size_id != $request->get('size_id')) {
                 foreach ($chitiettrung as $trung) {
