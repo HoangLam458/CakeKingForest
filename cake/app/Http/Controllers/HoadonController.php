@@ -174,6 +174,7 @@ class HoadonController extends Controller
             }
         }
 
+
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();

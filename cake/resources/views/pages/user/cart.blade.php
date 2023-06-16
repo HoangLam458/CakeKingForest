@@ -103,7 +103,7 @@
                                                 <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
                                                 <!-- <td class="size">{{ $lsCart->s_name }}
 
-                                            </td> -->
+                                                </td> -->
                                                 <td class="col-md-2">
                                                     <select name="size_id" id="selectBasic" class="form-control">
                                                         @foreach ($size as $sizes)
@@ -168,28 +168,23 @@
                                                 value="" placeholder="">
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-12 form-group">
                                         <label for="country">Số điện thoại</label>
                                         <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
                                             class="form-control text-left px-3" required name="sdtkhachhang"
                                             value="" placeholder="">
                                     </div>
-
                                     <div class="col-md-12 form-group">
                                         <label for="country">Địa chỉ</label>
                                         <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
                                             name="diachigiaohang" value=""></textarea>
                                     </div>
-
                                     <div class="col-md-12 form-group">
                                         <label>Ngày nhận hàng</label>
                                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                                             <input class="form-control" type="text" name="date">
                                             <span class="input-group-addon"></span>
                                         </div>
-
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="country">Hình thức nhận hàng</label>
@@ -214,41 +209,25 @@
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
-
                             </div>
-
                             <div class="row">
                                 <div class="col-md-5">
-                                <a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
+                                    <a href="#" class="btn btn-primary btn-lg py-3 px-5" onclick="submitForm()">
+                                        <h5 style="font-size: 15px">Thanh toán</h5>
+                                    </a>
                                 </div>
                                 <div class="col-md-5">
-                                <form action="{{ route('VNPay') }}" method="POST" class="form"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input hidden name="total_vnpay" value="{{ $total }}">
-                                    <input hidden name="payment" value="2">
-                                    <input hidden name="p_user_id" value="null">
-                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
-                                        Thanh toán VNP
-                                    </button>
-                                </form>
+                                    <form action="{{ route('momoQR') }}" method="POST" class="form"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input hidden name="total_momo" value="{{ $total }}">
+                                        <button class="btn btn-primary btn-lg py-3 px-5" name="redirect" type="submit">
+                                            <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="col-md-5">
-                                <form action="{{ route('momoQR') }}" method="POST" class="form"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input hidden name="total_momo" value="{{ $total }}">
-                                    <input hidden name="payment" value="2">
-                                    <input hidden name="p_user_id" value="null">
-                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
-                                        Thanh toán MOMO
-                                    </button>
-                                </form>
-                                </div>
-                            </div>
-
                         </div>
-
+                        </div>
                     </div>
                 @else
                     @foreach ($user as $u)
@@ -265,29 +244,28 @@
                                             <label for="">Họ Tên người nhận</label>
                                             <input required maxlength="20" type="text"
                                                 class="form-control text-left px-3" required name="tenkhachhang"
-                                                value="{{ $u->tenkhachhang }}">
+                                                id="name" value="{{ $u->tenkhachhang }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 form-group">
                                         <label for="country">Số điện thoại</label>
                                         <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
-                                            class="form-control text-left px-3" required name="sdtkhachhang"
-                                            value="{{ $u->sdtkhachhang }}">
+                                            id='phone' class="form-control text-left px-3" required
+                                            name="sdtkhachhang" value="{{ $u->sdtkhachhang }}">
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="country">Địa chỉ</label>
-                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
+                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" id='address' required
                                             name="diachigiaohang" value="">{{ $u->diachigiaohang }}</textarea>
 
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label>Ngày nhận hàng</label>
                                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" name="date">
+                                            <input class="form-control" type="text" name="date" id="date">
                                             <span class="input-group-addon"></span>
                                         </div>
-
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="country">Hình thức nhận hàng</label>
@@ -312,13 +290,27 @@
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
-
+                                    <div class="row">
+                                    <div class="col-md-5">
+                                        <a href="#" class="btn btn-primary btn-lg py-3 px-5" onclick="submitForm()">
+                                            <h5 style="font-size: 15px">Thanh toán</h5>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <form action="{{ route('momoQR') }}" method="POST" class="form"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <input hidden name="total_momo" value="{{ $total }}">
+                                            <button class="btn btn-primary btn-lg py-3 px-5" name="redirect" type="submit">
+                                                <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                            </button>
+                                        </form>
+                                    </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                <a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thanh toán</a>
-                                </div>
-                                <div class="col-md-5">
+
+
+
+                                {{-- <div class="col-md-5">
                                 <form action="{{ route('VNPay') }}" method="POST" class="form"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -329,19 +321,8 @@
                                         Thanh toán VNP
                                     </button>
                                 </form>
-                                </div>
-                                <div class="col-md-5">
-                                <form action="{{ route('momoQR') }}" method="POST" class="form"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input hidden name="total_momo" value="{{ $total }}">
-                                    <input hidden name="payment" value="2">
-                                    <input hidden name="p_user_id" value="null">
-                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
-                                        Thanh toán MOMO
-                                    </button>
-                                </form>
-                                </div>
+                                </div> --}}
+
                             </div>
                         </div>
                     </div>

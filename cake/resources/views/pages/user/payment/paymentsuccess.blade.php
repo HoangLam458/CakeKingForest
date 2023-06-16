@@ -25,7 +25,7 @@
                             <h1>Thông tin thanh toán</h1>
                             <div class="form-group">
                                 <label>Mã đơn hàng:</label>
-                                <label><?php echo $_GET['orderId']; ?></label>
+                                <label><?php echo Cookie::get('code'); ?></label>
                             </div>
                             <div class="form-group">
 
@@ -34,7 +34,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Nội dung thanh toán:</label>
-                                <label><?php echo $_GET['orderInfo']; ?></label>
+                                <label><?php
+                                    echo $_GET['orderInfo'];
+                                 ?></label>
                             </div>
                             <div class="form-group">
                                 <label>Kết quả: {{ $_GET['message'] }}</label>
@@ -42,7 +44,7 @@
                                 </label>
                                 <br>
                                 @if ($_GET['message'] == 'Successful.')
-                                    <a href="{{ route('ctdonhang', Session::get('hd_id')) }}">Theo dõi đơn hàng
+                                    <a href="{{ route('ctdonhang', Cookie::get('InvId')) }}">Theo dõi đơn hàng
                                     </a>
                                 @endif
                             </div>

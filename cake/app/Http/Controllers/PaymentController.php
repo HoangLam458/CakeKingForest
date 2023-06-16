@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\hoadon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
@@ -78,14 +79,12 @@ class PaymentController extends Controller
 
     public function momo_payment_qr(Request $request)
     {
-        if(Session::has('hd_id')) {
-            Session::forget('hd_id');
-        } if(Session::has('path')) {
-            Session::forget('path');
-        }
-        else
+        if(Session::has('hd_id')) Session::forget('hd_id');
+        if(Session::has('path')) Session::forget('path');
+
         Session::put('hd_id');
         Session::put('path');
+
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -98,17 +97,16 @@ class PaymentController extends Controller
             Session::push('hd_id',$hd);
         }
 
+
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBKUN20180529';
         Session::push('path',$partnerCode);
-
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "";
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
-
         $redirectUrl = "http://localhost:8000/paymentsuccess";
         $ipnUrl = "http://localhost:8000/paymentsuccess";
         $extraData = "";

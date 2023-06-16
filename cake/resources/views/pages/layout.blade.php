@@ -130,8 +130,9 @@
                                 nhân</a>
                             <a class="dropdown-item" href="{{ route('logout2') }}">Đăng xuất</a>
                         </div>
+                    </li>
             </div>
-            </li>
+
             @endif
             </ul>
         </div>
