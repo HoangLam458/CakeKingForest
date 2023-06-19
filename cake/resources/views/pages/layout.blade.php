@@ -63,7 +63,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('cake') }}"><img src="{{ asset('paper') }}/img/final_logo.png"
+            <a class="navbar-brand" href="{{ route('sendemailpay',['emailpay'=>'0306201458@caothang.edu.vn']) }}"><img src="{{ asset('paper') }}/img/final_logo.png"
                     width="55" height="55"></img></a>
             <a class="navbar-brand" href="{{ route('cake') }}">Cake King Forest</a>
             <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"

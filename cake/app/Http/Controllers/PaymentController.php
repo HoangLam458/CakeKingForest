@@ -104,9 +104,9 @@ class PaymentController extends Controller
         $orderId = time() . "-".$hd;
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
-        $redirectUrl = "http://localhost:8000/paymentsuccess";
 
-        $ipnUrl = "http://localhost:8000/";
+        $redirectUrl = "http://localhost:8000/chitietdh/$hd";
+        $ipnUrl = "http://localhost:8000/chitietdh/$hd";
         $extraData = "";
 
 
@@ -139,15 +139,6 @@ class PaymentController extends Controller
 
         $jsonResult = json_decode($result, true); // decode json
 
-        if ($jsonResult['message'] == 'Thành công.')
-        {
-           
-                $hd = hoadon::find($hd);
-                $hd->trangthai = 2 ;
-                $hd->phuongthucthanhtoan = 'MoMo';
-                $hd->save();
-                Session::forget('cate');
-        }
         //Just a example, please check more in there
         return redirect()->to($jsonResult['payUrl']);
         // header('Location: ' . $jsonResult['payUrl']);

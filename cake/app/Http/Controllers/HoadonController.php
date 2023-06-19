@@ -160,17 +160,29 @@ class HoadonController extends Controller
         ]);
     }
     public function chitietdonhang($idhd, Request $request){
-
-
-            if( $request->get('partnerCode') == "MOMOBKUN20180529")
-            {
-                $hd = hoadon::find($idhd);
-                $hd->trangthai = 2 ;
-                $hd->phuongthucthanhtoan = 'MOMO';
-                $hd->save();
-                Session::forget('cate');
+        if(Session::has('path'))
+        {
+            $path = Session::get('path');
+            $id_update = Session::get('hd_id');
+            if($_GET["resultCode"]==0){
+                if( (string)$path[0] == "MOMOBKUN20180529")
+                {
+                    $hd = hoadon::find($id_update[0]);
+                    $hd->trangthai = 2 ;
+                    $hd->phuongthucthanhtoan = 'MoMo';
+                    $hd->save();
+                    Session::forget('cate');
+                }
+            }else{
+                if(auth()->user() == null){
+                    return redirect()->route('cartss');
+                }
+                else{
+                    return redirect()->route('cart',auth()->user()->id);
+                }
             }
 
+        }
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
