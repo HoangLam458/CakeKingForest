@@ -11,7 +11,7 @@
         </div>
     </div>
 </div>
-
+@if($cart != null )
 <section class="ftco-section ftco-cart">
     <div class="container">
         <div class="row">
@@ -118,7 +118,7 @@
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                @foreach ($lsInD as $item)
+                                @foreach ($ls as $item)
                                 <form action="{{ route('updateghichu',$item->idchitiet)}}" method="POST" class="form"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -140,28 +140,31 @@
                                     </div>
                                 </td>
                                 <td class="total">{{ number_format($item->thanhtien) }} VND</td>
-                                @if($item->trangthai !=1 )
-                                <!-- nothing -->
+                                {{-- @if($item->trangthai !=1 )
+
                                 @else
                                 <td><button type="submit"><span>Update</span></button></td>
-                                @endif
+                                @endif --}}
                             </tr>
                             </form>
                             @endforeach
                             </tr>
                         </tbody>
                     </table>
-                    @if($item->trangthai !=1 )
+                    {{-- @if($item->trangthai !=1 )
                     <!-- nothing -->
                     @else
                     <div> <a type="button" onclick="return checkDelete()" href="{{ route('huydh',$mahd->id)}}"><span>Hủy
                                 hóa đơn</span></button></div>
-                    @endif
+                    @endif --}}
 
                 </div>
             </div>
         </div>
     </div>
+    @else
+    <h1>Hóa đơn này không tồn tại </h1>
+    @endif
 </section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <header>

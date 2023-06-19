@@ -41,13 +41,12 @@ Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
 Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
-Route::post('/add_to_cartss/{id?}', [CartController::class, 'add_to_cartss'])->name('add_to_cartss');
+
 Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('remove');
 Route::post('/checkout/{id?}', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
-Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
-Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
+
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
 Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
@@ -68,12 +67,12 @@ Route::get('/paymentfailed', function () {
 });
 
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
-    
+
     $details = [
         'title' => 'Mail from Cake King Forest',
         'body' => 'This is for testing email using smtp'
     ];
-    
+
     \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
 
 })->name('sendemailpay');
@@ -93,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
-   
+
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::post('/filter-by-date',[HomeController::class,'filter_by_date']);

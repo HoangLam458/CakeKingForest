@@ -6,6 +6,7 @@ use App\Models\hoadon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Storage\SessionStore;
 
 class PaymentController extends Controller
 {
@@ -80,6 +81,8 @@ class PaymentController extends Controller
     {
         if(Session::has('path')) Session::forget('path');
 
+        Session::put('data',$request->all());
+        
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -88,10 +91,8 @@ class PaymentController extends Controller
         else
         {
             $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
-
         }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
         $partnerCode = 'MOMOBKUN20180529';
         Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';

@@ -34,11 +34,6 @@
             </div>
         </div>
     </div>
-    <div>
-        <input name="test" id="test">
-        <input name="test" id="test">
-
-    </div>
     <section class="ftco-section ftco-cart">
         <div class="container">
             @if ($ls == null)
@@ -68,6 +63,7 @@
                     </div>
                 </div>
             @else
+            @include('pages.user.checkout')
                 <div class="row">
                     <div class="col-md-12 ftco-animate">
                         <div class="cart-list">
@@ -145,7 +141,7 @@
                                                 </td>
                                                 <td><button type="submit"class="btn"><span>Update</span></a></td>
 
-                                            </tr><!-- END TR-->
+                                            </tr>
                                         </form>
                                     @endforeach
                                 </tbody>
@@ -154,137 +150,6 @@
                     </div>
 
                 </div>
-                @foreach ($user as $u)
-                @endforeach
-                @if (auth()->user() == null)
-                    <div class="row justify-content-end">
-                        <div class="col-lg mt-5 cart-wrap ftco-animate">
-                            <div class="cart-total mb-3 col-md-12">
-                                <h3>Thông tin giao hàng</h3>
-                                <form action="{{ route('checkoutss') }}" id="form__submit" method="POST" class="form"
-                                    enctype="multipart/form-data">
-                                    @csrf
-
-                                    <div class="">
-                                        <div class="col-md-12 form-group">
-                                            <label for="">Tên người nhận</label>
-                                            <input required maxlength="20" type="text"
-                                                class="form-control text-left px-3" required name="tenkhachhang"
-                                                value="" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Số điện thoại</label>
-                                        <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
-                                            class="form-control text-left px-3" required name="sdtkhachhang"
-                                            value="" placeholder="">
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Địa chỉ</label>
-                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" required
-                                            name="diachigiaohang" value=""></textarea>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label>Ngày nhận hàng</label>
-                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" name="date">
-                                            <span class="input-group-addon"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Hình thức nhận hàng</label>
-                                        <select name="ship" id="ship" class="form-control">
-                                            <option required value="Nhận hàng tại cửa hàng">
-                                                Nhận hàng tại cửa hàng
-                                            </option>
-                                            <option required value="Giao đến địa chỉ">
-                                                Giao đến địa chỉ
-                                            </option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg mt-5 cart-wrap ftco-animate">
-                            <div class="cart-total mb-3">
-                                <h3>Cart Totals</h3>
-                                <p class="d-flex total-price">
-                                    <span>Phí vận chuyển</span>
-                                    Miễn phí
-                                <p class="d-flex total-price">
-                                    <span>Total</span>
-                                    {{ number_format($total) }} VND
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <a href="#" class="btn btn-primary btn-lg py-3 px-5" onclick="submitForm()">
-                                        <h5 style="font-size: 15px">Thanh toán</h5>
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <form action="{{ route('momoQR') }}" method="POST" class="form"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <input hidden name="total_momo" value="{{ $total }}">
-                                        <button class="btn btn-primary btn-lg py-3 px-5" name="redirect" type="submit">
-                                            <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
-                                        </button>
-                                    </form>
-                                </div>
-                        </div>
-                        </div>
-                    </div>
-                @else
-                    @foreach ($user as $u)
-                    @endforeach
-                    <div class="row justify-content-end">
-                        <div class="col-lg mt-5 cart-wrap ftco-animate">
-                            <div class="cart-total mb-3 col-md-12">
-                                <h3>Thông tin giao hàng</h3>
-                                <form action="{{ route('checkout', auth()->user()->id) }}" id="form__submit"
-                                    method="POST" class="form" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="">
-                                        <div class="col-md-12 form-group">
-                                            <label for="">Họ Tên người nhận</label>
-                                            <input required maxlength="20" type="text"
-                                                class="form-control text-left px-3" required name="tenkhachhang"
-                                                id="name" value="{{ $u->tenkhachhang }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Số điện thoại</label>
-                                        <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"
-                                            id='phone' class="form-control text-left px-3" required
-                                            name="sdtkhachhang" value="{{ $u->sdtkhachhang }}">
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Địa chỉ</label>
-                                        <textarea rows="3" maxlength="255" type="text" class="form-control text-left px-3" id='address' required
-                                            name="diachigiaohang" value="">{{ $u->diachigiaohang }}</textarea>
-
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label>Ngày nhận hàng</label>
-                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" name="date" id="date">
-                                            <span class="input-group-addon"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <label for="country">Hình thức nhận hàng</label>
-                                        <select name="ship" id="ship" class="form-control">
-                                            <option required value="Nhận hàng tại cửa hàng">
-                                                Nhận hàng tại cửa hàng
-                                            </option>
-                                            <option required value="Giao đến địa chỉ">
-                                                Giao đến địa chỉ
-                                            </option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                         <div class="col-lg mt-5 cart-wrap ftco-animate">
                             <div class="cart-total mb-3">
                                 <h3>Cart Totals</h3>
@@ -295,25 +160,19 @@
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
                                     <div class="row">
-                                    <div class="col-md-5">
-                                        <a href="#" class="btn btn-primary btn-lg py-3 px-5" onclick="submitForm()">
-                                            <h5 style="font-size: 15px">Thanh toán</h5>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <form action="{{ route('momoQR') }}" method="POST" class="form"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <input hidden name="total_momo" value="{{ $total }}">
-                                            <button class="btn btn-primary btn-lg py-3 px-5" name="redirect" type="submit">
-                                                <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                        <div class="col-md-5">
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#exampleModal">
+                                            Thanh toán
                                             </button>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#Modal">
+                                            <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                            </button>
+                                        </div>
                             </div>
-
-
-
                                 {{-- <div class="col-md-5">
                                 <form action="{{ route('VNPay') }}" method="POST" class="form"
                                     enctype="multipart/form-data">
@@ -326,12 +185,10 @@
                                     </button>
                                 </form>
                                 </div> --}}
-
                             </div>
                         </div>
                     </div>
                 @endif
-            @endif
         </div>
     </section>
 
@@ -366,8 +223,13 @@
                 autoclose: true,
                 todayHighlight: true
             }).datepicker('update', new Date());
+            $("#datepicker2").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker('update', new Date());
         });
     </script>
+
 
     <script>
         $(document).ready(function() {
@@ -402,5 +264,11 @@
             form.submit();
         }
     </script>
-
+ <header>
+    <script language="JavaScript" type="text/javascript">
+      function check(){
+          return confirm('Xác nhận thông tin hóa đơn?');
+      }
+    </script>
+  </header>
 @endsection
