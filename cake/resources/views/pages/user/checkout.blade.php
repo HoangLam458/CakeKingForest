@@ -29,6 +29,10 @@
                                     class="form-control" name="sdtkhachhang" >
                             </div>
                         </div>
+                        <div class = "col-md col-12">
+                            <label class="mb-2" for="first-name-column">Email</label>
+                            <input required type="email" id="first-name-column" class="form-control" name="email">
+                        </div>
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Địa chỉ</label>
@@ -74,16 +78,20 @@
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Số điện thoại</label>
-                                <input value="{{ $u->sdtkhachhang }}" pattern="(\+84|0)\d{9,10}"
+                                <input value="{{ $u->sdt }}" pattern="(\+84|0)\d{9,10}"
                                     maxlength="10" minlength="10" required type="text" id="phone"
                                     class="form-control" name="sdtkhachhang" >
                             </div>
+                        </div>
+                        <div class = "col-md col-12">
+                            <label class="mb-2" for="first-name-column">Email</label>
+                            <input required  value="{{ $u->email }}" type="email" id="first-name-column" class="form-control" name="email">
                         </div>
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Địa chỉ</label>
                                 <textarea required name="diachigiaohang" maxlength="255" class="form-control"
-                                id="exampleFormControlTextarea1" rows="3">{{ $u->diachigiaohang }}</textarea>
+                                id="exampleFormControlTextarea1" rows="3">{{ $u->diachi }}</textarea>
                             </div>
                         </div>
                         <div class="col-md col-12">
@@ -150,6 +158,10 @@
                                     class="form-control" name="sdtkhachhang" >
                             </div>
                         </div>
+                        <div class = "col-md col-12">
+                            <label class="mb-2" for="first-name-column">Email</label>
+                            <input required type="email" id="first-name-column" class="form-control" name="email">
+                        </div>
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Địa chỉ</label>
@@ -195,16 +207,20 @@
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Số điện thoại</label>
-                                <input value="{{ $u->sdtkhachhang }}" pattern="(\+84|0)\d{9,10}"
+                                <input value="{{ $u->sdt }}" pattern="(\+84|0)\d{9,10}"
                                     maxlength="10" minlength="10" required type="text" id="phone"
                                     class="form-control" name="sdtkhachhang" >
                             </div>
+                        </div>
+                        <div class = "col-md col-12">
+                            <label class="mb-2" for="first-name-column">Email</label>
+                            <input required value="{{ $u->email }}" type="email" id="first-name-column" class="form-control" name="email">
                         </div>
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Địa chỉ</label>
                                 <textarea required name="diachigiaohang" maxlength="255" class="form-control"
-                                id="exampleFormControlTextarea1" rows="3">{{ $u->diachigiaohang }}</textarea>
+                                id="exampleFormControlTextarea1" rows="3">{{ $u->diachi }}</textarea>
                             </div>
                         </div>
                         <div class="col-md col-12">

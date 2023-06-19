@@ -33,7 +33,7 @@ class CartController extends Controller
                 ]);
             }
 
-            $user = hoadon::where('users_id', auth()->user()->id)->get();
+            $user = user::where('id', auth()->user()->id)->get();
             $total = 0;
             $cart = 0;
             $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
