@@ -107,8 +107,8 @@ class PaymentController extends Controller
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
 
-        $redirectUrl = "http://localhost:8000/paymentsuccess";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+        $redirectUrl = "http://localhost:8000/chitietdh/$hd";
+        $ipnUrl = "http://localhost:8000/chitietdh/$hd";
         $extraData = "";
 
 
@@ -138,7 +138,6 @@ class PaymentController extends Controller
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true); // decode json
-
         //Just a example, please check more in there
         return redirect()->to($jsonResult['payUrl']);
         // header('Location: ' . $jsonResult['payUrl']);

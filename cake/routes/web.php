@@ -67,7 +67,16 @@ Route::get('/paymentfailed', function () {
     return view('pages.user.payment.paymentfailed');
 });
 
+Route::get('send-mail/{emailpay?}', function ($emailpay) {
+    
+    $details = [
+        'title' => 'Mail from Cake King Forest',
+        'body' => 'This is for testing email using smtp'
+    ];
+    
+    \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
 
+})->name('sendemailpay');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/user-edit/{id?}', [UserController::class, 'User_update'])->name('User_edit');
