@@ -132,7 +132,7 @@
                                         @if($hoadon->trangthai == 1)
                                         <a href="{{ route('invoice.detail', $hoadon->id) }}"><span class="hd">
                                                 Hóa đơn với mã
-                                                {{$hoadon->mahd}} đã đặt hàng và đang chờ duyệt</span></a></br>
+                                                {{$hoadon->mahd}} đã đặt hàng và đang chờ duyệt</span></a><br>
                                         @endif
                                         @endforeach
                                     </div>
@@ -148,11 +148,11 @@
                                         @if($hoadon->trangthai == 2 && $hoadon->phuongthucthanhtoan == 'MoMo')
                                         <a href="{{ route('invoice.detail', $hoadon->id) }}"><span class="hd"> Hóa
                                                 đơn {{$hoadon->mahd}} đã đặt hàng và thanh toán thành công bằng
-                                                MoMo</span></a></br>
+                                                MoMo</span></a><br>
                                         @elseif($hoadon->trangthai == 2 && $hoadon->phuongthucthanhtoan == 'VnPay')
                                         <a href="{{ route('invoice.detail', $hoadon->id) }}"><span class="hd">Hóa
                                                 đơn {{$hoadon->mahd}} đã đặt hàng và thanh toán thành công bằng
-                                                VnPay</span></a></br>
+                                                VnPay</span></a><br>
                                         @endif
                                         @endforeach
                                     </div>
