@@ -34,7 +34,11 @@
             </div>
         </div>
     </div>
+    <div>
+        <input name="test" id="test">
+        <input name="test" id="test">
 
+    </div>
     <section class="ftco-section ftco-cart">
         <div class="container">
             @if ($ls == null)
@@ -248,7 +252,6 @@
                                                 id="name" value="{{ $u->tenkhachhang }}">
                                         </div>
                                     </div>
-
                                     <div class="col-md-12 form-group">
                                         <label for="country">Số điện thoại</label>
                                         <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" type="text"

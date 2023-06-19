@@ -160,14 +160,15 @@ class HoadonController extends Controller
         ]);
     }
     public function chitietdonhang($idhd, Request $request){
+
+        //momo
         if(Session::has('path'))
         {
             $path = Session::get('path');
-            $id_update = Session::get('hd_id');
             if($_GET["resultCode"]==0){
-                if( (string)$path[0] == "MOMOBKUN20180529")
+                if( (string)$path == "MOMOBKUN20180529")
                 {
-                    $hd = hoadon::find($id_update[0]);
+                    $hd = hoadon::find($idhd);
                     $hd->trangthai = 2 ;
                     $hd->phuongthucthanhtoan = 'MoMo';
                     $hd->save();
@@ -183,6 +184,7 @@ class HoadonController extends Controller
             }
 
         }
+        //
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
