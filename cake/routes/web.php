@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\SizeController;
@@ -24,10 +26,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+Auth::routes();
+
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 
@@ -80,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
-
+   
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::post('/filter-by-date',[HomeController::class,'filter_by_date']);

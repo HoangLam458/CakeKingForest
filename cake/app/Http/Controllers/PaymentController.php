@@ -29,13 +29,12 @@ class PaymentController extends Controller
         $result = curl_exec($ch);
         //close connection
         curl_close($ch);
+
         return $result;
     }
 
     public function momo_payment(Request $request)
     {
-
-
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
@@ -79,36 +78,35 @@ class PaymentController extends Controller
 
     public function momo_payment_qr(Request $request)
     {
-        if(Session::has('hd_id')) Session::forget('hd_id');
-        if(Session::has('path')) Session::forget('path');
+        // if(Session::has('hd_id')) Session::forget('hd_id');
+        // if(Session::has('path')) Session::forget('path');
 
-        Session::put('hd_id');
-        Session::put('path');
+        // Session::put('hd_id');
+        // Session::put('path');
 
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
             $hd = hoadon::where('mahd',$code_cart)->value('id');
-            Session::push('hd_id',$hd);
         }
         else
         {
             $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
-            Session::push('hd_id',$hd);
-        }
 
+        }
 
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = 'MOMOBKUN20180529';
-        Session::push('path',$partnerCode);
+
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderId = time() . "";
+        $orderId = time() . "-".$hd;
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
         $redirectUrl = "http://localhost:8000/paymentsuccess";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+
+        $ipnUrl = "http://localhost:8000/";
         $extraData = "";
 
 
@@ -136,9 +134,20 @@ class PaymentController extends Controller
             'requestType' => $requestType,
             'signature' => $signature
         );
+
         $result = $this->execPostRequest($endpoint, json_encode($data));
+
         $jsonResult = json_decode($result, true); // decode json
 
+        if ($jsonResult['message'] == 'Thành công.')
+        {
+           
+                $hd = hoadon::find($hd);
+                $hd->trangthai = 2 ;
+                $hd->phuongthucthanhtoan = 'MoMo';
+                $hd->save();
+                Session::forget('cate');
+        }
         //Just a example, please check more in there
         return redirect()->to($jsonResult['payUrl']);
         // header('Location: ' . $jsonResult['payUrl']);

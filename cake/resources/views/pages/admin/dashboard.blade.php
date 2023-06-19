@@ -106,6 +106,28 @@
             </div>
         </div>
         <div class="row">
+        <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h5 class="card-title">Thông báo</h5>
+                        <p class="card-category">Thông báo về hóa đơn mới</p>
+                    </div>
+                    <div class="card-body">
+                        @foreach($hoadonall as $hoadon)
+                        @if($hoadon->trangthai == 1)
+                        <a class="dropdown-item" href="{{ route('invoice.detail', $hoadon->id) }}">  Hóa đơn với mã {{$hoadon->mahd}} đã đặt hàng và đang chờ duyệt</a>
+                        @elseif($hoadon->trangthai == 2 && $hoadon->phuongthucthanhtoan == 'MoMo')
+                        <a class="dropdown-item" href="{{ route('invoice.detail', $hoadon->id) }}"> Hóa đơn với mã {{$hoadon->mahd}} đã đặt hàng và thanh toán thành công bằng MoMo</a>
+                        
+                        @elseif($hoadon->trangthai == 2 && $hoadon->phuongthucthanhtoan == 'VnPay')
+                        <a class="dropdown-item" href="{{ route('invoice.detail', $hoadon->id) }}">Hóa đơn với mã {{$hoadon->mahd}} đã đặt hàng và thanh toán thành công bằng VnPay</a>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+</div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="card ">
                     <div class="card-header">
@@ -132,7 +154,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <div class="card ">
                     <div class="card-header ">
                         <h5 class="card-title">Email Statistics</h5>
@@ -154,28 +176,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h5 class="card-title">NASDAQ: AAPL</h5>
-                        <p class="card-category">Line Chart with Points</p>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="speedChart" width="400" height="100"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        <div class="chart-legend">
-                            <i class="fa fa-circle text-info"></i> Tesla Model S
-                            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                        </div>
-                        <hr />
-                        <div class="card-stats">
-                            <i class="fa fa-check"></i> Data information certified
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> -->
+           
         </div>
     </div>
 @endsection

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
 </head>
 
 <body class="goto-here">
@@ -71,19 +72,21 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg></i></a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <div class="dropdown-item">
                                 <form action="{{ route('searchpr')}}" method="POST" class="search-form">
                                     @csrf
                                     <div class="form-group">
                                         <span class="icon ion-ios-search"></span>
-                                        <input style="width:350px" type="text" class="form-control" placeholder="Nhập thông tin bánh cần tìm..."
-                                            name="searchpr">
+                                        <input style="width:350px" type="text" class="form-control"
+                                            placeholder="Nhập thông tin bánh cần tìm..." name="searchpr">
                                     </div>
                                 </form>
                             </div>
@@ -97,7 +100,7 @@
                             <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
                             @foreach ($category as $cate)
                             <a class="dropdown-item" href="{{ route('shop.category',$cate->id) }}">
-                            {{$cate->tenloaisp}}
+                                {{$cate->tenloaisp}}
                             </a>
                             @endforeach
                         </div>
@@ -107,9 +110,9 @@
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cartss') }}" class="nav-link"><span
                                 class="icon-shopping_cart"></span>[@php
-                                echo Session::has('cate')? count(Session::get('cate')) :0;
-                                @endphp]
-                            </a></li>
+                            echo Session::has('cate')? count(Session::get('cate')) :0;
+                            @endphp]
+                        </a></li>
                     <li class="nav-item"> <a href="{{ route('login') }}" class="nav-link">Đăng nhập</a>
                     </li>
                     @else
@@ -233,6 +236,7 @@
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                 stroke="#F96D00" />
         </svg></div>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>

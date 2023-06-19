@@ -9,6 +9,13 @@
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+      <script>
+            window.onbeforeunload = function(e) {
+               return 'Dialog text here.';
+            };
+
+    </script>
 </head>
 
 <body>
@@ -35,8 +42,9 @@
                             <div class="form-group">
                                 <label>Nội dung thanh toán:</label>
                                 <label><?php
-                                    echo $_GET['orderInfo'];
-                                 ?></label>
+                                echo $_GET['orderInfo'];
+                                ?></label>
+
                             </div>
                             <div class="form-group">
                                 <label>Kết quả: {{ $_GET['message'] }}</label>
@@ -44,7 +52,9 @@
                                 </label>
                                 <br>
                                 @if ($_GET['message'] == 'Successful.')
-                                    <a href="{{ route('ctdonhang', Cookie::get('InvId')) }}">Theo dõi đơn hàng
+                                <input value="{{$_GET['partnerCode']}}" hidden name="partnerCode">
+                                    <a href="{{ route('ctdonhang', explode('-', $_GET['orderId'])[1]) }}">Theo dõi đơn
+                                        hàng
                                     </a>
                                 @endif
                             </div>
@@ -115,5 +125,6 @@
     </p>
     </div>
 </body>
+
 
 </html>

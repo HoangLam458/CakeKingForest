@@ -2,35 +2,35 @@
 @section('body')
 <header>
     <style>
-        .button {
-            background-color: #4CAF50;
-            /* Green */
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
+    .button {
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
 
-        .button1 {
-            background-color: white;
-            color: black;
-            border: 2px solid #4CAF50;
-        }
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+    }
 
-        .active,
-        .button1:hover {
-            background-color: #4CAF50;
-            color: white;
-        }
-
+    .active,
+    .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
     </style>
 </header>
+@include('sweetalert::alert')
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -126,7 +126,7 @@
         </div>
     </div>
 </section>
- <!-- <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+<!-- <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
         <div class="container py-4">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-md-6">

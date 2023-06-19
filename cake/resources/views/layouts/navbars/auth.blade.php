@@ -48,7 +48,7 @@
                 </a>
             </li>
 
-            <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
+            <!-- <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -78,7 +78,7 @@
                     <i class="nc-icon nc-diamond"></i>
                     <p>{{ __('Icons') }}</p>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </div>
