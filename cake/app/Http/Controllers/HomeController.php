@@ -34,6 +34,8 @@ class HomeController extends Controller
         $doanhthu = 0;
         $chart[] = array();
         $hoadonall = hoadon::all();
+        $hoadonmomo = hoadon::where('trangthai',2)->where('phuongthucthanhtoan','MoMo')->get();
+        $hoadonvnpay = hoadon::where('trangthai',2)->where('phuongthucthanhtoan','VnPay')->get();
         $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
         $hoadon_choduyet = hoadon::where('trangthai',1)->get();
         $hoadon_danggiao = hoadon::where('trangthai',3)->get();
@@ -55,14 +57,17 @@ class HomeController extends Controller
             ->get();
         }
 
-
+        $count=$hoadonmomo->count()+$hoadonvnpay->count()+$hoadon_choduyet->count();
         return view('pages.admin.dashboard',[
             'chart_data'=>$test,
             'doanhthu'=>$doanhthu,
             'hd_success'=>count($hoadon_hoanthanh),
             'hd_pending'=>count($hoadon_choduyet),
             'hd_shipping'=>count($hoadon_danggiao),
-            'hoadonall'=>$hoadonall
+            'hoadonall'=>$hoadonall,
+            'dem'=>$count,
+            'choduyet'=>$hoadon_choduyet->count(),
+            'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
         ]);
     }
 
