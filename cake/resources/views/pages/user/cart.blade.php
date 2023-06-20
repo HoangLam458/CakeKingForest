@@ -159,34 +159,36 @@
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
-                            </div>
-                        </div>
-                            <div class="row justify-content-center">
-                                <div class="col-md-4 text-center">
-                                    <a  class="btn btn-info py-3 px-5" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    Thanh toán
-                                </a>
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    <a  class="btn btn-info py-3 px-5" data-toggle="modal"
-                                    data-target="#Modal">
-                                    <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
-                                </a>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                <form action="{{ route('VNPay') }}" method="POST" class="form"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input hidden name="total_vnpay" value="{{ $total }}">
-                                    <input hidden name="payment" value="2">
-                                    <input hidden name="p_user_id" value="null">
-                                    <a class="btn btn-info py-3 px-5" name="redirect" >
-                                        VNP
+                                <div class="row justify-content-center">
+                                    <div class="col-md-3 text-center">
+                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        Thanh toán
                                     </a>
-                                </form>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        data-target="#Modal">
+                                        <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                    </a>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        data-target="#Modal2">
+                                        MoMo ATM
+                                    </a>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+
+                                        <a class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        data-target="#Modal3"  >
+                                            VNP
+                                        </a>
+
+                                    </div>
                                 </div>
-                            </div>
+                        </div>
 
                     </div>
                 @endif
@@ -225,6 +227,14 @@
                 todayHighlight: true
             }).datepicker('update', new Date());
             $("#datepicker2").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker('update', new Date());
+            $("#datepicker3").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker('update', new Date());
+            $("#datepicker4").datepicker({
                 autoclose: true,
                 todayHighlight: true
             }).datepicker('update', new Date());

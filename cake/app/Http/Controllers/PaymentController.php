@@ -36,15 +36,29 @@ class PaymentController extends Controller
 
     public function momo_payment(Request $request)
     {
+        if(Session::has('path')) Session::forget('path');
+        if(Session::has('data')) Session::forget('data');
+        Session::put('data',$request->all());
+        // if(Session::has('payment')) Session::forget('payment');
+        if(auth()->user() == null)
+        {
+            $code_cart = $request->cookie('code');
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
+        Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
         $amount = $request->total_momo;
-        $orderId = time() . "";
-        $redirectUrl = "http://localhost:8000/paymentfailed";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+        $orderId = time() . "-".$hd;
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$request->email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$request->email";
         $extraData = "";
 
         $requestId = time() . "";
@@ -109,7 +123,7 @@ class PaymentController extends Controller
 
         $requestId = time() . "";
         // $requestType = "captureWallet";
-        $requestType = "payWithATM";
+        $requestType = "captureWallet";
         // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
         //before sign HMAC SHA256 signature
         $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .
@@ -144,18 +158,29 @@ class PaymentController extends Controller
 
     public function vnpay_payment(Request $request)
     {
-        $data = $request->all();
         $code_cart = $request->cookie('code');
+        if(Session::has('vnp_path')) Session::forget('vnp_path');
 
+        if(Session::has('vnp_data')) Session::forget('vnp_data');
+
+        if(auth()->user() == null)
+        {
+
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/paymentsuccess"; // url trả về view
+        $vnp_Returnurl = "http://localhost:8000/send-mail-vnp/$request->email";
         $vnp_TmnCode = "FM9XJF5C"; //Mã website tại VNPAY
+        Session::put('vnp_path',$vnp_TmnCode);
         $vnp_HashSecret = "NRDAOOOFDEKIQUFRBDSUMQOLIKIEAFPW";
-
-        $vnp_TxnRef = $code_cart;
+        $vnp_TxnRef = $code_cart .'-'. $hd;
         $vnp_OrderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $data['total_vnpay'] * 100;
+        $vnp_Amount = $request->get('total_vnpay') * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -219,7 +244,11 @@ class PaymentController extends Controller
         );
         if (isset($_POST['redirect'])) {
             header('Location: ' . $vnp_Url);
+            Session::put('vnp_data',$request->all());
+
+            
             die();
+
         } else {
             echo json_encode($returnData);
         }
