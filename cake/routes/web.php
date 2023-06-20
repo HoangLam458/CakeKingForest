@@ -16,6 +16,9 @@ use App\Http\Controllers\PaymentController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +42,7 @@ Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 Route::post('/back-to-home',[HoadonController::class, 'insertDB'])->name('back-to-home');
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
-Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
 
@@ -78,11 +81,35 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
                     'title' => 'Mail from Cake King Forest  MOMO' . 'HD' . explode('-', $_GET['orderId'])[1],
                     'body' => 'This is for testing email using smtp'
                 ];
-                \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details)); 
+                \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
                 Session::put('resultCode',$_GET["resultCode"]);
                 return redirect()->route('ctdonhang',  explode('-', $_GET['orderId'])[1]);
         }
     }
+});
+Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
+
+    if(Session::has('vnp_path'))
+    {
+        Session::forget('vnp_path');
+    }
+    Session::put('vnp_path',$_GET['vnp_TmnCode']);
+    if($_GET["vnp_TmnCode"]=="FM9XJF5C"){
+
+        if($_GET['vnp_ResponseCode'] != '00'){
+            dd('đã vào if 1');
+            return redirect()->route('cart');
+        }else{
+
+            $details = [
+                'title' => 'Mail from Cake King Forest  VNP' .explode('-', $_GET['vnp_TxnRef'])[0],
+                'body' => 'This is for testing email using smtp'
+            ];
+            \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
+            Session::put('resultVNP',$_GET['vnp_ResponseCode']);
+            return redirect()->route('ctdonhang',  explode('-', $_GET['vnp_TxnRef'])[1]);
+    }
+}
 });
 
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
@@ -98,7 +125,7 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
             'phuongthuc'=> Session::pull('pttt'),
             
         ];
-        \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details)); 
+        \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
         return redirect()->route('ctdonhang', Session::get('mahd'));
     }
 })->name('sendemailpay');

@@ -23,8 +23,8 @@ class HoadonController extends Controller
     public function index()
     {
 
-        $lsHoaDon = HoaDon::where('trangthai','<>', 0)->orderBy('mahd')->get();
-        return view('pages.admin.invoice.index', ['lsHoaDon'=> $lsHoaDon]);
+        $lsHoaDon = HoaDon::where('trangthai', '<>', 0)->orderBy('mahd')->get();
+        return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 
     /**
@@ -46,22 +46,21 @@ class HoadonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $id)
-            ->select('*','chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham','sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')->get();
+            ->select('*', 'chitiethoadons.giatien as thanhtien', 'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name', 'sanphams.hinhanh as img')->get();
         $user = Hoadon::where('id', $id)->get();
-        foreach ($lsInD as $in)
-        {
+        foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
         return view('pages.admin.invoice.details', [], [
             'lsInD' => $lsInD,
             'user' => $user,
-            'total'=>$total
+            'total' => $total
         ]);
     }
 
@@ -79,14 +78,14 @@ class HoadonController extends Controller
     public function update(Request $request, $id)
     {
         $user = hoadon::find($id);
-         $user->sdtkhachhang = $request->get('phone');
-         $user->diachigiaohang= $request->get('address');
-         $user->tenkhachhang = $request->get('fullname');
-         $user->ngaynhanhang = $request->get('date');
+        $user->sdtkhachhang = $request->get('phone');
+        $user->diachigiaohang = $request->get('address');
+        $user->tenkhachhang = $request->get('fullname');
+        $user->ngaynhanhang = $request->get('date');
 
-         $user->save();
+        $user->save();
 
-         return redirect()->route('invoice.detail',$id);
+        return redirect()->route('invoice.detail', $id);
     }
 
     /**
@@ -96,79 +95,82 @@ class HoadonController extends Controller
     {
         //
     }
-    public function update_status_success($id,Request $request)
+    public function update_status_success($id, Request $request)
     {
         $request = $request->all();
 
-            $hd = Hoadon::find($id);
-            $hd->trangthai = 4;
-            $hd->save();
-            return redirect()->back();
+        $hd = Hoadon::find($id);
+        $hd->trangthai = 4;
+        $hd->save();
+        return redirect()->back();
     }
-    public function update_status_ship($id,Request $request)
+    public function update_status_ship($id, Request $request)
     {
         $request = $request->all();
 
-            $hd = Hoadon::find($id);
-            $hd->trangthai = 3;
-            $hd->save();
-            return redirect()->back();
+        $hd = Hoadon::find($id);
+        $hd->trangthai = 3;
+        $hd->save();
+        return redirect()->back();
 
 
     }
-    public function update_status_cancel($id,Request $request)
+    public function update_status_cancel($id, Request $request)
     {
         $request = $request->all();
 
-            $hd = Hoadon::find($id);
-            $hd->trangthai = 5;
-            $hd->save();
-            return redirect()->back();
+        $hd = Hoadon::find($id);
+        $hd->trangthai = 5;
+        $hd->save();
+        return redirect()->back();
 
 
     }
-    public function update_status_approved($id,Request $request)
+    public function update_status_approved($id, Request $request)
     {
         $request = $request->all();
 
-            $hd = Hoadon::find($id);
-            $hd->trangthai = 2;
-            $hd->save();
-            return redirect()->back();
+        $hd = Hoadon::find($id);
+        $hd->trangthai = 2;
+        $hd->save();
+        return redirect()->back();
 
 
     }
 
-    public function donhang(Request $request,){
+    public function donhang(Request $request, )
+    {
         $category = loaisanpham::all();
-        $hd = hoadon::where('mahd',$request->get('search'))->where('trangthai','<>', 0)->first();
-        return view('pages.user.donhang',[
-            'hd' => $hd,'category'=>$category
+        $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->first();
+        return view('pages.user.donhang', [
+            'hd' => $hd,
+            'category' => $category
         ]);
     }
-    public function searchdonhang(Request $request){
+    public function searchdonhang(Request $request)
+    {
         $category = loaisanpham::all();
         $search = $request->get('search');
         // $hd = hoadon::where('trangthai','<>', 0)->Where('sdtkhachhang',$request->get('search'))
         // ->orWhere('mahd',$request->get('search'))->get();
 
-        $hd = hoadon::where('trangthai','<>', 0)->where(function($query) use($search ) {
-            $query->where('sdtkhachhang',$search)
-                ->orWhere('mahd',$search);
+        $hd = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
+            $query->where('sdtkhachhang', $search)
+                ->orWhere('mahd', $search);
         })->get();
-        return view('pages.user.donhang',[
-            'hd' => $hd,'category'=>$category
+        return view('pages.user.donhang', [
+            'hd' => $hd,
+            'category' => $category
         ]);
     }
-    public function chitietdonhang($idhd, Request $request){
+    public function chitietdonhang($idhd, Request $request)
+    {
         //momo
-        if(Session::has('path'))
-        {   
+        if (Session::has('path')) {
             $resultCode = Session::pull('resultCode');
             $path = Session::pull('path');
-            if( $resultCode==0){
-                if( (string)$path == "MOMOBKUN20180529")
-                {
+            if ($resultCode == 0) {
+                if ((string) $path == "MOMOBKUN20180529") {
                     $hd = hoadon::find($idhd);
                     $hd->trangthai = 2;
                     $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
@@ -182,44 +184,85 @@ class HoadonController extends Controller
                     Session::forget('data');
                 }
             }
-            else{
+            else {
                 Session::forget('data');
                 return redirect()->route('cart');
             }
 
-        }//
+        } //
+        //vnp
+
+
+        if (Session::has('vnp_path')) {
+
+            $resultVNP = Session::pull('resultVNP');
+            $vnppath = Session::pull('vnp_path');
+            if ($resultVNP == 00) {
+            if ((string) $vnppath == "FM9XJF5C") {
+                $hd = hoadon::find($idhd);
+                $hd->trangthai = 2;
+                $hd->tenkhachhang = Session::get('vnp_data')['tenkhachhang'];
+                $hd->sdtkhachhang = Session::get('vnp_data')['sdtkhachhang'];
+                $hd->diachigiaohang = Session::get('vnp_data')['diachigiaohang'];
+                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('vnp_data')['date'])->format('Y-m-d');
+                $hd->hinhthucnhanhang = Session::get('vnp_data')['ship'];
+                $hd->phuongthucthanhtoan = 'VnPay';
+                $hd->save();
+                Session::forget('cate');
+                Session::forget('vnp_data');
+            }
+            }
+            else {
+                Session::forget('vnp_data');
+                return redirect()->route('cart');
+        }
+        }
 
         //
+
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
             ->where('hoadon_id', $idhd)
-            ->select('*','chitiethoadons.id as idchitiet','chitiethoadons.giatien as thanhtien',
-            'sizes.id as idsize','sanphams.tensp as tensanpham',
-            'sanphams.giatien as giaban', 'sizes.tensize as s_name','sanphams.hinhanh as img')
+            ->select(
+                '*',
+                'chitiethoadons.id as idchitiet',
+                'chitiethoadons.giatien as thanhtien',
+                'sizes.id as idsize',
+                'sanphams.tensp as tensanpham',
+                'sanphams.giatien as giaban',
+                'sizes.tensize as s_name',
+                'sanphams.hinhanh as img'
+            )
             ->get();
-        $lstCart = hoadon::where('id', $idhd)->where('trangthai','<>',0)->first();
+        $lstCart = hoadon::where('id', $idhd)->where('trangthai', '<>', 0)->first();
         $mahd = Hoadon::where('id', $idhd)->first();
-        foreach ($lsInD as $in)
-        {
+        foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
-        return view('pages.user.chitietdonhang',
-        ['size'=>$size, 'mahd'=>$mahd,
-         'total'=>$total,'ls' =>$lsInD,'category'=>$category,'cart'=>$lstCart
-        ]);
+        return view(
+            'pages.user.chitietdonhang',
+            [
+                'size' => $size,
+                'mahd' => $mahd,
+                'total' => $total,
+                'ls' => $lsInD,
+                'category' => $category,
+                'cart' => $lstCart
+            ]
+        );
     }
-    public function updateghichu($id, Request $request){
+    public function updateghichu($id, Request $request)
+    {
         $chitiet = chitiethoadon::find($id);
-        if($chitiet){
+        if ($chitiet) {
             $chitiet->ghichu = $request->get('ghichu');
-                $chitiet->save();
-                return redirect()->back();
-        }
-        else
-        return redirect()->back();
+            $chitiet->save();
+            return redirect()->back();
+        } else
+            return redirect()->back();
     }
     public function insertDB(Request $request)
     {

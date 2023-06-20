@@ -20,7 +20,7 @@
 
 <body>
     <!--Begin display -->
-    @if ($_GET['partnerCode'] != null)
+    {{-- @if ($_GET['partnerCode'] != null)
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mx-auto mt-5">
@@ -66,8 +66,8 @@
                 </div>
             </div>
         </div>
-    @endif
-    {{-- <div class="container">
+    @endif --}}
+    <div class="container">
             <div class="row">
             <div class="col-md-6 mx-auto mt-5">
                 <div class="payment">
@@ -78,7 +78,12 @@
                     <h1>Thanh toán thành công !</h1>
                         <div class="form-group">
                             <label >Mã đơn hàng:</label>
-                            <label><?php echo $_GET['vnp_TxnRef']; ?></label>
+                            <label><?php
+                               echo explode('-', $_GET['vnp_TxnRef'])[0];
+
+                            ?></label>
+                            {{(string)Session::get('data')['email']}}
+                            {{(string)Session::get('vnppath')}}
                         </div>
                         <div class="form-group">
 
@@ -111,14 +116,16 @@
 
                             </label>
                             <br>
-                            <a href="{{route('back-to-home')}}">Trang chủ
+                            @if($_GET['vnp_ResponseCode'] == '00')
+                            <a href="{{route('ctdonhang',explode('-', $_GET['vnp_TxnRef'])[1])}}">Trang chủ
                             </a>
+                            @endif
                         </div>
 
                 </div>
             </div>
             </div>
-        </div> --}}
+        </div>
     </div>
     <p>
         &nbsp;
