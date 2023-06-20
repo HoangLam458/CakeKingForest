@@ -120,6 +120,7 @@
                     </div>
                     @endif
                     <div class="modal-footer">
+                        <input name="payment" value="0" hidden>
                         <button type="submit" class="btn btn-primary" onclick="return check()">Xác nhận</button>
                     </div>
                 </div>
@@ -248,6 +249,7 @@
                     </div>
                     @endif
                     <div class="modal-footer">
+                        <input name="payment" value="1" hidden>
                         <input name="total_momo" value="{{ $total }}" hidden>
                         <button type="submit" name="redirect" class="btn btn-primary" onclick="return check()">Xác nhận</button>
                     </div>
