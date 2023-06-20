@@ -20,6 +20,8 @@ class CartController extends Controller
 {
     public function cart(Request $request)
     {
+        if(Session::has('path')) Session::forget('path');
+        if(Session::has('data')) Session::forget('data');
         if (auth()->user()) {
             $sizes = size::all();
             $category = loaisanpham::all();

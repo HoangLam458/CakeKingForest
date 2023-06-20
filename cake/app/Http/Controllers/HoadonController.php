@@ -164,8 +164,8 @@ class HoadonController extends Controller
         //momo
         if(Session::has('path'))
         {   
-            $resultCode = Session::get('resultCode');
-            $path = Session::get('path');
+            $resultCode = Session::pull('resultCode');
+            $path = Session::pull('path');
             if( $resultCode==0){
                 if( (string)$path == "MOMOBKUN20180529")
                 {
@@ -178,15 +178,11 @@ class HoadonController extends Controller
                     $hd->hinhthucnhanhang = Session::get('data')['ship'];
                     $hd->phuongthucthanhtoan = 'MoMo';
                     $hd->save();
-                    Session::forget('resultCode');
                     Session::forget('cate');
-                    Session::forget('path');
                     Session::forget('data');
                 }
             }
             else{
-                Session::forget('resultCode');
-                Session::forget('path');
                 Session::forget('data');
                 return redirect()->route('cart');
             }

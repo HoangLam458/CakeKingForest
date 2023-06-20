@@ -172,6 +172,12 @@
                                             <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
                                             </button>
                                         </div>
+                                        <div class="col-md-5">
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#Modal2">
+                                            ATM MoMo
+                                            </button>
+                                        </div>
                             </div>
                                 {{-- <div class="col-md-5">
                                 <form action="{{ route('VNPay') }}" method="POST" class="form"
@@ -224,6 +230,10 @@
                 todayHighlight: true
             }).datepicker('update', new Date());
             $("#datepicker2").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker('update', new Date());
+            $("#datepicker3").datepicker({
                 autoclose: true,
                 todayHighlight: true
             }).datepicker('update', new Date());

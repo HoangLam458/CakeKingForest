@@ -36,15 +36,29 @@ class PaymentController extends Controller
 
     public function momo_payment(Request $request)
     {
+        if(Session::has('path')) Session::forget('path');
+        if(Session::has('data')) Session::forget('data');
+        Session::put('data',$request->all());
+        // if(Session::has('payment')) Session::forget('payment');
+        if(auth()->user() == null)
+        {
+            $code_cart = $request->cookie('code');
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
+        Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
         $amount = $request->total_momo;
-        $orderId = time() . "";
-        $redirectUrl = "http://localhost:8000/paymentfailed";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+        $orderId = time() . "-".$hd;
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$request->email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$request->email";
         $extraData = "";
 
         $requestId = time() . "";
@@ -109,7 +123,7 @@ class PaymentController extends Controller
 
         $requestId = time() . "";
         // $requestType = "captureWallet";
-        $requestType = "payWithATM";
+        $requestType = "captureWallet";
         // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
         //before sign HMAC SHA256 signature
         $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .

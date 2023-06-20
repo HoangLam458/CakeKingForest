@@ -57,6 +57,7 @@ Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_ca
 //payment
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('VNPay');
 Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->name('momoQR');
+Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
 
 Route::get('/paymentsuccess', function () {
     return view('pages.user.payment.paymentsuccess');
@@ -68,6 +69,7 @@ Route::get('/paymentfailed', function () {
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
         if($_GET["partnerCode"]=="MOMOBKUN20180529"){
+
             if($_GET["resultCode"]!=0){
                 return redirect()->route('cart');
             }else{
