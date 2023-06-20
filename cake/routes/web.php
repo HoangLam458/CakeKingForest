@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -88,7 +89,14 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
     if(Session::get('payment')==0){
         $details = [
             'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
-            'body' => 'This is for testing email using smtp'
+            'body' => Session::pull('hd_ma'),
+            'ten'=>  Session::get('data')['tenkhachhang'],
+            'sdt'=>            Session::get('data')['sdtkhachhang'],
+            'dchi'=> Session::get('data')['diachigiaohang'],
+            'hthuc'=> Session::get('data')['ship'],
+            'ngay'=>  Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d'),
+            'phuongthuc'=> Session::pull('pttt'),
+            
         ];
         \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details)); 
         return redirect()->route('ctdonhang', Session::get('mahd'));

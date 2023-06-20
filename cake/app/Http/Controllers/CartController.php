@@ -311,9 +311,12 @@ class CartController extends Controller
                 $user->save();
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
+                Session::put('hd_ma',$user->mahd);
                 Session::forget('payment');
                 Session::forget('resultCode');
                 Session::forget('path');
+                Session::put('data',$request->all());
+                Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$request->email);
             }
             return view('homeuser');
@@ -335,9 +338,12 @@ class CartController extends Controller
                 Cookie::forget('code');
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
+                Session::put('hd_ma',$user->mahd);
                 Session::forget('payment');
                 Session::forget('resultCode');
                 Session::forget('path');
+                Session::put('data',$request->all());
+                Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$request->email);
             } else
                 return view('homeuser');
