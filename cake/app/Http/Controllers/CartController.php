@@ -32,7 +32,6 @@ class CartController extends Controller
                     'category' => $category
                 ]);
             }
-
             $user = user::where('id', auth()->user()->id)->get();
             $total = 0;
             $cart = 0;
@@ -332,7 +331,7 @@ class CartController extends Controller
         }
 
     }
-    
+
     public function updateqty($id, Request $request)
     {
         if (auth()->user() == null) {

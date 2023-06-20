@@ -159,34 +159,35 @@
                                 <p class="d-flex total-price">
                                     <span>Total</span>
                                     {{ number_format($total) }} VND
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            Thanh toán
-                                            </button>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#Modal">
-                                            <img style="margin-top: -5px;"src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
-                                            </button>
-                                        </div>
                             </div>
-                                {{-- <div class="col-md-5">
+                        </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 text-center">
+                                    <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    Thanh toán
+                                </a>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                    data-target="#Modal">
+                                    <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                                </a>
+                                </div>
+                                <div class="col-md-4 text-center">
                                 <form action="{{ route('VNPay') }}" method="POST" class="form"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <input hidden name="total_vnpay" value="{{ $total }}">
                                     <input hidden name="payment" value="2">
                                     <input hidden name="p_user_id" value="null">
-                                    <button class="btn btn-primary py-3 px-5" name="redirect" type="submit">
-                                        Thanh toán VNP
-                                    </button>
+                                    <a class="btn btn-info py-3 px-5" name="redirect" >
+                                        VNP
+                                    </a>
                                 </form>
-                                </div> --}}
+                                </div>
                             </div>
-                        </div>
+
                     </div>
                 @endif
         </div>
@@ -265,6 +266,20 @@
         }
     </script>
  <header>
+    <style>
+        .button {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+        </style>
     <script language="JavaScript" type="text/javascript">
       function check(){
           return confirm('Xác nhận thông tin hóa đơn?');

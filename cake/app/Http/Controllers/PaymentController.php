@@ -80,9 +80,9 @@ class PaymentController extends Controller
     public function momo_payment_qr(Request $request)
     {
         if(Session::has('path')) Session::forget('path');
-
+        if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
-        
+
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');

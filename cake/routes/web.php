@@ -15,6 +15,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 Route::post('/back-to-home',[HoadonController::class, 'insertDB'])->name('back-to-home');
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
-Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
 
