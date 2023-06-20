@@ -66,15 +66,31 @@ Route::get('/paymentfailed', function () {
     return view('pages.user.payment.paymentfailed');
 });
 
+Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
+        if($_GET["partnerCode"]=="MOMOBKUN20180529"){
+            if($_GET["resultCode"]!=0){
+                return redirect()->route('cart');
+            }else{
+                $details = [
+                    'title' => 'Mail from Cake King Forest  MOMO' . 'HD' . explode('-', $_GET['orderId'])[1],
+                    'body' => 'This is for testing email using smtp'
+                ];
+                \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details)); 
+                Session::put('resultCode',$_GET["resultCode"]);
+                return redirect()->route('ctdonhang',  explode('-', $_GET['orderId'])[1]);
+        }
+    }
+});
+
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
-
-    $details = [
-        'title' => 'Mail from Cake King Forest',
-        'body' => 'This is for testing email using smtp'
-    ];
-
-    \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
-
+    if(Session::get('payment')==0){
+        $details = [
+            'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
+            'body' => 'This is for testing email using smtp'
+        ];
+        \Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details)); 
+        return redirect()->route('ctdonhang', Session::get('mahd'));
+    }
 })->name('sendemailpay');
 
 Route::group(['middleware' => 'auth'], function () {

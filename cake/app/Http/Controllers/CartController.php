@@ -292,7 +292,9 @@ class CartController extends Controller
     {
         $currentTime = Carbon::now();
         if(Session::has('email')) Session::forget('email');
-        Session::put('email',$request->email);
+        if(Session::has('mahd')) Session::forget('mahd');
+        if(Session::has('payment')) Session::forget('payment');
+        Session::put('payment',$request->payment);
         if (auth()->user()) {
             $user = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
             if ($user != Null) {
@@ -306,7 +308,11 @@ class CartController extends Controller
                 $user->trangthai = 1;
                 $user->save();
                 Session::forget('cate');
-                return redirect()->route('cart', auth()->user()->id);
+                Session::put('mahd',$user->id);
+                Session::forget('payment');
+                Session::forget('resultCode');
+                Session::forget('path');
+                return redirect()->route('sendemailpay',$request->email);
             }
             return view('homeuser');
         } else {
@@ -326,7 +332,11 @@ class CartController extends Controller
                 $request->cookie('code');
                 Cookie::forget('code');
                 Session::forget('cate');
-                return redirect()->route('cart');
+                Session::put('mahd',$user->id);
+                Session::forget('payment');
+                Session::forget('resultCode');
+                Session::forget('path');
+                return redirect()->route('sendemailpay',$request->email);
             } else
                 return view('homeuser');
         }

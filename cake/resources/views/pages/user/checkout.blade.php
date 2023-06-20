@@ -1,6 +1,7 @@
 <form action="{{ route('checkout') }}" method="POST" class="form"
         enctype="multipart/form-data">
         @csrf
+        <input name="payment" value="0" hidden>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -129,6 +130,7 @@
 <form action="{{ route('momoQR') }}" method="POST" class="form"
         enctype="multipart/form-data">
         @csrf
+        <input name="payment" value="1" hidden>
         <div class="modal fade" id="Modal" tabindex="-1" role="dialog"
             aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

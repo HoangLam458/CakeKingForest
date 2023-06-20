@@ -80,9 +80,9 @@ class PaymentController extends Controller
     public function momo_payment_qr(Request $request)
     {
         if(Session::has('path')) Session::forget('path');
-
+        if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
-        
+        // if(Session::has('payment')) Session::forget('payment');
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -95,14 +95,15 @@ class PaymentController extends Controller
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
         Session::put('path',$partnerCode);
+        // Session::put('payment',Session::get('data')['payment']);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "-".$hd;
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = $request->total_momo;
 
-        $redirectUrl = "http://localhost:8000/chitietdh/$hd/";
-        $ipnUrl = "http://localhost:8000/chitietdh/$hd/";
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$request->email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$request->email";
         $extraData = "";
 
 
