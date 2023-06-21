@@ -58,17 +58,12 @@ Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->nam
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 //payment
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('VNPay');
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
 Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->name('momoQR');
 Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
 
-Route::get('/paymentsuccess', function () {
-    return view('pages.user.payment.paymentsuccess');
-});
+Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getdata');
 
-Route::get('/paymentfailed', function () {
-    return view('pages.user.payment.paymentfailed');
-});
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
         if($_GET["partnerCode"]=="MOMOBKUN20180529"){
@@ -87,6 +82,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
     }
 });
 Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
+
 
     if(Session::has('vnp_path'))
     {
@@ -112,14 +108,14 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
 });
 
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
-    if(Session::get('payment')==0){
+
         $details = [
             'title' => 'Mail from Cake King Forest Thanh Toan' .'HD' . Session::get('mahd'),
             'body' => 'This is for testing email using smtp'
         ];
         \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
         return redirect()->route('ctdonhang', Session::get('mahd'));
-    }
+
 })->name('sendemailpay');
 
 Route::group(['middleware' => 'auth'], function () {

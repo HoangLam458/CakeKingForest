@@ -162,34 +162,31 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-3 text-center">
-                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
                                         data-target="#exampleModal">
                                         Thanh toán
                                     </a>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
                                         data-target="#Modal">
                                         <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
                                     </a>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <a  class="btn btn-info py-3 px-5" data-toggle="modal"
+                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
                                         data-target="#Modal2">
                                         MoMo ATM
                                     </a>
                                     </div>
                                     <div class="col-md-3 text-center">
-
-                                        <a class="btn btn-info py-3 px-5" data-toggle="modal"
-                                        data-target="#Modal3"  >
-                                            VNP
+                                        <a class="btn btn-primary py-3 px-5" data-toggle="modal"
+                                        data-target="#Modal3" style="color: rgb(8, 8, 8);">
+                                           Đặt hàng
                                         </a>
-
                                     </div>
                                 </div>
                         </div>
-
                     </div>
                 @endif
         </div>
@@ -223,18 +220,6 @@
     <script type="text/javascript">
         $(function() {
             $("#datepicker").datepicker({
-                autoclose: true,
-                todayHighlight: true
-            }).datepicker('update', new Date());
-            $("#datepicker2").datepicker({
-                autoclose: true,
-                todayHighlight: true
-            }).datepicker('update', new Date());
-            $("#datepicker3").datepicker({
-                autoclose: true,
-                todayHighlight: true
-            }).datepicker('update', new Date());
-            $("#datepicker4").datepicker({
                 autoclose: true,
                 todayHighlight: true
             }).datepicker('update', new Date());
@@ -280,7 +265,7 @@
         .button {
           background-color: #4CAF50;
           border: none;
-          color: white;
+          color: rgb(15, 15, 15);
           padding: 15px 32px;
           text-align: center;
           text-decoration: none;

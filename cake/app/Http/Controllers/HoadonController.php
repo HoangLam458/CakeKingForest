@@ -165,6 +165,7 @@ class HoadonController extends Controller
     }
     public function chitietdonhang($idhd, Request $request)
     {
+        $currentTime = Carbon::now();
         //momo
         if (Session::has('path')) {
             $resultCode = Session::pull('resultCode');
@@ -172,16 +173,17 @@ class HoadonController extends Controller
             if ($resultCode == 0) {
                 if ((string) $path == "MOMOBKUN20180529") {
                     $hd = hoadon::find($idhd);
-                    $hd->trangthai = 2;
-                    $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
-                    $hd->sdtkhachhang = Session::get('data')['sdtkhachhang'];
-                    $hd->diachigiaohang = Session::get('data')['diachigiaohang'];
-                    $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
-                    $hd->hinhthucnhanhang = Session::get('data')['ship'];
-                    $hd->phuongthucthanhtoan = 'MoMo';
-                    $hd->save();
-                    Session::forget('cate');
-                    Session::forget('data');
+                $hd->trangthai = 2;
+                $hd->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+                $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
+                $hd->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+                $hd->diachigiaohang = Session::get('data')['diachigiaohang'];
+                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+                $hd->hinhthucnhanhang = Session::get('data')['ship'];
+                $hd->phuongthucthanhtoan = 'MoMo';
+                $hd->save();
+                Session::forget('cate');
+                Session::forget('data');
                 }
             }
             else {
@@ -201,19 +203,19 @@ class HoadonController extends Controller
             if ((string) $vnppath == "FM9XJF5C") {
                 $hd = hoadon::find($idhd);
                 $hd->trangthai = 2;
-                $hd->tenkhachhang = Session::get('vnp_data')['tenkhachhang'];
-                $hd->sdtkhachhang = Session::get('vnp_data')['sdtkhachhang'];
-                $hd->diachigiaohang = Session::get('vnp_data')['diachigiaohang'];
-                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('vnp_data')['date'])->format('Y-m-d');
-                $hd->hinhthucnhanhang = Session::get('vnp_data')['ship'];
+                $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
+                $hd->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+                $hd->diachigiaohang = Session::get('data')['diachigiaohang'];
+                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+                $hd->hinhthucnhanhang = Session::get('data')['ship'];
                 $hd->phuongthucthanhtoan = 'VnPay';
                 $hd->save();
                 Session::forget('cate');
-                Session::forget('vnp_data');
+                Session::forget('data');
             }
             }
             else {
-                Session::forget('vnp_data');
+                Session::forget('data');
                 return redirect()->route('cart');
         }
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\hoadon;
+use App\Models\loaisanpham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -36,10 +37,10 @@ class PaymentController extends Controller
 
     public function momo_payment(Request $request)
     {
+        // if(Session::has('data')) Session::forget('data');
+        // Session::put('data',$request->all());
+        $email = (string)Session::get('data')['email'];
         if(Session::has('path')) Session::forget('path');
-        if(Session::has('data')) Session::forget('data');
-        Session::put('data',$request->all());
-        // if(Session::has('payment')) Session::forget('payment');
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -55,12 +56,11 @@ class PaymentController extends Controller
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
-        $amount = $request->total_momo;
+        $amount = Session::get('data')['total'];
         $orderId = time() . "-".$hd;
-        $redirectUrl = "http://localhost:8000/send-mail-momo/$request->email";
-        $ipnUrl = "http://localhost:8000/send-mail-momo/$request->email";
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$email";
         $extraData = "";
-
         $requestId = time() . "";
         $requestType = "payWithATM";
         // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
@@ -93,10 +93,8 @@ class PaymentController extends Controller
 
     public function momo_payment_qr(Request $request)
     {
+        $email = (string)Session::get('data')['email'];
         if(Session::has('path')) Session::forget('path');
-        if(Session::has('data')) Session::forget('data');
-        Session::put('data',$request->all());
-
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -114,10 +112,10 @@ class PaymentController extends Controller
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "-".$hd;
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
-        $amount = $request->total_momo;
+        $amount = Session::get('data')['total'];
 
-        $redirectUrl = "http://localhost:8000/send-mail-momo/$request->email";
-        $ipnUrl = "http://localhost:8000/send-mail-momo/$request->email";
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$email";
         $extraData = "";
 
 
@@ -155,14 +153,29 @@ class PaymentController extends Controller
         // header('Location: ' . $jsonResult['payUrl']);
 
     }
+    public function getdata(Request $request)
+    {
+        $category = loaisanpham::all();
+        if(Session::has('data')) Session::forget('data');
+        Session::put('data',$request->all());
+       if(auth()->user())
+       {
+        $lstCart = hoadon::where('users_id', auth()->user()->id)
+        ->where('trangthai', 0)->first();
+        }
+       else
+       {
+        $lstCart = hoadon::where('mahd', Cookie::get('code'))->where('trangthai', 0)->first();
+       }
+        return view('pages.user.payment.paymentsuccess',[
+            'category'=>$category
+        ]);
+    }
 
     public function vnpay_payment(Request $request)
     {
+        $email = (string)Session::get('data')['email'];
         $code_cart = $request->cookie('code');
-        if(Session::has('vnp_path')) Session::forget('vnp_path');
-
-        if(Session::has('vnp_data')) Session::forget('vnp_data');
-
         if(auth()->user() == null)
         {
 
@@ -173,14 +186,13 @@ class PaymentController extends Controller
             $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
         }
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/send-mail-vnp/$request->email";
+        $vnp_Returnurl = "http://localhost:8000/send-mail-vnp/$email";
         $vnp_TmnCode = "FM9XJF5C"; //Mã website tại VNPAY
-        Session::put('vnp_path',$vnp_TmnCode);
         $vnp_HashSecret = "NRDAOOOFDEKIQUFRBDSUMQOLIKIEAFPW";
         $vnp_TxnRef = $code_cart .'-'. $hd;
         $vnp_OrderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $request->get('total_vnpay') * 100;
+        $vnp_Amount = Session::get('data')['total'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -244,9 +256,7 @@ class PaymentController extends Controller
         );
         if (isset($_POST['redirect'])) {
             header('Location: ' . $vnp_Url);
-            Session::put('vnp_data',$request->all());
 
-            
             die();
 
         } else {

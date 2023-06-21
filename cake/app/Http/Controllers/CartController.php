@@ -20,6 +20,8 @@ class CartController extends Controller
 {
     public function cart(Request $request)
     {
+
+        if(Session::has('vnp_path')) Session::forget('vnp_path');
         if(Session::has('path')) Session::forget('path');
         if(Session::has('data')) Session::forget('data');
         if (auth()->user()) {
@@ -199,7 +201,8 @@ class CartController extends Controller
                     foreach ($chitiet as $item) {
                         Session::push('cate', $item);
                     }
-                return redirect()->back();
+                    $test = Cookie::forever('code', $code);
+                    return response()->redirectToRoute('shop')->withCookie($test);
             }
         } else {
             $sanpham = sanpham::find($request->get('id'));
@@ -291,21 +294,20 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        $email = (string)Session::get('data')['email'];
         $currentTime = Carbon::now();
         if(Session::has('email')) Session::forget('email');
         if(Session::has('mahd')) Session::forget('mahd');
-        if(Session::has('payment')) Session::forget('payment');
-        Session::put('payment',$request->payment);
         if (auth()->user()) {
             $user = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
             if ($user != Null) {
                 $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
-                $user->tenkhachhang = $request->get('tenkhachhang');
-                $user->sdtkhachhang = $request->get('sdtkhachhang');
-                $user->diachigiaohang = $request->get('diachigiaohang');
-                $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
-                $user->hinhthucnhanhang = $request->get('ship');
-                $user->phuongthucthanhtoan = "Tiền Mặt";
+                $user->tenkhachhang = Session::get('data')['tenkhachhang'];
+                $user->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+                $user->diachigiaohang = Session::get('data')['diachigiaohang'];
+                $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+                $user->hinhthucnhanhang = Session::get('data')['ship'];
+                $user->phuongthucthanhtoan = 'MoMo';
                 $user->trangthai = 1;
                 $user->save();
                 Session::forget('cate');
@@ -313,7 +315,7 @@ class CartController extends Controller
                 Session::forget('payment');
                 Session::forget('resultCode');
                 Session::forget('path');
-                return redirect()->route('sendemailpay',$request->email);
+                return redirect()->route('sendemailpay',$email);
             }
             return view('homeuser');
         } else {
@@ -322,12 +324,12 @@ class CartController extends Controller
             $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
             if ($user != Null) {
                 $user->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
-                $user->tenkhachhang = $request->get('tenkhachhang');
-                $user->sdtkhachhang = $request->get('sdtkhachhang');
-                $user->diachigiaohang = $request->get('diachigiaohang');
-                $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', $request->get('date'))->format('Y-m-d');
-                $user->hinhthucnhanhang = $request->get('ship');
-                $user->phuongthucthanhtoan = "Tiền Mặt";
+                $user->tenkhachhang = Session::get('data')['tenkhachhang'];
+                $user->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+                $user->diachigiaohang = Session::get('data')['diachigiaohang'];
+                $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+                $user->hinhthucnhanhang = Session::get('data')['ship'];
+                $user->phuongthucthanhtoan = 'MoMo';
                 $user->trangthai = 1;
                 $user->save();
                 $request->cookie('code');
@@ -337,7 +339,7 @@ class CartController extends Controller
                 Session::forget('payment');
                 Session::forget('resultCode');
                 Session::forget('path');
-                return redirect()->route('sendemailpay',$request->email);
+                return redirect()->route('sendemailpay',$email);
             } else
                 return view('homeuser');
         }

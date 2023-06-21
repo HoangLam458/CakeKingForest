@@ -1,137 +1,159 @@
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/payment.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-      <script>
-            window.onbeforeunload = function(e) {
-               return 'Dialog text here.';
-            };
-
-    </script>
-</head>
-
-<body>
-    <!--Begin display -->
-    {{-- @if ($_GET['partnerCode'] != null)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto mt-5">
-                    <div class="payment_momo">
-                        <div class="payment_header">
-                            <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
-                        </div>
-                        <div class="content">
-                            <h1>Thông tin thanh toán</h1>
-                            <div class="form-group">
-                                <label>Mã đơn hàng:</label>
-                                <label><?php echo Cookie::get('code'); ?></label>
-                            </div>
-                            <div class="form-group">
-
-                                <label>Số tiền:</label>
-                                <label><?= number_format($_GET['amount']) ?> VNĐ</label>
-                            </div>
-                            <div class="form-group">
-                                <label>Nội dung thanh toán:</label>
-                                <label><?php
-                                echo $_GET['orderInfo'];
-                                ?></label>
-
-                            </div>
-                            <div class="form-group">
-                                <label>Kết quả: {{ $_GET['message'] }}</label>
-                                <label>
-                                </label>
-                                <br>
-                                @if ($_GET['message'] == 'Successful.')
-                                <input value="{{$_GET['partnerCode']}}" hidden name="partnerCode">
-                                    <a href="{{ route('ctdonhang', explode('-', $_GET['orderId'])[1]) }}">Theo dõi đơn
-                                        hàng
-                                    </a>
-                                @endif
-                            </div>
-                            @php
-
-                            @endphp
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif --}}
+@extends('pages.layout')
+@section('body')
+<div class="modal bd-example-modal-lg" tabindex="-1" role="dialog" id="Modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+       <div class="row col-md-12">
+        <form action="{{route('checkout')}}" method="POST" class="form" enctype="multipart/form-data">
+            @csrf
+            <button type="submit"> Thanh toán COD</button>
+        </form>
+       </div>
+       <div class="row col-md-12">
+        <form action="{{ route('momoATM') }}" method="POST" class="form" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" name="redirect" class="btn btn-primary" >ATM</button>
+        </form>
+       </div>
+       <div class="row col-md-12">
+        <form action="{{ route('momoQR') }}" method="POST" class="form" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" name="redirect" class="btn btn-primary" >QR</button>
+        </form>
+       </div>
+       <div class="row col-md-12">
+        <form action="{{ route('vnpay') }}" method="POST" class="form" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" name="redirect" class="btn btn-primary" >VNPAY</button>
+        </form>
+       </div>
+      </div>
+    </div>
+</div>
+<div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
     <div class="container">
-            <div class="row">
-            <div class="col-md-6 mx-auto mt-5">
-                <div class="payment">
-                    <div class="payment_header">
-                    <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    </div>
-                    <div class="content">
-                    <h1>Thanh toán thành công !</h1>
-                        <div class="form-group">
-                            <label >Mã đơn hàng:</label>
-                            <label><?php
-                               echo explode('-', $_GET['vnp_TxnRef'])[0];
-
-                            ?></label>
-                            {{(string)Session::get('data')['email']}}
-                            {{(string)Session::get('vnppath')}}
-                        </div>
-                        <div class="form-group">
-
-                            <label >Số tiền:</label>
-                            <label><?= number_format($_GET['vnp_Amount'] / 100) ?> VNĐ</label>
-                        </div>
-                        <div class="form-group">
-                            <label >Nội dung thanh toán:</label>
-                            <label><?php echo $_GET['vnp_OrderInfo']; ?></label>
-                        </div>
-                        <div class="form-group">
-                            <label >Mã phản hồi (vnp_ResponseCode):</label>
-                            <label><?php echo $_GET['vnp_ResponseCode']; ?></label>
-                        </div>
-                        <div class="form-group">
-                            <label >Mã GD Tại VNPAY:</label>
-                            <label><?php echo $_GET['vnp_TransactionNo']; ?></label>
-                        </div>
-                        <div class="form-group">
-                            <label >Ngân hàng:</label>
-                            <label>{{$_GET['vnp_BankCode']}}</label>
-                        </div>
-                        <div class="form-group">
-                            <label >Thời gian thanh toán:</label>
-                            <label><?php echo \Carbon\Carbon::parse($_GET['vnp_PayDate'])->format('d/m/Y H:i:s'); ?></label>
-                        </div>
-                        <div class="form-group">
-                            <label >Kết quả:</label>
-                            <label>
-
-                            </label>
-                            <br>
-                            @if($_GET['vnp_ResponseCode'] == '00')
-                            <a href="{{route('ctdonhang',explode('-', $_GET['vnp_TxnRef'])[1])}}">Trang chủ
-                            </a>
-                            @endif
-                        </div>
-
-                </div>
-            </div>
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Home</a></span>
+                    <span>Cart</span>
+                </p>
+                <h1 class="mb-0 bread">My Cart</h1>
             </div>
         </div>
     </div>
-    <p>
-        &nbsp;
-    </p>
+</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title text-center"> Xác nhận thông tin hóa đơn</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            <label>Mã đơn hàng:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Cookie::get('code') }}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tên khách hàng:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['tenkhachhang'] }}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số điện thoại:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['sdtkhachhang'] }}
+
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['email'] }}
+
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['diachigiaohang'] }}
+
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày nhận:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['date'] }}
+                        </div>
+                        <div class="form-group">
+                            <label>Hình thức nhận hàng:</label>
+                            <label><?php
+                            ?></label>
+                            {{ (string) Session::get('data')['ship'] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title text-center"> Tổng tiền giỏ hàng </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                Tên SP
+                            </div>
+                            <div class="col-md-3">
+                               Giá bán
+                            </div>
+                            <div class="col-md-3">
+                               Số lượng
+                            </div>
+                            <div class="col-md-3">
+                                Thành tiền
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                Tên SP
+                            </div>
+                            <div class="col-md-3">
+                               Giá bán
+                            </div>
+                            <div class="col-md-3">
+                               Số lượng
+                            </div>
+                            <div class="col-md-3">
+                                Thành tiền
+                            </div>
+                        </div>
+                        <div class="cart-total mb-3">
+                            <p class="d-flex total-price">
+                                <span>Phí vận chuyển</span>
+                                Miễn phí
+                            <p class="d-flex total-price">
+                                <span>Total</span>
+                                {{ number_format((string) Session::get('data')['total']) }} VND
+                        </div>
+                        <div class="form-group text-center" >
+                            <a style="color: rgb(8, 8, 8);" type="button" data-target="#Modal" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                Thanh toán</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-
-
-</html>
+</section>
+@endsection
