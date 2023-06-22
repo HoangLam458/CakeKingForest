@@ -27,7 +27,7 @@ class SendEmailPay extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Email Pay',
+            subject: '[Cake King Forest ] Thông tin đơn hàng ',
         );
     }
 
