@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+Session::start();
 class HoadonController extends Controller
 {
     /**
@@ -165,7 +165,7 @@ class HoadonController extends Controller
     }
     public function chitietdonhang($idhd, Request $request)
     {
-       
+
         $currentTime = Carbon::now();
         //momo
         if (Session::has('path')) {

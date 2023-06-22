@@ -139,7 +139,7 @@
                                                         <textarea rows="3" maxlength="255" type="text" name="ghichu" value="">{{ $lsCart->ghichu }}</textarea>
                                                     </div>
                                                 </td>
-                                                <td><button type="submit"class="btn"><span>Update</span></a></td>
+                                                <td><button type="submit"class="btn btn-primary"><span>Update</span></a></td>
 
                                             </tr>
                                         </form>
@@ -152,7 +152,7 @@
                 </div>
                         <div class="col-lg mt-5 cart-wrap ftco-animate">
                             <div class="cart-total mb-3">
-                                <h3>Cart Totals</h3>
+                                <h3>Tổng tiền giỏ hàng</h3>
                                 <p class="d-flex total-price">
                                     <span>Phí vận chuyển</span>
                                     Miễn phí

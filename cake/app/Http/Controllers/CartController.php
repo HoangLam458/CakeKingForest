@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
-
+Session::start();
 class CartController extends Controller
 {
     public function cart(Request $request)

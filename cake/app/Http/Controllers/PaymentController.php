@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+Session::start();
 use RealRashid\SweetAlert\Storage\SessionStore;
 
 class PaymentController extends Controller
@@ -37,11 +38,10 @@ class PaymentController extends Controller
     }
 
     public function momo_payment(Request $request)
-    {
-        // if(Session::has('data')) Session::forget('data');
+    {Session::start();
+        if(Session::has('path')) Session::forget('path');
         // Session::put('data',$request->all());
         $email = (string)Session::get('data')['email'];
-        if(Session::has('path')) Session::forget('path');
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -85,7 +85,7 @@ class PaymentController extends Controller
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true); // decode json
-
+        Session::save();
         //Just a example, please check more in there
         return redirect()->to($jsonResult['payUrl']);
         // header('Location: ' . $jsonResult['payUrl']);
@@ -94,6 +94,7 @@ class PaymentController extends Controller
 
     public function momo_payment_qr(Request $request)
     {
+        Session::start();
         $email = (string)Session::get('data')['email'];
         if(Session::has('path')) Session::forget('path');
         if(auth()->user() == null)
@@ -108,18 +109,14 @@ class PaymentController extends Controller
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
         Session::put('path',$partnerCode);
-        // Session::put('payment',Session::get('data')['payment']);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "-".$hd;
         $orderInfo = "Thanh toán qua QR MoMo". "" ;
         $amount = Session::get('data')['total'];
-
         $redirectUrl = "http://localhost:8000/send-mail-momo/$email";
         $ipnUrl = "http://localhost:8000/send-mail-momo/$email";
         $extraData = "";
-
-
         $requestId = time() . "";
         // $requestType = "captureWallet";
         $requestType = "captureWallet";
@@ -144,14 +141,12 @@ class PaymentController extends Controller
             'requestType' => $requestType,
             'signature' => $signature
         );
-
         $result = $this->execPostRequest($endpoint, json_encode($data));
-
         $jsonResult = json_decode($result, true); // decode json
-
         //Just a example, please check more in there
-        return redirect()->to($jsonResult['payUrl']);
-        // header('Location: ' . $jsonResult['payUrl']);
+        Session::save();
+        header('Location: ' . $jsonResult['payUrl']);
+        exit();
 
     }
     public function getdata(Request $request)
@@ -159,8 +154,6 @@ class PaymentController extends Controller
         $category = loaisanpham::all();
         if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
-        Session::save();
-
         if(auth()->user())
         {
             $lstCart = hoadon::where('users_id', auth()->user()->id)
@@ -185,13 +178,14 @@ class PaymentController extends Controller
                 )
                 ->orderBy("idchitiet")
                 ->get();
+        Session::save();
         return view('pages.user.payment.paymentsuccess',[
             'category'=>$category , 'lstcart' =>$Cart
         ]);
     }
 
     public function vnpay_payment(Request $request)
-    {
+    {Session::start();
         $email = (string)Session::get('data')['email'];
         $code_cart = $request->cookie('code');
         if(auth()->user() == null)
@@ -272,13 +266,11 @@ class PaymentController extends Controller
             ,
             'data' => $vnp_Url
         );
+        Session::save();
         if (isset($_POST['redirect'])) {
             return redirect()->to($vnp_Url);
-
-           
         } else {
             echo json_encode($returnData);
         }
     }
-
 }
