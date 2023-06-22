@@ -124,20 +124,23 @@
                                 Thành tiền
                             </div>
                         </div>
+                        @foreach ($lstcart as $item)
                         <div class="row">
                             <div class="col-md-3">
-                                Tên SP
+                                {{$item->tensanpham}}
+                                <br> {{ $item->s_name }}
                             </div>
                             <div class="col-md-3">
-                               Giá bán
+                                {{ number_format($item->giaban) }} VND
                             </div>
                             <div class="col-md-3">
-                               Số lượng
+                                {{ $item->soluong }}
                             </div>
                             <div class="col-md-3">
-                                Thành tiền
+                                {{ number_format($item->thanhtien) }} VND
                             </div>
                         </div>
+                        @endforeach
                         <div class="cart-total mb-3">
                             <p class="d-flex total-price">
                                 <span>Phí vận chuyển</span>

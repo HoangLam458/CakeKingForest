@@ -165,6 +165,7 @@ class HoadonController extends Controller
     }
     public function chitietdonhang($idhd, Request $request)
     {
+       
         $currentTime = Carbon::now();
         //momo
         if (Session::has('path')) {

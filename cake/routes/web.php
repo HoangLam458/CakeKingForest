@@ -92,7 +92,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
     if($_GET["vnp_TmnCode"]=="FM9XJF5C"){
 
         if($_GET['vnp_ResponseCode'] != '00'){
-            dd('đã vào if 1');
+            
             return redirect()->route('cart');
         }else{
 

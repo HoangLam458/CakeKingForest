@@ -6,6 +6,7 @@ use App\Models\hoadon;
 use App\Models\loaisanpham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Storage\SessionStore;
 
@@ -158,17 +159,34 @@ class PaymentController extends Controller
         $category = loaisanpham::all();
         if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
-       if(auth()->user())
-       {
-        $lstCart = hoadon::where('users_id', auth()->user()->id)
-        ->where('trangthai', 0)->first();
+        Session::save();
+
+        if(auth()->user())
+        {
+            $lstCart = hoadon::where('users_id', auth()->user()->id)
+             ->where('trangthai', 0)->first();
         }
        else
        {
-        $lstCart = hoadon::where('mahd', Cookie::get('code'))->where('trangthai', 0)->first();
+            $lstCart = hoadon::where('mahd', Cookie::get('code'))->where('trangthai', 0)->first();
        }
+       $Cart = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
+                ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
+                ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
+                ->select(
+                    '*',
+                    'chitiethoadons.id as idchitiet',
+                    'chitiethoadons.giatien as thanhtien',
+                    'sanphams.tensp as tensanpham',
+                    'sanphams.giatien as giaban',
+                    'sizes.id as idsize',
+                    'sizes.tensize as s_name',
+                    'sanphams.hinhanh as img'
+                )
+                ->orderBy("idchitiet")
+                ->get();
         return view('pages.user.payment.paymentsuccess',[
-            'category'=>$category
+            'category'=>$category , 'lstcart' =>$Cart
         ]);
     }
 
@@ -255,10 +273,9 @@ class PaymentController extends Controller
             'data' => $vnp_Url
         );
         if (isset($_POST['redirect'])) {
-            header('Location: ' . $vnp_Url);
+            return redirect()->to($vnp_Url);
 
-            die();
-
+           
         } else {
             echo json_encode($returnData);
         }
