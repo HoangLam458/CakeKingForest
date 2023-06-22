@@ -7,6 +7,7 @@ use App\Http\Requests\StorechitiethoadonRequest;
 use App\Http\Requests\UpdatechitiethoadonRequest;
 use App\Models\hoadon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 
@@ -74,6 +75,7 @@ class ChitiethoadonController extends Controller
                 $item = chitiethoadon::where('hoadon_id', $user1->id)->first();
                 if ($item == null) {
                     $user1->delete();
+                    Cookie::forget('code');
                     return redirect()->back();
                 }
                 Session::forget('cate');
@@ -94,6 +96,7 @@ class ChitiethoadonController extends Controller
                 $item = chitiethoadon::where('hoadon_id', $user1->id)->first();
                 if ($item == null) {
                     $user1->delete();
+                    Cookie::forget('code');
                     return redirect()->back();
                 }
                 Session::forget('cate');

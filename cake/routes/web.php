@@ -13,11 +13,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Models\hoadon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-Session::start();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -66,21 +68,31 @@ Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getd
 
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
-    dd(Session::all());
+
+    if(Session::has('path'))
+    {
+        Session::forget('path');
+    }
+    Session::put('path',$_GET["partnerCode"]);
         if($_GET["partnerCode"]=="MOMOBKUN20180529"){
             if($_GET["resultCode"]!=0){
                 return redirect()->route('cart');
             }else{
+                $code = explode('-', $_GET['orderId'])[1];
+                $info = hoadon::find($code);
+
                 $details = [
                     'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
-                    'body' => "Session::pull('hd_ma')",
-                    'ten'=>  Session::get('data')['tenkhachhang'],
-                    'sdt'=>  Session::get('data')['sdtkhachhang'],
-                    'dchi'=> Session::get('data')['diachigiaohang'],
-                    'hthuc'=> Session::get('data')['ship'],
-                    'ngay'=>  Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d'),
-                    'phuongthuc'=> Session::pull('pttt'),
+                    'body' => $info->mahd,
+                    'ten'=>  $info->tenkhachhang,
+                    'sdt'=>  $info->sdtkhachhang,
+                    'dchi'=> $info->diachigiaohang,
+                    'hthuc'=> $info->hinhthucnhanhang,
+                    'ngay'=>  Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+                    'phuongthuc'=> "MoMo",
+                    'total' => $_GET['amount']
                 ];
+
                 \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
                 Session::put('resultCode',$_GET["resultCode"]);
                 return redirect()->route('ctdonhang',  explode('-', $_GET['orderId'])[1]);
@@ -95,23 +107,25 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
         Session::forget('vnp_path');
     }
     Session::put('vnp_path',$_GET['vnp_TmnCode']);
-    
+
     if($_GET["vnp_TmnCode"]=="FM9XJF5C"){
 
         if($_GET['vnp_ResponseCode'] != '00'){
 
             return redirect()->route('cart');
         }else{
-
+            $code = explode('-', $_GET['vnp_TxnRef'])[1];
+            $info = hoadon::find($code);
             $details = [
-                'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
-                'body' => "Session::pull('hd_ma')",
-                'ten'=>  Session::get('data')['tenkhachhang'],
-                'sdt'=>  Session::get('data')['sdtkhachhang'],
-                'dchi'=> Session::get('data')['diachigiaohang'],
-                'hthuc'=> Session::get('data')['ship'],
-                'ngay'=>  Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d'),
-                'phuongthuc'=> Session::pull('pttt'),
+                'title' => 'Mail from Cake King Forest Thanh Toan',
+                'body' => $info->mahd,
+                'ten'=>  $info->tenkhachhang,
+                'sdt'=>  $info->sdtkhachhang,
+                'dchi'=> $info->diachigiaohang,
+                'hthuc'=> $info->hinhthucnhanhang,
+                'ngay'=>  Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+                'phuongthuc'=> "VNPAY",
+                'total' => $_GET['vnp_Amount']
             ];
             \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
             Session::put('resultVNP',$_GET['vnp_ResponseCode']);
@@ -129,9 +143,9 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
             'sdt'=>  Session::get('data')['sdtkhachhang'],
             'dchi'=> Session::get('data')['diachigiaohang'],
             'hthuc'=> Session::get('data')['ship'],
-            'ngay'=>  Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d'),
+            'ngay'=>  Session::get('data')['date'],
             'phuongthuc'=> Session::pull('pttt'),
-
+            'total' => Session::get('data')['total']
         ];
         \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
         return redirect()->route('ctdonhang', Session::get('mahd'));

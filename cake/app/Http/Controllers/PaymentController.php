@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\hoadon;
 use App\Models\loaisanpham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-Session::start();
+
 use RealRashid\SweetAlert\Storage\SessionStore;
 
 class PaymentController extends Controller
@@ -38,7 +39,7 @@ class PaymentController extends Controller
     }
 
     public function momo_payment(Request $request)
-    {Session::start();
+    {
         if(Session::has('path')) Session::forget('path');
         // Session::put('data',$request->all());
         $email = (string)Session::get('data')['email'];
@@ -94,7 +95,6 @@ class PaymentController extends Controller
 
     public function momo_payment_qr(Request $request)
     {
-        Session::start();
         $email = (string)Session::get('data')['email'];
         if(Session::has('path')) Session::forget('path');
         if(auth()->user() == null)
@@ -151,9 +151,11 @@ class PaymentController extends Controller
     }
     public function getdata(Request $request)
     {
+        $currentTime = Carbon::now();
         $category = loaisanpham::all();
         if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
+
         if(auth()->user())
         {
             $lstCart = hoadon::where('users_id', auth()->user()->id)
@@ -163,6 +165,13 @@ class PaymentController extends Controller
        {
             $lstCart = hoadon::where('mahd', Cookie::get('code'))->where('trangthai', 0)->first();
        }
+       $lstCart->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+       $lstCart->tenkhachhang = Session::get('data')['tenkhachhang'];
+       $lstCart->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+       $lstCart->diachigiaohang = Session::get('data')['diachigiaohang'];
+       $lstCart->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+       $lstCart->hinhthucnhanhang = Session::get('data')['ship'];
+       $lstCart->save();
        $Cart = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
                 ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
                 ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)

@@ -24,16 +24,16 @@
       				}
     </style>
     <!--<![endif]-->
-    <!--[if mso]> 
-		<xml> 
-			<o:OfficeDocumentSettings> 
-				<o:AllowPNG/> 
-				<o:PixelsPerInch>96</o:PixelsPerInch> 
-			</o:OfficeDocumentSettings> 
+    <!--[if mso]>
+		<xml>
+			<o:OfficeDocumentSettings>
+				<o:AllowPNG/>
+				<o:PixelsPerInch>96</o:PixelsPerInch>
+			</o:OfficeDocumentSettings>
 		</xml>
 		<![endif]-->
-    <!--[if lte mso 11]> 
-		<style type="text/css"> 
+    <!--[if lte mso 11]>
+		<style type="text/css">
 			.outlook-group-fix{width:100% !important;}
 		</style>
 		<![endif]-->
@@ -97,9 +97,9 @@
                                           <table border='0' cellpadding='0' cellspacing='0' style='cellpadding:0;cellspacing:0;color:#000000;font-family:Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;' width='100%'>
                                             <tr>
                                               <td align='left'>
-                                                
+
                                                   <span style="font-size:20px; font-weight:600;">CAKE KING FOREST</span>
-                                               
+
                                               </td>
                                               <td align='right' style='vertical-align:bottom;' width='34px'>
                                                 <a href='#'>
@@ -196,7 +196,7 @@
                         <!--[if mso | IE]>
 <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:270px;">
 <![endif]-->
-                        
+
 <div class='dys-column-per-45 outlook-group-fix' style='direction:ltr;display:inline-block;font-size:13px;text-align:left;vertical-align:top;width:100%;'>
                           <table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'>
                             <tbody>
@@ -220,7 +220,7 @@
                                     <tr>
                                       <td align='left' style='font-size:0px;padding:0px ;word-break:break-word;'>
                                         <div style='color:#4d4d4d;font-family:Oxygen, Helvetica neue, sans-serif;font-size:18px;font-weight:700;line-height:25px;text-align:left;'>
-                                         Ngày nhận: 
+                                         Ngày nhận:
                                         </div>
                                       </td>
                                     </tr>
@@ -234,7 +234,7 @@
                                     <tr>
                                       <td align='left' style='font-size:0px;padding:0px ;word-break:break-word;'>
                                         <div style='color:#4d4d4d;font-family:Oxygen, Helvetica neue, sans-serif;font-size:18px;font-weight:700;line-height:25px;text-align:left;'>
-                                         Hình thức nhận hàng: 
+                                         Hình thức nhận hàng:
                                         </div>
                                       </td>
                                     </tr>
@@ -245,6 +245,20 @@
                                         </div>
                                       </td>
                                     </tr>
+                                    <tr>
+                                        <td align='left' style='font-size:0px;padding:0px ;word-break:break-word;'>
+                                          <div style='color:#4d4d4d;font-family:Oxygen, Helvetica neue, sans-serif;font-size:18px;font-weight:700;line-height:25px;text-align:left;'>
+                                           Tổng hóa đơn:
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align='left' style='font-size:0px;padding:0px;word-break:break-word;'>
+                                          <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;line-height:22px;text-align:left;'>
+                                          {{ number_format($details['total'])}} VNĐ
+                                          </div>
+                                        </td>
+                                      </tr>
                                   </table>
                                 </td>
                               </tr>
@@ -370,14 +384,14 @@
                             <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;font-weight:700;line-height:21px;text-align:center;'>
-                                @2023 CFK Inc
+                                @2023 CKF Inc
                                 </div>
                               </td>
                             </tr>
                             <!-- <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;line-height:1;text-align:center;'>
-                                 
+
                                 </div>
                               </td>
                             </tr>

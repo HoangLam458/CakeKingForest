@@ -20,7 +20,6 @@ class CartController extends Controller
 {
     public function cart(Request $request)
     {
-
         if(Session::has('vnp_path')) Session::forget('vnp_path');
         if(Session::has('path')) Session::forget('path');
         if(Session::has('data')) Session::forget('data');
@@ -71,6 +70,7 @@ class CartController extends Controller
         } else {
             $category = loaisanpham::all();
             $code_cookie = $request->cookie('code');
+
             $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
             $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
             $sizes = size::all();
@@ -310,6 +310,7 @@ class CartController extends Controller
                 $user->phuongthucthanhtoan = 'MoMo';
                 $user->trangthai = 1;
                 $user->save();
+                Cookie::forget('code');
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
                 Session::put('hd_ma',$user->mahd);
@@ -343,7 +344,7 @@ class CartController extends Controller
                 Session::forget('resultCode');
                 Session::forget('path');
                 Session::put('pttt','Tiền Mặt');
-                return redirect()->route('sendemailpay',$request->email);
+                return redirect()->route('sendemailpay',$email);
             } else
                 return view('homeuser');
         }

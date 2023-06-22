@@ -166,21 +166,15 @@ class HoadonController extends Controller
     public function chitietdonhang($idhd, Request $request)
     {
 
-        $currentTime = Carbon::now();
+
         //momo
         if (Session::has('path')) {
             $resultCode = Session::pull('resultCode');
             $path = Session::pull('path');
             if ($resultCode == 0) {
                 if ((string) $path == "MOMOBKUN20180529") {
-                    $hd = hoadon::find($idhd);
+                $hd = hoadon::find($idhd);
                 $hd->trangthai = 2;
-                $hd->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
-                $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
-                $hd->sdtkhachhang = Session::get('data')['sdtkhachhang'];
-                $hd->diachigiaohang = Session::get('data')['diachigiaohang'];
-                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
-                $hd->hinhthucnhanhang = Session::get('data')['ship'];
                 $hd->phuongthucthanhtoan = 'MoMo';
                 $hd->save();
                 Session::forget('cate');
@@ -197,18 +191,12 @@ class HoadonController extends Controller
 
 
         if (Session::has('vnp_path')) {
-
             $resultVNP = Session::pull('resultVNP');
             $vnppath = Session::pull('vnp_path');
             if ($resultVNP == 00) {
             if ((string) $vnppath == "FM9XJF5C") {
                 $hd = hoadon::find($idhd);
                 $hd->trangthai = 2;
-                $hd->tenkhachhang = Session::get('data')['tenkhachhang'];
-                $hd->sdtkhachhang = Session::get('data')['sdtkhachhang'];
-                $hd->diachigiaohang = Session::get('data')['diachigiaohang'];
-                $hd->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
-                $hd->hinhthucnhanhang = Session::get('data')['ship'];
                 $hd->phuongthucthanhtoan = 'VnPay';
                 $hd->save();
                 Session::forget('cate');
