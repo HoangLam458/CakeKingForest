@@ -97,9 +97,9 @@
                                           <table border='0' cellpadding='0' cellspacing='0' style='cellpadding:0;cellspacing:0;color:#000000;font-family:Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;' width='100%'>
                                             <tr>
                                               <td align='left'>
-                                                <a href='#'>
-                                                  <img align='left' alt='Logo' height='33' padding='5px' src='https://swu-cs-assets.s3.amazonaws.com/OSET/oxy-logo.png' width='120' />
-                                                </a>
+                                                
+                                                  <span style="font-size:20px; font-weight:600;">CAKE KING FOREST</span>
+                                               
                                               </td>
                                               <td align='right' style='vertical-align:bottom;' width='34px'>
                                                 <a href='#'>
@@ -164,9 +164,9 @@
                               </td>
                             </tr>
                             <tr>
-                              <td align='center' style='font-size:0px;padding:10px 25px;word-break:break-word;'>
+                              <td align='center' style='font-size:0px;padding:12px 10px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;line-height:21px;text-align:center;'>
-                                Cảm ơn bạn đã mua bánh kem của chúng tôi! Chúng tôi rất trân trọng sự tin tưởng và ủng hộ của bạn. Chúc bạn có một ngày tốt lành !. Bên dưới đây là thông tin về đơn hàng của bạn, vui lòng ghi nhớ mã đơn hàng bên dưới để tìm kiếm đơn hàng của bạn và theo dõi.
+                                Cảm ơn bạn đã mua bánh kem của chúng tôi! Chúng tôi rất trân trọng sự tin tưởng và ủng hộ của bạn. Chúc bạn có một ngày tốt lành!. Bên dưới đây là thông tin về đơn hàng của bạn, vui lòng ghi nhớ mã đơn hàng bên dưới để tìm kiếm đơn hàng của bạn và theo dõi.
                                 </div>
                               </td>
                             </tr>
@@ -370,21 +370,21 @@
                             <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;font-weight:700;line-height:21px;text-align:center;'>
-                                  Awesome Inc
+                                @2023 CFK Inc
                                 </div>
                               </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;line-height:1;text-align:center;'>
-                                  1234 Awesome St
+                                 
                                 </div>
                               </td>
                             </tr>
-                            <tr>
+                            <tr> -->
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;line-height:1;text-align:center;'>
-                                  Wonderland
+                                Bạn nhận được email này vì bạn đã đặt hàng tại website của chúng tôi.
                                 </div>
                               </td>
                             </tr>
