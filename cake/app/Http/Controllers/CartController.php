@@ -70,7 +70,6 @@ class CartController extends Controller
         } else {
             $category = loaisanpham::all();
             $code_cookie = $request->cookie('code');
-
             $currentTime = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y');
             $user1 = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
             $sizes = size::all();
@@ -168,7 +167,8 @@ class CartController extends Controller
                 }
             } else {
                 $hoadon = hoadon::orderBy('id', 'DESC')->first();
-                $code = 'HD' . '' . (string) ($hoadon->id + 1);
+                $codetest = $this->randHD();
+                $code = 'HD' . '' . (string) ($hoadon->id + 1) . $codetest;
                 $currentTime = Carbon::now();
                 hoadon::create([
                     'mahd' => $code,
@@ -254,7 +254,8 @@ class CartController extends Controller
                 }
             } else {
                 $hoadon = hoadon::orderBy('id', 'DESC')->first();
-                $code = 'HD' . '' . (string) ($hoadon->id + 1);
+                $codetest = $this->randHD();
+                $code = 'HD' . '' . (string) ($hoadon->id + 1) . $codetest;
                 hoadon::create([
                     'mahd' => $code,
                     'ngaylaphd' => $currentTime,

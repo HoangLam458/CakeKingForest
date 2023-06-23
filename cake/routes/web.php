@@ -125,7 +125,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
                 'hthuc'=> $info->hinhthucnhanhang,
                 'ngay'=>  Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
                 'phuongthuc'=> "VNPAY",
-                'total' => $_GET['vnp_Amount']
+                'total' => $_GET['vnp_Amount'] / 100
             ];
             \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
             Session::put('resultVNP',$_GET['vnp_ResponseCode']);
