@@ -15,7 +15,7 @@
                             <input type="hidden" name="token" value="{{ $token }}">
 
                             <div class="card-header ">
-                                <h3 class="header text-center">{{ __('Reset Password') }}</h3>
+                                <h3 class="header text-center">{{ __('Tạo mới mật khẩu') }}</h3>
                             </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
@@ -36,7 +36,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="nc-icon nc-key-25"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" value="{{ old('password') }}" required>
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Mật khẩu') }}" type="password" value="{{ old('password') }}" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -50,12 +50,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="nc-icon nc-key-25"></i></span>
                                     </div>
-                                    <input class="form-control" name="password_confirmation" placeholder="{{ __('Password Confirmation') }}" type="password" value="{{ old('password_confirmation') }}" required>
+                                    <input class="form-control" name="password_confirmation" placeholder="{{ __('Nhập lại mật khẩu') }}" type="password" value="{{ old('password_confirmation') }}" required>
                                 </div>
                             </div>
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Reset Password') }}</button>
+                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Cập nhật mật khẩu') }}</button>
                             </div>
                         </form>
                     </div>

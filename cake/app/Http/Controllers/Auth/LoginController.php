@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class LoginController extends Controller
 {
     /*
@@ -44,6 +46,8 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|exists:users',
             'password' => 'required'
+        ], [
+            'email.exists' =>'Email không tồn tại',
         ]);
 
         if ($validator->fails()) {
@@ -64,6 +68,7 @@ class LoginController extends Controller
             return redirect()->route('home');
 
         }
+        Alert::error('Lỗi', 'Mật khẩu không đúng');
         return redirect()->back();
     }
 }

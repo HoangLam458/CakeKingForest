@@ -8,11 +8,16 @@ use App\Models\loaisanpham;
 use App\Models\sanpham;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
+Session::start();
 class HomeUserController extends Controller
 {
     public function homepage(Request $request)
     {
+
+        
+
         $product = sanpham::all()->random(8);
         Session::put('cate');
         $category = loaisanpham::all();

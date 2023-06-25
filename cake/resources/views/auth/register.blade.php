@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="card-body ">
-                        <form class="form" method="POST" action="{{ route('register_create') }}" enctype="multipart/form-data">
+                        <form class="form" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <div class="input-group-prepend">

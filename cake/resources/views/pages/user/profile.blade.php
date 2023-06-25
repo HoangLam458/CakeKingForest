@@ -120,57 +120,115 @@ enctype="multipart/form-data">
 </header>
 @section('body')
 
-<div class="content">
-    <div class="row col-md-6">
-        <div class="col-md-12">
+<div class="container">
+    <div class="row col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Chi tiết tài khoản</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;" >
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;" >
                             <label>Tên khách hàng</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->tenkhachhang }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Email</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->email }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Số điện thoại</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->sdt }}</label>
                         </div>
-                        <div class="col-md-3" style="font-size:15px; font-weight: bold;">
+                        <div class="col-md-4" style="font-size:15px; font-weight: bold;">
                             <label>Địa chỉ</label>
                         </div>
-                        <div class="col-md-9 form-group mb-3" style="font-size:15px">
+                        <div class="col-md-8 form-group mb-3" style="font-size:15px">
                             <label>{{ $user->diachi }}</label>
                         </div>
-                        <div class="col-auto">
+                        <div   class="col-md-12 text-center">
                             <button type="button" class="btn btn-round btn-primary" data-toggle="modal"
                                 data-target="#Modal2">
                                 Thay đổi thông tin
                             </button>
-                            <button type="button" class="btn btn-round btn-info" data-toggle="modal"
-                                data-target="#exampleModal">
-                                Đổi mật khẩu
-                            </button>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Đổi mật khẩu</h4>
+                </div>
+                <div class="card-body">
+                    <form class="col-md-12" action="{{ route('profile.password') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="old_password" class="form-control" placeholder="Mật khẩu hiện tại" required>
+                                        </div>
+                                        @if ($errors->has('old_password'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('old_password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
+                                        </div>
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                                        </div>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
+                                    </div>
+                                </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-        <div class="w-100"></div>
-        <div class="w-100"></div>
+
+
     <div class="row col-md-12 ">
         <div class="col-md-12">
             <div class="card">
@@ -222,7 +280,14 @@ enctype="multipart/form-data">
                                                         <path fill-rule="evenodd"
                                                             d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                                     </svg>
-                                                    </button>
+                                                </a>
+                                                @if($item->trangthai == 1)
+                                                <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button" class="btn btn-danger" onclick="return checkDelete()">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg>
+                                                </a>
+                                                @endif
 
                                         </td>
                                 </tr>

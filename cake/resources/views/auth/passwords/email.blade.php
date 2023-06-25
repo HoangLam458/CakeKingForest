@@ -10,7 +10,7 @@
                 <div class="card card-login">
                     <div class="card-body ">
                         <div class="card-header ">
-                            <h3 class="header text-center">{{ __('Reset Password') }}</h3>
+                            <h3 class="header text-center">{{ __('Tạo mới mật khẩu') }}</h3>
                         </div>
 
                         @if (session('status'))
@@ -36,9 +36,9 @@
                                         </span>
                                     </div>
                                 @endif
-                            </div>
+                            <!-- </div> -->
                             <div class="text-center">
-                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Send Password Reset Link') }}</button>
+                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Gửi link tạo mới mật khẩu') }}</button>
                             </div>
                         </form>
                     </div>

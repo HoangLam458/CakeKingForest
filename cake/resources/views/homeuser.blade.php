@@ -164,8 +164,8 @@
                                         class="d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
-                                    @if (auth()->user() == null)
-                                    <form id="form__submit" action="{{ route('add_to_cartss') }}" method="POST"
+
+                                        <form id="form__submit" action="{{ route('add_to_cart')}}" method="POST"
                                             class="form" enctype="multipart/form-data">
                                             @csrf
                                             <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
@@ -176,19 +176,7 @@
                                                 <i class="ion-ios-cart"></i>
                                             </button>
                                         </form>
-                                    @else
-                                        <form id="form__submit" action="{{ route('add_to_cart', auth()->user()->id) }}" method="POST"
-                                            class="form" enctype="multipart/form-data">
-                                            @csrf
-                                            <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
-                                                required>
-                                            <input name="quantity" value="1" type="number" hidden required>
-                                            <input name="size" value="1" type="number" hidden required>
-                                                <button  type="submit" class="btn btn-primary justify-content-center align-items-center mx-2">
-                                                <i class="ion-ios-cart"></i>
-                                            </button>
-                                        </form>
-                                    @endif
+
                                 </div>
                             </div>
                     </div>
@@ -217,4 +205,5 @@
             </div>
         </div>
     </section>
+
 @endsection

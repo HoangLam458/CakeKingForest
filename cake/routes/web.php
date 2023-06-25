@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
@@ -12,8 +13,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Models\hoadon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,27 +34,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::post('/register_create', [RegisterController::class, 'create'])->name('register_create');
+Route::get('/test', function () {
+    return view('pages.user.payment.paymentfailed');
+});
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 
+Route::post('/back-to-home', [HoadonController::class, 'insertDB'])->name('back-to-home');
+
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
-Route::get('/cart/{id?}', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
-Route::post('/add_to_cartss/{id?}', [CartController::class, 'add_to_cartss'])->name('add_to_cartss');
+
 Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('remove');
 Route::post('/checkout/{id?}', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('shop.category');
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
-Route::get('/cartss', [CartController::class, 'cartss'])->name('cartss');
-Route::post('/checkoutss', [CartController::class, 'checkoutss'])->name('checkoutss');
+
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
+Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
 Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
 Route::post('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
@@ -56,16 +62,107 @@ Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->nam
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 //payment
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
-Route::get('/paymentsuccess', function () {
-    return view('pages.user.payment.paymentsuccess');
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
+Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->name('momoQR');
+Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
+
+Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getdata');
+
+
+Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
+    $currentTime = Carbon::now();
+    $code = explode('-', $_GET['orderId'])[1];
+    $info = hoadon::find($code);
+    $info->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+    $info->phuongthucthanhtoan = 'MoMo';
+    $info->save();
+    if (Session::has('info')) {
+        Session::forget('info');
+        Session::forget('total');
+    }
+    Session::put('info', $info);
+    Session::put('total', $_GET['amount']);
+
+        if ($_GET["resultCode"] != 0)
+        {
+            return view('pages.user.payment.failed');
+        }
+        else
+        {
+            $info->trangthai = 1;
+            $info->save();
+            Session::forget('cate');
+            Session::forget('data');
+            $details = [
+                'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
+                'body' => $info->mahd,
+                'ten' => $info->tenkhachhang,
+                'sdt' => $info->sdtkhachhang,
+                'dchi' => $info->diachigiaohang,
+                'hthuc' => $info->hinhthucnhanhang,
+                'ngay' => Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+                'phuongthuc' => "MoMo",
+                'total' => $_GET['amount']
+            ];
+            \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+            Session::put('resultCode', $_GET["resultCode"]);
+            return view('pages.user.payment.success');
+        }
+
+});
+Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
+    $currentTime = Carbon::now();
+    $code = explode('-', $_GET['vnp_TxnRef'])[1];
+    $info = hoadon::find($code);
+    $info->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+    $info->phuongthucthanhtoan = 'VnPay';
+    $info->save();
+    if (Session::has('info')) {
+        Session::forget('info');
+        Session::forget('total');
+    }
+    Session::put('info', $info);
+    Session::put('total', $_GET['vnp_Amount'] / 100);
+    if ($_GET['vnp_ResponseCode'] != '00') {
+        return view('pages.user.payment.failed');
+    } else {
+        $info->trangthai = 1;
+        $info->save();
+        Session::forget('cate');
+        Session::forget('data');
+        $details = [
+            'title' => 'Mail from Cake King Forest Thanh Toan',
+            'body' => $info->mahd,
+            'ten' => $info->tenkhachhang,
+            'sdt' => $info->sdtkhachhang,
+            'dchi' => $info->diachigiaohang,
+            'hthuc' => $info->hinhthucnhanhang,
+            'ngay' => Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+            'phuongthuc' => "VNPAY",
+            'total' => $_GET['vnp_Amount'] / 100
+        ];
+        \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+        return view('pages.user.payment.success');
+    }
 });
 
-Route::get('/paymentfailed', function () {
-    return view('pages.user.payment.paymentfailed');
-});
+Route::get('send-mail/{emailpay?}', function ($emailpay) {
 
+    $details = [
+        'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
+        'body' => Session::pull('hd_ma'),
+        'ten' => Session::get('data')['tenkhachhang'],
+        'sdt' => Session::get('data')['sdtkhachhang'],
+        'dchi' => Session::get('data')['diachigiaohang'],
+        'hthuc' => Session::get('data')['ship'],
+        'ngay' => Session::get('data')['date'],
+        'phuongthuc' => Session::pull('pttt'),
+        'total' => Session::get('data')['total']
+    ];
+    \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+    return view('pages.user.payment.success');
 
+})->name('sendemailpay');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/user-edit/{id?}', [UserController::class, 'User_update'])->name('User_edit');
@@ -82,9 +179,10 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
-   
+
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::post('/filter-by-date', [HomeController::class, 'filter_by_date']);
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');

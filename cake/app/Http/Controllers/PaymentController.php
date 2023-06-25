@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hoadon;
+use App\Models\loaisanpham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
+use RealRashid\SweetAlert\Storage\SessionStore;
 
 class PaymentController extends Controller
 {
@@ -12,9 +20,13 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data))
+                'Content-Length: ' . strlen($data)
+            )
         );
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -22,110 +34,186 @@ class PaymentController extends Controller
         $result = curl_exec($ch);
         //close connection
         curl_close($ch);
+
         return $result;
     }
 
-    public function momo_payment(Request $request){
-
-
+    public function momo_payment(Request $request)
+    {
+        if(Session::has('path')) Session::forget('path');
+        // Session::put('data',$request->all());
+        $email = (string)Session::get('data')['email'];
+        if(auth()->user() == null)
+        {
+            $code_cart = $request->cookie('code');
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
         $partnerCode = 'MOMOBKUN20180529';
+        Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
-        $amount = $request->total_momo;
-        $orderId = time() ."";
-        $redirectUrl = "http://localhost:8000/paymentfailed";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+        $amount = Session::get('data')['total'];
+        $orderId = time() . "-".$hd;
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$email";
         $extraData = "";
-
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $secretKey);
-            $data = array('partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature);
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-            return redirect()->to($jsonResult['payUrl']);
-            // header('Location: ' . $jsonResult['payUrl']);
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true); // decode json
+        Session::save();
+        //Just a example, please check more in there
+        return redirect()->to($jsonResult['payUrl']);
+        // header('Location: ' . $jsonResult['payUrl']);
 
     }
 
-    public function momo_payment_qr(Request $request){
-        //0919100100
-
+    public function momo_payment_qr(Request $request)
+    {
+        $email = (string)Session::get('data')['email'];
+        if(Session::has('path')) Session::forget('path');
+        if(auth()->user() == null)
+        {
+            $code_cart = $request->cookie('code');
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
         $partnerCode = 'MOMOBKUN20180529';
+        Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderInfo = "Thanh toán qua QR MoMo";
-        $amount = $request->total_momo;
-        $orderId = time() ."";
-        $redirectUrl = "http://localhost:8000/pay";
-        $ipnUrl = "http://localhost:8000/paymentsuccess";
+        $orderId = time() . "-".$hd;
+        $orderInfo = "Thanh toán qua QR MoMo". "" ;
+        $amount = Session::get('data')['total'];
+        $redirectUrl = "http://localhost:8000/send-mail-momo/$email";
+        $ipnUrl = "http://localhost:8000/send-mail-momo/$email";
         $extraData = "";
-
-            $requestId = time() . "";
-            $requestType = "captureWallet";
-            // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .
+        $requestId = time() . "";
+        // $requestType = "captureWallet";
+        $requestType = "captureWallet";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" .
             $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode .
             "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $secretKey);
-            $data = array('partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature);
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-            return redirect()->to($jsonResult['payUrl']);
-            // header('Location: ' . $jsonResult['payUrl']);
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true); // decode json
+        //Just a example, please check more in there
+        Session::save();
+        header('Location: ' . $jsonResult['payUrl']);
+        exit();
 
     }
+    public function getdata(Request $request)
+    {
+        $currentTime = Carbon::now();
+        $category = loaisanpham::all();
+        if(Session::has('data')) Session::forget('data');
+        Session::put('data',$request->all());
 
-    public function vnpay_payment(Request $request){
-        $data = $request->all();
-        $code_cart = $request->cookie('code');;
+        if(auth()->user())
+        {
+            $lstCart = hoadon::where('users_id', auth()->user()->id)
+             ->where('trangthai', 0)->first();
+        }
+       else
+       {
+            $lstCart = hoadon::where('mahd', Cookie::get('code'))->where('trangthai', 0)->first();
+       }
+       $lstCart->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+       $lstCart->tenkhachhang = Session::get('data')['tenkhachhang'];
+       $lstCart->sdtkhachhang = Session::get('data')['sdtkhachhang'];
+       $lstCart->diachigiaohang = Session::get('data')['diachigiaohang'];
+       $lstCart->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
+       $lstCart->hinhthucnhanhang = Session::get('data')['ship'];
+       $lstCart->save();
+       $Cart = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
+                ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
+                ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
+                ->select(
+                    '*',
+                    'chitiethoadons.id as idchitiet',
+                    'chitiethoadons.giatien as thanhtien',
+                    'sanphams.tensp as tensanpham',
+                    'sanphams.giatien as giaban',
+                    'sizes.id as idsize',
+                    'sizes.tensize as s_name',
+                    'sanphams.hinhanh as img'
+                )
+                ->orderBy("idchitiet")
+                ->get();
+        Session::save();
+        return view('pages.user.payment.show-checkout',[
+            'category'=>$category , 'lstcart' =>$Cart
+        ]);
+    }
 
+    public function vnpay_payment(Request $request)
+    {Session::start();
+        $email = (string)Session::get('data')['email'];
+        $code_cart = $request->cookie('code');
+        if(auth()->user() == null)
+        {
+
+            $hd = hoadon::where('mahd',$code_cart)->value('id');
+        }
+        else
+        {
+            $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
+        }
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/paymentsuccess"; // url trả về view
-        $vnp_TmnCode = "FM9XJF5C";//Mã website tại VNPAY
+        $vnp_Returnurl = "http://localhost:8000/send-mail-vnp/$email";
+        $vnp_TmnCode = "FM9XJF5C"; //Mã website tại VNPAY
         $vnp_HashSecret = "NRDAOOOFDEKIQUFRBDSUMQOLIKIEAFPW";
-
-        $vnp_TxnRef = $code_cart;
-        $vnp_OrderInfo = 'Thanh toán đơn hàng'. ' ' . (string) $code_cart;
+        $vnp_TxnRef = $code_cart .'-'. $hd;
+        $vnp_OrderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $data['total_vnpay'] * 100;
+        $vnp_Amount = Session::get('data')['total'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -177,17 +265,21 @@ class PaymentController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        $returnData = array('code' => '00'
-            , 'message' => 'success'
-            , 'data' => $vnp_Url);
-            if (isset($_POST['redirect'])) {
-                header('Location: ' . $vnp_Url);
-                die();
-            } else {
-                echo json_encode($returnData);
-            }
+        $returnData = array(
+            'code' => '00'
+            ,
+            'message' => 'success'
+            ,
+            'data' => $vnp_Url
+        );
+        Session::save();
+        if (isset($_POST['redirect'])) {
+            return redirect()->to($vnp_Url);
+        } else {
+            echo json_encode($returnData);
+        }
     }
 }
