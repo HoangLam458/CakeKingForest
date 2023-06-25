@@ -14,7 +14,9 @@
         <form action="{{route('checkout')}}" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <button type="submit" class="button">
-                 Thanh toán COD
+                <img src="{{ asset('images/VNPAY.png') }}" class="float-left" alt="VNPAY"
+                width="35px" height="35px">
+                <span class="form-group" style="margin-left: 10px">Tiền Mặt</span>
             </button>
         </form>
         <form action="{{ route('vnpay') }}" method="POST" class="form" enctype="multipart/form-data">
@@ -30,9 +32,9 @@
         <form action="{{ route('momoATM') }}" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <button type="submit" name="redirect" class="button text-center" >
-                <img src="{{ asset('images/MOMO.png') }}" style="margin-left: 10px" class="float-left " alt="MoMo QR"
+                <img src="{{ asset('images/MOMO.png') }}"  class="float-left " alt="MoMo QR"
                 width="30px" height="30px">
-                <span class="form-group" style="margin-left: 15px"> MoMo ATM</span>
+                <span class="form-group" style="margin-left: 10px"> MoMo ATM</span>
             </button>
         </form>
         <form action="{{ route('momoQR') }}" method="POST" class="form" enctype="multipart/form-data">

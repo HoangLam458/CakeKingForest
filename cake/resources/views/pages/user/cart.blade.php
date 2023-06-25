@@ -21,7 +21,7 @@
     }
 </style>
 @section('body')
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
     <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             @else
-            @include('pages.user.checkout')
+                @include('pages.user.checkout')
                 <div class="row">
                     <div class="col-md-12 ftco-animate">
                         <div class="cart-list">
@@ -90,21 +90,16 @@
                                                 <td class="product-remove"><a
                                                         href="{{ route('remove', $lsCart->idchitiet) }}"><span
                                                             class="ion-ios-close"></span></a></td>
-
                                                 <td class="image-prod">
                                                     <div class="img"
                                                         style="background-image:url({{ asset('/images/' . $lsCart->img) }});">
                                                     </div>
                                                 </td>
-
                                                 <td class="product-name">
                                                     <h3>{{ $lsCart->tensanpham }}</h3>
                                                 </td>
-
                                                 <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
-                                                <!-- <td class="size">{{ $lsCart->s_name }}
 
-                                                </td> -->
                                                 <td class="col-md-2">
                                                     <select name="size_id" id="selectBasic" class="form-control">
                                                         @foreach ($size as $sizes)
@@ -139,8 +134,8 @@
                                                         <textarea rows="3" maxlength="255" type="text" name="ghichu" value="">{{ $lsCart->ghichu }}</textarea>
                                                     </div>
                                                 </td>
-                                                <td><button type="submit"class="btn btn-primary"><span>Update</span></a></td>
-
+                                                <td><button type="submit"class="btn btn-primary"><span>Update</span></a>
+                                                </td>
                                             </tr>
                                         </form>
                                     @endforeach
@@ -148,47 +143,43 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
-                        <div class="col-lg mt-5 cart-wrap ftco-animate">
-                            <div class="cart-total mb-3">
-                                <h3>Tổng tiền giỏ hàng</h3>
-                                <p class="d-flex total-price">
-                                    <span>Phí vận chuyển</span>
-                                    Miễn phí
-                                <p class="d-flex total-price">
-                                    <span>Total</span>
-                                    {{ number_format($total) }} VND
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-3 text-center">
-                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
-                                        data-target="#exampleModal">
-                                        Thanh toán
-                                    </a>
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
-                                        data-target="#Modal">
-                                        <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
-                                    </a>
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <a  hidden class="btn btn-info py-3 px-5" data-toggle="modal"
-                                        data-target="#Modal2">
-                                        MoMo ATM
-                                    </a>
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <a class="btn btn-primary py-3 px-5" data-toggle="modal"
-                                        data-target="#Modal3" style="color: rgb(8, 8, 8);">
-                                           Đặt hàng
-                                        </a>
-                                    </div>
-                                </div>
+                <div class="col-lg mt-5 cart-wrap ftco-animate">
+                    <div class="cart-total mb-3">
+                        <h3>Tổng tiền giỏ hàng</h3>
+                        <p class="d-flex total-price">
+                            <span>Phí vận chuyển</span>
+                            Miễn phí
+                        <p class="d-flex total-price">
+                            <span>Total</span>
+                            {{ number_format($total) }} VND
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-3 text-center">
+                            <a hidden class="btn btn-info py-3 px-5" data-toggle="modal" data-target="#exampleModal">
+                                Thanh toán
+                            </a>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <a hidden class="btn btn-info py-3 px-5" data-toggle="modal" data-target="#Modal">
+                                <img src="{{ asset('images/MoMo.png') }}" width="30px" height="30px">
+                            </a>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <a hidden class="btn btn-info py-3 px-5" data-toggle="modal" data-target="#Modal2">
+                                MoMo ATM
+                            </a>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <a class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#Modal3"
+                                style="color: rgb(8, 8, 8);">
+                                Đặt hàng
+                            </a>
                         </div>
                     </div>
-                @endif
+                </div>
+        </div>
+        @endif
         </div>
     </section>
 
@@ -260,25 +251,25 @@
             form.submit();
         }
     </script>
- <header>
-    <style>
-        .button {
-          background-color: #4CAF50;
-          border: none;
-          color: rgb(15, 15, 15);
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-        }
+    <header>
+        <style>
+            .button {
+                background-color: #4CAF50;
+                border: none;
+                color: rgb(15, 15, 15);
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
         </style>
-    <script language="JavaScript" type="text/javascript">
-      function check(){
-          return confirm('Xác nhận thông tin hóa đơn?');
-      }
-    </script>
-  </header>
+        <script language="JavaScript" type="text/javascript">
+            function check() {
+                return confirm('Xác nhận thông tin hóa đơn?');
+            }
+        </script>
+    </header>
 @endsection

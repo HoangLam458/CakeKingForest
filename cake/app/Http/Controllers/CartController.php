@@ -18,10 +18,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 Session::start();
 class CartController extends Controller
 {
+    public function update_cart(Request $request)
+    {
+        dd($request->all());
+    }
     public function cart(Request $request)
     {
-        if(Session::has('vnp_path')) Session::forget('vnp_path');
-        if(Session::has('path')) Session::forget('path');
         if(Session::has('data')) Session::forget('data');
         if (auth()->user()) {
             $sizes = size::all();
@@ -308,20 +310,24 @@ class CartController extends Controller
                 $user->diachigiaohang = Session::get('data')['diachigiaohang'];
                 $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
                 $user->hinhthucnhanhang = Session::get('data')['ship'];
-                $user->phuongthucthanhtoan = 'MoMo';
+                $user->phuongthucthanhtoan = 'Tiền Mặt';
                 $user->trangthai = 1;
                 $user->save();
+                if(Session::has('info'))
+                {
+                    Session::forget('info');
+                    Session::forget('total');
+                }
+                Session::put('info',$user);
+                Session::put('total',Session::get('data')['total']);
                 Cookie::forget('code');
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
                 Session::put('hd_ma',$user->mahd);
-                Session::forget('payment');
                 Session::forget('resultCode');
-                Session::forget('path');
                 Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$email);
             }
-            return view('homeuser');
         } else {
             $code_cookie = $request->cookie('code');
             $currentTime = Carbon::now();
@@ -333,21 +339,25 @@ class CartController extends Controller
                 $user->diachigiaohang = Session::get('data')['diachigiaohang'];
                 $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
                 $user->hinhthucnhanhang = Session::get('data')['ship'];
-                $user->phuongthucthanhtoan = 'MoMo';
+                $user->phuongthucthanhtoan = 'Tiền mặt';
                 $user->trangthai = 1;
                 $user->save();
                 $request->cookie('code');
+                if(Session::has('info'))
+                {
+                    Session::forget('info');
+                    Session::forget('total');
+                }
+                Session::put('info',$user);
+                Session::put('total',Session::get('data')['total']);
                 Cookie::forget('code');
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
                 Session::put('hd_ma',$user->mahd);
-                Session::forget('payment');
                 Session::forget('resultCode');
-                Session::forget('path');
                 Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$email);
-            } else
-                return view('homeuser');
+            }
         }
 
     }

@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
     public function randHD(){
-        $string = "abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $str="";
         $size = strlen($string);
         for($i = 0; $i < 4; $i++)
