@@ -129,7 +129,6 @@ class HoadonController extends Controller
     public function update_status_approved($id, Request $request)
     {
         $request = $request->all();
-
         $hd = Hoadon::find($id);
         $hd->trangthai = 2;
         $hd->save();
@@ -165,52 +164,6 @@ class HoadonController extends Controller
     }
     public function chitietdonhang($idhd, Request $request)
     {
-
-
-        //momo
-        if (Session::has('path')) {
-            $resultCode = Session::pull('resultCode');
-            $path = Session::pull('path');
-            if ($resultCode == 0) {
-                if ((string) $path == "MOMOBKUN20180529") {
-                $hd = hoadon::find($idhd);
-                $hd->trangthai = 2;
-                $hd->phuongthucthanhtoan = 'MoMo';
-                $hd->save();
-                Session::forget('cate');
-                Session::forget('data');
-                }
-            }
-            else {
-                Session::forget('data');
-                return redirect()->route('cart');
-            }
-
-        } //
-        //vnp
-
-
-        if (Session::has('vnp_path')) {
-            $resultVNP = Session::pull('resultVNP');
-            $vnppath = Session::pull('vnp_path');
-            if ($resultVNP == 00) {
-            if ((string) $vnppath == "FM9XJF5C") {
-                $hd = hoadon::find($idhd);
-                $hd->trangthai = 2;
-                $hd->phuongthucthanhtoan = 'VnPay';
-                $hd->save();
-                Session::forget('cate');
-                Session::forget('data');
-            }
-            }
-            else {
-                Session::forget('data');
-                return redirect()->route('cart');
-        }
-        }
-
-        //
-
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();

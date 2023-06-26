@@ -187,7 +187,7 @@ class PaymentController extends Controller
                 ->orderBy("idchitiet")
                 ->get();
         Session::save();
-        return view('pages.user.payment.paymentsuccess',[
+        return view('pages.user.payment.show-checkout',[
             'category'=>$category , 'lstcart' =>$Cart
         ]);
     }

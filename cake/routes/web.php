@@ -34,13 +34,14 @@ use Illuminate\Support\Facades\Session;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-
-Auth::routes();
+Route::get('/test', function () {
+    return view('pages.user.payment.paymentfailed');
+});
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
 
-Route::post('/back-to-home',[HoadonController::class, 'insertDB'])->name('back-to-home');
+Route::post('/back-to-home', [HoadonController::class, 'insertDB'])->name('back-to-home');
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -53,6 +54,7 @@ Route::get('/shop/{id?}', [SanphamController::class, 'shop_category'])->name('sh
 Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.detail');
 
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
+Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
 Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
 Route::post('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
@@ -68,87 +70,97 @@ Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getd
 
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
-
-    if(Session::has('path'))
-    {
-        Session::forget('path');
+    $currentTime = Carbon::now();
+    $code = explode('-', $_GET['orderId'])[1];
+    $info = hoadon::find($code);
+    $info->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+    $info->phuongthucthanhtoan = 'MoMo';
+    $info->save();
+    if (Session::has('info')) {
+        Session::forget('info');
+        Session::forget('total');
     }
-    Session::put('path',$_GET["partnerCode"]);
-        if($_GET["partnerCode"]=="MOMOBKUN20180529"){
-            if($_GET["resultCode"]!=0){
-                return redirect()->route('cart');
-            }else{
-                $code = explode('-', $_GET['orderId'])[1];
-                $info = hoadon::find($code);
+    Session::put('info', $info);
+    Session::put('total', $_GET['amount']);
 
-                $details = [
-                    'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
-                    'body' => $info->mahd,
-                    'ten'=>  $info->tenkhachhang,
-                    'sdt'=>  $info->sdtkhachhang,
-                    'dchi'=> $info->diachigiaohang,
-                    'hthuc'=> $info->hinhthucnhanhang,
-                    'ngay'=>  Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
-                    'phuongthuc'=> "MoMo",
-                    'total' => $_GET['amount']
-                ];
-
-                \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
-                Session::put('resultCode',$_GET["resultCode"]);
-                return redirect()->route('ctdonhang',  explode('-', $_GET['orderId'])[1]);
+        if ($_GET["resultCode"] != 0)
+        {
+            return view('pages.user.payment.failed');
         }
-    }
+        else
+        {
+            $info->trangthai = 1;
+            $info->save();
+            Session::forget('cate');
+            Session::forget('data');
+            $details = [
+                'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
+                'body' => $info->mahd,
+                'ten' => $info->tenkhachhang,
+                'sdt' => $info->sdtkhachhang,
+                'dchi' => $info->diachigiaohang,
+                'hthuc' => $info->hinhthucnhanhang,
+                'ngay' => Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+                'phuongthuc' => "MoMo",
+                'total' => $_GET['amount']
+            ];
+            \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+            Session::put('resultCode', $_GET["resultCode"]);
+            return view('pages.user.payment.success');
+        }
+
 });
 Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
-
-
-    if(Session::has('vnp_path'))
-    {
-        Session::forget('vnp_path');
+    $currentTime = Carbon::now();
+    $code = explode('-', $_GET['vnp_TxnRef'])[1];
+    $info = hoadon::find($code);
+    $info->ngaylaphd = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime)->format('Y-m-d');
+    $info->phuongthucthanhtoan = 'VnPay';
+    $info->save();
+    if (Session::has('info')) {
+        Session::forget('info');
+        Session::forget('total');
     }
-    Session::put('vnp_path',$_GET['vnp_TmnCode']);
-
-    if($_GET["vnp_TmnCode"]=="FM9XJF5C"){
-
-        if($_GET['vnp_ResponseCode'] != '00'){
-
-            return redirect()->route('cart');
-        }else{
-            $code = explode('-', $_GET['vnp_TxnRef'])[1];
-            $info = hoadon::find($code);
-            $details = [
-                'title' => 'Mail from Cake King Forest Thanh Toan',
-                'body' => $info->mahd,
-                'ten'=>  $info->tenkhachhang,
-                'sdt'=>  $info->sdtkhachhang,
-                'dchi'=> $info->diachigiaohang,
-                'hthuc'=> $info->hinhthucnhanhang,
-                'ngay'=>  Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
-                'phuongthuc'=> "VNPAY",
-                'total' => $_GET['vnp_Amount']
-            ];
-            \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
-            Session::put('resultVNP',$_GET['vnp_ResponseCode']);
-            return redirect()->route('ctdonhang',  explode('-', $_GET['vnp_TxnRef'])[1]);
+    Session::put('info', $info);
+    Session::put('total', $_GET['vnp_Amount'] / 100);
+    if ($_GET['vnp_ResponseCode'] != '00') {
+        return view('pages.user.payment.failed');
+    } else {
+        $info->trangthai = 1;
+        $info->save();
+        Session::forget('cate');
+        Session::forget('data');
+        $details = [
+            'title' => 'Mail from Cake King Forest Thanh Toan',
+            'body' => $info->mahd,
+            'ten' => $info->tenkhachhang,
+            'sdt' => $info->sdtkhachhang,
+            'dchi' => $info->diachigiaohang,
+            'hthuc' => $info->hinhthucnhanhang,
+            'ngay' => Carbon::createFromFormat('Y-m-d', $info->ngaynhanhang)->format('d-m-Y'),
+            'phuongthuc' => "VNPAY",
+            'total' => $_GET['vnp_Amount'] / 100
+        ];
+        \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+        return view('pages.user.payment.success');
     }
-}
 });
 
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
 
-        $details = [
-            'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
-            'body' => Session::pull('hd_ma'),
-            'ten'=>  Session::get('data')['tenkhachhang'],
-            'sdt'=>  Session::get('data')['sdtkhachhang'],
-            'dchi'=> Session::get('data')['diachigiaohang'],
-            'hthuc'=> Session::get('data')['ship'],
-            'ngay'=>  Session::get('data')['date'],
-            'phuongthuc'=> Session::pull('pttt'),
-            'total' => Session::get('data')['total']
-        ];
-        \Illuminate\Support\Facades\Mail::to((string)$emailpay)->send(new \App\Mail\SendEmailPay($details));
-        return redirect()->route('ctdonhang', Session::get('mahd'));
+    $details = [
+        'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
+        'body' => Session::pull('hd_ma'),
+        'ten' => Session::get('data')['tenkhachhang'],
+        'sdt' => Session::get('data')['sdtkhachhang'],
+        'dchi' => Session::get('data')['diachigiaohang'],
+        'hthuc' => Session::get('data')['ship'],
+        'ngay' => Session::get('data')['date'],
+        'phuongthuc' => Session::pull('pttt'),
+        'total' => Session::get('data')['total']
+    ];
+    \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+    return view('pages.user.payment.success');
 
 })->name('sendemailpay');
 
@@ -170,7 +182,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
 
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::post('/filter-by-date',[HomeController::class,'filter_by_date']);
+        Route::post('/filter-by-date', [HomeController::class, 'filter_by_date']);
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
