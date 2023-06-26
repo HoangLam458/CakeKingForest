@@ -171,15 +171,18 @@
                     <div class="row col">
                         <h5 class="card-title">Thống kê</h5>
                     </div>
-                    <form>
+                    <form
+                    class="form" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-md-2">
-                                <p>Từ ngày: <input type="text" id="datepicker" class="form-control" name="fromdate"></p>
-                                <input type="button" id="btn-dashboard" class="btn btn-primary btn-sm btn-round"
-                                    value="Lọc kết quả">
+                                <p>Từ ngày: <input type="text" id="datepicker" class="form-control" name="from_date"></p>
+                                <button id="btn-dashboard" class="btn btn-primary btn-sm btn-round">
+                                    Lọc kết quả
+                                </button>
                             </div>
                             <div class="col-md-2">
-                                <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" name="todate"></p>
+                                <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" name="to_date"></p>
                             </div>
                         </div>
                     </form>
@@ -191,6 +194,7 @@
             </div>
         </div>
     </div>
+    {{$chart_data}}
     <div class="row">
         <!-- <div class="col-md-4">
                 <div class="card ">
@@ -226,24 +230,25 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
-    var chart = new Morris.Area({
+<script type="text/javascript">
+$(document).ready(function(){
+
+        new Morris.Area({
         element: 'myfirstchart',
+        lineColors:['#ffffff'],
+        hideHover:'auto',
         fillOpacity: 0.3,
-        data: [
-            @foreach($chart_data as $sale) {
-                'date': '{{ \Carbon\Carbon::parse($sale->ngaylaphd)->format('
-                d / m / Y ') }} ',
-                'total': '{{ $sale->thanhtien }}'
-            },
-            @endforeach
-        ],
         parseTime: false,
+        data:[
+                
+        ]
         xkey: 'date',
         ykeys: ['total'],
-        labels: ['Doanh thu']
-    });
+        behaveLikeLine:true,
+        labels: ['Doanh thu'],
 
+    });
+})
 </script>
 <script>
     $(function () {
@@ -265,7 +270,7 @@
 
 </script>
 <script>
-    $('#btn-dashboard').click(function ({
+    $('#btn-dashboard').click(function (){
         var _token = $('input[name="_token"]').val();
         var from_date = $('#datepicker').val();
         var to_date = $('#datepicker2').val();
@@ -278,11 +283,10 @@
                 to_date: to_date,
                 _token: _token
             },
-            success:: function (data) {
+            success: function (data) {
                 chart.setData(data);
             }
         });
-    }));
-
+    });
 </script>
 @endpush

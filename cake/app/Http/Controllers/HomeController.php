@@ -32,7 +32,6 @@ class HomeController extends Controller
     {
 
         $doanhthu = 0;
-        $chart[] = array();
         $hoadonall = hoadon::all();
         $hoadonmomo = hoadon::where('trangthai',2)->where('phuongthucthanhtoan','MoMo')->get();
         $hoadonvnpay = hoadon::where('trangthai',2)->where('phuongthucthanhtoan','VnPay')->get();
@@ -56,10 +55,9 @@ class HomeController extends Controller
             ->groupBy('hoadons.ngaylaphd')->orderBy('hoadons.ngaylaphd','ASC')
             ->get();
         }
-
         $count=$hoadonmomo->count()+$hoadonvnpay->count()+$hoadon_choduyet->count();
         return view('pages.admin.dashboard',[
-            'chart_data'=>$test,
+            'chart_data'=>json_encode($test),
             'doanhthu'=>$doanhthu,
             'hd_success'=>count($hoadon_hoanthanh),
             'hd_pending'=>count($hoadon_choduyet),
@@ -73,8 +71,9 @@ class HomeController extends Controller
 
     public function filter_by_date(Request $request)
     {
+
         $data = $request->all();
-        $from_date = Carbon::parse($data['form_date'])->format('Y/m/d');
+        $from_date = Carbon::parse($data['from_date'])->format('Y/m/d');
         $to_date = Carbon::parse($data['to_date'])->format('Y/m/d');
         $get = DB::table('chitiethoadons')
         ->join('hoadons','hoadon_id','=','hoadons.id')
@@ -89,5 +88,6 @@ class HomeController extends Controller
             );
         }
         echo $data = json_encode($chart_data);
+
     }
 }

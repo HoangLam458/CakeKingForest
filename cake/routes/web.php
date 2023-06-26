@@ -37,9 +37,10 @@ Route::get('/login', function () {
 Route::get('/test', function () {
     return view('pages.user.payment.paymentfailed');
 });
-
+Auth::routes();
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
+Route::post('/filter-by-date', [HomeController::class, 'filter_by_date'])->name('test');
 
 Route::post('/back-to-home', [HoadonController::class, 'insertDB'])->name('back-to-home');
 
@@ -182,7 +183,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
 
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::post('/filter-by-date', [HomeController::class, 'filter_by_date']);
+
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
