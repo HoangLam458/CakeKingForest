@@ -9,7 +9,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
 use RealRashid\SweetAlert\Storage\SessionStore;
 
 class PaymentController extends Controller

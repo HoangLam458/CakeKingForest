@@ -105,7 +105,7 @@
                             @endforeach
                         </div>
                     </li>
-                    <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Liên Hệ</a></li>
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}"
                             class="nav-link"><span class="icon-shopping_cart"></span>
@@ -158,7 +158,7 @@
                         <h2 class="ftco-heading-2">Menu</h2>
                         <ul class="list-unstyled">
                             <li><a href="{{ route('shop') }}" class="py-2 d-block">Shop</a></li>
-                            <li><a href="{{ route('contact') }}" class="py-2 d-block">Contact Us</a></li>
+                            <li><a href="{{ route('contact') }}" class="py-2 d-block">Liên Hê</a></li>
                         </ul>
                     </div>
                 </div>
