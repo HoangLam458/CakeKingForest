@@ -13,12 +13,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Mail\Contact;
 use App\Models\hoadon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 /*
@@ -37,6 +39,20 @@ Route::get('/login', function () {
 Route::get('/test', function () {
     return view('pages.user.payment.paymentfailed');
 });
+
+Route::post("/sendcontact", function(Illuminate\Http\Request $request){ 
+    $arr = request()->post(); 
+    $lienhe = [
+        'hoten' =>trim(strip_tags( $arr['ht'] )),
+        'email' =>trim(strip_tags( $arr['em'] )),
+        'noidung' => trim(strip_tags( $arr['nd'] )),
+        'tieude' =>trim(strip_tags( $arr['td'] )),
+    ];
+    $adminEmail = 'lamhoangtruong202@gmail.com'; //Gửi thư đến ban quản trị
+    Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
+    Session::put('sendct',1);
+    return redirect()->route('contact');
+  });
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
@@ -67,7 +83,6 @@ Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->n
 Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
 
 Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getdata');
-
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
     $currentTime = Carbon::now();

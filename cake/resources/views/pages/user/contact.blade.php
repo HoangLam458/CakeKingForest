@@ -1,5 +1,6 @@
 @extends('pages.layout')
 @section('body')
+@include('sweetalert::alert')
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -38,18 +39,19 @@
         </div>
         <div class="row block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-white p-5 contact-form">
+            <form action="/sendcontact" class="bg-white p-5 contact-form" method="post">
+              @csrf
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" name="ht" class="form-control" placeholder="Họ và tên" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="email" class="form-control" name="em"  placeholder="Email của bạn" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                <input type="text" name="td" class="form-control" maxlength="50" minlength="15" placeholder="Tiêu đề" required>
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea name="nd" id="" cols="30" rows="7" minlength="80" class="form-control" placeholder="Nội dung" required></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
