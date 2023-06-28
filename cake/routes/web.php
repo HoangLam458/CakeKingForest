@@ -36,9 +36,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/test', function () {
-    return view('pages.user.payment.paymentfailed');
-});
+Route::get('/payment/failed', function () {
+    return view('pages.user.payment.failed');
+})->name('paymant_fails');
+Route::get('/payment/success', function () {
+    return view('pages.user.payment.success');
+})->name('paymant_success');
 Auth::routes();
 Route::post("/sendcontact", function(Illuminate\Http\Request $request){
     $arr = request()->post();
@@ -56,7 +59,7 @@ Route::post("/sendcontact", function(Illuminate\Http\Request $request){
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
-Route::post('/filter-by-date', [HomeController::class, 'filter_by_date'])->name('test');
+Route::post('/admin/home', [HomeController::class, 'filter_by_date'])->name('filter_by_date');
 
 Route::post('/back-to-home', [HoadonController::class, 'insertDB'])->name('back-to-home');
 
@@ -101,7 +104,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
 
         if ($_GET["resultCode"] != 0)
         {
-            return view('pages.user.payment.failed');
+            return redirect()->route('paymant_fails');
         }
         else
         {
@@ -122,7 +125,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
             ];
             \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
             Session::put('resultCode', $_GET["resultCode"]);
-            return view('pages.user.payment.success');
+            return redirect()->route('paymant_success');
         }
 
 });
@@ -140,7 +143,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
     Session::put('info', $info);
     Session::put('total', $_GET['vnp_Amount'] / 100);
     if ($_GET['vnp_ResponseCode'] != '00') {
-        return view('pages.user.payment.failed');
+        return redirect()->route('paymant_fails');
     } else {
         $info->trangthai = 1;
         $info->save();
@@ -158,7 +161,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
             'total' => $_GET['vnp_Amount'] / 100
         ];
         \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
-        return view('pages.user.payment.success');
+        return redirect()->route('paymant_success');
     }
 });
 
@@ -176,7 +179,7 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
         'total' => Session::get('data')['total']
     ];
     \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
-    return view('pages.user.payment.success');
+    return redirect()->route('paymant_success');
 
 })->name('sendemailpay');
 

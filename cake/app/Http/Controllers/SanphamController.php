@@ -132,7 +132,6 @@ class SanphamController extends Controller
      */
     public function destroy($id)
     {
-
         $sanpham = sanpham::find($id);
         if ($sanpham) {
             $sanpham->delete();

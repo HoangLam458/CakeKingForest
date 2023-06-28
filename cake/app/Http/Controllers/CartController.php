@@ -120,9 +120,11 @@ class CartController extends Controller
     }
     public function add_to_cart(Request $request)
     {
+        $currentTime = Carbon::now();
         if (Session::has('cate') == null) {
             Session::put('cate');
         }
+
         if (auth()->user()) {
             $user = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
             $taikhoan = User::find(auth()->user()->id);
@@ -135,7 +137,8 @@ class CartController extends Controller
                         if ($chitiet->soluong + $request['quantity'] > 10) {
                             alert()->warning('Thông báo', 'Bánh này đã đạt giới hạn số lượng');
                             return redirect()->back();
-                        } else {
+                        }
+                        else {
                             $chitiet->soluong = $chitiet->soluong + $request['quantity'];
                             $total = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100);
                             $chitiet->giatien = $chitiet->giatien + $total;
@@ -186,10 +189,11 @@ class CartController extends Controller
                 ]);
                 $user2 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
                 $request = $request->all();
+
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",
-                    'giatien' => $sanpham->giatien,
+                    'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                     'hoadon_id' => $user2->id,
                     'size_id' => $request['size'],
                     'sanpham_id' => $request['id']
@@ -206,9 +210,9 @@ class CartController extends Controller
                     $test = Cookie::forever('code', $code);
                     return response()->redirectToRoute('shop')->withCookie($test);
             }
-        } else {
+        }
+        else {
             $sanpham = sanpham::find($request->get('id'));
-            $currentTime = Carbon::now();
             $phantram = size::find($request->get('size'));
             $code_cookie = $request->cookie('code');
             $user = hoadon::where('mahd', $code_cookie)->where('trangthai', 0)->first();
@@ -274,7 +278,7 @@ class CartController extends Controller
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",
-                    'giatien' => $sanpham->giatien,
+                    'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                     'hoadon_id' => $hoadon_id2->id,
                     'size_id' => $request['size'],
                     'sanpham_id' => $request['id']

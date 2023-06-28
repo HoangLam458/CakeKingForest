@@ -9,19 +9,6 @@
 
     </head>
     <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0;">
-        <!-- Header Start -->
-        {{-- <div class="bg-white header" bgcolor="#ffffff" style="background-color: white; width: 100%;">
-            <table align="center" bgcolor="#ffffff" style="border-left: 10px solid white; border-right: 10px solid white; max-width: 600px; width: 100%;">
-                <tr height="80">
-                    <td align="left" class="vertical-align-middle" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: middle;">
-                        <a href="https://www.go.com.mt/" target="_blank" style="-webkit-text-decoration-color: #F16522; color: #F16522; text-decoration: none; text-decoration-color: #F16522;">
-                            <img src="http://dgtlmrktng.s3.amazonaws.com/go/emails/generic-email-template/logo.png" alt="GO" width="70" style="border: 0; font-size: 0; margin: 0; max-width: 100%; padding: 0;">
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div> --}}
-        <!-- Header End -->
 
         <!-- Content Start -->
         <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px;">
@@ -54,7 +41,11 @@
                         <tr align="center">
                             <td width="36" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                             <td class="text-primary" style="color: #F16522; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
+                                @if(Session::get('info')['phuongthucthanhtoan'] == "Tiền mặt")
+                                <h1 style="color: #F16522; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 34px; margin-bottom: 0; margin-top: 0;">Đặt hàng thành công</h1>
+                                @else
                                 <h1 style="color: #F16522; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 34px; margin-bottom: 0; margin-top: 0;">Thanh toán thành công</h1>
+                                @endif
                             </td>
                             <td width="36" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                         </tr>
