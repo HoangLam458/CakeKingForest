@@ -2,35 +2,36 @@
 @section('body')
 <header>
     <style>
-    .button {
-        background-color: #4CAF50;
-        /* Green */
-        border: none;
-        color: white;
-        padding: 16px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
 
-    .button1 {
-        background-color: white;
-        color: black;
-        border: 2px solid #4CAF50;
-    }
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
 
-    .active,
-    .button1:hover {
-        background-color: #4CAF50;
-        color: white;
-    }
+        .active,
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
     </style>
 </header>
-@include('sweetalert::alert')
+@php Session::put('urlback', url()->full()); @endphp
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg') }}')">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -64,6 +65,12 @@
                 </ul>
             </div>
         </div>
+        <div class="flash-message">
+            @if(Session::has('maxbanh'))
+            <p class="alert alert-warning">{{ Session::pull('maxbanh') }} <a href="#" class="close" data-dismiss="alert"
+                    aria-label="close">&times;</a></p>
+            @endif
+        </div>
         <div class="row">
             @foreach ($lsSanpham as $Sanpham)
             <div class="col-md-6 col-lg-3 ftco-animate">
@@ -87,8 +94,8 @@
                                     class="d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
-                                <form id="form__submit" action="{{ route('add_to_cart')}}"
-                                    method="POST" class="form" enctype="multipart/form-data">
+                                <form id="form__submit" action="{{ route('add_to_cart')}}" method="POST" class="form"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <input name="id" value="{{ $Sanpham->id }}" type="text" hidden required>
                                     <input name="quantity" value="1" type="number" hidden required>

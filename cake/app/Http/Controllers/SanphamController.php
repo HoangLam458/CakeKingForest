@@ -10,8 +10,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Symfony\Component\HttpFoundation\Request;
 use Termwind\Components\BreakLine;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SanphamController extends Controller
 {
@@ -21,8 +24,7 @@ class SanphamController extends Controller
     public function index()
     {
         $loaisanpham = loaisanpham::all();
-
-        $lsSanpham = Sanpham::simplePaginate(10);
+        $lsSanpham = Sanpham::Paginate(10);
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
@@ -169,7 +171,7 @@ class SanphamController extends Controller
     {
         $act = 0;
         $category = loaisanpham::all();
-        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%{$request->get('searchpr')}%")->orWhere('mota','LIKE',"%{$request->get('searchpr')}%")->Paginate(8);
+        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%{$request->get('searchpr')}%")->orWhere('mota','LIKE',"%{$request->get('searchpr')}%")->Paginate(10);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         return response()->view('pages.user.shop',
@@ -199,5 +201,24 @@ class SanphamController extends Controller
             return redirect()->back();
         }
         return redirect()->back();
+    }
+    public function locloaisp(Request $request)
+    {
+        if(Session::has('loaibanh')&& $request->get('loaibanh')!=null){
+            Session::forget('loaibanh');
+        }
+        if($request->get('loaibanh')==0){
+            alert()->warning('Thông báo', 'Bạn chưa chọn loại bánh');
+            return back();
+        }
+        $loaisanpham = loaisanpham::all();
+        $loc = $request->get('loaibanh');  
+        $lsSanpham = sanpham::where('loaisanpham_id', $loc)->Paginate(2);
+        if(Session::has('loaibanh')){
+            $lsSanpham = sanpham::where('loaisanpham_id', Session::get('loaibanh'))->Paginate(2);
+            return response()->view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+        }
+        Session::put('loaibanh',$loc);
+        return response()->view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 }

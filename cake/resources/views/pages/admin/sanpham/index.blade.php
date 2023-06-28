@@ -1,24 +1,57 @@
 @extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'sanpham'
+'class' => '',
+'elementActive' => 'sanpham'
 ])
+
 <header>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <style>
-    .pagination {
-        justify-content: center;
-    }
+        .pagination {
+            justify-content: center;
+        }
+
     </style>
 </header>
 @section('content')
+@include('sweetalert::alert')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách bánh</h4>
-                    <a href="{{ route('sanpham.create') }}" type="button" class="btn btn-primary"> Thêm bánh
-                        mới</a>
+                    <div class="row">
+                        <h4 class="card-title col-md-10"> Danh sách bánh</h4>
+                        <a href="{{ route('sanpham.create') }}" type="button" class="btn btn-primary"> Thêm bánh
+                            mới</a>
+                    </div>
                 </div>
+                <form class="col-md-3" action="" method="POST">
+                    @csrf
+                    <div class="input-group no-border">
+                        <input type="text" value="" name="hoadon" class="form-control" placeholder="Tìm sản phẩm...">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="nc-icon nc-zoom-split"></i>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                @include('sweetalert::alert')
+                <form action="{{ route('locloaisp')}}" method="POST">
+                    @csrf
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span style="font-size:16px;">Lọc Theo Loại Bánh: </span>
+                            <button type="submit" class="btn btn-primary">Lọc</button>
+                            <select name="loaibanh" id="basicSelect" style="height:40px" class="col-md-3 form-control">
+                                <option value="0" selected disabled hidden> Chọn Loại Bánh</option>
+                                @foreach($loaisanpham as $category)
+                                    <option value="{{ $category->id }}"> {{ $category->tenloaisp }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </form>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
@@ -43,7 +76,8 @@
                                 @foreach ( $lsSanpham as $item )
                                 <tr>
                                     <td class="text-bold-500">
-                                        <img width="150px" height="150px" src="{{asset('/images/'.$item->hinhanh)}}" alt="">
+                                        <img width="150px" height="150px" src="{{asset('/images/'.$item->hinhanh)}}"
+                                            alt="">
                                     </td>
                                     <td class="text-bold-500">{{ $item->tensp }}</td>
                                     <td>
@@ -76,8 +110,10 @@
                                                 </svg>
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
-                                            <a href="{{ route('sanpham.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}" onclick="return checkDelete()">
+                                            <a href="{{ route('sanpham.delete', $item->id) }}" type="button"
+                                                class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#animation-{{ $item->id }}"
+                                                onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path
@@ -89,22 +125,26 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                               
-                            </tbody>     
+
+                            </tbody>
                         </table>
                         <div class="pagination">
-                        {{  $lsSanpham->onEachSide(1)->links() }}
+                            {{  $lsSanpham->onEachSide(1)->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js" integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
+            integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <header>
-  <script language="JavaScript" type="text/javascript">
-    function checkDelete(){
-        return confirm('Bạn có chắc chắn muốn xóa');
-    }
-  </script>
-</header>
-@endsection
+            <script language="JavaScript" type="text/javascript">
+                function checkDelete() {
+                    return confirm('Bạn có chắc chắn muốn xóa');
+                }
+
+            </script>
+        </header>
+        @endsection

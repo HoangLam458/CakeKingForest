@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Cake King Forest</title>
     <meta charset="utf-8">
@@ -11,6 +10,7 @@
         rel="stylesheet">
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap') }}"
         rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
@@ -28,7 +28,6 @@
 </head>
 
 <body class="goto-here">
-
     <div class="py-1 bg-primary">
         <div class="container">
 
@@ -249,7 +248,6 @@
     </script>
     <script src="{{ asset('js/google-map.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
 </body>
 
 </html>

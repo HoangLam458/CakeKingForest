@@ -1,5 +1,6 @@
 @extends('pages.layout')
 @section('body')
+@php Session::put('urlback', url()->full()); @endphp
     <section id="home-section" class="hero">
         <div class="home-slider owl-carousel">
             <div class="slider-item" style="background-image: url(images/bg_1.jpg);">

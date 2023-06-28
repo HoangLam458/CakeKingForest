@@ -143,7 +143,7 @@
                             <div class="collapse multi-collapse" id="multiCollapseExample2">
                                 <div class="card card-body">
                                     <div class="alert alert-info">
-                                        <h5 class="card-title">Đơn đã thanh toán  <span style="color:#ff0000; font-size:20px"> {{$thanhtoan}}</span></h5>
+                                        <h5 class="card-title">Đơn chờ duyệt đã thanh toán  <span style="color:#ff0000; font-size:20px"> {{$thanhtoan}}</span></h5>
                                         @foreach($hoadonall as $hoadon)
                                         @if($hoadon->trangthai == 2 && $hoadon->phuongthucthanhtoan == 'MoMo')
                                         <a href="{{ route('invoice.detail', $hoadon->id) }}"><span class="hd"> Hóa

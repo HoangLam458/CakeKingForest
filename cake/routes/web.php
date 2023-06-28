@@ -240,6 +240,11 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/category/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('category.edit.form');
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
+        //route admin seach loc
+        Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('getloaisp');
+        Route::post('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
+        Route::post('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
+        Route::post('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
 
     });
 });

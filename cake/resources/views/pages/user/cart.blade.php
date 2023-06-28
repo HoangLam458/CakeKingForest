@@ -86,7 +86,9 @@
                                         <form action="{{ route('update', $lsCart->idchitiet) }}" method="POST"
                                             class="form" enctype="multipart/form-data">
                                             @csrf
+                                            
                                             <tr class="text-center">
+                                            <div class="flash-message">
                                                 <td class="product-remove"><a
                                                         href="{{ route('remove', $lsCart->idchitiet) }}"><span
                                                             class="ion-ios-close"></span></a></td>
