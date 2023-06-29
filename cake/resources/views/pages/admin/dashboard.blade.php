@@ -175,12 +175,13 @@
                 <div class="card ">
                     <div class="card-header">
                         <div class="row col">
-                            <h5 class="card-title">Thống kê</h5>
+                            <h5 class="card-title">Thống kê doanh thu</h5>
                         </div>
-                        <form action="{{ route('filter_by_date') }}" method="POST" class="form" enctype="multipart/form-data">
+                        <form action="{{ route('filter_by_date') }}" method="POST" class="form"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <input hidden name ="search" value="1">
+                                <input hidden name="search" value="1">
                                 <div class="col-md-2">
                                     <p>Từ ngày: <input type="text" id="datepicker" class="form-control"
                                             name="from_date" required></p>
@@ -193,44 +194,39 @@
                                             name="to_date" required></p>
                                 </div>
                         </form>
-                        <form action="{{ route('filter_by_date') }}" method="POST" class="form" enctype="multipart/form-data">
-                            @csrf
-                                <input hidden name ="search" value="2">
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-round" style="margin-top: 25px">
-                                        7 Ngày
-                                    </button>
-                                </div>
-                        </form>
-                        <form action="{{ route('filter_by_date') }}" method="POST" class="form" enctype="multipart/form-data">
-                            @csrf
-                                <input hidden name ="search" value="3">
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-round" style="margin-top: 25px">
-                                        365 Ngày
-                                    </button>
-                                </div>
-
-                        </form>
-                        <form action="{{ route('filter_by_date') }}" method="POST" class="form" enctype="multipart/form-data">
-                            @csrf
-                                <input hidden name ="search" value="4">
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-round" style="margin-top: 25px">
-                                        Tháng trước
-                                    </button>
-                                </div>
-                        </form>
-                        <form action="{{ route('filter_by_date') }}" method="POST" class="form" enctype="multipart/form-data">
-                            @csrf
-                                <input hidden name ="search" value="5">
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-round" style="margin-top: 25px">
-                                        Tháng này
-                                    </button>
-                                </div>
+                        <div class="dropdown dropright">
+                            <button style="margin-top: 14;"
+                                class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lọc theo
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <form id="form__submit2" action="{{ route('filter_by_date') }}" method="POST"
+                                    class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="search" value="2">
+                                </form>
+                                <form id="form__submit3" action="{{ route('filter_by_date') }}" method="POST"
+                                    class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="search" value="3">
+                                </form>
+                                <form id="form__submit4" action="{{ route('filter_by_date') }}" method="POST"
+                                    class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="search" value="4">
+                                </form>
+                                <form id="form__submit5" action="{{ route('filter_by_date') }}" method="POST"
+                                    class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden name="search" value="5">
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="submitForm2()">7 ngày trước</a>
+                                <a class="dropdown-item" href="#" onclick="submitForm3()">365 ngày</a>
+                                <a class="dropdown-item" href="#" onclick="submitForm4()">Tháng trước</a>
+                                <a class="dropdown-item" href="#" onclick="submitForm5()">Tháng này</a>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <hr>
                     <div class="card-body">
@@ -238,6 +234,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -265,6 +262,7 @@
                 </div>
             </div>
         </div>
+
     @endsection
 
     @push('scripts')
@@ -336,7 +334,7 @@
                     xkey: 'label',
                     ykeys: ['value'],
                     labels: ['Số lượng']
-                    });
+                });
             })
         </script>
         <script>
@@ -357,24 +355,28 @@
                 });
             });
         </script>
-        {{-- <script>
-    $('#btn-dashboard').click(function (){
-        var _token = $('input[name="_token"]').val();
-        var from_date = $('#datepicker').val();
-        var to_date = $('#datepicker2').val();
-        $.ajax({
-            url: "{{url('/filter-by-date')}}",
-            method: "POST",
-            dataType: "JSON",
-            data: {
-                from_date: from_date,
-                to_date: to_date,
-                _token: _token
-            },
-            success: function (data) {
-                chart.setData(data);
+        <script>
+            function submitForm2() {
+                let form = document.getElementById("form__submit2");
+                form.submit();
             }
-        });
-    });
-</script> --}}
+        </script>
+        <script>
+            function submitForm3() {
+                let form = document.getElementById("form__submit3");
+                form.submit();
+            }
+        </script>
+        <script>
+            function submitForm4() {
+                let form = document.getElementById("form__submit4");
+                form.submit();
+            }
+        </script>
+        <script>
+            function submitForm5() {
+                let form = document.getElementById("form__submit5");
+                form.submit();
+            }
+        </script>
     @endpush

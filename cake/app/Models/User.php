@@ -12,18 +12,17 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $guarded=[]; 
+    protected $guarded=[];
     public function hoadons(){
         return $this->hasMany(hoadon::class);
     }
-    
+
     protected $fillable = [
         'tenkhachhang',
         'email',

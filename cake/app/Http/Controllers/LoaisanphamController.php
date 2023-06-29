@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\loaisanpham;
 use App\Http\Requests\StoreloaisanphamRequest;
 use App\Http\Requests\UpdateloaisanphamRequest;
+use App\Models\sanpham;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Constraint\Count;
 
 class LoaisanphamController extends Controller
 {
@@ -81,6 +83,12 @@ class LoaisanphamController extends Controller
      */
     public function destroy( $id)
     {
+        $product = sanpham::where('loaisanpham_id',$id)->value('id');
+        if($product!=null)
+        {
+            alert()->warning('Thông báo', 'Loại sản phẩm đang hoạt động!');
+            return redirect()->back();
+        }
         $category = loaisanpham::find($id);
         if($category){
             $category->delete();

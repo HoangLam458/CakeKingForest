@@ -2,6 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
+@include('sweetalert::alert')
 @section('content')
 <div class="content">
     <section id="multiple-column-form">
@@ -47,7 +48,20 @@
                                              <label class="mb-2" for="last-name-column" style="font-size:15px">Mật khẩu</label>
                                              <input required maxlength="20" type="password" id="last-name-column" class="form-control" name="password">
                                          </div>
-                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country"style="font-size:15px">Chức vụ</label>
+                                        <select name="admin" id="ship" class="form-control">
+                                            <option required value="1">
+                                                Quản trị viên
+                                            </option>
+                                            <option required value="0">
+                                                Khách hàng
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                                  </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">
                                          <button type="submit" class="btn  btn-round btn-primary me-1 mb-1">Xác nhận</button>
@@ -62,4 +76,12 @@
          </div>
      </section>
  </div>
+ <header>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        function checkDelete() {
+            return confirm('Bạn có chắc chắn muốn xóa');
+        }
+    </script>
+</header>
 @endsection

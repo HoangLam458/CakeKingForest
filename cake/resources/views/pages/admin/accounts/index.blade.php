@@ -10,11 +10,35 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Danh sách tài khoản</h4>
+                    <div class="row col-md-5">
                     <a href="{{ route('user.create.form') }}" type="button" class="btn btn-round btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                           </svg>
                     </a>
+                    <div class="dropdown dropright">
+                        <button style="margin-top: 15px;"
+                            class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lọc theo
+                        </button>
+                        <form id="form__submit2" action="{{ route('user.index.admin') }}" method="POST"
+                        class="form" enctype="multipart/form-data">
+                        @csrf
+                        <input hidden name="admin" value="1">
+                    </form>
+                    <form id="form__submit3" action="{{ route('user.index.admin') }}" method="POST"
+                    class="form" enctype="multipart/form-data">
+                    @csrf
+                    <input hidden name="admin" value="0">
+                    </form>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ route('user.index') }}" >Tất cả</a>
+                            <a class="dropdown-item" href="#" onclick="submitForm2()" >Quản trị viên</a>
+                            <a class="dropdown-item" href="#" onclick="submitForm3()" >Khách hàng</a>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -39,7 +63,13 @@
                             <tbody>
                                 @foreach ( $lsUsers as $item  )
                                 <tr>
-                                    <td class="text-bold-500">{{ $item->tenkhachhang }}</td>
+                                    <td class="text-bold-500">{{ $item->tenkhachhang }} </br>
+                                    @if ($item->loai == 0)
+                                        (Khách hàng)
+                                        @else
+                                        (Quản trị viên)
+                                    @endif
+                                    </td>
                                     <td>{{ $item->email }}</td>
                                     <td class="text-bold-500">{{ $item->sdt }}</td>
                                     <td>{{ explode(", ", $item->diachi)[0] }}</td>
@@ -88,6 +118,18 @@
       function checkDelete(){
           return confirm('Bạn có chắc chắn muốn xóa');
       }
+    </script>
+    <script>
+        function submitForm2() {
+            let form = document.getElementById("form__submit2");
+            form.submit();
+        }
+    </script>
+    <script>
+        function submitForm3() {
+            let form = document.getElementById("form__submit3");
+            form.submit();
+        }
     </script>
 </header>
 
