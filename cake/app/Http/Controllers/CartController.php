@@ -147,8 +147,7 @@ class CartController extends Controller
                     }
                 }
                 foreach ($chitiethoadon as $chitiet) {
-                    if ($chitiet->sanpham_id != $request->get('id')) {
-                        $request = $request->all();
+                    if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id != $request->get('size')) {
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
                             'ghichu' => "",
@@ -167,7 +166,26 @@ class CartController extends Controller
                                 Session::push('cate', $item);
                             }
                         return redirect()->back();
-                    }
+                    }else{
+                        Chitiethoadon::create([
+                            'soluong' => $request['quantity'],
+                            'ghichu' => "",
+                            'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
+                            'hoadon_id' => $user->id,
+                            'size_id' => $request['size'],
+                            'sanpham_id' => $request['id']
+                        ]);
+                        $chitiet =
+                            chitiethoadon::where('hoadon_id', $user->id)
+                                ->where('size_id', $request['size'])
+                                ->where('sanpham_id', $request['id'])
+                                ->get();
+                        if ($chitiet != null)
+                            foreach ($chitiet as $item) {
+                                Session::push('cate', $item);
+                            }
+                        return redirect()->back();
+                    }          
                 }
             } else {
                 $hoadon = hoadon::orderBy('id', 'DESC')->first();
@@ -233,7 +251,7 @@ class CartController extends Controller
                     }
                 }
                 foreach ($chitiethoadon as $chitiet) {
-                    if ($chitiet->sanpham_id != $request->get('id')) {
+                    if ($chitiet->sanpham_id != $request->get('id')&& $chitiet->size_id != $request->get('size')) {
                         $request = $request->all();
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
@@ -257,7 +275,26 @@ class CartController extends Controller
                                 }
                         }
                         return redirect()->back();
-                    }
+                    } else{
+                        Chitiethoadon::create([
+                            'soluong' => $request['quantity'],
+                            'ghichu' => "",
+                            'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
+                            'hoadon_id' => $user->id,
+                            'size_id' => $request['size'],
+                            'sanpham_id' => $request['id']
+                        ]);
+                        $chitiet =
+                            chitiethoadon::where('hoadon_id', $user->id)
+                                ->where('size_id', $request['size'])
+                                ->where('sanpham_id', $request['id'])
+                                ->get();
+                        if ($chitiet != null)
+                            foreach ($chitiet as $item) {
+                                Session::push('cate', $item);
+                            }
+                        return redirect()->back();
+                    }  
                 }
             } else {
                 $hoadon = hoadon::orderBy('id', 'DESC')->first();

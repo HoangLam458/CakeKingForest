@@ -74,7 +74,7 @@ Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update
 Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
 Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
-Route::post('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
+Route::get('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
 Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
@@ -241,10 +241,10 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
         //route admin seach loc
-        Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('getloaisp');
-        Route::post('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
-        Route::post('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
-        Route::post('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
 
+        Route::get('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
+        Route::get('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
+        Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
+        Route::get('/manages/sanpham/searchsp', [SanphamController::class, 'searchprad'])->name('searchad');
     });
 });

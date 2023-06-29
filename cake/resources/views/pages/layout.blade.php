@@ -80,12 +80,11 @@
                             </svg></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <div class="dropdown-item">
-                                <form action="{{ route('searchpr')}}" method="POST" class="search-form">
-                                    @csrf
+                                <form action="{{ route('searchpr')}}" method="GET" class="search-form">
                                     <div class="form-group">
                                         <span class="icon ion-ios-search"></span>
                                         <input style="width:350px" type="text" class="form-control"
-                                            placeholder="Nhập thông tin bánh cần tìm..." name="searchpr">
+                                            placeholder="Nhập thông tin bánh cần tìm..." name="key">
                                     </div>
                                 </form>
                             </div>

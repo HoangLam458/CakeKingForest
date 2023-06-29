@@ -21,8 +21,7 @@
                     <div class="card-header pb-0">
                         <h4 class="card-title">Danh sách hóa đơn</h4>
                     </div>
-                    <form class="col-md-3" action="{{ route('searchhd')}}" method="POST">
-                        @csrf
+                    <form class="col-md-3" action="{{ route('searchhd')}}" method="GET">
                         <div class="input-group no-border">
                             <input type="text" value="" name="hoadon" class="form-control" placeholder="Tìm hóa đơn...">
                             <div class="input-group-append">
@@ -32,10 +31,12 @@
                             </div>
                         </div>
                     </form>
-                    <form class="row-md-12" action="{{ route('searchloc')}}" method="POST">
-                        @csrf
+                    <form class="row-md-12" action="{{ route('searchloc')}}" method="GET"> 
                         <div class="col-md-12">
                             <span style="font-size:16px;">Lọc Theo Trạng Thái: </span>
+                            <button name="trangthai" type="submit" class="btn bg-success" value="">
+                                <span>Tất cả</span>
+                            </button>
                             <button name="trangthai" type="submit" class="btn bg-warning" value="1">
                                 <span>Chờ duyệt</span>
                             </button>

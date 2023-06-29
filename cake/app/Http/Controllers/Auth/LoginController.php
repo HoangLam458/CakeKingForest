@@ -69,6 +69,6 @@ class LoginController extends Controller
 
         }
         Alert::error('Lỗi', 'Mật khẩu không đúng');
-        return redirect()->back();
+        return view('auth.login');
     }
 }

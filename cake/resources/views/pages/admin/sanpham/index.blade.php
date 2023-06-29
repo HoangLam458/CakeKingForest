@@ -4,7 +4,7 @@
 ])
 
 <header>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <style>
         .pagination {
             justify-content: center;
@@ -25,10 +25,9 @@
                             mới</a>
                     </div>
                 </div>
-                <form class="col-md-3" action="" method="POST">
-                    @csrf
+                <form class="col-md-3" action="{{ route('searchad')}}" method="GET">
                     <div class="input-group no-border">
-                        <input type="text" value="" name="hoadon" class="form-control" placeholder="Tìm sản phẩm...">
+                        <input type="text" value="" name="key" class="form-control" placeholder="Tìm sản phẩm...">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="nc-icon nc-zoom-split"></i>
@@ -36,17 +35,22 @@
                         </div>
                     </div>
                 </form>
-                @include('sweetalert::alert')
-                <form action="{{ route('locloaisp')}}" method="POST">
-                    @csrf
+                <form action="{{ route('locloaisp')}}" method="GET">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <div class="flash-message">
+                                @if(Session::has('select'))
+                                <p class="alert alert-warning">{{ Session::pull('select') }} <a href="#" class="close"
+                                        data-dismiss="alert" aria-label="close">&times;</a></p>
+                                @endif
+                            </div>
                             <span style="font-size:16px;">Lọc Theo Loại Bánh: </span>
                             <button type="submit" class="btn btn-primary">Lọc</button>
+
                             <select name="loaibanh" id="basicSelect" style="height:40px" class="col-md-3 form-control">
-                                <option value="0" selected disabled hidden> Chọn Loại Bánh</option>
+                                <option value="" selected hidden> Chọn Loại Bánh</option>
                                 @foreach($loaisanpham as $category)
-                                    <option value="{{ $category->id }}"> {{ $category->tenloaisp }}</option>
+                                <option value="{{ $category->id }}"> {{ $category->tenloaisp }}</option>
                                 @endforeach
                             </select>
                         </div>

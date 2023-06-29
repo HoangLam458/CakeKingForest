@@ -212,19 +212,22 @@ class HoadonController extends Controller
         dd($request->all());
         return redirect()->route('donhang');
     }
-    public function searchhd(Request $request)
+    public function searchhd()
     {
-        $search = $request->get('hoadon');
+        $search = $_GET['hoadon'];  
         $lsHoaDon = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
             $query->where('tenkhachhang','LIKE',"%{$search}%")
                 ->orWhere('mahd','LIKE',"%{$search}%")->orWhere('sdtkhachhang','LIKE',"%{$search}%");
-        })->Paginate(10);
+        })->Paginate(10)->withQueryString();
         return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
-    public function loctrangthai(Request $request)
+    public function loctrangthai()
     {
-        $loc = $request->get('trangthai');
-        $lsHoaDon = hoadon::where('trangthai', $loc)->Paginate(1);
+        $loc = $_GET['trangthai'];  
+        if($loc == null){
+            return redirect()->route('invoice.index');
+        }
+        $lsHoaDon = hoadon::where('trangthai', $loc)->Paginate(1)->withQueryString();
         return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 }
