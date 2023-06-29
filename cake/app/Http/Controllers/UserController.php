@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $lsUsers = User::all();
+
 
         $check = User::where('email', $request->get('email'))->value('id');
         if ($check != Null) {
@@ -52,7 +52,8 @@ class UserController extends Controller
         $user->loai = $request->get('admin');
         $user->trangthai = 1;
         $user->save();
-        alert()->warning('Thông báo', 'Tạo tài khoản mới thành công');
+        $lsUsers = User::all();
+        alert()->success('Thông báo', 'Tạo tài khoản mới thành công');
         return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
     }
 

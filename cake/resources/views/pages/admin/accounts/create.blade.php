@@ -2,8 +2,8 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-@include('sweetalert::alert')
 @section('content')
+@include('sweetalert::alert')
 <div class="content">
     <section id="multiple-column-form">
          <div class="row match-height">
@@ -77,7 +77,7 @@
      </section>
  </div>
  <header>
-    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+
     <script language="JavaScript" type="text/javascript">
         function checkDelete() {
             return confirm('Bạn có chắc chắn muốn xóa');
