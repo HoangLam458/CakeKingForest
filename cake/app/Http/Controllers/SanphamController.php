@@ -137,6 +137,7 @@ class SanphamController extends Controller
         $sanpham = sanpham::find($id);
         if ($sanpham) {
             $sanpham->delete();
+            Session::put('success','Xóa thành công!');
             return redirect()->back();
         }
     }

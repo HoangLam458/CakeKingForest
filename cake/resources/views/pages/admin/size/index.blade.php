@@ -13,6 +13,12 @@
                     <a href="{{ route('size.create') }}" type="button" class="btn btn-primary"> Thêm kích thước</a>
                 </div>
                 <div class="card-body">
+                <div class="flash-message">
+                        @if(Session::has('success'))
+                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
+                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">

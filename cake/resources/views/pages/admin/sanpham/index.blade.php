@@ -13,7 +13,6 @@
     </style>
 </header>
 @section('content')
-@include('sweetalert::alert')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -57,6 +56,12 @@
                     </div>
                 </form>
                 <div class="card-body">
+                    <div class="flash-message">
+                        @if(Session::has('success'))
+                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
+                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
@@ -115,9 +120,7 @@
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
                                             <a href="{{ route('sanpham.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}"
-                                                onclick="return checkDelete()">
+                                                class="btn btn-danger" onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path
