@@ -10,8 +10,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Symfony\Component\HttpFoundation\Request;
 use Termwind\Components\BreakLine;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SanphamController extends Controller
 {
@@ -21,8 +24,7 @@ class SanphamController extends Controller
     public function index()
     {
         $loaisanpham = loaisanpham::all();
-
-        $lsSanpham = Sanpham::simplePaginate(10);
+        $lsSanpham = Sanpham::Paginate(10);
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
@@ -164,16 +166,19 @@ class SanphamController extends Controller
          'act'=>$act,'category'=>$category
         ]);
     }
-    public function searchpr (Request $request)
+
+    //tìm sản phẩm user
+    public function searchpr()
     {
-        $act = 0;
+        $act = 0;        
+        $key = $_GET['key'];
         $category = loaisanpham::all();
-        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%{$request->get('searchpr')}%")->orWhere('mota','LIKE',"%{$request->get('searchpr')}%")->Paginate(8);
+        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         return response()->view('pages.user.shop',
          ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
-         'act'=>$act,'category'=>$category
+         'act'=>$act,'category'=>$category,
         ]);
     }
     public function detail($id)
@@ -198,5 +203,25 @@ class SanphamController extends Controller
             return redirect()->back();
         }
         return redirect()->back();
+    }
+    //lọc sản phẩm admin
+    public function locloaisp()
+    {
+        if($_GET['loaibanh']==null){
+            Session::put('select','Bạn chưa chọn loại bánh!');
+            return redirect()->back();
+        }
+        $loaisanpham = loaisanpham::all();
+        $loc = $_GET['loaibanh'];  
+        $lsSanpham = sanpham::where('loaisanpham_id', $loc)->Paginate(2)->withQueryString();
+        return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    }
+    //tìm sản phẩm admin
+    public function searchprad()
+    { 
+        $key = $_GET['key'];
+        $loaisanpham = loaisanpham::all();
+        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(10)->withQueryString();
+        return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 }

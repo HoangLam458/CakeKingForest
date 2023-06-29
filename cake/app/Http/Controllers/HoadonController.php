@@ -22,8 +22,7 @@ class HoadonController extends Controller
      */
     public function index()
     {
-
-        $lsHoaDon = HoaDon::where('trangthai', '<>', 0)->orderBy('mahd')->get();
+        $lsHoaDon = HoaDon::where('trangthai', '<>', 0)->orderBy('mahd')->Paginate(10);
         return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 
@@ -137,7 +136,7 @@ class HoadonController extends Controller
 
     }
 
-    public function donhang(Request $request, )
+    public function donhang(Request $request)
     {
         $category = loaisanpham::all();
         $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->first();
@@ -212,5 +211,23 @@ class HoadonController extends Controller
     {
         dd($request->all());
         return redirect()->route('donhang');
+    }
+    public function searchhd()
+    {
+        $search = $_GET['hoadon'];  
+        $lsHoaDon = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
+            $query->where('tenkhachhang','LIKE',"%{$search}%")
+                ->orWhere('mahd','LIKE',"%{$search}%")->orWhere('sdtkhachhang','LIKE',"%{$search}%");
+        })->Paginate(10)->withQueryString();
+        return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
+    }
+    public function loctrangthai()
+    {
+        $loc = $_GET['trangthai'];  
+        if($loc == null){
+            return redirect()->route('invoice.index');
+        }
+        $lsHoaDon = hoadon::where('trangthai', $loc)->Paginate(1)->withQueryString();
+        return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 }
