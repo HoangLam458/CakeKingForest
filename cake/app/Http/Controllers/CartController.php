@@ -136,7 +136,7 @@ class CartController extends Controller
                 foreach ($chitiethoadon as $chitiet) {
                     if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
                         if ($chitiet->soluong + $request['quantity'] > 10) {
-                            alert()->warning('Thông báo', 'Bánh này đã đạt giới hạn số lượng');
+                            Session::put('maxbanh','Bánh này đã đạt giới hạn số lượng!');
                             return redirect()->back();
                         } else {
                             $chitiet->soluong = $chitiet->soluong + $request['quantity'];
@@ -207,7 +207,6 @@ class CartController extends Controller
                 ]);
                 $user2 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
                 $request = $request->all();
-
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",

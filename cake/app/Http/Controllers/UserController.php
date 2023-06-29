@@ -9,17 +9,19 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $lsUsers = User::all();
+        $lsUsers = User::Paginate(10);
         return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
     }
     public function show_admin(Request $request)
     {
-        $user = User::where('loai',$request->admin)->get();
+        $admin=$_GET['admin'];
+        $user = User::where('loai',$admin)->Paginate(10)->withQueryString();
         return view('pages.admin.accounts.index', ['lsUsers' => $user]);
     }
     /**
@@ -124,6 +126,7 @@ class UserController extends Controller
                 $item->save();
             }
             $user->delete();
+            Session::put('success','Xóa thành công!');
             return redirect()->back();
         }
     }

@@ -76,7 +76,7 @@ Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.de
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
-Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
+Route::get('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
 Route::get('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
 Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
@@ -204,7 +204,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
 
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
-        Route::post('/manages/user', [UserController::class, 'show_admin'])->name('user.index.admin');
+        Route::get('/manages/user/filter', [UserController::class, 'show_admin'])->name('user.index.admin');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
         Route::get('/manages/user/create', [UserController::class, 'create'])->name('user.create.form');
         Route::post('/manages/user/create', [UserController::class, 'store'])->name('user.create');

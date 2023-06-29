@@ -148,14 +148,14 @@ class HoadonController extends Controller
     public function searchdonhang(Request $request)
     {
         $category = loaisanpham::all();
-        $search = $request->get('search');
+        $search = $_GET['search'];
         // $hd = hoadon::where('trangthai','<>', 0)->Where('sdtkhachhang',$request->get('search'))
         // ->orWhere('mahd',$request->get('search'))->get();
 
         $hd = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
             $query->where('sdtkhachhang', $search)
                 ->orWhere('mahd', $search);
-        })->get();
+        })->Paginate(10)->withQueryString();
         return view('pages.user.donhang', [
             'hd' => $hd,
             'category' => $category
