@@ -37,48 +37,29 @@
             </li>
             <li class="{{ $elementActive == 'sanpham' ? 'active' : '' }}">
                 <a href="{{ route('sanpham.index', 'index') }}">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="nc-icon nc-basket"></i>
                     <p>{{ __('Sản Phẩm') }}</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
                 <a href="{{ route('size.index', 'index') }}">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="nc-icon nc-ruler-pencil"></i>
                     <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
-
-            <!-- <li class="{{ $elementActive == 'document' || $elementActive == 'profile' ? 'active' : '' }}">
-                <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
-                    <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
-                    <p>
-                        {{ __('Laravel examples') }}
-                        <b class="caret"></b>
-                    </p>
+            <div class="h-25"></div>
+            <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
+                <a href="{{ route('logout2') }}">
+                    <i class="nc-icon nc-button-power"></i>
+                    <p>{{ __('Đăng xuất') }}</p>
                 </a>
-                <div class="collapse show" id="laravelExamples">
-                    <ul class="nav">
-                        <li class="{{ $elementActive == 'profile' ? 'active' : '' }}">
-                            <a href="{{ route('profile.edit') }}">
-                                <span class="sidebar-mini-icon">{{ __('UP') }}</span>
-                                <span class="sidebar-normal">{{ __(' User Profile ') }}</span>
-                            </a>
-                        </li>
-                        <li class="{{ $elementActive == 'doc' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'user') }}">
-                                <span class="sidebar-mini-icon">{{ __('U') }}</span>
-                                <span class="sidebar-normal">{{ __(' User Management ') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
-            <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'icons') }}">
-                    <i class="nc-icon nc-diamond"></i>
-                    <p>{{ __('Icons') }}</p>
-                </a>
-            </li> -->
         </ul>
+
+
+
+
+
+
     </div>
 </div>

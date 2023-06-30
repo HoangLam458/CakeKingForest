@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\size;
 use App\Http\Requests\StoresizeRequest;
 use App\Http\Requests\UpdatesizeRequest;
+use Illuminate\Support\Facades\Session;
 
 class SizeController extends Controller
 {
@@ -83,7 +84,8 @@ class SizeController extends Controller
         $size = Size::find($id);
         if($size){
             $size->delete();
-        return redirect()->back();
+            Session::put('success','Xóa thành công!');
+            return redirect()->back();
          }
     }
 }

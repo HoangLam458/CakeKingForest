@@ -13,12 +13,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Mail\Contact;
 use App\Models\hoadon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 /*
@@ -34,14 +36,32 @@ use Illuminate\Support\Facades\Session;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/test', function () {
-    return view('pages.user.payment.paymentfailed');
-});
+Route::get('/payment/failed', function () {
+    return view('pages.user.payment.failed');
+})->name('paymant_fails');
+Route::get('/payment/success', function () {
+    return view('pages.user.payment.success');
+})->name('paymant_success');
+Auth::routes();
+Route::post("/sendcontact", function(Illuminate\Http\Request $request){
+    $arr = request()->post();
+    $lienhe = [
+        'hoten' =>trim(strip_tags( $arr['ht'] )),
+        'email' =>trim(strip_tags( $arr['em'] )),
+        'noidung' => trim(strip_tags( $arr['nd'] )),
+        'tieude' =>trim(strip_tags( $arr['td'] )),
+    ];
+    $adminEmail = 'lamhoangtruong202@gmail.com'; //Gửi thư đến ban quản trị
+    \Illuminate\Support\Facades\Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
+    Session::put('sendct',1);
+    return redirect()->route('contact');
+  });
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
 Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
+Route::post('/admin/home', [HomeController::class, 'filter_by_date'])->name('filter_by_date');
 
-Route::post('/back-to-home', [HoadonController::class, 'insertDB'])->name('back-to-home');
+
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -56,8 +76,8 @@ Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.de
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
-Route::post('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
-Route::post('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
+Route::get('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
+Route::get('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
 Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
 Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
@@ -67,7 +87,6 @@ Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->n
 Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
 
 Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getdata');
-
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
     $currentTime = Carbon::now();
@@ -85,7 +104,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
 
         if ($_GET["resultCode"] != 0)
         {
-            return view('pages.user.payment.failed');
+            return redirect()->route('paymant_fails');
         }
         else
         {
@@ -106,7 +125,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
             ];
             \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
             Session::put('resultCode', $_GET["resultCode"]);
-            return view('pages.user.payment.success');
+            return redirect()->route('paymant_success');
         }
 
 });
@@ -124,7 +143,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
     Session::put('info', $info);
     Session::put('total', $_GET['vnp_Amount'] / 100);
     if ($_GET['vnp_ResponseCode'] != '00') {
-        return view('pages.user.payment.failed');
+        return redirect()->route('paymant_fails');
     } else {
         $info->trangthai = 1;
         $info->save();
@@ -142,7 +161,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
             'total' => $_GET['vnp_Amount'] / 100
         ];
         \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
-        return view('pages.user.payment.success');
+        return redirect()->route('paymant_success');
     }
 });
 
@@ -160,7 +179,7 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
         'total' => Session::get('data')['total']
     ];
     \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
-    return view('pages.user.payment.success');
+    return redirect()->route('paymant_success');
 
 })->name('sendemailpay');
 
@@ -182,9 +201,10 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
 
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::post('/filter-by-date', [HomeController::class, 'filter_by_date']);
+
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
+        Route::get('/manages/user/filter', [UserController::class, 'show_admin'])->name('user.index.admin');
         Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
         Route::get('/manages/user/create', [UserController::class, 'create'])->name('user.create.form');
         Route::post('/manages/user/create', [UserController::class, 'store'])->name('user.create');
@@ -224,6 +244,11 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/category/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('category.edit.form');
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
+        //route admin seach loc
 
+        Route::get('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
+        Route::get('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
+        Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
+        Route::get('/manages/sanpham/searchsp', [SanphamController::class, 'searchprad'])->name('searchad');
     });
 });

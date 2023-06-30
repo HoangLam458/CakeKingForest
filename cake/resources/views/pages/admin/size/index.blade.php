@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
+<title>Cake KingForest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
@@ -13,6 +14,12 @@
                     <a href="{{ route('size.create') }}" type="button" class="btn btn-primary"> Thêm kích thước</a>
                 </div>
                 <div class="card-body">
+                <div class="flash-message">
+                        @if(Session::has('success'))
+                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
+                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
@@ -23,7 +30,7 @@
                                     Phần Trăm tăng
                                 </th>
                                 <th>
-                                    Ch
+                                    Chức năng
                             </thead>
                             <tbody>
                                 @foreach ( $lsSize as $item )
@@ -32,7 +39,7 @@
                                     <td class="text-bold-500">{{ $item->phantram }} %</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                           
+
                                             <a href="{{ route('size.edit.form', $item->id) }}" type="button"
                                                 class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

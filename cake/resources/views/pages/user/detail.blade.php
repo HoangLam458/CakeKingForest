@@ -1,6 +1,6 @@
 @extends('pages.layout')
 @section('body')
-@include('sweetalert::alert')
+@php Session::put('urlback', url()->full()); @endphp
 <div class="hero-wrap hero-bread" style="background-image: url('{{ asset('images/bg_1.jpg')}}')">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -12,11 +12,18 @@
         </div>
     </div>
 </div>
+
 <form id="form__submit" action="{{ route('add_to_cart')}}" method="POST" class="form"
     enctype="multipart/form-data">
     @csrf
     <section class="ftco-section">
         <div class="container">
+        <div class="flash-message">
+            @if(Session::has('maxbanh'))
+            <p class="alert alert-warning">{{ Session::pull('maxbanh') }} <a href="#" class="close" data-dismiss="alert"
+                    aria-label="close">&times;</a></p>
+            @endif
+        </div>
             <div class="row">
                 <div class="col-lg-6 mb-5 ftco-animate">
                     <a href="{{ asset('/images/' . $sanpham->hinhanh) }}" class="image-popup"><img
@@ -52,7 +59,7 @@
                                 </button>
                             </span>
                             <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
-                                min="1" max="100" required>
+                                min="1" max="100" required readonly>
                             <span class="form-group-btn ml-2">
                                 <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                                     <i class="ion-ios-add"></i>

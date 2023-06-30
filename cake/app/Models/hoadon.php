@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class hoadon extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
-    protected $guarded=[]; 
+
+    protected $guarded=[];
     public function chitiethoadons(){
         return $this->belongsTo(chitiethoadon::class);
     }

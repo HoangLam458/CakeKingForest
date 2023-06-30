@@ -16,7 +16,7 @@ class HomeUserController extends Controller
     public function homepage(Request $request)
     {
 
-        
+
 
         $product = sanpham::all()->random(8);
         Session::put('cate');
@@ -35,7 +35,6 @@ class HomeUserController extends Controller
                 Session::push('cate',$item);
             }
             }
-
         }
         }
         else
@@ -57,7 +56,11 @@ class HomeUserController extends Controller
         ]);
     }
     public function contact()
-    { $category = loaisanpham::all();
+    {
+        $category = loaisanpham::all();
+        if(Session::pull('sendct')==1){
+            alert()->success('Thông báo', 'Đã gửi email liên hệ đến admin');
+        }
         return view('pages.user.contact',[
             'category'=>$category
         ]);

@@ -2,6 +2,8 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
+<title>Cake KingForest - Sản phẩm</title>
+
 @section('content')
 <div class="content">
     <section id="multiple-column-form">

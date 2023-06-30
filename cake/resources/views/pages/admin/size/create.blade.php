@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
+<title>Cake KingForest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">

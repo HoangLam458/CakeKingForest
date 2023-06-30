@@ -10,8 +10,7 @@ class loaisanpham extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    protected $guarded=[]; 
+    protected $guarded=[];
     public function sanphams(){
         return $this->hasMany(sanpham::class);
     }

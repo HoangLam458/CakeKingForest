@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -62,13 +63,16 @@ class LoginController extends Controller
         {
             $user=\Illuminate\Foundation\Auth\User::where('email', $request->email)->first();
             $request->session()->put('email', $user);
+
             if($user->loai==0){
                 return redirect()->route('cake');
             }
+            if(\Illuminate\Support\Facades\Session::has('is_admin')) \Illuminate\Support\Facades\Session::forget('is_admin');
+            \Illuminate\Support\Facades\Session::put('is_admin',$user);
             return redirect()->route('home');
 
         }
         Alert::error('Lỗi', 'Mật khẩu không đúng');
-        return redirect()->back();
+        return view('auth.login');
     }
 }

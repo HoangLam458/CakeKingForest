@@ -16,7 +16,7 @@
                         <div class="col-md col-12">
                             <div class="form-group">
                                 <label class="mb-2" for="first-name-column">Tên khách hàng</label>
-                                <input value="" required maxlength="20" type="text" id="first-name-column"
+                                <input value="" pattern="^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$" required maxlength="50" type="text" id="first-name-column"
                                     class="form-control" name="tenkhachhang">
                             </div>
                         </div>

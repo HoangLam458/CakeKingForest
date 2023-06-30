@@ -1,5 +1,6 @@
 @extends('pages.layout')
 @section('body')
+@include('sweetalert::alert')
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -14,8 +15,7 @@
 
 <section class="ftco-section ftco-cart bg-light">
     <div class="container col-md-6">
-        <form action="{{ route('searchdh')}}" method="POST" class="search-form">
-            @csrf
+        <form action="{{ route('searchdh')}}" method="GET" class="search-form">
             <div class="form-group">
                 <span class="icon ion-ios-search"></span>
                 <input type="text" class="form-control" placeholder="Nhập mã đơn hàng hoặc số điện thoại..."
@@ -95,6 +95,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{  $hd->onEachSide(1)->links() }}
+                    </div>
                 </div>
             </div>
         </div>
