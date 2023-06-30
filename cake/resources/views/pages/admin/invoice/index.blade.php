@@ -64,6 +64,7 @@
                                             <th class="col-2">Mã hóa đơn</th>
                                             <th class="col-2">Tên khách hàng</th>
                                             <th class="col-2">Số điện thoại</th>
+                                            <th class="col-2">Ngày lập</th>
                                             <th class="col-2">Ngày nhận</th>
                                             <th class="col-2">Trạng thái</th>
                                             <th class="col-2">Chức năng</th>
@@ -76,8 +77,10 @@
                                             <td style="width:20%" class="col-2">{{ $item->tenkhachhang }}</td>
                                             <td style="width:20%" class="col-2">{{ $item->sdtkhachhang }}</td>
                                             <td style="width:20%" class="col-2">
+                                                {{ \Carbon\Carbon::parse($item->ngaylaphd)->format('d/m/Y')}}</td>
+                                            <td style="width:20%" class="col-2">
                                                 {{ \Carbon\Carbon::parse($item->ngaynhanhang)->format('d/m/Y')}}</td>
-                                            {{-- <td>{{ $item->total }} VND</td> --}}
+
                                             @switch($item->trangthai)
                                             @case(1)
                                             <td><span class="badge bg-warning">Chờ duyệt</span></td>

@@ -38,7 +38,7 @@
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                     class="icon-phone2"></span></div>
-                            <span class="text">+ 1235 2355 98</span>
+                            <span class="text">0348575810</span>
                         </div>
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -90,12 +90,12 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="{{ route('cake') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{{ route('cake') }}" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Shop</a>
+                            aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
+                            <a class="dropdown-item" href="{{ route('shop') }}">Tất cả</a>
                             @foreach ($category as $cate)
                             <a class="dropdown-item" href="{{ route('shop.category',$cate->id) }}">
                                 {{$cate->tenloaisp}}

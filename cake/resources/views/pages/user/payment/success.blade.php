@@ -6,7 +6,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="format-detection" content="telephone=no">
         <title>Cake King Forest</title>
-
+        <meta charset="utf-8">
+        <link sizes="76x76" href="{{ asset('paper') }}/img/final_logo.png">
+        <link rel="icon" type="image/png" href="{{ asset('paper') }}/img/final_logo.png">
     </head>
     <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0;">
 

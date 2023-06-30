@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -17,13 +18,14 @@ class UserController extends Controller
 
     public function index()
     {
+        $lsUsers = User::orderBy('loai', 'DESC')->Paginate(10);
 
-        $lsUsers = User::all();
         return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
     }
     public function show_admin(Request $request)
     {
-        $user = User::where('loai',$request->admin)->get();
+        $admin=$_GET['admin'];
+        $user = User::where('loai',$admin)->Paginate(10)->withQueryString();
         return view('pages.admin.accounts.index', ['lsUsers' => $user]);
     }
     /**
@@ -126,9 +128,8 @@ class UserController extends Controller
                 $item->save();
             }
             $user->delete();
-            $lsUsers = User::all();
-            alert()->success('Thông báo', 'Xóa tài khoản thành công');
-            return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
+            Session::put('success','Xóa thành công!');
+            return redirect()->back();
         }
     }
     public function logout(Request $request)
@@ -141,7 +142,7 @@ class UserController extends Controller
     {
         $category = loaisanpham::all();
         $user = User::find($id);
-        $cart = hoadon::where('users_id', $id)->where('trangthai', '<>', 0)->get();
+        $cart = hoadon::where('users_id', $id)->where('trangthai', '<>', 0)->orderBy('ngaylaphd', 'DESC')->get();
         return view('pages.user.profile', [
             'user' => $user,
             'cart' => $cart,

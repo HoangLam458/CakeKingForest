@@ -8,8 +8,10 @@ use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Models\size;
 use Carbon\Carbon;
+
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,6 +49,7 @@ class HomeController extends Controller
     }
     public function index()
     {
+       
         $time = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->format('Y/m/d');
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
         $doanhthu = 0;

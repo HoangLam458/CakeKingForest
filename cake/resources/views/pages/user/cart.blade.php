@@ -28,10 +28,10 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Home</a></span>
+                <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Trang chủ</a></span>
                     <span>Cart</span>
                 </p>
-                <h1 class="mb-0 bread">My Cart</h1>
+                <h1 class="mb-0 bread">Giỏ hàng</h1>
             </div>
         </div>
     </div>
@@ -141,7 +141,8 @@
                                                 value="">{{ $lsCart->ghichu }}</textarea>
                                         </div>
                                     </td>
-                                    <td><button type="submit" class="btn btn-primary"><span>Update</span></a>
+                                    <td><button type="submit" class="btn btn-primary">
+                                        <span style="font-size: 15px" >Cập nhật</span>
                                     </td>
                                 </tr>
                             </form>

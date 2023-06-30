@@ -15,12 +15,14 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
+
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            
+            <label style="margin-top: 10px;"> Xin chào {{Session::get('is_admin')["tenkhachhang"]}} !</label>
             <ul class="navbar-nav">
-               
-               
+
+
                 <li class="nav-item btn-rotate dropdown">
+
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="nc-icon nc-settings-gear-65"></i>
@@ -28,8 +30,10 @@
                             <span class="d-lg-none d-md-block">{{ __('Account') }}</span>
                         </p>
                     </a>
+
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('cake') }}">{{ __('Trang chủ') }}</a>
                             <a class="dropdown-item" href="{{ route('logout2') }}">{{ __('Đăng Xuất') }}</a>
                         </div>
                     </div>

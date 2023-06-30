@@ -47,7 +47,7 @@
                             <label style="font-size:15px">Giá Tiền</label>
                         </div>
                         <div class="col-md-9 form-group mb-3">
-                            <label style="font-size:15px">{{ $sanpham->giatien }} VNĐ</label>
+                            <label style="font-size:15px">{{ number_format($sanpham->giatien) }} VNĐ</label>
                         </div>
 
                     </div>

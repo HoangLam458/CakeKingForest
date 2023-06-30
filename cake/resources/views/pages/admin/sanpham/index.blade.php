@@ -14,7 +14,6 @@
     </style>
 </header>
 @section('content')
-@include('sweetalert::alert')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -58,6 +57,12 @@
                     </div>
                 </form>
                 <div class="card-body">
+                    <div class="flash-message">
+                        @if(Session::has('success'))
+                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
+                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
@@ -76,6 +81,9 @@
                                 <th>
                                     Giá Tiền
                                 </th>
+                                <th>
+                                    Chức năng
+                                </th>
                             </thead>
                             <tbody>
                                 @foreach ( $lsSanpham as $item )
@@ -93,7 +101,7 @@
                                         @endforeach
                                     </td>
                                     <td class="text-bold-500">{{ $item->mota }}</td>
-                                    <td class="text-bold-500">{{ $item->giatien }} VNĐ</td>
+                                    <td class="text-bold-500"> {{ number_format($item->giatien) }} VNĐ</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('sanpham.detail', $item->id) }}" type="button"
@@ -116,8 +124,7 @@
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
                                             <a href="{{ route('sanpham.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger"
-                                                onclick="return checkDelete()">
+                                                class="btn btn-danger" onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path

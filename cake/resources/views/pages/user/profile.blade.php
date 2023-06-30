@@ -1,123 +1,4 @@
 @extends('pages.layout')
-<header>
-<form action="{{ route('profile.password') }}" method="POST" class="form"
-enctype="multipart/form-data">
-@csrf
-@method('PUT')
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Đổi mật khẩu</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="password" name="old_password" class="form-control" placeholder="Mật khẩu hiện tại" required>
-                            </div>
-                            @if ($errors->has('old_password'))
-                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                    <strong>{{ $errors->first('old_password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
-                            </div>
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu" required>
-                            </div>
-                            @if ($errors->has('password_confirmation'))
-                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" style="font-size: 15px" class="btn btn-primary">Xác nhận</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
-{{-- {{}} --}}
-<form action="{{route('User_edit',auth()->user()->id)}}" method="POST" class="form"
-enctype="multipart/form-data">
-@csrf
-<div class="modal" id="Modal2" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thay đổi thông tin</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="mb-2" for="first-name-column">Tên khách hàng</label>
-                        <input value="{{ $user->tenkhachhang }}" required maxlength="20"
-                            type="text" id="first-name-column" class="form-control"
-                            name="fullname">
-                    </div>
-                </div>
-
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="mb-2" for="city-column">Số điện thoại</label>
-                        <input value="{{ $user->sdt }}" pattern="(\+84|0)\d{9,10}"
-                            maxlength="10" minlength="10" required type="text"
-                            id="phone" class="form-control" name="phone">
-                    </div>
-                </div>
-                <div class="col-md col-12">
-                    <div class="form-group">
-                        <label class="mb-2" for="city-column">Địa chỉ</label>
-                        <textarea required name="address" maxlength="255" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $user->diachi }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
-</header>
 @section('body')
 
 <div class="container">
@@ -253,8 +134,9 @@ enctype="multipart/form-data">
                                     <td class="col-2">
                                         {{ $item->mahd }}
                                     </td>
-                                    <td  class="col-1">{{ \Carbon\Carbon::parse($item->ngaynhanhang)->format('d/m/Y')}}</td>
+
                                     <td class="col-1">{{ \Carbon\Carbon::parse($item->ngaylaphd)->format('d/m/Y')}}</td>
+                                    <td  class="col-1">{{ \Carbon\Carbon::parse($item->ngaynhanhang)->format('d/m/Y')}}</td>
                                     @switch($item->trangthai)
                                         @case(1)
                                         <td class="col-1"><span class="badge bg-warning">Chờ duyệt</span></td>
@@ -318,5 +200,124 @@ enctype="multipart/form-data">
         </div>
     </div>
 </section>
+<header>
+    <form action="{{ route('profile.password') }}" method="POST" class="form"
+    enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Đổi mật khẩu</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu hiện tại') }}</label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" name="old_password" class="form-control" placeholder="Mật khẩu hiện tại" required>
+                                </div>
+                                @if ($errors->has('old_password'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('old_password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Mật khẩu mới') }}</label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required>
+                                </div>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="col-md-12 col-form-label" style="font-size:15px">{{ __('Nhập lại mật khẩu') }}</label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                                </div>
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" style="font-size: 15px" class="btn btn-primary">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    {{-- {{}} --}}
+    <form action="{{route('User_edit',auth()->user()->id)}}" method="POST" class="form"
+        enctype="multipart/form-data">
+        @csrf
+        <div class="modal" id="Modal2" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thay đổi thông tin</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="mb-2" for="first-name-column">Tên khách hàng</label>
+                            <input value="{{ $user->tenkhachhang }}" required maxlength="20"
+                                type="text" id="first-name-column" class="form-control"
+                                name="fullname">
+                        </div>
+                    </div>
+
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="mb-2" for="city-column">Số điện thoại</label>
+                            <input value="{{ $user->sdt }}" pattern="(\+84|0)\d{9,10}"
+                                maxlength="10" minlength="10" required type="text"
+                                id="phone" class="form-control" name="phone">
+                        </div>
+                    </div>
+                    <div class="col-md col-12">
+                        <div class="form-group">
+                            <label class="mb-2" for="city-column">Địa chỉ</label>
+                            <textarea required name="address" maxlength="255" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $user->diachi }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    </header>
 @endsection
 
