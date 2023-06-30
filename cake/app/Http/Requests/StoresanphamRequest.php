@@ -22,7 +22,12 @@ class StoresanphamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tensp'=>['required','unique:sanphams'],
+        ];
+    }
+    public function messages(){
+        return [
+            'tensp.unique'=>'Tên sản phẩm đã được sử dụng'
         ];
     }
 }
