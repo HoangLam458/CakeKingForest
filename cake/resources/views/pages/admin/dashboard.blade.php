@@ -2,6 +2,7 @@
     'class' => '',
     'elementActive' => 'dashboard',
 ])
+<title>Cake KingForest - Thống kê</title>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">

@@ -10,6 +10,7 @@
 
     </style>
 </header>
+<title>Cake KingForest - Hóa đơn</title>
 
 @section('content')
 @include('sweetalert::alert')
@@ -31,7 +32,7 @@
                             </div>
                         </div>
                     </form>
-                    <form class="row-md-12" action="{{ route('searchloc')}}" method="GET"> 
+                    <form class="row-md-12" action="{{ route('searchloc')}}" method="GET">
                         <div class="col-md-12">
                             <span style="font-size:16px;">Lọc Theo Trạng Thái: </span>
                             <button name="trangthai" type="submit" class="btn bg-success" value="">

@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
+<title>Cake KingForest - Sản phẩm</title>
 
 @section('content')
 <div class="content">

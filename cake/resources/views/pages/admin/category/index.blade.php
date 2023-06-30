@@ -2,6 +2,7 @@
     'class' => '',
     'elementActive' => 'category',
 ])
+<title>Cake KingForest - Loại sản phẩm</title>
 @section('content')
     @include('sweetalert::alert')
     <div class="content">
@@ -26,6 +27,9 @@
                                         Tên loại sản phẩm
                                     </th>
                                     <th>
+                                        Số sản phẩm
+                                    </th>
+                                    <th>
                                         Chức năng
                                     </th>
                                 </thead>
@@ -33,6 +37,7 @@
                                     @foreach ($lsUsers as $item)
                                         <tr>
                                             <td class="col-md-4">{{ $item->tenloaisp }}</td>
+                                            <td class="col-md-4">{{ $item->count }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <a href="{{ route('category.edit.form', $item->id) }}" type="button"

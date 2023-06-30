@@ -7,6 +7,7 @@ use App\Http\Requests\StoreloaisanphamRequest;
 use App\Http\Requests\UpdateloaisanphamRequest;
 use App\Models\sanpham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Constraint\Count;
 
 class LoaisanphamController extends Controller
@@ -14,9 +15,18 @@ class LoaisanphamController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected function data()
+    {
+       return DB::table('loaisanphams')
+        ->leftJoin('sanphams','loaisanphams.id','=','sanphams.loaisanpham_id')
+        ->whereNull('sanphams.deleted_at')->whereNull('loaisanphams.deleted_at')
+        ->select('tenloaisp',DB::raw('COUNT(sanphams.id) as count'),'loaisanphams.id as id')
+        ->groupBy('loaisanphams.tenloaisp','loaisanphams.id')->orderBy('loaisanphams.id')
+        ->get();
+    }
     public function index()
     {
-        $lsUsers = Loaisanpham::all();
+        $lsUsers = $this->data();
         return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
     }
 
@@ -86,13 +96,16 @@ class LoaisanphamController extends Controller
         $product = sanpham::where('loaisanpham_id',$id)->value('id');
         if($product!=null)
         {
-            alert()->warning('Thông báo', 'Loại sản phẩm đang hoạt động!');
-            return redirect()->back();
+            $lsUsers = $this->data();
+            alert()->warning('Thông báo', 'Loại sản phẩm đang được sử dụng!');
+            return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
         }
         $category = loaisanpham::find($id);
         if($category){
             $category->delete();
-        return redirect()->back();
-         }
+            $lsUsers = $this->data();
+            alert()->success('Thông báo', 'Xóa thành công!');
+            return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
+        }
     }
 }

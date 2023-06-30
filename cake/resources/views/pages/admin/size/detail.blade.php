@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
+<title>Cake KingForest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
@@ -40,7 +41,7 @@
                         </div>
                         <div class="col-md-9 form-group mb-3">
                             <label>{{ $sanpham->mota }}</label>
-                        </div>  
+                        </div>
                         <div class="col-md-3">
                             <label>Giá Tiền</label>
                         </div>

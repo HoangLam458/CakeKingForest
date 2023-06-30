@@ -2,9 +2,12 @@
     'class' => '',
     'elementActive' => 'user'
 ])
-
+<title>Cake KingForest - Tài khoản</title>
 @section('content')
 @include('sweetalert::alert')
+@php
+    Session::put('urlback', url()->full());
+@endphp
 <div class="content">
     <div class="row">
         <div class="col-md-12">

@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
+<title>Cake KingForest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
@@ -23,7 +24,7 @@
                                     Phần Trăm tăng
                                 </th>
                                 <th>
-                                    Ch
+                                    Chức năng
                             </thead>
                             <tbody>
                                 @foreach ( $lsSize as $item )
@@ -32,7 +33,7 @@
                                     <td class="text-bold-500">{{ $item->phantram }} %</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                           
+
                                             <a href="{{ route('size.edit.form', $item->id) }}" type="button"
                                                 class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

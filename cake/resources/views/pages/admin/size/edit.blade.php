@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
+<title>Cake KingForest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
@@ -21,7 +22,7 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                  
+
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
@@ -49,15 +50,15 @@
 
                                 </div>
                             </form>
-                            
+
                         </div>
                     </div>
                     <a href="{{ route('size.index') }}" type="button" class="btn btn-secondary"> Back to list
-    </a>    
+    </a>
                 </div>
             </div>
         </div>
     </section>
-    
+
 </div>
 @endsection

@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
+<title>Cake KingForest - Sản phẩm</title>
 
 <header>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
@@ -115,8 +116,7 @@
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
                                             <a href="{{ route('sanpham.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}"
+                                                class="btn btn-danger"
                                                 onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

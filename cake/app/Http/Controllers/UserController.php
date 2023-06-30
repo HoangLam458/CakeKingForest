@@ -6,14 +6,18 @@ use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use App\Models\loaisanpham;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
     public function index()
     {
+
         $lsUsers = User::all();
         return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
     }
@@ -28,6 +32,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+
         return view('pages.admin.accounts.create');
     }
 
@@ -36,8 +41,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $check = User::where('email', $request->get('email'))->value('id');
         if ($check != Null) {
             alert()->warning('Thông báo', 'Email đã tồn tại');
@@ -52,9 +55,8 @@ class UserController extends Controller
         $user->loai = $request->get('admin');
         $user->trangthai = 1;
         $user->save();
-        $lsUsers = User::all();
         alert()->success('Thông báo', 'Tạo tài khoản mới thành công');
-        return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
+        return view('pages.admin.accounts.create');
     }
 
     /**
@@ -104,19 +106,19 @@ class UserController extends Controller
         $user->sdt = $request->get('phone');
         $user->diachi = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
-
         $user->save();
-
-        return redirect()->route('user.index');
+        $user = User::find($id);
+        alert()->success('Thông báo', 'Cập nhật thành công');
+        return view('pages.admin.accounts.edit', [
+            'staff' => $user
+        ]);
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
         $user = User::find($id);
-
         if ($user) {
             $invoice = hoadon::where('users_id', $user->id)->get();
             foreach ($invoice as $item) {
@@ -124,7 +126,9 @@ class UserController extends Controller
                 $item->save();
             }
             $user->delete();
-            return redirect()->back();
+            $lsUsers = User::all();
+            alert()->success('Thông báo', 'Xóa tài khoản thành công');
+            return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
         }
     }
     public function logout(Request $request)

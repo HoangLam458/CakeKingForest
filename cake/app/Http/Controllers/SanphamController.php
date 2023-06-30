@@ -170,7 +170,7 @@ class SanphamController extends Controller
     //tìm sản phẩm user
     public function searchpr()
     {
-        $act = 0;        
+        $act = 0;
         $key = $_GET['key'];
         $category = loaisanpham::all();
         $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
@@ -212,13 +212,13 @@ class SanphamController extends Controller
             return redirect()->back();
         }
         $loaisanpham = loaisanpham::all();
-        $loc = $_GET['loaibanh'];  
+        $loc = $_GET['loaibanh'];
         $lsSanpham = sanpham::where('loaisanpham_id', $loc)->Paginate(2)->withQueryString();
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
     //tìm sản phẩm admin
     public function searchprad()
-    { 
+    {
         $key = $_GET['key'];
         $loaisanpham = loaisanpham::all();
         $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(10)->withQueryString();

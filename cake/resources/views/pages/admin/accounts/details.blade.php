@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-
+<title>Cake KingForest - Tài khoản</title>
 @section('content')
 <div class="content">
     <div class="row">

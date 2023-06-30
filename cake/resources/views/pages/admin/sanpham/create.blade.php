@@ -2,6 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
+<title>Cake KingForest - Sản phẩm</title>
 
 @section('content')
 <div class="content">
@@ -71,9 +72,9 @@
                                     <div class="col-md-6 col-12">
                                     <div class="mb-3">
                 <label class="form-label" for="inputImage">Hình Ảnh</label>
-                <input 
-                    type="file" 
-                    name="image" 
+                <input
+                    type="file"
+                    name="image"
                     id="inputImage"
                     class="form-control @error('image') is-invalid @enderror">
                                @error('image')

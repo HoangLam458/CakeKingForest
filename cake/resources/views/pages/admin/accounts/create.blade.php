@@ -2,6 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
+<title>Cake KingForest - Tài khoản</title>
 @section('content')
 @include('sweetalert::alert')
 <div class="content">
