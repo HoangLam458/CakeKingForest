@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sanphams', function (Blueprint $table) {
             $table->id();
-            $table->string('tensp',255);
+            $table->string('tensp',255)->unique();
             $table->text('mota');
             $table->string('hinhanh',255);
             $table->unsignedInteger('giatien');

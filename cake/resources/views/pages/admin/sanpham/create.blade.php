@@ -15,30 +15,33 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="{{ route('sanpham.store') }}" method="POST" class="form" enctype="multipart/form-data">
+                            <form action="{{ route('sanpham.store') }}" method="POST" class="form"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="mb-3">
-                                        <label class="form-label" for="inputImage">Hình ảnh</label>
-                                        <input
-                                            type="file"
-                                            name="image"
-                                            id="inputImage"
-                                            class="form-control @error('image') is-invalid @enderror">
-
-                                        @error('image')
+                                            <label class="form-label" for="inputImage">Hình ảnh</label>
+                                            <input type="file" name="image" id="inputImage"
+                                                class="form-control @error('image') is-invalid @enderror">
+                                            @error('image')
                                             <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                            @enderror
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-10">
-                                        <div class="form-group">
+                                        <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Bánh</label>
-                                            <input required maxlength="255" type="text" id="first-name-column"
-                                                class="form-control" name="tensp">
+                                            <input name="tensp" required maxlength="255" type="text" id="first-name-column"class="form-control" >
+                                          
+                                            @if ($errors->has('tensp'))
+                                           
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('tensp') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -67,9 +70,7 @@
                                                 type="number" id="last-name-column" class="form-control" name="giatien">
                                         </div>
                                     </div>
-<<<<<<< HEAD
-=======
-                                    <div class="col-md-6 col-12">
+                                    <!-- <div class="col-md-6 col-12">
                                     <div class="mb-3">
                 <label class="form-label" for="inputImage">Hình Ảnh</label>
                 <input
@@ -82,21 +83,20 @@
                 @enderror
             </div>
                                     </div>
->>>>>>> hoanglam
+                                </div> -->
+                                    <hr />
+                                    <div class="col-12 d-flex justify-content-end mt-2">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <a onclick="location.reload();" type="reset"
+                                            class="btn btn-light-secondary me-1 mb-1">Reset</a>
+                                    </div>
                                 </div>
-                                <hr />
-                                <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                    <a onclick="location.reload();" type="reset"
-                                        class="btn btn-light-secondary me-1 mb-1">Reset</a>
-                                </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
-</div>
-</section>
+    </section>
 </div>
 @endsection

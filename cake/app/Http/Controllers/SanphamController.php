@@ -42,6 +42,29 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time() . '.' . $extension;
+        //     $file->move('images/', $filename);
+        //     $file= $filename;
+        // }
+        // if ($request->hasFile('image') == null) {
+        //     $file = 'Default.jpg';
+        // }
+        // $file = 
+        // SanPham::create(
+        //     [
+        //         'tensp'=>$request->get('tensp'),
+        //         'mota'=>$request->get('mota'),
+        //         'giatien'=>$request->get('giatien'),
+        //         'loaisanpham_id'=>$request->get('loaisanpham_id'),
+        //         'cau_tra_loi_4'=>$request->cau_tra_loi_4,
+        //         'dap_an' =>$request ->dap_an,
+        //         'trang_thai'=> 1,
+        //         'hinhanh'=>$file
+        //     ]
+        // );
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
         $sanphams->mota = $request->input('mota');
