@@ -29,7 +29,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Trang chủ</a></span>
-                    <span>Cart</span>
+                    <span>Giỏ hàng</span>
                 </p>
                 <h1 class="mb-0 bread">Giỏ hàng</h1>
             </div>
@@ -88,7 +88,6 @@
                             <form action="{{ route('update', $lsCart->idchitiet) }}" method="POST" class="form"
                                 enctype="multipart/form-data">
                                 @csrf
-
                                 <tr class="text-center">
                                     <div class="flash-message">
                                         @if(Session::has('maxcart'))
@@ -99,14 +98,17 @@
                                     <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span
                                                 class="ion-ios-close"></span></a></td>
                                     <td class="image-prod">
-                                        <div class="img"
-                                            style="background-image:url({{ asset('/images/' . $lsCart->img) }});">
+                                        <div >
+                                        <a class="img" style="background-image:url({{ asset('/images/' . $lsCart->img) }});"
+                                            href="{{ route('shop.detail', $lsCart->id_sp) }}"
+                                            >
+                                        </a>
                                         </div>
                                     </td>
                                     <td class="product-name">
                                         <h3>{{ $lsCart->tensanpham }}</h3>
                                     </td>
-                                    <td class="price">{{ number_format($lsCart->giaban) }} VND</td>
+                                    <td class="price">{{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }} VND</td>
 
                                     <td class="col-md-2">
                                         <select name="size_id" id="selectBasic" class="form-control">
@@ -191,24 +193,7 @@
     </div>
 </section>
 
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-    <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-            <div class="col-md-6">
-                <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                <span>Get e-mail updates about our latest shops and special offers</span>
-            </div>
-            <div class="col-md-6 d-flex align-items-center">
-                <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                        <input type="text" class="form-control" placeholder="Enter email address">
-                        <input type="submit" value="Subscribe" class="submit px-3">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+
 <script src="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js') }}"></script>
 <script
     src="{{ asset('http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js') }}">

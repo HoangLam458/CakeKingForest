@@ -106,43 +106,5 @@
                 </td>
             </tr>
         </table>
-        <!-- Content End -->
-
-        <!-- Footer Start -->
-        {{-- <div class="bg-gray-dark footer" bgcolor="#464646" height="165" style="background-color: #464646; width: 100%;">
-            <table align="center" bgcolor="#464646" style="max-width: 600px; width: 100%;">
-
-                <tr height="15"><td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td></tr>
-
-                <tr>
-                    <td align="center" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
-                        <img src="http://dgtlmrktng.s3.amazonaws.com/go/emails/generic-email-template/logo.png" alt="GO" width="50" style="border: 0; font-size: 0; margin: 0; max-width: 100%; padding: 0;">
-                    </td>
-                </tr>
-
-                <tr height="2"><td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td></tr>
-
-                <tr>
-                    <td align="center" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
-                        <p class="text-white" style="color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 22px; margin: 0;">Copyright © GO p.l.c. 2018. All rights reserved.</p>
-                        <p class="text-primary" style="color: #F16522; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 22px; margin: 0;">
-                        </p>
-                    </td>
-                </tr>
-
-                <tr height="15"><td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td></tr>
-
-                <tr>
-                    <td align="center" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
-                        <a href="https://www.facebook.com/go.com.mt" style="-webkit-text-decoration-color: #464646; color: #F16522; text-decoration: none; text-decoration-color: #464646;"><img width="25" htight="25" src="http://dgtlmrktng.s3.amazonaws.com/go/emails/generic-email-template/fb.png" target="_blank" alt="Facebook" style="border: 0; font-size: 0; margin: 0; max-width: 100%; padding: 0;"></a>&nbsp;
-                        <a href="https://www.youtube.com/user/gomaltachannel" style="-webkit-text-decoration-color: #464646; color: #F16522; text-decoration: none; text-decoration-color: #464646;"><img width="25" htight="25" src="http://dgtlmrktng.s3.amazonaws.com/go/emails/generic-email-template/youtube.png" target="_blank" alt="Youtube" style="border: 0; font-size: 0; margin: 0; max-width: 100%; padding: 0;"></a>&nbsp;
-                        <a href="https://www.linkedin.com/company/mobis/?trk=prof-following-company-logo" style="-webkit-text-decoration-color: #464646; color: #F16522; text-decoration: none; text-decoration-color: #464646;"><img width="25" htight="25" src="http://dgtlmrktng.s3.amazonaws.com/go/emails/generic-email-template/linkedin.png" target="_blank" alt="LinkedIn" style="border: 0; font-size: 0; margin: 0; max-width: 100%; padding: 0;"></a>&nbsp;
-                    </td>
-                </tr>
-                <tr height="10"><td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td></tr>
-
-            </table>
-        </div> --}}
-        <!-- Footer End -->
     </body>
 </html>

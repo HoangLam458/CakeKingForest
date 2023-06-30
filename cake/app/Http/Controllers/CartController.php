@@ -48,6 +48,7 @@ class CartController extends Controller
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
+                    'sanphams.id as id_sp',
                     'sanphams.giatien as giaban',
                     'sizes.id as idsize',
                     'sizes.tensize as s_name',
@@ -93,6 +94,7 @@ class CartController extends Controller
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
+                    'sanphams.id as id_sp',
                     'sanphams.giatien as giaban',
                     'sizes.id as idsize',
                     'sizes.tensize as s_name',
@@ -367,7 +369,6 @@ class CartController extends Controller
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
                 Session::put('hd_ma',$user->mahd);
-                Session::forget('resultCode');
                 Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$email);
             }
@@ -382,7 +383,7 @@ class CartController extends Controller
                 $user->diachigiaohang = Session::get('data')['diachigiaohang'];
                 $user->ngaynhanhang = Carbon::createFromFormat('d-m-Y', Session::get('data')['date'])->format('Y-m-d');
                 $user->hinhthucnhanhang = Session::get('data')['ship'];
-                $user->phuongthucthanhtoan = 'Tiền mặt';
+                $user->phuongthucthanhtoan = 'Tiền Mặt';
                 $user->trangthai = 1;
                 $user->save();
                 $request->cookie('code');
@@ -397,7 +398,6 @@ class CartController extends Controller
                 Session::forget('cate');
                 Session::put('mahd',$user->id);
                 Session::put('hd_ma',$user->mahd);
-                Session::forget('resultCode');
                 Session::put('pttt','Tiền Mặt');
                 return redirect()->route('sendemailpay',$email);
             }
