@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatesanphamRequest;
 use App\Models\loaisanpham;
 use App\Models\sanpham;
 use App\Http\Requests\StoresanphamRequest;
@@ -42,29 +43,6 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $extension;
-        //     $file->move('images/', $filename);
-        //     $file= $filename;
-        // }
-        // if ($request->hasFile('image') == null) {
-        //     $file = 'Default.jpg';
-        // }
-        // $file = 
-        // SanPham::create(
-        //     [
-        //         'tensp'=>$request->get('tensp'),
-        //         'mota'=>$request->get('mota'),
-        //         'giatien'=>$request->get('giatien'),
-        //         'loaisanpham_id'=>$request->get('loaisanpham_id'),
-        //         'cau_tra_loi_4'=>$request->cau_tra_loi_4,
-        //         'dap_an' =>$request ->dap_an,
-        //         'trang_thai'=> 1,
-        //         'hinhanh'=>$file
-        //     ]
-        // );
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
         $sanphams->mota = $request->input('mota');
@@ -122,14 +100,13 @@ class SanphamController extends Controller
             }
             return redirect()->back();
         }
-
         return redirect()->back();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdatesanphamRequest $request, $id)
     {
         $sanpham = Sanpham::find($id);
         $sanpham->tensp = $request->get('tensp');
@@ -146,7 +123,7 @@ class SanphamController extends Controller
             $filename = time() . '.' . $extension;
             $file->move('images/', $filename);
             $sanpham->hinhanh = $filename;
-        }
+        }   
         $sanpham->save();
         return redirect()->back()->with('status', 'Cập nhật thành công');
 

@@ -71,7 +71,6 @@ class SizeController extends Controller
         $size = Size::find($id);
         $size->tensize = $request->get('tensize');
         $size->phantram= $request->get('phantram');
-       
         $size->save();
         return redirect()->back()->with('status','Cập nhật thành công');
     }

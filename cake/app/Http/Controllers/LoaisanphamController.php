@@ -41,18 +41,13 @@ class LoaisanphamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreloaisanphamRequest $request)
     {
-        $this->validate($request,[
-            'tenloaisp'=>'unique:loaisanphams',
-        ]);
-        $request = $request->all();
         Loaisanpham::create([
-            'tenloaisp'=> $request['name'],
+            'tenloaisp'=> $request['tenloaisp'],
             'trangthai'=> 1
         ]);
-
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('status','Cập nhật thành công');
     }
 
     /**
@@ -83,9 +78,12 @@ class LoaisanphamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateloaisanphamRequest $request, loaisanpham $loaisanpham)
+    public function update(UpdateloaisanphamRequest $request, $id)
     {
-        //
+        $category = loaisanpham::find($id);
+        $category->tenloaisp = $request->get('tenloaisp');
+        $category->save();
+        return redirect()->back()->with('status','Cập nhật thành công');
     }
 
     /**

@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\chitiethoadon;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\hoadon;
 use App\Models\loaisanpham;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
-use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -41,13 +39,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $check = User::where('email', $request->get('email'))->value('id');
-        if ($check != Null) {
-            alert()->warning('Thông báo', 'Email đã tồn tại');
-            return view('pages.admin.accounts.create');
-        }
         $user = new User;
         $user->tenkhachhang = $request->input('name');
         $user->email = $request->input('email');
@@ -57,7 +50,6 @@ class UserController extends Controller
         $user->loai = $request->get('admin');
         $user->trangthai = 1;
         $user->save();
-        alert()->success('Thông báo', 'Tạo tài khoản mới thành công');
         return view('pages.admin.accounts.create');
     }
 
@@ -99,7 +91,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateuserRequest $request, $id)
     {
         $user = User::find($id);
         if ($request->get('password') != null) {
@@ -110,7 +102,6 @@ class UserController extends Controller
         $user->tenkhachhang = $request->get('fullname');
         $user->save();
         $user = User::find($id);
-        alert()->success('Thông báo', 'Cập nhật thành công');
         return view('pages.admin.accounts.edit', [
             'staff' => $user
         ]);
@@ -128,7 +119,6 @@ class UserController extends Controller
                 $item->save();
             }
             $user->delete();
-            Session::put('success','Xóa thành công!');
             return redirect()->back();
         }
     }
@@ -149,7 +139,7 @@ class UserController extends Controller
             'category' => $category
         ]);
     }
-    public function User_update(Request $request, $id)
+    public function User_update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
         $user->sdt = $request->get('phone');

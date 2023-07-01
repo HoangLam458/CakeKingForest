@@ -20,13 +20,16 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
-                                        <div class="mb-3">
+                                        <div class="mb-3 {{ $errors->has('image') ? ' has-danger' : '' }}">
                                             <label class="form-label" for="inputImage">Hình ảnh</label>
                                             <input type="file" name="image" id="inputImage"
                                                 class="form-control @error('image') is-invalid @enderror">
-                                            @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @if ($errors->has('image'))
+
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('image') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -34,10 +37,11 @@
                                     <div class="col-md-6 col-10">
                                         <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Bánh</label>
-                                            <input name="tensp" required maxlength="255" type="text" id="first-name-column"class="form-control" >
-                                          
+                                            <input name="tensp" value="{{old('tensp')}}" required maxlength="255"
+                                                minlength="15" type="text" id="first-name-column" class="form-control">
+
                                             @if ($errors->has('tensp'))
-                                           
+
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('tensp') }}</strong>
                                             </span>
@@ -48,8 +52,15 @@
                                         <div class="form-group">
                                             <label class="mb-2">Loại Bánh</label>
                                             <select class="form-control" name="loaisanpham_id" id="basicSelect">
+
                                                 @foreach ($loaisanpham as $lsanpham)
-                                                <option value="{{ $lsanpham->id }}"> {{ $lsanpham->tenloaisp }}</option>
+                                                @if (old('loaisanpham_id'))
+                                                <option value="{{ $lsanpham->id }}"
+                                                    {{$lsanpham->id == old('loaisanpham_id') ? 'selected' : '' }}>
+                                                    {{ $lsanpham->tenloaisp }}</option>
+                                                @else
+                                                <option value="{{ $lsanpham->id }}">{{ $lsanpham->tenloaisp }}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -57,17 +68,28 @@
                                 </div>
                                 <div class="row ">
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
+                                        <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Mô Tả</label>
-                                            <textarea required name="mota" class="form-control"
-                                                id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea required name="mota" class="form-control" maxlength="255"
+                                                minlength="50"
+                                                id="exampleFormControlTextarea1">{{old('mota')}}</textarea>
+                                            @if ($errors->has('mota'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('mota') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
+                                        <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Giá Tiền</label>
-                                            <input required value="80000" min="80000" max="2000000" step="1000"
-                                                type="number" id="last-name-column" class="form-control" name="giatien">
+                                            <input required value="{{old('giatien')?old('giatien'):10000}}" min="10000" step="1000" type="number"
+                                                id="last-name-column" class="form-control" name="giatien">
+                                            @if ($errors->has('giatien'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('giatien') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-6 col-12">
