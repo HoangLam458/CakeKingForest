@@ -152,7 +152,6 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-
         var quantitiy = 0;
         $('.quantity-right-plus').click(function (e) {
 

@@ -18,9 +18,14 @@
                                  @csrf
                                  <div class="row">
                                      <div class="col-md-6 col-12">
-                                         <div class="form-group">
+                                         <div class="form-group{{ $errors->has('tenloaisp') ? ' has-danger' : '' }}">
                                              <label class="mb-2" for="first-name-column" style="font-size:15px">Tên loại sản phẩm</label>
-                                             <input required maxlength="255" type="text" id="first-name-column" class="form-control" name="name">
+                                             <input required minlength="15" maxlength="255" value="{{old('tenloaisp')}}"  type="text" id="first-name-column" class="form-control" name="tenloaisp">
+                                             @if ($errors->has('tenloaisp'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('tenloaisp') }}</strong>
+                                            </span>
+                                            @endif
                                          </div>
                                      </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">

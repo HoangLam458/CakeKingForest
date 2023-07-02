@@ -40,7 +40,6 @@ class ProfileController extends Controller
     public function password(PasswordRequest $request)
     {
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
-
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+        return redirect()->back()->with('status','Cập nhật mật khẩu thành công');
     }
 }

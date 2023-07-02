@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatehoadonRequest;
 use App\Models\hoadon;
 use App\Models\loaisanpham;
 use Illuminate\Http\Request;
@@ -147,13 +148,12 @@ class PaymentController extends Controller
         exit();
 
     }
-    public function getdata(Request $request)
+    public function getdata(UpdatehoadonRequest $request)
     {
         $currentTime = Carbon::now();
         $category = loaisanpham::all();
         if(Session::has('data')) Session::forget('data');
         Session::put('data',$request->all());
-
         if(auth()->user())
         {
             $lstCart = hoadon::where('users_id', auth()->user()->id)
