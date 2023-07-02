@@ -128,6 +128,4 @@
          </div>
      </section>
  </div>
- <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary"> Back to list
-</a>
 @endsection

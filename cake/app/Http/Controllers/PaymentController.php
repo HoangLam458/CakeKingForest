@@ -40,7 +40,6 @@ class PaymentController extends Controller
     public function momo_payment(Request $request)
     {
         if(Session::has('path')) Session::forget('path');
-        // Session::put('data',$request->all());
         $email = (string)Session::get('data')['email'];
         if(auth()->user() == null)
         {
@@ -85,9 +84,9 @@ class PaymentController extends Controller
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true); // decode json
-        Session::save();
         //Just a example, please check more in there
-        return redirect()->to($jsonResult['payUrl']);
+        $test = $jsonResult['payUrl'];
+        return redirect()->to($test);
         // header('Location: ' . $jsonResult['payUrl']);
 
     }

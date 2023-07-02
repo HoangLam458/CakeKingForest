@@ -201,6 +201,16 @@
                                     <label style="font-size:15px"> {{ $u->phuongthucthanhtoan }}</label>
                                 </div>
                             </div>
+                            @if($u->phuongthucthanhtoan != "Tiền Mặt")
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label style="font-size:15px">Mã giao dịch</label>
+                                </div>
+                                <div class="col-md-7 form-group mb-3">
+                                    <label style="font-size:15px"> {{ $u->trans_id}}</label>
+                                </div>
+                            </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-5">
                                     <label style="font-size:15px">Trạng thái hóa đơn</label>
