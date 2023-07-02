@@ -10,11 +10,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách kích thước bánh</h4>
-                    <a href="{{ route('size.create') }}" type="button" class="btn btn-primary"> Thêm kích thước</a>
+                    <div class="row">
+                        <h4 class="card-title col-md-9"> Danh sách kích thước bánh</h4>
+                        <a href="{{ route('size.create') }}" type="button" class="btn btn-primary"> Thêm kích thước</a>
+                    </div>
                 </div>
                 <div class="card-body">
-                <div class="flash-message">
+                    <div class="flash-message">
                         @if(Session::has('success'))
                         <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
                                 data-dismiss="alert" aria-label="close">&times;</a></p>
@@ -51,8 +53,10 @@
                                                 </svg>
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
-                                            <a href="{{ route('size.delete', $item->id) }}" type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}" onclick="return checkDelete()">
+                                            <a href="{{ route('size.delete', $item->id) }}" type="button"
+                                                class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#animation-{{ $item->id }}"
+                                                onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path
@@ -71,10 +75,11 @@
             </div>
         </div>
         <header>
-  <script language="JavaScript" type="text/javascript">
-    function checkDelete(){
-        return confirm('Bạn có chắc chắn muốn xóa');
-    }
-  </script>
-</header>
+            <script language="JavaScript" type="text/javascript">
+                function checkDelete() {
+                    return confirm('Bạn có chắc chắn muốn xóa');
+                }
+
+            </script>
+        </header>
         @endsection

@@ -23,20 +23,23 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required', 'min:3'
-            ],
-            // 'email' => [
-            //     'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-            // ],
-            'email'=>['required','unique:users'],
-            'password' => [
-                $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
-            ]
+            'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
+            'fullname'=>['required','min:7','max:50'],
+            'address'=>['required','min:10','max:255'],
         ];
-        
     }
     public function messages(){
-        return ['email.required'=>'Email đã được sử dụng'];
+        return [
+            'phone.regex'=>'Sổ điện thoại không đúng định dạng',
+            'phone.required'=>'Sổ điện thoại không được bỏ trống',
+            'phone.min'=>'Sổ điện thoại phải 10 số',
+            'phone.max'=>'Sổ điện thoại phải 10 số',
+            'fullname.required'=>'Họ tên không được bỏ trống',
+            'fullname.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
+            'fullname.max'=>'Độ dài họ tên tối đa 50 kí tự',
+            'address.required'=>'Địa chỉ không được bỏ trống',
+            'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',
+            'address.max'=>'Độ dài địa chỉ tối đa 255 kí tự',
+        ];
     }
 }

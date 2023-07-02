@@ -50,7 +50,7 @@ class UserController extends Controller
         $user->loai = $request->get('admin');
         $user->trangthai = 1;
         $user->save();
-        return view('pages.admin.accounts.create');
+        return redirect()->route('user.index')->with('status','Thêm tài khoản thành công');
     }
 
     /**
@@ -91,20 +91,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateuserRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
-        if ($request->get('password') != null) {
-            $user->password = bcrypt($request->get('password'));
-        }
         $user->sdt = $request->get('phone');
         $user->diachi = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
         $user->save();
-        $user = User::find($id);
-        return view('pages.admin.accounts.edit', [
-            'staff' => $user
-        ]);
+        return redirect()->back()->with('status','Cập nhật tài khoản thành công');
     }
     /**
      * Remove the specified resource from storage.
@@ -146,7 +140,7 @@ class UserController extends Controller
         $user->diachi = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
         $user->save();
-        return redirect()->route('trang-ca-nhan', $id);
+        return redirect()->back()->with('status','Cập nhật thông tin tài khoản thành công');
     }
 
 

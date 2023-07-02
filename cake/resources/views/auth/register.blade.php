@@ -42,7 +42,7 @@
                                 </span>
                                 @endif
                             </div>
-                            <div class="input-group">
+                            <div class="input-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -54,8 +54,13 @@
                                     </span>
                                 </div>
                                 <input pattern="(\+84|0)\d{9,10}" maxlength="10" minlength="10" value="{{ old('phone') }}" name="phone" class="form-control" placeholder="Số điện thoại" required>
+                                @if ($errors->has('phone'))
+                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                                @endif
                             </div>
-                            <div class="input-group">
+                            <div class="input-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -67,7 +72,12 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <textarea  maxlength="255" rows="1" value="{{ old('address') }}" name="address" class="form-control" placeholder="Địa chỉ" required></textarea>
+                                <textarea  maxlength="255" rows="1" value="{{ old('address') }}" name="address" class="form-control" placeholder="Địa chỉ" required>{{old('address')}}</textarea>
+                                @if ($errors->has('address'))
+                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                 <div class="input-group-prepend">

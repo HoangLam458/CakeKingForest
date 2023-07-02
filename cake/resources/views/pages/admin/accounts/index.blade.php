@@ -12,22 +12,27 @@
     </style>
 </header>
 @section('content')
-@include('sweetalert::alert')
-@php
-    Session::put('urlback', url()->full());
-@endphp
 <div class="content">
     <div class="row">
         <div class="col-md-12">
+            @if(session('status'))
+            <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                    data-dismiss="alert">&times;</button></h6>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách tài khoản</h4>
+
+                    <div class="row">
+
+                        <h4 class="card-title col-md-9"> Danh sách tài khoản</h4>
+
+                        <a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary">Thêm tài khoản
+                            mới</a>
+                    </div>
+
                     <div class="row col-md-5 text-center">
-                        <a href="{{ route('user.create.form') }}" type="button" class="btn btn-round btn-primary">
-                          Thêm tài khoản mới
-                        </a>
                         <div class="dropdown dropright">
-                            <button style="margin-top: 15px;" class="btn btn-primary btn-round dropdown-toggle"
+                            <button style="margin-top: 15px;" class="btn btn-primary dropdown-toggle"
                                 type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 Lọc theo

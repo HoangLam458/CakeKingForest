@@ -7,20 +7,18 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-                @if(session('status'))
-                <h6 class="alert alert-success">{{session('status')}} <button class="close"
-                        data-dismiss="alert">&times;</button></h6>
-                @endif
+            @if(session('status'))
+            <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                    data-dismiss="alert">&times;</button></h6>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Danh sách loại sản phẩm</h4>
-                    <a href="{{ route('category.create.form') }}" type="button" class="btn btn-round btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-plus" viewBox="0 0 16 16">
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                    </a>
+                    <div class="row">
+                        <h4 class="card-title col-md-9"> Danh sách các loại bánh</h4>
+                        <a href="{{ route('category.create.form') }}" type="button" class="btn btn-primary"> Thêm loại
+                            bánh
+                            mới</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

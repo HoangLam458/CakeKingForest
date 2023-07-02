@@ -52,22 +52,25 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => [
-                'required', 'min:3'
-            ],
+            'name' => ['required', 'min:7','max:50'],
+            'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
             'email'=>['required','unique:users'],
-            'password' => [
-                'required', 'confirmed', 'min:6','max:16'
-            ]
+            'password' => ['required', 'min:6','max:16','confirmed'],
+            'address'=>['required','min:10','max:255'],
             ],
         [
-            'name.required' => 'Họ tên không được bỏ trống',
+            'name.required'=>'Họ tên không được bỏ trống',
+            'name.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
+            'name.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'email.unique' =>'Email này đã được sử dụng',
             'email.required' => 'Email không được bỏ trống',
-            'password.required' => 'Mật khẩu không được bỏ trống',
             'password.confirmed' => 'Mật khẩu nhập lại không chính xác',
-            'password.min' => 'Mật khẩu phải dài hơn 6 kí tự',
-            'password.max' => 'Mật khẩu phải ngắn hơn 16 kí tự',
+            'password.required' => 'Mật khẩu không được bỏ trống',
+            'password.min' => 'Độ dài mật khẩu tối thiểu 6 kí tự',
+            'password.max' => 'Độ dài mật khẩu tối đa 16 kí tự',
+            'address.required'=>'Địa chỉ không được bỏ trống',
+            'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',
+            'address.max'=>'Độ dài địa chỉ tối đa 255 kí tự',
         ]);
     }
 
