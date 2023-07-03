@@ -4,6 +4,8 @@
 ])
 <title>Cake KingForest - Sản phẩm</title>
 
+
+@section('content')
 <header>
     <style>
         .pagination {
@@ -12,7 +14,6 @@
 
     </style>
 </header>
-@section('content')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -144,9 +145,9 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
             integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {

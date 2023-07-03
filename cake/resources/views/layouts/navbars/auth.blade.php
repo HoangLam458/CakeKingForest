@@ -49,7 +49,7 @@
             </li>
             <li class="{{ $elementActive == 'contact' ? 'active' : '' }}">
                 <a href="{{ route('contact.index', 'admin_index') }}">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="nc-icon nc-support-17"></i>
                     <p>{{ __('Phản hồi') }}</p>
                 </a>
             </li>

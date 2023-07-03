@@ -73,7 +73,7 @@
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
                                                 <label class="mb-2" for="last-name-column">Giá Tiền</label>
                                                 <input value="{{old('giatien')? old('giatien'):$sanpham->giatien }}"
-                                                    required value="10000" min="10000" max="2000000" step="1000"
+                                                    required value="100000" min="100000" max="2000000" step="10000"
                                                     type="number" id="last-name-column" class="form-control"
                                                     name="giatien">
                                                 @if ($errors->has('giatien'))

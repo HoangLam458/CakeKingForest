@@ -24,7 +24,7 @@ class UpdatesanphamRequest extends FormRequest
         return [
             'tensp'=>'required|min:15|max:255|unique:sanphams,tensp,'.$this->id,
             'mota'=>['required','max:255','min:50'],
-            'giatien'=> 'required|numeric|between:10000,2000000',
+            'giatien'=> 'required|numeric|between:100000,2000000',
         ];
     }
     public function messages(){
@@ -37,7 +37,7 @@ class UpdatesanphamRequest extends FormRequest
             'mota.max'=>'Độ dài mô tả tối đa 255 kí tự',
             'mota.min'=>'Độ dài mô tả tối thiểu 50 kí tự',
             'giatien.required'=>'Giá tiền không được bỏ trống',
-            'giatien.between'=>'Giá tiền phải tối thiểu 10.000 và tối đa 2.000.000',
+            'giatien.between'=>'Giá tiền phải tối thiểu 100.000 và tối đa 2.000.000',
         ];
     }
 }

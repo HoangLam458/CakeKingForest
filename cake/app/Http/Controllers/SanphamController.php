@@ -43,6 +43,26 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
+        $pro = sanpham::where('tensp',$request->get('tensp'))->withTrashed()->first();
+        if($pro)
+        {
+            $pro->mota = $request->input('mota');
+            $pro->giatien = $request->input('giatien');
+            $pro->loaisanpham_id = $request->input('loaisanpham_id');
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('images/', $filename);
+                $pro->hinhanh = $filename;
+            }
+            if ($request->hasFile('image') == null) {
+                $pro->hinhanh = 'Default.jpg';
+            }
+            $pro->deleted_at = Null;
+            $pro->save();
+            return redirect()->route('sanpham.index');
+        }
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
         $sanphams->mota = $request->input('mota');
@@ -123,7 +143,7 @@ class SanphamController extends Controller
             $filename = time() . '.' . $extension;
             $file->move('images/', $filename);
             $sanpham->hinhanh = $filename;
-        }   
+        }
         $sanpham->save();
         return redirect()->back()->with('status', 'Cập nhật thành công');
 
