@@ -258,5 +258,6 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
         Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
         Route::get('/manages/sanpham/searchsp', [SanphamController::class, 'searchprad'])->name('searchad');
+        Route::get('/manages/user/searchur', [UserController::class, 'searchuser'])->name('searchuser');
     });
 });

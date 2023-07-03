@@ -21,15 +21,21 @@
             @endif
             <div class="card">
                 <div class="card-header">
-
                     <div class="row">
-
                         <h4 class="card-title col-md-9"> Danh sách tài khoản</h4>
-
                         <a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary">Thêm tài khoản
                             mới</a>
                     </div>
-
+                    <form action="{{ route('searchuser')}}" method="GET">
+                    <div class="input-group no-border">
+                        <input type="text" value="" name="key" class="form-control col-md-3" placeholder="Tìm tài khoản...">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="nc-icon nc-zoom-split"></i>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                     <div class="row col-md-5 text-center">
                         <div class="dropdown dropright">
                             <button style="margin-top: 15px;" class="btn btn-primary dropdown-toggle"

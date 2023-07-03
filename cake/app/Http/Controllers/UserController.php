@@ -142,6 +142,11 @@ class UserController extends Controller
         $user->save();
         return redirect()->back()->with('status','Cập nhật thông tin tài khoản thành công');
     }
-
+    public function searchuser()
+    {
+        $key = $_GET['key'];
+        $lsUsers= User::orWhere('sdt','LIKE',"%$key%")->orWhere('email','LIKE',"%$key%")->orWhere('tenkhachhang','LIKE',"%$key%")->Paginate(10)->withQueryString();
+        return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
+    }
 
 }
