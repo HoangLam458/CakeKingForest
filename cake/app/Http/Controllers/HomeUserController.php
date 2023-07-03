@@ -55,14 +55,4 @@ class HomeUserController extends Controller
             'category'=>$category
         ]);
     }
-    public function contact()
-    {
-        $category = loaisanpham::all();
-        if(Session::pull('sendct')==1){
-            alert()->success('Thông báo', 'Đã gửi email liên hệ đến admin');
-        }
-        return view('pages.user.contact',[
-            'category'=>$category
-        ]);
-    }
 }

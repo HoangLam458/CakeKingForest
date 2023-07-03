@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\LienheController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\HoadonController;
 use App\Http\Controllers\LoaisanphamController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+
 use App\Mail\Contact;
 use App\Models\hoadon;
 use Carbon\Carbon;
@@ -43,8 +45,8 @@ Route::get('/payment/success', function () {
     return view('pages.user.payment.success');
 })->name('paymant_success');
 Auth::routes();
-Route::post("/sendcontact", function(Illuminate\Http\Request $request){
-    $arr = request()->post();
+Route::get("/sendcontact", function(Illuminate\Http\Request $request){
+    $arr = Session::pull('contact');
     $lienhe = [
         'hoten' =>trim(strip_tags( $arr['ht'] )),
         'email' =>trim(strip_tags( $arr['em'] )),
@@ -55,10 +57,11 @@ Route::post("/sendcontact", function(Illuminate\Http\Request $request){
     \Illuminate\Support\Facades\Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
     Session::put('sendct',1);
     return redirect()->route('contact');
-  });
+  })->name('sendcontact');
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
-Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
+Route::get('/contact', [LienheController::class, 'index'])->name('contact');
+Route::post('/contact/store', [LienheController::class, 'store'])->name('Storecontact');
 Route::post('/admin/home', [HomeController::class, 'filter_by_date'])->name('filter_by_date');
 
 
@@ -109,6 +112,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
         else
         {
             $info->trangthai = 1;
+            $info->trans_id = explode('-', $_GET['orderId'])[0];
             $info->save();
             Session::forget('cate');
             Session::forget('data');
@@ -146,6 +150,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
         return redirect()->route('paymant_fails');
     } else {
         $info->trangthai = 1;
+        $info->trans_id = explode('-', $_GET['vnp_TxnRef'])[0];
         $info->save();
         Session::forget('cate');
         Session::forget('data');
@@ -244,11 +249,15 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/category/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('category.edit.form');
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
+        // route admin contact
+        Route::get('/manages/contact', [LienheController::class, 'admin_index'])->name('contact.index');
+        Route::get('/manages/contact/{id?}', [LienheController::class, 'show'])->name('contact.details');
         //route admin seach loc
 
         Route::get('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
         Route::get('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
         Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
         Route::get('/manages/sanpham/searchsp', [SanphamController::class, 'searchprad'])->name('searchad');
+        Route::get('/manages/user/searchur', [UserController::class, 'searchuser'])->name('searchuser');
     });
 });

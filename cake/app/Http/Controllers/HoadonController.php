@@ -23,7 +23,7 @@ class HoadonController extends Controller
      */
     public function index()
     {
-        $lsHoaDon = HoaDon::where('trangthai', '<>', 0)->orderBy('ngaylaphd', 'DESC')->Paginate(10);
+        $lsHoaDon = HoaDon::where('trangthai', '<>', 0)->orderBy('created_at', 'DESC')->Paginate(10);
         return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 
@@ -223,7 +223,7 @@ class HoadonController extends Controller
         if ($loc == null) {
             return redirect()->route('invoice.index');
         }
-        $lsHoaDon = hoadon::where('trangthai', $loc)->orderBy('ngaylaphd', 'DESC')->Paginate(10)->withQueryString();
+        $lsHoaDon = hoadon::where('trangthai', $loc)->orderBy('created_at', 'DESC')->Paginate(10)->withQueryString();
         return view('pages.admin.invoice.index', ['lsHoaDon' => $lsHoaDon]);
     }
 }

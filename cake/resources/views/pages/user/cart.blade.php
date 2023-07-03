@@ -38,6 +38,10 @@
 </div>
 <section class="ftco-section ftco-cart">
     <div class="container">
+        @if($errors->has('email')||$errors->has('tenkhachhang')||$errors->has('diachigiaohang')||$errors->has('sdtkhachhang')||$errors->has('date'))
+        <h6 class="alert alert-warning">Thông tin giao hàng không hợp lệ vui lòng kiểm tra lại <a class="close"
+                data-dismiss="alert">&times;</a></h6>
+        @endif
         @if ($ls == null)
         <div class="row">
             <div class="col d-flex justify-content-center">
@@ -98,17 +102,21 @@
                                     <td class="product-remove"><a href="{{ route('remove', $lsCart->idchitiet) }}"><span
                                                 class="ion-ios-close"></span></a></td>
                                     <td class="image-prod">
-                                        <div >
-                                        <a class="img" style="background-image:url({{ asset('/images/' . $lsCart->img) }});"
-                                            href="{{ route('shop.detail', $lsCart->id_sp) }}"
-                                            >
-                                        </a>
+                                        <div>
+                                            <a class="img"
+                                                style="background-image:url({{ asset('/images/' . $lsCart->img) }});"
+                                                href="{{ route('shop.detail', $lsCart->id_sp) }}">
+                                            </a>
                                         </div>
                                     </td>
                                     <td class="product-name">
+                                        <a  href="{{ route('shop.detail', $lsCart->id_sp) }}">
                                         <h3>{{ $lsCart->tensanpham }}</h3>
+                                        </a>
                                     </td>
-                                    <td class="price">{{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }} VND</td>
+                                    <td class="price">
+                                        {{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }}
+                                        VND</td>
 
                                     <td class="col-md-2">
                                         <select name="size_id" id="selectBasic" class="form-control">
@@ -144,7 +152,7 @@
                                         </div>
                                     </td>
                                     <td><button type="submit" class="btn btn-primary">
-                                        <span style="font-size: 15px" >Cập nhật</span>
+                                            <span style="font-size: 15px">Cập nhật</span>
                                     </td>
                                 </tr>
                             </form>
@@ -204,6 +212,15 @@
 <script type="text/javascript">
     $(function () {
         $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', new Date());
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker2").datepicker({
             autoclose: true,
             todayHighlight: true
         }).datepicker('update', new Date());

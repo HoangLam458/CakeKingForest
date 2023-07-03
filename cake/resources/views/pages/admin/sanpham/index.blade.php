@@ -4,8 +4,9 @@
 ])
 <title>Cake KingForest - Sản phẩm</title>
 
+
+@section('content')
 <header>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <style>
         .pagination {
             justify-content: center;
@@ -13,7 +14,6 @@
 
     </style>
 </header>
-@section('content')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -136,26 +136,23 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                         <div class="pagination">
-                            {{  $lsSanpham->onEachSide(1)->links() }}
+                            {{ $lsSanpham->onEachSide(1)->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
             integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {
                     return confirm('Bạn có chắc chắn muốn xóa');
                 }
-
             </script>
         </header>
         @endsection

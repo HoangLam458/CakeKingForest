@@ -47,6 +47,12 @@
                     <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'contact' ? 'active' : '' }}">
+                <a href="{{ route('contact.index', 'admin_index') }}">
+                    <i class="nc-icon nc-support-17"></i>
+                    <p>{{ __('Phản hồi') }}</p>
+                </a>
+            </li>
             <div class="h-25"></div>
             <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
                 <a href="{{ route('logout2') }}">

@@ -418,11 +418,19 @@ class CartController extends Controller
         $chitiet = chitiethoadon::find($id);
         $sanpham = sanpham::find($chitiet->sanpham_id);
         $phantrams = size::find($request->get('size_id'));
-        if ($chitiet != null) {
-            if ($chitiet->size_id != $request->get('size_id')) {
-                foreach ($chitiettrung as $trung) {
-                    if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id')) {
-                        if ($request->get('quantity') + $trung->soluong > 10) {
+        if ($chitiet != null)
+        {
+
+            if ($chitiet->size_id != $request->get('size_id'))
+            {
+                foreach ($chitiettrung as $trung)
+                {
+
+                    if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id'))
+                    {
+                        
+                        if ($request->get('quantity') + $trung->soluong > 10)
+                        {
                             Session::put('maxcart','Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
                             return redirect()->back();
                         } else {
@@ -440,14 +448,14 @@ class CartController extends Controller
                     }
                 }
                 Session::forget('cate');
-                $chitiet =
+                $chitiet2 =
                     chitiethoadon::where('hoadon_id', $hoadon->id)
                         ->get();
-                if ($chitiet != null)
-                    foreach ($chitiet as $item) {
+                if ($chitiet2 != null)
+                    foreach ($chitiet2 as $item) {
                         Session::push('cate', $item);
                     }
-                return redirect()->back();
+                    return redirect()->back();
             }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');

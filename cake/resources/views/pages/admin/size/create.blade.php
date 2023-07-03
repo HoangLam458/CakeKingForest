@@ -20,17 +20,28 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
+                                        <div class="form-group{{ $errors->has('tensize') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Kích Thước</label>
-                                            <input required maxlength="25" type="text" id="first-name-column"
-                                                class="form-control" name="tensize">
+                                            <input value="{{old('tensize')}}" required minlength="5" maxlength="25"
+                                                type="text" id="first-name-column" class="form-control" name="tensize">
+                                            @if ($errors->has('tensize'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('tensize') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md col-12">
-                                        <div class="form-group">
+                                        <div class="form-group{{ $errors->has('phantram') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Phần Trăm Tăng</label>
-                                            <input required value="1" min="0" max="30" step="1" type="number"
-                                                id="last-name-column" class="form-control" name="phantram">
+                                            <input required value="{{old('phantram')?old('phantram'):1}}" min="0"
+                                                max="30" step="1" type="number" id="last-name-column"
+                                                class="form-control" name="phantram">
+                                            @if ($errors->has('phantram'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('phantram') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -40,12 +51,12 @@
                                     <a onclick="location.reload();" type="reset"
                                         class="btn btn-light-secondary me-1 mb-1">Reset</a>
                                 </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-</section>
+    </section>
 </div>
 @endsection
