@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\LienheController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\HoadonController;
 use App\Http\Controllers\LoaisanphamController;
@@ -43,8 +44,8 @@ Route::get('/payment/success', function () {
     return view('pages.user.payment.success');
 })->name('paymant_success');
 Auth::routes();
-Route::post("/sendcontact", function(Illuminate\Http\Request $request){
-    $arr = request()->post();
+Route::get("/sendcontact", function(Illuminate\Http\Request $request){
+    $arr = Session::pull('contact');
     $lienhe = [
         'hoten' =>trim(strip_tags( $arr['ht'] )),
         'email' =>trim(strip_tags( $arr['em'] )),
@@ -55,10 +56,11 @@ Route::post("/sendcontact", function(Illuminate\Http\Request $request){
     \Illuminate\Support\Facades\Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
     Session::put('sendct',1);
     return redirect()->route('contact');
-  });
+  })->name('sendcontact');
 
 Route::get('/', [HomeUserController::class, 'homepage'])->name('cake');
-Route::get('/contact', [HomeUserController::class, 'contact'])->name('contact');
+Route::get('/contact', [LienheController::class, 'index'])->name('contact');
+Route::post('/contact/store', [LienheController::class, 'store'])->name('Storecontact');
 Route::post('/admin/home', [HomeController::class, 'filter_by_date'])->name('filter_by_date');
 
 
