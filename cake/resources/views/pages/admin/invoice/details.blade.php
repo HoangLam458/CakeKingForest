@@ -111,7 +111,7 @@
                                         <div class="col-md col-12">
                                             <div class="form-group">
                                                 <label class="mb-2" for="city-column">Ngày nhận</label>
-                                                <input value="{{ $u->ngaynhanhang }}" maxlength="10" minlength="10" required
+                                                    <input value="{{ $u->ngaynhanhang }}" maxlength="10" minlength="10" required
                                                     type="date" id="date" class="form-control" name="date">
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@
                                     <tr>
                                         <th class="col-2">Hình Ảnh</th>
                                         <th class="col-2">Tên Sản Phẩm</th>
-                                        <th class="col-1">Giá bán</th>
+                                        <th class="col-1">Giá bánh</th>
                                         <th class="col-1">Kích cỡ</th>
                                         <th class="col-1">Số Lượng</th>
                                         <th class="col-1">Thành tiền</th>
@@ -274,7 +274,7 @@
                                                     src="{{ asset('/images/' . $item->img) }}" alt="">
                                             </td>
                                             <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
-                                            <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
+                                            <td style="width:10%" class="col-1">{{ number_format($item->giabanh) }} VNĐ
                                             </td>
                                             <td style="width:30%" class="col-1">{{ $item->s_name }}
                                                 ({{ $item->phantram }}%)

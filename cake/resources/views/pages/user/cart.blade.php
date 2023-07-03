@@ -115,7 +115,7 @@
                                         </a>
                                     </td>
                                     <td class="price">
-                                        {{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }}
+                                        {{ number_format($lsCart->giabanh) }}
                                         VND</td>
 
                                     <td class="col-md-2">

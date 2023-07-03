@@ -48,6 +48,7 @@ class HoadonController extends Controller
      */
     public function show($id)
     {
+        
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
@@ -60,7 +61,8 @@ class HoadonController extends Controller
         return view('pages.admin.invoice.details', [], [
             'lsInD' => $lsInD,
             'user' => $user,
-            'total' => $total
+            'total' => $total,
+            'curent'=>$cunr
         ]);
     }
 
@@ -152,7 +154,6 @@ class HoadonController extends Controller
         $search = $_GET['search'];
         // $hd = hoadon::where('trangthai','<>', 0)->Where('sdtkhachhang',$request->get('search'))
         // ->orWhere('mahd',$request->get('search'))->get();
-
         $hd = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
             $query->where('sdtkhachhang', $search)
                 ->orWhere('mahd', $search);
@@ -186,16 +187,14 @@ class HoadonController extends Controller
         foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
-        return view(
-            'pages.user.chitietdonhang',
+        return view('pages.user.chitietdonhang',
             [
                 'size' => $size,
                 'mahd' => $mahd,
                 'total' => $total,
                 'ls' => $lsInD,
                 'category' => $category,
-                'cart' => $lstCart
-            ]
+                'cart' => $lstCart]
         );
     }
     public function updateghichu($id, Request $request)

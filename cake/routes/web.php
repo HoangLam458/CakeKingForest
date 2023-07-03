@@ -210,7 +210,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/filter', [UserController::class, 'show_admin'])->name('user.index.admin');
-        Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
+        // Route::get('/manages/user/detail/{id?}', [UserController::class, 'show'])->name('user.detail');
         Route::get('/manages/user/create', [UserController::class, 'create'])->name('user.create.form');
         Route::post('/manages/user/create', [UserController::class, 'store'])->name('user.create');
         Route::get('/manages/user/edit/{id?}', [UserController::class, 'edit'])->name('user.edit.form');

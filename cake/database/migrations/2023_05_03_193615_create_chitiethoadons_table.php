@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chitiethoadons', function (Blueprint $table) {
             $table->id();
             $table->integer('soluong');
+            $table->unsignedInteger('giabanh');
             $table->text('ghichu')->nullable();
             $table->unsignedInteger('giatien');
             $table->softDeletes();

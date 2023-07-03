@@ -145,9 +145,6 @@
                 </div>
             </div>
         </div>
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
-            integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {

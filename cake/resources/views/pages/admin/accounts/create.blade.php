@@ -78,13 +78,18 @@
                                     <div class="form-group">
                                         <label for="country"style="font-size:15px">Chức vụ</label>
                                         <select name="admin" id="ship" class="form-control">
+                                            @if(auth()->user()->loai == 2)
                                                 <option required value="1">
                                                 Quản trị viên
-                                            </option>
-                                            <option required value="0">
+                                                </option>
+                                             <option required value="0">
                                                 Khách hàng
-                                            </option>
-                                           
+                                             </option>
+                                             @else
+                                             <option required value="0">
+                                                Khách hàng
+                                             </option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -103,7 +108,6 @@
      </section>
  </div>
  <header>
-
     <script language="JavaScript" type="text/javascript">
         function checkDelete() {
             return confirm('Bạn có chắc chắn muốn xóa');
