@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+
 use App\Mail\Contact;
 use App\Models\hoadon;
 use Carbon\Carbon;
@@ -248,6 +249,9 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/category/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('category.edit.form');
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
+        // route admin contact
+        Route::get('/manages/contact', [LienheController::class, 'admin_index'])->name('contact.index');
+        Route::get('/manages/contact/{id?}', [LienheController::class, 'show'])->name('contact.details');
         //route admin seach loc
 
         Route::get('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');

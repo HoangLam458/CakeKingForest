@@ -23,6 +23,13 @@ class LienheController extends Controller
             'category'=>$category
         ]);
     }
+    public function admin_index()
+    {
+        $contact = Lienhe::all();
+       return view('pages.admin.contacts.index',[
+        'contact'=>$contact
+       ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -50,9 +57,12 @@ class LienheController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lienhe $lienhe)
+    public function show($id)
     {
-        //
+        $contact = Lienhe::find($id);
+        return view('pages.admin.contacts.details',[
+         'contact'=>$contact
+        ]);
     }
 
     /**
