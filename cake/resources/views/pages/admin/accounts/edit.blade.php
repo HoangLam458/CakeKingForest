@@ -15,6 +15,8 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
+                    <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary"> Trở lại
+</a>
                         <h5 class="title">{{ __('Chỉnh sửa thông tin tài khoản') }}</h5>
                     </div>
                     <div class="card-content">
@@ -74,9 +76,9 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-info btn-round">Xác nhận</button>
-                                    <a onclick="location.reload();" type="reset"
-                                        class="btn btn-round btn-light-secondary ">Reset</a>
+                                    <button type="submit" class="btn btn-info">Xác nhận</button>
+                                    <button onclick="location.reload();" type="reset"
+                                        class="btn btn-light-secondary ">Reset</button>
                                 </div>
                         </div>
                         </form>

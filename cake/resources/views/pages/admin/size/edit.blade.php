@@ -15,6 +15,8 @@
                 @endif
                 <div class="card">
                     <div class="card-header pb-0">
+                    <a href="{{ route('size.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                </a>
                         <h4 class="card-title">Chỉnh sửa kích thước</h4>
                     </div>
                     <div class="card-content">
@@ -23,8 +25,6 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-
-
                                     <div class="col-md-6 col-12">
                                         <div class="form-group{{ $errors->has('tensize') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Kích Thước</label>
@@ -55,8 +55,8 @@
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                    <a onclick="location.reload();" type="reset"
-                                        class="btn btn-light-secondary me-1 mb-1">Reset</a>
+                                    <button onclick="location.reload();" type="reset"
+                                        class="btn btn-light-secondary me-1 mb-1">Reset</buton>
                                 </div>
 
                         </div>
@@ -64,8 +64,6 @@
 
                     </div>
                 </div>
-                <a href="{{ route('size.index') }}" type="button" class="btn btn-secondary"> Back to list
-                </a>
             </div>
         </div>
 </div>
