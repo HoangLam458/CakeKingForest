@@ -22,10 +22,10 @@ class UpdatehoadonRequest extends FormRequest
     {
         return [
             'email'=>['required'],
-            'tenkhachhang'=>['required','min:10','max:50'], 
+            'tenkhachhang'=>['required','min:10','max:50'],
             'diachigiaohang'=>['required','min:10','max:255'],
             'sdtkhachhang'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
-            'date'=> 'required'
+            'date'=> 'required|required|date|after:date-now',
         ];
     }
     public function messages(){
@@ -42,6 +42,7 @@ class UpdatehoadonRequest extends FormRequest
             'sdtkhachhang.min'=>'Sổ điện thoại phải 10 số',
             'sdtkhachhang.max'=>'Sổ điện thoại phải 10 số',
             'date.required'=>'Ngày nhận hàng không được bỏ trống',
+            'date.after'=>'Ngày nhận hàng phải lớn hơn ngày hiện tại',
         ];
     }
 }

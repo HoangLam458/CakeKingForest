@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="mb-2" for="city-column">Địa chỉ</label>
                                 <textarea required name="diachigiaohang" maxlength="255" class="form-control" id="exampleFormControlTextarea1"
-                                    rows="3">{{old('diachigiaohang')}}"</textarea>
+                                    rows="3">{{old('diachigiaohang')}}</textarea>
                                     @if ($errors->has('diachigiaohang'))
                                     <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
                                         {{ $errors->first('diachigiaohang') }}
@@ -71,6 +71,10 @@
                                        {{ $errors->first('date') }}
                                     </span>
                                     @endif
+                                </div>
+                                <div hidden id="datepicker2" class="input-group date" data-date-format="dd-mm-yyyy">
+                                    <input class="form-control" type="text" name="date-now">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
                         </div>
@@ -151,6 +155,10 @@
                                         {{ $errors->first('date') }}
                                     </span>
                                     @endif
+                                </div>
+                                <div hidden id="datepicker2" class="input-group date" data-date-format="dd-mm-yyyy">
+                                    <input class="form-control" type="text" name="date-now">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
                         </div>

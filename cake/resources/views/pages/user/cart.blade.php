@@ -110,7 +110,9 @@
                                         </div>
                                     </td>
                                     <td class="product-name">
+                                        <a  href="{{ route('shop.detail', $lsCart->id_sp) }}">
                                         <h3>{{ $lsCart->tensanpham }}</h3>
+                                        </a>
                                     </td>
                                     <td class="price">
                                         {{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }}
@@ -210,6 +212,15 @@
 <script type="text/javascript">
     $(function () {
         $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', new Date());
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker2").datepicker({
             autoclose: true,
             todayHighlight: true
         }).datepicker('update', new Date());

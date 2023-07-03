@@ -80,7 +80,7 @@
                                 <div class="text text-center">
                                     <h2>Cake King Forest</h2>
                                     <p>Những chiếc bánh thơm ngon đến mọi người</p>
-                                    <p><a href="#" class="btn btn-primary">Mua hàng ngay bây giờ</a></p>
+                                    <p><a href="{{route('shop')}}" class="btn btn-primary">Mua hàng ngay bây giờ</a></p>
                                 </div>
                             </div>
                         </div>
