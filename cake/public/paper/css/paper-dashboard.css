@@ -4796,8 +4796,13 @@ License - nucleoapp.com/license/
     width: 100%;
 }
 
+/* sửa css ghi đè
 .table-responsive {
     overflow: scroll;
+    padding-bottom: 10px;
+} */
+.table-responsive {
+    overflow: hidden;
     padding-bottom: 10px;
 }
 

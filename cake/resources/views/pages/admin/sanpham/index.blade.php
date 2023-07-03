@@ -138,7 +138,7 @@
                             </tbody>
                         </table>
                         <div class="pagination">
-                            {{  $lsSanpham->onEachSide(1)->links() }}
+                            {{ $lsSanpham->onEachSide(1)->links() }}
                         </div>
                     </div>
                 </div>

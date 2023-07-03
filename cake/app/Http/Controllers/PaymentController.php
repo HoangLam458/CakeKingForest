@@ -202,11 +202,12 @@ class PaymentController extends Controller
         {
             $hd = hoadon::where('users_id',auth()->user()->id)->where('trangthai',0)->value('id');
         }
+        $rand=time() . "";
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://127.0.0.1:8000/send-mail-vnp/$email";
         $vnp_TmnCode = "FM9XJF5C"; //Mã website tại VNPAY
         $vnp_HashSecret = "NRDAOOOFDEKIQUFRBDSUMQOLIKIEAFPW";
-        $vnp_TxnRef = $code_cart .'-'. $hd;
+        $vnp_TxnRef = $rand. '-'.$hd;
         $vnp_OrderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = Session::get('data')['total'] * 100;
