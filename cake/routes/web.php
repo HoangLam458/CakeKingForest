@@ -218,12 +218,16 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/user/delete/{id?}', [UserController::class, 'destroy'])->name('user.delete');
         // route admin sản phẩm
         Route::get('/manages/sanpham', [SanphamController::class, 'index'])->name('sanpham.index');
+        Route::get('/manages/trash_sanpham', [SanphamController::class, 'trash'])->name('sanpham.trash');
+        Route::get('/manages/trash_sanpham/loclsp_trash', [SanphamController::class, 'locloaisptrash'])->name('locloaisptrash');
+        Route::get('/manages/trash_sanpham/searchsp_trash', [SanphamController::class, 'searchprtrash'])->name('searchadtrash');
         Route::get('/manages/sanpham/detail/{id?}', [SanphamController::class, 'show'])->name('sanpham.detail');
         Route::get('/manages/sanpham/edit/{id?}', [SanphamController::class, 'edit'])->name('sanpham.edit.form');
         Route::post('/manages/sanpham/edit/{id?}', [SanphamController::class, 'update'])->name('sanpham.edit');
         Route::get('/manages/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
         Route::post('/manages/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');
         Route::get('/manages/sanpham/delete/{id?}', [SanphamController::class, 'destroy'])->name('sanpham.delete');
+        Route::get('/manages/trash_sanpham/restore/{id?}', [SanphamController::class, 'restore'])->name('sanpham.restore');
         // route admin size
         Route::get('/manages/size', [SizeController::class, 'index'])->name('size.index');
         Route::get('/manages/size/detail/{id?}', [SizeController::class, 'show'])->name('size.detail');

@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'category',
 ])
-<title>Cake KingForest - Loại sản phẩm</title>
+<title>Cake KingForest - Loại Bánh</title>
 @section('content')
 <div class="content">
     <div class="row">
@@ -25,10 +25,10 @@
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>
-                                    Tên loại sản phẩm
+                                    Tên loại bánh
                                 </th>
                                 <th>
-                                    Số sản phẩm
+                                    Số bánh
                                 </th>
                                 <th>
                                     Chức năng

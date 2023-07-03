@@ -9,7 +9,10 @@
          <div class="row match-height">
              <div class="col-12">
                  <div class="card">
+                
                      <div class="card-header pb-0">
+                     <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary">Trở lại
+                </a>
                          <h4 class="card-title">Tạo tài khoản mới</h4>
                      </div>
                      <div class="card-content">
@@ -95,8 +98,8 @@
                                 </div>
                                  </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">
-                                         <button type="submit" class="btn  btn-round btn-primary me-1 mb-1">Xác nhận</button>
-                                         <a onclick="location.reload();" type="reset" class="btn btn-round btn-light-secondary me-1 mb-1">Reset</a>
+                                         <button type="submit" class="btn btn-primary me-1 mb-1">Xác nhận</button>
+                                         <button onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                      </div>
                                  </div>
                              </form>

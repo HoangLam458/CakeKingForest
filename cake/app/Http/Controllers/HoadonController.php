@@ -79,12 +79,31 @@ class HoadonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'fullname'=>['required','min:10','max:50'],
+            'address'=>['required','min:10','max:255'],
+            'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
+            'date'=> 'required|required|date|after:date-now'
+        ],
+        [
+            'fullname.required'=>'Họ tên không được bỏ trống',
+            'fullname.min'=>'Độ dài họ tên tối thiểu 10 kí tự',
+            'fullname.max'=>'Độ dài họ tên tối đa 50 kí tự',
+            'address.required'=>'Địa chỉ không được bỏ trống',
+            'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',
+            'address.max'=>'Độ dài địa chỉ tối đa 255 kí tự',
+            'phone.regex'=>'Sổ điện thoại không đúng định dạng',
+            'phone.required'=>'Sổ điện thoại không được bỏ trống',
+            'phone.min'=>'Sổ điện thoại phải 10 số',
+            'phone.max'=>'Sổ điện thoại phải 10 số',
+            'date.required'=>'Ngày nhận hàng không được bỏ trống',
+            'date.after'=>'Ngày nhận hàng phải lớn hơn hoặc bằng ngày hiện tại',
+        ]);
         $user = hoadon::find($id);
         $user->sdtkhachhang = $request->get('phone');
         $user->diachigiaohang = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
         $user->ngaynhanhang = $request->get('date');
-
         $user->save();
 
         return redirect()->route('invoice.detail', $id);

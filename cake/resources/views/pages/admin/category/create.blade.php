@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-<title>Cake KingForest - Loại sản phẩm</title>
+<title>Cake KingForest - Loại Bánh</title>
 @section('content')
 <div class="content">
     <section id="multiple-column-form">
@@ -10,7 +10,9 @@
              <div class="col-12">
                  <div class="card">
                      <div class="card-header pb-0">
-                         <h4 class="card-title">Tạo loại sản phẩm mới</h4>
+                     <a href="{{ route('category.index') }}" type="button" class="btn btn-secondary"> Trở lại
+</a>
+                         <h4 class="card-title">Thêm loại bánh mới</h4>
                      </div>
                      <div class="card-content">
                          <div class="card-body">
@@ -30,7 +32,7 @@
                                      </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">
                                          <button type="submit" class="btn btn-primary me-1 mb-1">Xác nhận</button>
-                                         <a onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</a>
+                                         <button onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                      </div>
                                  </div>
                              </form>
