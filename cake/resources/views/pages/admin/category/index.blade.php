@@ -83,7 +83,6 @@
         function checkDelete() {
             return confirm('Bạn có chắc chắn muốn xóa?');
         }
-
     </script>
 </header>
 <!-- <script>

@@ -65,7 +65,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('nd') ? ' has-danger' : '' }}">
-                        <textarea name="nd" id="" cols="30" rows="7" class="form-control" placeholder="Nội dung"
+                        <textarea name="nd" id="" cols="30" rows="7" class="form-control" minlength="50" placeholder="Nội dung"
                             required>{{old('nd')}}</textarea>
                         @if ($errors->has('nd'))
                         <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">

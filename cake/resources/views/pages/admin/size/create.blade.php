@@ -11,8 +11,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                    <a href="{{ route('size.index') }}" type="button" class="btn btn-secondary"> Trở lại
-</a>
+                        <a href="{{ route('size.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                        </a>
                         <h4 class="card-title">Thêm kích thước</h4>
                     </div>
                     <div class="card-content">
@@ -49,7 +49,8 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" onclick="return checkDelete()" class="btn btn-primary me-1 mb-1">Xác nhận</button>
+                                    <button type="submit" onclick="return checkDelete()"
+                                        class="btn btn-primary me-1 mb-1">Xác nhận</button>
                                     <button onclick="location.reload();" type="reset"
                                         class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</button>
                                 </div>
@@ -58,14 +59,14 @@
                     </div>
                 </div>
             </div>
-
     </section>
 </div>
 @endsection
+
 <head>
     <script language="JavaScript" type="text/javascript">
         function checkDelete() {
             return confirm('Bạn muốn tạo kích thước mới?');
         }
     </script>
-    </head>
+</head>

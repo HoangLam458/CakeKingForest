@@ -28,7 +28,7 @@
                                             <label class="mb-2" for="first-name-column"
                                                 style="font-size:15px">Name</label>
                                             <input value="{{old('tenloaisp')? old('tenloaisp'):$staff->tenloaisp }}"
-                                                required maxlength="255" minlength="15" type="text"
+                                                required maxlength="255" minlength="10" type="text"
                                                 id="first-name-column" class="form-control" name="tenloaisp">
                                             @if ($errors->has('tenloaisp'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">

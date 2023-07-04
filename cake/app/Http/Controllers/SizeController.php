@@ -35,7 +35,7 @@ class SizeController extends Controller
             'tensize'=> $request['tensize'],
             'phantram'=> $request['phantram'],
         ]);
-        return redirect()->route('size.index');
+        return redirect()->route('size.index')->with('status','Thêm kích thước thành công');
     }
 
     /**
@@ -82,8 +82,7 @@ class SizeController extends Controller
         $size = Size::find($id);
         if($size){
             $size->delete();
-            Session::put('success','Xóa thành công!');
-            return redirect()->back();
+            return redirect()->back()->with('status','Xóa kích thước thành công');
          }
     }
 }

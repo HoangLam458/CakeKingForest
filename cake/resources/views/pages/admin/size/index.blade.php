@@ -17,9 +17,9 @@
                 </div>
                 <div class="card-body">
                     <div class="flash-message">
-                        @if(Session::has('success'))
-                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
-                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @if(session('status'))
+                        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                                data-dismiss="alert">&times;</button></h6>
                         @endif
                     </div>
                     <div class="table-responsive">

@@ -29,7 +29,7 @@
                                         <div class="form-group{{ $errors->has('tensize') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Kích Thước</label>
                                             <input value="{{old('tensize')? old('tensize'):$size->tensize }}" required
-                                                minlength="15" maxlength="255" type="text" id="first-name-column"
+                                                minlength="5" maxlength="25" type="text" id="first-name-column"
                                                 class="form-control" name="tensize">
                                             @if ($errors->has('tensize'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -58,7 +58,6 @@
                                     <button onclick="location.reload();" type="reset"
                                         class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</buton>
                                 </div>
-
                         </div>
                         </form>
 

@@ -23,7 +23,7 @@
                                      <div class="col-md-6 col-12">
                                          <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                              <label class="mb-2" for="first-name-column" style="font-size:15px">Họ và tên</label>
-                                             <input value="{{old('name')}}" required minlength="7" maxlength="50" type="text" id="first-name-column" class="form-control" name="name">
+                                             <input value="{{old('name')}}" required maxlength="50" type="text" id="first-name-column" class="form-control" name="name">
                                              @if ($errors->has('name'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('name') }}</strong>

@@ -23,7 +23,7 @@
                                         <div class="form-group{{ $errors->has('tenloaisp') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column" style="font-size:15px">Tên loại
                                                 sản phẩm</label>
-                                            <input required minlength="15" maxlength="255" value="{{old('tenloaisp')}}"
+                                            <input required minlength="10" maxlength="255" value="{{old('tenloaisp')}}"
                                                 type="text" id="first-name-column" class="form-control"
                                                 name="tenloaisp">
                                             @if ($errors->has('tenloaisp'))
