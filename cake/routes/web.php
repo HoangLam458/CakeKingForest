@@ -68,7 +68,7 @@ Route::post('/admin/home', [HomeController::class, 'filter_by_date'])->name('fil
 
 Route::get('/shop', [SanphamController::class, 'shop'])->name('shop');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::get('/donhang', [HoadonController::class, 'donhang'])->name('donhang');
+Route::get('/order', [HoadonController::class, 'donhang'])->name('donhang');
 Route::post('/add_to_cart/{id?}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
 
 Route::get('/remove/{id?}', [ChitiethoadonController::class, 'destroy'])->name('remove');
@@ -79,10 +79,10 @@ Route::get('/detail/{id?}', [SanphamController::class, 'detail'])->name('shop.de
 Route::post('/update/{id?}', [CartController::class, 'updateqty'])->name('update');
 Route::post('/update_cart', [CartController::class, 'update_cart'])->name('update_cart');
 Route::post('/updateghichu/{id?}', [HoadonController::class, 'updateghichu'])->name('updateghichu');
-Route::get('/searchdh', [HoadonController::class, 'searchdonhang'])->name('searchdh');
-Route::get('/searchsp', [SanphamController::class, 'searchpr'])->name('searchpr');
-Route::get('/chitietdh/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
-Route::get('/chitietdh/huyhd/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
+Route::get('/search-order', [HoadonController::class, 'searchdonhang'])->name('searchdh');
+Route::get('/search-product', [SanphamController::class, 'searchpr'])->name('searchpr');
+Route::get('/order-details/{id?}', [HoadonController::class, 'chitietdonhang'])->name('ctdonhang');
+Route::get('/order-details/remove-details/{id?}', [HoadonController::class, 'update_status_cancel'])->name('huydh');
 
 //payment
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
@@ -190,7 +190,7 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/user-edit/{id?}', [UserController::class, 'User_update'])->name('User_edit');
-    Route::get('/trang-ca-nhan/{id?}', [UserController::class, 'profile'])->name('trang-ca-nhan');
+    Route::get('/user-profile/{id?}', [UserController::class, 'profile'])->name('trang-ca-nhan');
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -217,17 +217,17 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::post('/manages/user/edit/{id?}', [UserController::class, 'update'])->name('user.edit');
         Route::get('/manages/user/delete/{id?}', [UserController::class, 'destroy'])->name('user.delete');
         // route admin sản phẩm
-        Route::get('/manages/sanpham', [SanphamController::class, 'index'])->name('sanpham.index');
-        Route::get('/manages/trash_sanpham', [SanphamController::class, 'trash'])->name('sanpham.trash');
-        Route::get('/manages/trash_sanpham/loclsp_trash', [SanphamController::class, 'locloaisptrash'])->name('locloaisptrash');
-        Route::get('/manages/trash_sanpham/searchsp_trash', [SanphamController::class, 'searchprtrash'])->name('searchadtrash');
-        Route::get('/manages/sanpham/detail/{id?}', [SanphamController::class, 'show'])->name('sanpham.detail');
-        Route::get('/manages/sanpham/edit/{id?}', [SanphamController::class, 'edit'])->name('sanpham.edit.form');
-        Route::post('/manages/sanpham/edit/{id?}', [SanphamController::class, 'update'])->name('sanpham.edit');
-        Route::get('/manages/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
-        Route::post('/manages/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');
-        Route::get('/manages/sanpham/delete/{id?}', [SanphamController::class, 'destroy'])->name('sanpham.delete');
-        Route::get('/manages/trash_sanpham/restore/{id?}', [SanphamController::class, 'restore'])->name('sanpham.restore');
+        Route::get('/manages/product', [SanphamController::class, 'index'])->name('sanpham.index');
+        Route::get('/manages/trash-product', [SanphamController::class, 'trash'])->name('sanpham.trash');
+        Route::get('/manages/trash-product/find-trash', [SanphamController::class, 'locloaisptrash'])->name('locloaisptrash');
+        Route::get('/manages/trash-product/search-trash', [SanphamController::class, 'searchprtrash'])->name('searchadtrash');
+        Route::get('/manages/product/detail/{id?}', [SanphamController::class, 'show'])->name('sanpham.detail');
+        Route::get('/manages/product/edit/{id?}', [SanphamController::class, 'edit'])->name('sanpham.edit.form');
+        Route::post('/manages/product/edit/{id?}', [SanphamController::class, 'update'])->name('sanpham.edit');
+        Route::get('/manages/product/create', [SanphamController::class, 'create'])->name('sanpham.create');
+        Route::post('/manages/product/store', [SanphamController::class, 'store'])->name('sanpham.store');
+        Route::get('/manages/product/delete/{id?}', [SanphamController::class, 'destroy'])->name('sanpham.delete');
+        Route::get('/manages/trash-product/restore/{id?}', [SanphamController::class, 'restore'])->name('sanpham.restore');
         // route admin size
         Route::get('/manages/size', [SizeController::class, 'index'])->name('size.index');
         Route::get('/manages/size/detail/{id?}', [SizeController::class, 'show'])->name('size.detail');
@@ -258,10 +258,10 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/contact/{id?}', [LienheController::class, 'show'])->name('contact.details');
         //route admin seach loc
 
-        Route::get('/manages/invoice/searchhd', [HoadonController::class, 'searchhd'])->name('searchhd');
-        Route::get('/manages/sanpham/searchlochd', [HoadonController::class, 'loctrangthai'])->name('searchloc');
-        Route::get('/manages/sanpham/loclsp', [SanphamController::class, 'locloaisp'])->name('locloaisp');
-        Route::get('/manages/sanpham/searchsp', [SanphamController::class, 'searchprad'])->name('searchad');
-        Route::get('/manages/user/searchur', [UserController::class, 'searchuser'])->name('searchuser');
+        Route::get('/manages/invoice/search', [HoadonController::class, 'searchhd'])->name('searchhd');
+        Route::get('/manages/product/find', [HoadonController::class, 'loctrangthai'])->name('searchloc');
+        Route::get('/manages/product/fill', [SanphamController::class, 'locloaisp'])->name('locloaisp');
+        Route::get('/manages/product/search', [SanphamController::class, 'searchprad'])->name('searchad');
+        Route::get('/manages/user/search', [UserController::class, 'searchuser'])->name('searchuser');
     });
 });
