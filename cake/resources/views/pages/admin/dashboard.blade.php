@@ -311,8 +311,8 @@
                         '#00838F',
                         '#006064'
                     ],
-                    //labelColor:"#cccccc", // text color
-                    //backgroundColor: '#333333', // border color
+                    labelColor:"#cccccc", // text color
+                    backgroundColor: '#333333', // border color
                     data: [
                         @foreach ($countCate as $sale)
                             {

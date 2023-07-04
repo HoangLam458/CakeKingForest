@@ -216,7 +216,6 @@
             todayHighlight: true
         }).datepicker('update', new Date());
     });
-
 </script>
 <script type="text/javascript">
     $(function () {

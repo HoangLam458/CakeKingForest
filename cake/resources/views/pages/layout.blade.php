@@ -118,7 +118,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @if (auth()->user()->loai == 1)
+                            @if (auth()->user()->loai == 1 || auth()->user()->loai == 2 )
                             <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá

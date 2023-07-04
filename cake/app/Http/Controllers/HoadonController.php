@@ -48,7 +48,7 @@ class HoadonController extends Controller
      */
     public function show($id)
     {
-        
+
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
@@ -62,7 +62,7 @@ class HoadonController extends Controller
             'lsInD' => $lsInD,
             'user' => $user,
             'total' => $total,
-            'curent'=>$cunr
+
         ]);
     }
 
@@ -79,11 +79,13 @@ class HoadonController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $date_now = Carbon::now()->format('Y-m-d');
         $this->validate($request,[
             'fullname'=>['required','min:10','max:50'],
             'address'=>['required','min:10','max:255'],
             'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
-            'date'=> 'required|required|date|after:date-now'
+            'date'=> 'required|required|date|after:'.$date_now
         ],
         [
             'fullname.required'=>'Họ tên không được bỏ trống',
@@ -97,7 +99,7 @@ class HoadonController extends Controller
             'phone.min'=>'Sổ điện thoại phải 10 số',
             'phone.max'=>'Sổ điện thoại phải 10 số',
             'date.required'=>'Ngày nhận hàng không được bỏ trống',
-            'date.after'=>'Ngày nhận hàng phải lớn hơn hoặc bằng ngày hiện tại',
+            'date.after'=>'Ngày nhận hàng phải lớn hơn ngày hiện tại',
         ]);
         $user = hoadon::find($id);
         $user->sdtkhachhang = $request->get('phone');

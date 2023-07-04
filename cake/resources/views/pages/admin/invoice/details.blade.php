@@ -146,10 +146,9 @@
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('date') ? ' has-danger' : '' }}" data-date-format="dd-mm-yyyy">
                                             <label class="mb-2" for="city-column">Ngày nhận</label>
-                                            <input class="form-control" type="text" name="date-now"
-                                                value="{{ Carbon\Carbon::now()->format('Y/m/d') }}">
                                             <input value="{{ $u->ngaynhanhang }}" type="date" id="date"
                                                 class="form-control" name="date">
+
                                             @if ($errors->has('date'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('date') }}</strong>
