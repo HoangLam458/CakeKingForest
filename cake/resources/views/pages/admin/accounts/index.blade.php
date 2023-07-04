@@ -27,19 +27,20 @@
                             mới</a>
                     </div>
                     <form action="{{ route('searchuser')}}" method="GET">
-                    <div class="input-group no-border">
-                        <input type="text" value="" name="key" class="form-control col-md-3" placeholder="Tìm tài khoản...">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <i class="nc-icon nc-zoom-split"></i>
+                        <div class="input-group no-border">
+                            <input type="text" value="" name="key" class="form-control col-md-3"
+                                placeholder="Tìm tài khoản...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="nc-icon nc-zoom-split"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                     <div class="row col-md-5 text-center">
                         <div class="dropdown dropright">
-                            <button style="margin-top: 15px;" class="btn btn-primary dropdown-toggle"
-                                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            <button style="margin-top: 15px;" class="btn btn-primary dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 Lọc theo
                             </button>
@@ -107,12 +108,12 @@
                                 <td>
                                     <div class="btn-group " role="group" aria-label="Basic example">
                                         {{-- <a href="{{ route('user.detail', $item->id) }}" type="button"
-                                            class="btn btn-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                            </svg>
+                                        class="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                            fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                        </svg>
                                         </a> --}}
                                         @if (auth()->user()->loai == 2)
                                         <a href="{{ route('user.edit.form', $item->id) }}" type="button"
@@ -175,7 +176,7 @@
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {
-                    return confirm('Bạn có chắc chắn muốn xóa');
+                    return confirm('Bạn có chắc chắn muốn xóa?');
                 }
 
             </script>

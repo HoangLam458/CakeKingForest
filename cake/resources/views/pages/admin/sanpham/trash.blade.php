@@ -17,6 +17,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
+
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -26,7 +27,8 @@
                 </div>
                 <form class="col-md-4" action="{{ route('searchadtrash')}}" method="GET">
                     <div class="input-group no-border">
-                        <input type="text" value="" name="key" class="form-control" placeholder="Tìm sản phẩm ngưng bán...">
+                        <input type="text" value="" name="key" class="form-control"
+                            placeholder="Tìm sản phẩm ngưng bán...">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="nc-icon nc-zoom-split"></i>
@@ -39,8 +41,8 @@
                         <div class="form-group">
                             <div class="flash-message">
                                 @if(Session::has('select'))
-                                <p class="alert alert-warning">{{ Session::pull('select') }} <a href="#" class="close"
-                                        data-dismiss="alert" aria-label="close">&times;</a></p>
+                                <h6 class="alert alert-warning">{{ Session::pull('select') }} <button href="#"
+                                        class="close" data-dismiss="alert" aria-label="close">&times;</button></h6>
                                 @endif
                             </div>
                             <span style="font-size:16px;">Lọc Theo Loại Bánh: </span>
@@ -57,9 +59,9 @@
                 </form>
                 <div class="card-body">
                     <div class="flash-message">
-                        @if(Session::has('success'))
-                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
-                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @if(session('status'))
+                        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                                data-dismiss="alert">&times;</button></h6>
                         @endif
                     </div>
                     <div class="table-responsive">

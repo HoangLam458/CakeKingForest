@@ -41,8 +41,8 @@
                         <div class="form-group">
                             <div class="flash-message">
                                 @if(Session::has('select'))
-                                <p class="alert alert-warning">{{ Session::pull('select') }} <a href="#" class="close"
-                                        data-dismiss="alert" aria-label="close">&times;</a></p>
+                                <h6 class="alert alert-warning">{{ Session::pull('select') }} <button href="#"
+                                        class="close" data-dismiss="alert" aria-label="close">&times;</button></h6>
                                 @endif
                             </div>
                             <span style="font-size:16px;">Lọc Theo Loại Bánh: </span>
@@ -59,10 +59,10 @@
                 </form>
                 <div class="card-body">
                     <div class="flash-message">
-                    @if(session('status'))
-                <h6 class="alert alert-success">{{session('status')}} <button class="close"
-                        data-dismiss="alert">&times;</button></h6>
-                @endif
+                        @if(session('status'))
+                        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                                data-dismiss="alert">&times;</button></h6>
+                        @endif
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -149,8 +149,9 @@
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {
-                    return confirm('Bạn có chắc chắn muốn xóa');
+                    return confirm('Bạn có chắc chắn muốn xóa?');
                 }
+
             </script>
         </header>
         @endsection

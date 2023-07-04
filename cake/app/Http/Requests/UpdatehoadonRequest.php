@@ -22,7 +22,7 @@ class UpdatehoadonRequest extends FormRequest
     {
         return [
             'email'=>['required'],
-            'tenkhachhang'=>['required','min:10','max:50'],
+            'tenkhachhang'=>['required','max:50'],
             'diachigiaohang'=>['required','min:10','max:255'],
             'sdtkhachhang'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
             'date'=> 'required|required|date|after:date-now',
@@ -32,7 +32,6 @@ class UpdatehoadonRequest extends FormRequest
         return [
             'email.required'=>'Email không được bỏ trống',
             'tenkhachhang.required'=>'Họ tên không được bỏ trống',
-            'tenkhachhang.min'=>'Độ dài họ tên tối thiểu 10 kí tự',
             'tenkhachhang.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'diachigiaohang.required'=>'Địa chỉ không được bỏ trống',
             'diachigiaohang.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',

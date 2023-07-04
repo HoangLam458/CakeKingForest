@@ -47,7 +47,7 @@ class LoaisanphamController extends Controller
             'tenloaisp'=> $request['tenloaisp'],
             'trangthai'=> 1
         ]);
-        return redirect()->route('category.index')->with('status','Cập nhật thành công');
+        return redirect()->route('category.index')->with('status','Thêm loại bánh thành công');
     }
 
     /**
@@ -94,16 +94,12 @@ class LoaisanphamController extends Controller
         $product = sanpham::where('loaisanpham_id',$id)->value('id');
         if($product!=null)
         {
-            $lsUsers = $this->data();
-            alert()->warning('Thông báo', 'Loại sản phẩm đang được sử dụng!');
-            return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
+            return redirect()->back()->with('fail','Không thể xóa loại bánh này vì đang được sử dụng');
         }
         $category = loaisanpham::find($id);
         if($category){
             $category->delete();
-            $lsUsers = $this->data();
-            alert()->success('Thông báo', 'Xóa thành công!');
-            return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
+            return redirect()->back()->with('status','Xóa thành công');
         }
     }
 }

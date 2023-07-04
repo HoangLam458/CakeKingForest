@@ -1,6 +1,6 @@
 @extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'index'
+'class' => '',
+'elementActive' => 'index'
 ])
 <title>Cake King Forest - Tài khoản</title>
 @section('content')
@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3" style="font-size:20px; font-weight: bold;" >
+                        <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Tên khách hàng</label>
                         </div>
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
@@ -37,10 +37,8 @@
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
                             <label>{{ $user->diachi }}</label>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-@endsection
+        @endsection

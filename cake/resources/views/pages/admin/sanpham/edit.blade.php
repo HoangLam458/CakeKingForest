@@ -10,7 +10,8 @@
         <div class="row match-height">
             <div class="col-12">
                 @if(session('status'))
-                <h6 class="alert alert-success">{{session('status')}}</h6>
+                <h6 class="alert alert-success">{{session('status')}}<button class="close"
+                        data-dismiss="alert">&times;</button></h6>
                 @endif
                 <div class="card">
                     <div class="card-header pb-0">
@@ -105,7 +106,8 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                    <button type="submit" class="btn btn-primary me-1 mb-1"
+                                        onclick="return checkUpdate()">Xác nhận</button>
                                     <button onclick="location.reload();" type="reset"
                                         class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                 </div>
@@ -119,4 +121,12 @@
 </div>
 </section>
 </div>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdate() {
+            return confirm('Bạn có chắc chắn muốn cập nhật?');
+        }
+
+    </script>
+</header>
 @endsection

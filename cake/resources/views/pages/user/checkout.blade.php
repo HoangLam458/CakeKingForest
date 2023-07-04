@@ -15,7 +15,7 @@
                     <div class="col-md col-12">
                         <div class="form-group">
                             <label class="mb-2" for="first-name-column">Tên khách hàng</label>
-                            <input value="{{old('tenkhachhang')}}" required maxlength="50" type="text"
+                            <input value="{{old('tenkhachhang')}}" required   maxlength="50"  type="text"
                                 id="first-name-column" class="form-control" name="tenkhachhang">
                             @if ($errors->has('tenkhachhang'))
                             <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
@@ -50,7 +50,7 @@
                     <div class="col-md col-12">
                         <div class="form-group">
                             <label class="mb-2" for="city-column">Địa chỉ</label>
-                            <textarea required name="diachigiaohang" maxlength="255" class="form-control"
+                            <textarea required name="diachigiaohang" minlength="10" maxlength="255" class="form-control"
                                 id="exampleFormControlTextarea1" rows="3">{{old('diachigiaohang')}}</textarea>
                             @if ($errors->has('diachigiaohang'))
                             <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
@@ -98,7 +98,7 @@
                     <div class="col-md col-12">
                         <div class="form-group">
                             <label class="mb-2" for="first-name-column">Tên khách hàng</label>
-                            <input value="{{ $u->tenkhachhang }}" required maxlength="20" type="text"
+                            <input value="{{ $u->tenkhachhang }}" required   maxlength="50" type="text"
                                 id="first-name-column" class="form-control" name="tenkhachhang">
                             @if ($errors->has('tenkhachhang'))
                             <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
@@ -133,7 +133,7 @@
                     <div class="col-md col-12">
                         <div class="form-group">
                             <label class="mb-2" for="city-column">Địa chỉ</label>
-                            <textarea required name="diachigiaohang" maxlength="255" class="form-control"
+                            <textarea required name="diachigiaohang" minlength="10" maxlength="255"  class="form-control"
                                 id="exampleFormControlTextarea1" rows="3">{{ $u->diachi }}</textarea>
                             @if ($errors->has('diachigiaohang'))
                             <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
