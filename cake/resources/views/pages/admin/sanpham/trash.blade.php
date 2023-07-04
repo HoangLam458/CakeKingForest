@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
-<title>Cake KingForest - Sản phẩm</title>
+<title>Cake King Forest - Sản phẩm</title>
 
 
 @section('content')

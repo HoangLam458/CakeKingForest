@@ -96,7 +96,7 @@
                         </tbody>
                     </table>
                     <div class="pagination">
-                        {{-- {{  $hd->onEachSide(1)->links() }} --}}
+                        {{  $hd->onEachSide(1)->links() }} 
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-<title>Cake KingForest - Phản hồi</title>
+<title>Cake King Forest - Phản hồi</title>
 @section('content')
 <div class="content">
     <div class="row">

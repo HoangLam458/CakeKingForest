@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'index',
 ])
-<title>Cake KingForest - Hóa đơn</title>
+<title>Cake King Forest - Hóa đơn</title>
 @section('content')
 <div class="content">
     @foreach ($user as $u)

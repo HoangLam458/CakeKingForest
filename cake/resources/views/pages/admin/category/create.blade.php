@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-<title>Cake KingForest - Loại Bánh</title>
+<title>Cake King Forest - Loại Bánh</title>
 @section('content')
 <div class="content">
     <section id="multiple-column-form">

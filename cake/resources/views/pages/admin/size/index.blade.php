@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
-<title>Cake KingForest - Kích thước bánh</title>
+<title>Cake King Forest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
