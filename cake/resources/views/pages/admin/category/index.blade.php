@@ -7,6 +7,10 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
+            @if(session('fail'))
+            <h6 class="alert alert-warning">{{session('fail')}} <button class="close"
+                    data-dismiss="alert">&times;</button></h6>
+            @endif
             @if(session('status'))
             <h6 class="alert alert-success">{{session('status')}} <button class="close"
                     data-dismiss="alert">&times;</button></h6>
@@ -78,7 +82,7 @@
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <script language="JavaScript" type="text/javascript">
         function checkDelete() {
-            return confirm('Bạn có chắc chắn muốn xóa');
+            return confirm('Bạn có chắc chắn muốn xóa?');
         }
 
     </script>

@@ -82,14 +82,14 @@ class HoadonController extends Controller
 
         $date_now = Carbon::now()->format('Y-m-d');
         $this->validate($request,[
-            'fullname'=>['required','min:10','max:50'],
+            'fullname'=>['required','min:7','max:50'],
             'address'=>['required','min:10','max:255'],
             'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
             'date'=> 'required|required|date|after:'.$date_now
         ],
         [
             'fullname.required'=>'Họ tên không được bỏ trống',
-            'fullname.min'=>'Độ dài họ tên tối thiểu 10 kí tự',
+            'fullname.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
             'fullname.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'address.required'=>'Địa chỉ không được bỏ trống',
             'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',
@@ -107,8 +107,7 @@ class HoadonController extends Controller
         $user->tenkhachhang = $request->get('fullname');
         $user->ngaynhanhang = $request->get('date');
         $user->save();
-
-        return redirect()->route('invoice.detail', $id);
+        return redirect()->back()->with('status','Cập nhật hóa đơn thành công');
     }
 
     /**

@@ -15,8 +15,8 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                    <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary"> Trở lại
-</a>
+                        <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                        </a>
                         <h5 class="title">{{ __('Chỉnh sửa thông tin tài khoản') }}</h5>
                     </div>
                     <div class="card-content">
@@ -29,8 +29,8 @@
                                             <label class="mb-2" for="first-name-column" style="font-size:15px">Tên khách
                                                 hàng</label>
                                             <input value="{{old('fullname')? old('fullname'):$staff->tenkhachhang }}"
-                                                required minlength="7" maxlength="50" type="text"
-                                                id="first-name-column" class="form-control" name="fullname">
+                                                required maxlength="50" type="text" id="first-name-column"
+                                                class="form-control" name="fullname">
                                             @if ($errors->has('fullname'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('fullname') }}</strong>
@@ -76,7 +76,8 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-info">Xác nhận</button>
+                                    <button type="submit" class="btn btn-info" onclick="return checkUpdateInfo()">Xác
+                                        nhận</button>
                                     <button onclick="location.reload();" type="reset"
                                         class="btn btn-light-secondary ">Reset</button>
                                 </div>
@@ -117,7 +118,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                         <input type="password" name="password" class="form-control"
-                                            placeholder="Mật khẩu mới" required minlength="6" maxlength="16" >
+                                            placeholder="Mật khẩu mới" required minlength="6" maxlength="16">
                                     </div>
                                     @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -146,7 +147,8 @@
                         <div class="card-footer ">
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round"
+                                        onclick="return checkUpdate()">{{ __('Xác nhận') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -157,4 +159,18 @@
 </div>
 </section>
 </div>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdate() {
+            return confirm('Bạn có chắc chắn muốn cập nhật mật khẩu?');
+        }
+
+    </script>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdateInfo() {
+            return confirm('Bạn có chắc chắn muốn cập nhật?');
+        }
+
+    </script>
+</header>
 @endsection

@@ -8,6 +8,14 @@
     @foreach ($user as $u)
     @endforeach
     <div class="col-md-12">
+        @if($errors->has('fullname')||$errors->has('address')||$errors->has('phone')||$errors->has('date'))
+        <h6 class="alert alert-warning">Cập nhật thông tin hóa đơn thất bại, vui lòng kiểm tra lại <button class="close"
+                data-dismiss="alert">&times;</button></h6>
+        @endif
+        @if(session('status'))
+        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                data-dismiss="alert">&times;</button></h6>
+        @endif
         <div class="card">
             <div class="card-header pb-0">
                 <div class="row">
@@ -109,7 +117,7 @@
                                         <div class="form-group{{ $errors->has('fullname') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên khách hàng</label>
                                             <input value="{{ $u->tenkhachhang }}" type="text" id="first-name-column"
-                                                class="form-control" name="fullname">
+                                                class="form-control" name="fullname" required maxlength="50">
                                             @if ($errors->has('fullname'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('fullname') }}</strong>
@@ -122,7 +130,7 @@
                                         <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Số điện thoại</label>
                                             <input value="{{ $u->sdtkhachhang }}" pattern="(\+84|0)\d{9,10}" type="text"
-                                                id="phone" class="form-control" name="phone">
+                                                id="phone" class="form-control" name="phone" required>
                                             @if ($errors->has('phone'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('phone') }}</strong>
@@ -133,8 +141,8 @@
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Địa chỉ</label>
-                                            <textarea name="address" class="form-control"
-                                                id="exampleFormControlTextarea1"
+                                            <textarea minlength="10" maxlength="255" required name="address"
+                                                class="form-control" id="exampleFormControlTextarea1"
                                                 rows="3">{{ $u->diachigiaohang }}</textarea>
                                             @if ($errors->has('address'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -144,9 +152,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md col-12">
-                                        <div class="form-group{{ $errors->has('date') ? ' has-danger' : '' }}" data-date-format="dd-mm-yyyy">
+                                        <div class="form-group{{ $errors->has('date') ? ' has-danger' : '' }}"
+                                            data-date-format="dd-mm-yyyy">
                                             <label class="mb-2" for="city-column">Ngày nhận</label>
-                                            <input value="{{ $u->ngaynhanhang }}" type="date" id="date"
+                                            <input required value="{{ $u->ngaynhanhang }}" type="date" id="date"
                                                 class="form-control" name="date">
 
                                             @if ($errors->has('date'))
@@ -288,66 +297,68 @@
         </div>
     </div>
 
-        <div class="col-md">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h4 class="card-title">Chi tiết hóa đơn</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="col-2">Hình Ảnh</th>
-                                        <th class="col-2">Tên Sản Phẩm</th>
-                                        <th class="col-1">Giá bán</th>
-                                        <th class="col-1">Kích cỡ</th>
-                                        <th class="col-1">Số Lượng</th>
-                                        <th class="col-1">Thành tiền</th>
-                                        <th class="col-2">Ghi Chú</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($lsInD as $item)
-                                        <tr>
-                                            <td class="col-2">
-                                                <img width="150px" height="150px"
-                                                    src="{{ asset('/images/' . $item->img) }}" alt="">
-                                            </td>
-                                            <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
-                                            <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
-                                            </td>
-                                            <td style="width:30%" class="col-1">{{ $item->s_name }}
-                                                ({{ $item->phantram }}%)
-                                            </td>
-                                            <td class="col-1">{{ $item->soluong }}</td>
-                                            <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
-                                            <td class="col-2">{{ $item->ghichu }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="col-md">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Chi tiết hóa đơn</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="col-2">Hình Ảnh</th>
+                                    <th class="col-2">Tên Sản Phẩm</th>
+                                    <th class="col-1">Giá bán</th>
+                                    <th class="col-1">Kích cỡ</th>
+                                    <th class="col-1">Số Lượng</th>
+                                    <th class="col-1">Thành tiền</th>
+                                    <th class="col-2">Ghi Chú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($lsInD as $item)
+                                <tr>
+                                    <td class="col-2">
+                                        <img width="150px" height="150px" src="{{ asset('/images/' . $item->img) }}"
+                                            alt="">
+                                    </td>
+                                    <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
+                                    <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
+                                    </td>
+                                    <td style="width:30%" class="col-1">{{ $item->s_name }}
+                                        ({{ $item->phantram }}%)
+                                    </td>
+                                    <td class="col-1">{{ $item->soluong }}</td>
+                                    <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
+                                    <td class="col-2">{{ $item->ghichu }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <header>
-        <script language="JavaScript" type="text/javascript">
-          function check(){
-              return confirm('Xác nhận chỉnh sửa thông tin hóa đơn?');
-          }
-        </script>
-      </header>
-    <header>
-        <script language="JavaScript" type="text/javascript">
-          function checkDelete(){
-              return confirm('Bạn có chắc chắn hủy hóa đơn?');
-          }
-        </script>
-      </header>
+</div>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function check() {
+            return confirm('Xác nhận chỉnh sửa thông tin hóa đơn?');
+        }
+
+    </script>
+</header>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkDelete() {
+            return confirm('Bạn có chắc chắn hủy hóa đơn?');
+        }
+
+    </script>
+</header>
 
 <header>
     <script language="JavaScript" type="text/javascript">

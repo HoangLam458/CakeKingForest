@@ -40,7 +40,7 @@
                 <form action="{{ route('Storecontact')}}" class="bg-white p-5 contact-form" method="post">
                     @csrf
                     <div class="form-group{{ $errors->has('ht') ? ' has-danger' : '' }}">
-                        <input type="text" name="ht" value="{{old('ht')}}" class="form-control" placeholder="Họ và tên" required>
+                        <input type="text" name="ht" value="{{old('ht')}}" class="form-control" placeholder="Họ và tên" maxlength="50" required>
                         @if ($errors->has('ht'))
                         <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
                             {{ $errors->first('ht') }}
