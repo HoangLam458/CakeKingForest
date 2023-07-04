@@ -101,7 +101,7 @@
                                             @endswitch
                                             <td>
                                                 <a href="{{ route('invoice.detail', $item->id) }}" type="button"
-                                                    class="btn btn-secondary">
+                                                    class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Xem chi tiết hóa đơn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                                                         <path fill-rule="evenodd"
@@ -112,7 +112,7 @@
                                                 @case(1)
                                                 <a href="{{ route('invoice.status.approved', $item->id ) }}"
                                                     type="button" class="btn btn-primary" method="POST"
-                                                    onclick="return checkApproved()">
+                                                    onclick="return checkApproved()" data-toggle="tooltip" data-placement="top" title="Duyệt hóa đơn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                                         <path
@@ -121,7 +121,7 @@
 
                                                 </a>
                                                 <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button"
-                                                    class="btn btn-danger" onclick="return checkDelete()">
+                                                    class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3-fill"
                                                         viewBox="0 0 16 16">
@@ -133,7 +133,7 @@
                                                 @break
                                                 @case(2)
                                                 <a href="{{ route('invoice.status.ship', $item->id) }}" type="button"
-                                                    class="btn btn-info" onclick="return checkShip()">
+                                                    class="btn btn-info" onclick="return checkShip()" data-toggle="tooltip" data-placement="top" title="Giao đơn hàng">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                                         <path
@@ -141,7 +141,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button"
-                                                    class="btn btn-danger" onclick="return checkDelete()">
+                                                    class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3-fill"
                                                         viewBox="0 0 16 16">
@@ -152,7 +152,7 @@
                                                 @break
                                                 @case(3)
                                                 <a href="{{ route('invoice.status.success', $item->id) }}" type="button"
-                                                    class="btn btn-success" onclick="return checkSuccess()">
+                                                    class="btn btn-success" onclick="return checkSuccess()" data-toggle="tooltip" data-placement="top" title="Xác nhận hoàn thành">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-check-circle-fill"
                                                         viewBox="0 0 16 16">
@@ -161,7 +161,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button"
-                                                    class="btn btn-danger" onclick="return checkDelete()">
+                                                    class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3-fill"
                                                         viewBox="0 0 16 16">

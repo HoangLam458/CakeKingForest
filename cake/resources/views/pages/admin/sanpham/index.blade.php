@@ -106,7 +106,7 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('sanpham.detail', $item->id) }}" type="button"
-                                                class="btn btn-secondary">
+                                                class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Xem chi tiết sản phẩm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                                     <path
@@ -114,7 +114,7 @@
                                                 </svg>
                                             </a>
                                             <a href="{{ route('sanpham.edit.form', $item->id) }}" type="button"
-                                                class="btn btn-primary">
+                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa thông tin">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -125,7 +125,7 @@
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
                                             <a href="{{ route('sanpham.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger" onclick="return checkDelete()">
+                                                class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Xóa sản phẩm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path

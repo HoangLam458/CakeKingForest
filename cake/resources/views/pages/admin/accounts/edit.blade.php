@@ -76,9 +76,9 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-info">Xác nhận</button>
+                                    <button type="submit"  onclick="return checkDelete()" class="btn btn-info">Xác nhận</button>
                                     <button onclick="location.reload();" type="reset"
-                                        class="btn btn-light-secondary ">Reset</button>
+                                        class="btn btn-light-secondary ">Nhập lại dữ liệu</button>
                                 </div>
                         </div>
                         </form>
@@ -146,7 +146,7 @@
                         <div class="card-footer ">
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
+                                    <button type="submit" onclick="return changepass()" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -158,3 +158,13 @@
 </section>
 </div>
 @endsection
+<head>
+<script language="JavaScript" type="text/javascript">
+    function checkDelete() {
+        return confirm('Xác nhận thay đổi thông tin?');
+    }
+    function changepass() {
+        return confirm('Xác nhận thay đổi mật khẩu?');
+    }
+</script>
+</head>

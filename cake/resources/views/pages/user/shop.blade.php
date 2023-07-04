@@ -48,17 +48,17 @@
             <div class="text-center">
                 <ul class="product-category">
                     @if ($act == 0)
-                    <li><a class="button button1 focus active" href="{{ route('shop') }}" class="active">All</a>
+                    <li><a class="button button1 focus active"   href="{{ route('shop') }}" class="active">All</a>
                     </li>
                     @elseif($act != 0)
-                    <li><a class="button button1 focus" href="{{ route('shop') }}" class="active">All</a></li>
+                    <li><a  class="button button1 focus" href="{{ route('shop') }}" class="active">All</a></li>
                     @endif
                     @foreach ($lsloaisp as $loaisp)
                     @if ($loaisp->id == $act)
-                    <li><a class="button button1 focus active" href="{{ route('shop.category', $loaisp->id) }}">
+                    <li><a  class="button button1 focus active" href="{{ route('shop.category', $loaisp->id) }}">
                             {{ $loaisp->tenloaisp }} </a></li>
                     @else
-                    <li><a class="button button1 focus" href="{{ route('shop.category', $loaisp->id) }}">
+                    <li><a  class="button button1 focus" href="{{ route('shop.category', $loaisp->id) }}">
                             {{ $loaisp->tenloaisp }} </a></li>
                     @endif
                     @endforeach
@@ -90,7 +90,7 @@
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
 
-                                <a type="button" href="{{ route('shop.detail', $Sanpham->id) }}"
+                                <a type="button" href="{{ route('shop.detail', $Sanpham->id) }}" data-toggle="tooltip" data-placement="top" title="Nhấn để xem chi tiết"
                                     class="d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
@@ -100,7 +100,7 @@
                                     <input name="id" value="{{ $Sanpham->id }}" type="text" hidden required>
                                     <input name="quantity" value="1" type="number" hidden required>
                                     <input name="size" value="1" type="number" hidden required>
-                                    <button type="submit"
+                                    <button type="submit" data-toggle="tooltip" data-placement="top" title="Nhấn để thêm sản phẩm vào giỏ hàng"
                                         class="btn btn-primary justify-content-center align-items-center mx-2">
                                         <i class="ion-ios-cart"></i>
                                     </button>

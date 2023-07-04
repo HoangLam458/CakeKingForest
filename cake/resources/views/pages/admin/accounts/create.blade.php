@@ -9,7 +9,7 @@
          <div class="row match-height">
              <div class="col-12">
                  <div class="card">
-                
+
                      <div class="card-header pb-0">
                      <a href="{{ route('user.index') }}" type="button" class="btn btn-secondary">Trở lại
                 </a>
@@ -98,8 +98,8 @@
                                 </div>
                                  </div>
                                      <div class="col-12 d-flex justify-content-end mt-2">
-                                         <button type="submit" class="btn btn-primary me-1 mb-1">Xác nhận</button>
-                                         <button onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                         <button type="submit" onclick="return checkDelete()" class="btn btn-primary me-1 mb-1">Xác nhận</button>
+                                         <button onclick="location.reload();" type="reset" class="btn btn-light-secondary me-1 mb-1">Nhập lại dữ liệu</button>
                                      </div>
                                  </div>
                              </form>
@@ -113,7 +113,7 @@
  <header>
     <script language="JavaScript" type="text/javascript">
         function checkDelete() {
-            return confirm('Bạn có chắc chắn muốn xóa');
+            return confirm('Bạn muốn tạo tài khoản mới?');
         }
     </script>
 </header>

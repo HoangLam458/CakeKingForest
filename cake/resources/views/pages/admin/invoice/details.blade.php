@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-md-auto">
                         @if ($u->trangthai == 1)
-
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
+                        data-toggle="tooltip" data-placement="top" title="Sửa thông tin hóa đơn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                 class="bi bi-gear" viewBox="0 0 16 16">
                                 <path
@@ -28,12 +28,11 @@
                                     d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
                             </svg>
                         </button>
-
                         @endif
                         @switch($u->trangthai)
                         @case(1)
                         <a href="{{ route('invoice.status.approved', $u->id ) }}" type="button" class="btn btn-primary"
-                            method="POST" onclick="return checkApproved()">
+                            method="POST" onclick="return checkApproved()" data-toggle="tooltip" data-placement="top" title="Duyệt hóa đơn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-check2" viewBox="0 0 16 16">
                                 <path
@@ -42,7 +41,7 @@
 
                         </a>
                         <a href="{{ route('invoice.status.cancel', $u->id) }}" type="button" class="btn btn-danger"
-                            onclick="return checkDelete()">
+                            onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path
@@ -53,7 +52,7 @@
                         @break
                         @case(2)
                         <a href="{{ route('invoice.status.ship', $u->id) }}" type="button" class="btn btn-info"
-                            onclick="return checkShip()">
+                            onclick="return checkShip()" data-toggle="tooltip" data-placement="top" title="Giao đơn hàng">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-send" viewBox="0 0 16 16">
                                 <path
@@ -61,7 +60,7 @@
                             </svg>
                         </a>
                         <a href="{{ route('invoice.status.cancel', $u->id) }}" type="button" class="btn btn-danger"
-                            onclick="return checkDelete()">
+                            onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path
@@ -71,7 +70,7 @@
                         @break
                         @case(3)
                         <a href="{{ route('invoice.status.success', $u->id) }}" type="button" class="btn btn-success"
-                            onclick="return checkSuccess()">
+                            onclick="return checkSuccess()" data-toggle="tooltip" data-placement="top" title="Xác nhận hoàn thành ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                 <path
@@ -79,7 +78,7 @@
                             </svg>
                         </a>
                         <a href="{{ route('invoice.status.cancel', $u->id) }}" type="button" class="btn btn-danger"
-                            onclick="return checkDelete()">
+                            onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Hủy hóa đơn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path

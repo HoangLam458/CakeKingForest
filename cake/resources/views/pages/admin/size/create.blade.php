@@ -49,9 +49,9 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                    <button type="submit" onclick="return checkDelete()" class="btn btn-primary me-1 mb-1">Xác nhận</button>
                                     <button onclick="location.reload();" type="reset"
-                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</button>
                                 </div>
                             </form>
                         </div>
@@ -62,3 +62,10 @@
     </section>
 </div>
 @endsection
+<head>
+    <script language="JavaScript" type="text/javascript">
+        function checkDelete() {
+            return confirm('Bạn muốn tạo kích thước mới?');
+        }
+    </script>
+    </head>

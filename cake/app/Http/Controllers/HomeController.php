@@ -1,17 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
-use App\Models\loaisanpham;
-use App\Models\sanpham;
-use App\Models\size;
 use Carbon\Carbon;
-
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -49,9 +42,9 @@ class HomeController extends Controller
     }
     public function index()
     {
-       
-        $time = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->format('Y/m/d');
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
+
+        $time = Carbon::now()->subDays(30)->format('Y/m/d');
+        $now = Carbon::now()->format('Y/m/d');
         $doanhthu = 0;
         $hoadonall = hoadon::all();
         $hoadonmomo = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','MoMo')->get();
@@ -70,12 +63,7 @@ class HomeController extends Controller
                     $doanhthu = $doanhthu + $item->giatien;
                 }
             }
-            $test = DB::table('chitiethoadons')
-            ->join('hoadons','hoadon_id','=','hoadons.id')
-            ->where('hoadons.trangthai',4)->whereBetween('ngaylaphd',[$time,$now])
-            ->select(DB::raw('SUM(giatien) as thanhtien'),'hoadons.ngaylaphd as ngaylaphd')
-            ->groupBy('hoadons.ngaylaphd')->orderBy('hoadons.ngaylaphd','ASC')
-            ->get();
+            $test = $this->data_chart($time,$now);
         }
         return view('pages.admin.dashboard',[
             'product'=>$this->product_replate(),

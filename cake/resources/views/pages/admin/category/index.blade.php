@@ -42,7 +42,7 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('category.edit.form', $item->id) }}" type="button"
-                                                class="btn btn-primary">
+                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Sửa thông tin loại sản phẩm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -53,8 +53,7 @@
                                             </a>
 
                                             <a href="{{ route('category.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}"
+                                                class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa loại sản phẩm"
                                                 onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

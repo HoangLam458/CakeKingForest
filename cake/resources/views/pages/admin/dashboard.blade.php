@@ -188,15 +188,18 @@
                                 <div class="col-md-2">
                                     <p>Từ ngày: <input type="text" id="datepicker" class="form-control"
                                             name="from_date" autocomplete="off" required></p>
-                                    <button type="submit" class="btn btn-primary btn-sm btn-round">
-                                        Lọc kết quả
-                                    </button>
                                 </div>
                                 <div class="col-md-2">
                                     <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"
                                             name="to_date" autocomplete="off" required></p>
                                 </div>
+                                <div class="col-md-2">
+                                    <button type="submit" style="margin-top: 14;" class="btn btn-primary btn-round">
+                                        Lọc kết quả
+                                    </button>
+                                </div>
                         </form>
+                        <div class="col-md-2">
                         <div class="dropdown dropright">
                             <button style="margin-top: 14;"
                                 class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -231,6 +234,8 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                    
                     <hr>
                     <div class="card-body">
                         <div id="myfirstchart" style="height: 400px;"></div>

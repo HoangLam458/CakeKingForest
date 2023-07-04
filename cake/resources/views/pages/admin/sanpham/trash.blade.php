@@ -104,7 +104,7 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('sanpham.restore', $item->id) }}" type="button"
-                                                class="btn btn-success" onclick="return checkDelete()">
+                                                class="btn btn-success" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Khôi phục sản phẩm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-house-add" viewBox="0 0 16 16">
                                                     <path
@@ -126,15 +126,11 @@
                 </div>
             </div>
         </div>
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha3/js/bootstrap.min.js"
-            integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {
-                    return confirm('Bạn có chắc chắn muốn khôi phục');
+                    return confirm('Bạn có chắc chắn muốn khôi phục?');
                 }
-
             </script>
         </header>
         @endsection

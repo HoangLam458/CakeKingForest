@@ -36,8 +36,8 @@
                                      </div>
                                  </div><hr/>
                                      <div class="col-12 d-flex justify-content-end mt-2">
-                                         <button type="submit" class="btn btn-primary me-1 mb-1">Xác nhận</button>
-                                         <button onclick="location.reload();" type="reset" class="btn btn-secondary me-1 mb-1">Reset</button>
+                                         <button type="submit" onclick="return checkDelete()" class="btn btn-primary me-1 mb-1">Xác nhận</button>
+                                         <button onclick="location.reload();" type="reset" class="btn btn-secondary me-1 mb-1">Nhập lại thông tin</button>
                                      </div>
                                  </div>
                              </form>
@@ -49,3 +49,10 @@
      </section>
  </div>
 @endsection
+<head>
+    <script language="JavaScript" type="text/javascript">
+        function checkDelete() {
+            return confirm('Xác nhận thay đổi thông tin?');
+        }
+    </script>
+    </head>

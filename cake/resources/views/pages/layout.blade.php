@@ -106,6 +106,7 @@
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Liên Hệ</a></li>
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}"
+                        data-toggle="tooltip" data-placement="top" title="Giỏ hàng"
                             class="nav-link"><span class="icon-shopping_cart"></span>
                             [@php
                             echo Session::has('cate')? count(Session::get('cate')) :0;

@@ -116,7 +116,7 @@
                                         </a> --}}
                                         @if (auth()->user()->loai == 2)
                                         <a href="{{ route('user.edit.form', $item->id) }}" type="button"
-                                            class="btn btn-primary">
+                                            class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Sửa thông tin tài khoản">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path
@@ -127,7 +127,7 @@
                                         </a>
                                         @if ($item->id!=auth()->user()->id)
                                         <a href="{{ route('user.delete', $item->id) }}" type="button"
-                                            class="btn btn-danger" onclick="return checkDelete()">
+                                            class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Xóa tài khoản">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                 <path
@@ -138,7 +138,7 @@
                                         @endif
                                         {{-- --}}
                                         @if (auth()->user()->loai == 1)
-                                        <a href="{{ route('user.edit.form', $item->id) }}" type="button"
+                                        <a href="{{ route('user.edit.form', $item->id) }}" type="button" data-toggle="tooltip" data-placement="top" title="Sửa thông tin tài khoản"
                                             class="btn btn-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -150,7 +150,7 @@
                                         </a>
                                         @if ($item->id!=auth()->user()->id && $item->loai == 0)
                                         <a href="{{ route('user.delete', $item->id) }}" type="button"
-                                            class="btn btn-danger" onclick="return checkDelete()">
+                                            class="btn btn-danger" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Xóa tài khoản">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                 fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                 <path
