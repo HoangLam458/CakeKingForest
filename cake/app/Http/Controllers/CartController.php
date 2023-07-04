@@ -220,7 +220,6 @@ class CartController extends Controller
                 ]);
                 $user2 = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
                 $request = $request->all();
-                dd($request);
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",
