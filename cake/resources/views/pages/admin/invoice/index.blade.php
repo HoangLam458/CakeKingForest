@@ -2,6 +2,10 @@
 'class' => '',
 'elementActive' => 'invoice'
 ])
+
+<title>Cake King Forest - Hóa đơn</title>
+
+@section('content')
 <header>
     <style>
         .pagination {
@@ -10,9 +14,6 @@
 
     </style>
 </header>
-<title>Cake KingForest - Hóa đơn</title>
-
-@section('content')
 @include('sweetalert::alert')
 <div class="content">
     <section id="multiple-column-form">

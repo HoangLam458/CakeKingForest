@@ -59,6 +59,7 @@ class HomeController extends Controller
         $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
         $hoadon_choduyet = hoadon::where('trangthai',1)->get();
         $hoadon_danggiao = hoadon::where('trangthai',3)->get();
+        $hoadon_tienmat = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','Tiền Mặt')->get();
         if($hoadon_hoanthanh != null)
         {
             foreach($hoadon_hoanthanh as $hd)
@@ -76,7 +77,6 @@ class HomeController extends Controller
             ->groupBy('hoadons.ngaylaphd')->orderBy('hoadons.ngaylaphd','ASC')
             ->get();
         }
-        $count=$hoadonmomo->count()+$hoadonvnpay->count()+$hoadon_choduyet->count();
         return view('pages.admin.dashboard',[
             'product'=>$this->product_replate(),
             'countCate'=>$this->product_chart(),
@@ -86,8 +86,7 @@ class HomeController extends Controller
             'hd_pending'=>count($hoadon_choduyet),
             'hd_shipping'=>count($hoadon_danggiao),
             'hoadonall'=>$hoadonall,
-            'dem'=>$count,
-            'choduyet'=>$hoadon_choduyet->count(),
+            'choduyet'=>$hoadon_tienmat->count(),
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
         ]);
     }

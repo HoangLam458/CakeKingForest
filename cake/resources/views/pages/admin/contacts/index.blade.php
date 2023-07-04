@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'contact',
 ])
-<title>Cake KingForest - Phản hồi</title>
+<title>Cake King Forest - Phản hồi</title>
 {{-- <header>
     <style>
         .pagination {

@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
-<title>Cake KingForest - Chỉnh Sửa Bánh</title>
+<title>Cake King Forest - Chỉnh Sửa Bánh</title>
 
 @section('content')
 <div class="content">

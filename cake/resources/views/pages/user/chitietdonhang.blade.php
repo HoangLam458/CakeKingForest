@@ -6,7 +6,7 @@
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="{{route('cake')}}">Trang chủ</a></span> <span>Chi tiết đơn hàng</span>
                 </p>
-                <h1 class="mb-0 bread">Chi tiết đơn hàng</h1>
+                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Chi tiết đơn hàng</h1>
             </div>
         </div>
     </div>

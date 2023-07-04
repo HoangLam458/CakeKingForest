@@ -163,7 +163,10 @@ class HoadonController extends Controller
     public function donhang(Request $request)
     {
         $category = loaisanpham::all();
-        $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->first();
+        $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->Paginate(10);
+        if(!$hd){
+            alert()->success('Thông báo', 'Không tìm thấy đơn hàng!');
+        }
         return view('pages.user.donhang', [
             'hd' => $hd,
             'category' => $category
@@ -179,6 +182,10 @@ class HoadonController extends Controller
             $query->where('sdtkhachhang', $search)
                 ->orWhere('mahd', $search);
         })->Paginate(10)->withQueryString();
+
+        if($hd->count()<=0){
+            alert()->error('Thông báo', 'Không tìm thấy đơn hàng!');
+        }
         return view('pages.user.donhang', [
             'hd' => $hd,
             'category' => $category

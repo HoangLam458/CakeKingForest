@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'user'
 ])
-<title>Cake KingForest - Tài khoản</title>
+<title>Cake King Forest - Tài khoản</title>
 <header>
     <style>
         .pagination {
