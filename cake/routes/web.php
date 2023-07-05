@@ -196,7 +196,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
-Route::post('/login2', [LoginController::class, 'login'])->name('login2');
+Route::post('/login', [LoginController::class, 'login'])->name('login2');
 Route::get('/signout', [UserController::class, 'logout'])->name('logout2');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);

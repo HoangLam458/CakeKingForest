@@ -97,6 +97,7 @@ class UserController extends Controller
         $user->sdt = $request->get('phone');
         $user->diachi = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
+        $user->loai = $request->get('admin');
         $user->save();
         return redirect()->back()->with('status','Cập nhật tài khoản thành công');
     }
