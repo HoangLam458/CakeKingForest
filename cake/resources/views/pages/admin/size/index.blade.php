@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'size'
 ])
-<title>Cake KingForest - Kích thước bánh</title>
+<title>Cake King Forest - Kích thước bánh</title>
 
 @section('content')
 <div class="content">
@@ -17,9 +17,9 @@
                 </div>
                 <div class="card-body">
                     <div class="flash-message">
-                        @if(Session::has('success'))
-                        <p class="alert alert-success">{{ Session::pull('success') }} <a href="#" class="close"
-                                data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @if(session('status'))
+                        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                                data-dismiss="alert">&times;</button></h6>
                         @endif
                     </div>
                     <div class="table-responsive">
@@ -41,9 +41,8 @@
                                     <td class="text-bold-500">{{ $item->phantram }} %</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-
                                             <a href="{{ route('size.edit.form', $item->id) }}" type="button"
-                                                class="btn btn-primary">
+                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Thay đổi thông tin kích thước">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -54,8 +53,7 @@
                                             </a>
                                             {{-- @if ($item->id!=auth()->user()->id) --}}
                                             <a href="{{ route('size.delete', $item->id) }}" type="button"
-                                                class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#animation-{{ $item->id }}"
+                                                class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa kích thước"
                                                 onclick="return checkDelete()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -77,7 +75,7 @@
         <header>
             <script language="JavaScript" type="text/javascript">
                 function checkDelete() {
-                    return confirm('Bạn có chắc chắn muốn xóa');
+                    return confirm('Bạn có chắc chắn muốn xóa?');
                 }
 
             </script>

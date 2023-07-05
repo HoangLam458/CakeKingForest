@@ -48,6 +48,7 @@ class HoadonController extends Controller
      */
     public function show($id)
     {
+
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
@@ -60,7 +61,8 @@ class HoadonController extends Controller
         return view('pages.admin.invoice.details', [], [
             'lsInD' => $lsInD,
             'user' => $user,
-            'total' => $total
+            'total' => $total,
+
         ]);
     }
 
@@ -77,15 +79,35 @@ class HoadonController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $date_now = Carbon::now()->format('Y-m-d');
+        $this->validate($request,[
+            'fullname'=>['required','min:7','max:50'],
+            'address'=>['required','min:10','max:255'],
+            'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
+            'date'=> 'required|required|date|after:'.$date_now
+        ],
+        [
+            'fullname.required'=>'Họ tên không được bỏ trống',
+            'fullname.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
+            'fullname.max'=>'Độ dài họ tên tối đa 50 kí tự',
+            'address.required'=>'Địa chỉ không được bỏ trống',
+            'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',
+            'address.max'=>'Độ dài địa chỉ tối đa 255 kí tự',
+            'phone.regex'=>'Sổ điện thoại không đúng định dạng',
+            'phone.required'=>'Sổ điện thoại không được bỏ trống',
+            'phone.min'=>'Sổ điện thoại phải 10 số',
+            'phone.max'=>'Sổ điện thoại phải 10 số',
+            'date.required'=>'Ngày nhận hàng không được bỏ trống',
+            'date.after'=>'Ngày nhận hàng phải lớn hơn ngày hiện tại',
+        ]);
         $user = hoadon::find($id);
         $user->sdtkhachhang = $request->get('phone');
         $user->diachigiaohang = $request->get('address');
         $user->tenkhachhang = $request->get('fullname');
         $user->ngaynhanhang = $request->get('date');
-
         $user->save();
-
-        return redirect()->route('invoice.detail', $id);
+        return redirect()->back()->with('status','Cập nhật hóa đơn thành công');
     }
 
     /**
@@ -140,7 +162,10 @@ class HoadonController extends Controller
     public function donhang(Request $request)
     {
         $category = loaisanpham::all();
-        $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->first();
+        $hd = hoadon::where('mahd', $request->get('search'))->where('trangthai', '<>', 0)->Paginate(10);
+        if(!$hd){
+            alert()->success('Thông báo', 'Không tìm thấy đơn hàng!');
+        }
         return view('pages.user.donhang', [
             'hd' => $hd,
             'category' => $category
@@ -152,11 +177,14 @@ class HoadonController extends Controller
         $search = $_GET['search'];
         // $hd = hoadon::where('trangthai','<>', 0)->Where('sdtkhachhang',$request->get('search'))
         // ->orWhere('mahd',$request->get('search'))->get();
-
         $hd = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
             $query->where('sdtkhachhang', $search)
                 ->orWhere('mahd', $search);
         })->Paginate(10)->withQueryString();
+
+        if($hd->count()<=0){
+            alert()->error('Thông báo', 'Không tìm thấy đơn hàng!');
+        }
         return view('pages.user.donhang', [
             'hd' => $hd,
             'category' => $category
@@ -186,16 +214,14 @@ class HoadonController extends Controller
         foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }
-        return view(
-            'pages.user.chitietdonhang',
+        return view('pages.user.chitietdonhang',
             [
                 'size' => $size,
                 'mahd' => $mahd,
                 'total' => $total,
                 'ls' => $lsInD,
                 'category' => $category,
-                'cart' => $lstCart
-            ]
+                'cart' => $lstCart]
         );
     }
     public function updateghichu($id, Request $request)

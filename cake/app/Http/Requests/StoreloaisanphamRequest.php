@@ -22,7 +22,7 @@ class StoreloaisanphamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tenloaisp'=>['required','unique:loaisanphams,tenloaisp','max:255','min:15'],
+            'tenloaisp'=>['required','unique:loaisanphams,tenloaisp','max:255','min:10'],
         ];
     }
     public function messages(){
@@ -30,7 +30,7 @@ class StoreloaisanphamRequest extends FormRequest
             'tenloaisp.unique'=>'Tên loại bánh đã được sử dụng',
             'tenloaisp.required'=>'Tên loại bánh không được bỏ trống',
             'tenloaisp.max'=>'Độ dài tên loại bánh tối đa 255 kí tự',
-            'tenloaisp.min'=>'Độ dài tên tên loại bánh tối thiểu 15 kí tự',
+            'tenloaisp.min'=>'Độ dài tên tên loại bánh tối thiểu 10 kí tự',
         ];
     }
 }

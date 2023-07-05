@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
-<title>Cake KingForest - Sản phẩm</title>
+<title>Cake King Forest - Chỉnh Sửa Bánh</title>
 
 @section('content')
 <div class="content">
@@ -10,10 +10,13 @@
         <div class="row match-height">
             <div class="col-12">
                 @if(session('status'))
-                <h6 class="alert alert-success">{{session('status')}}</h6>
+                <h6 class="alert alert-success">{{session('status')}}<button class="close"
+                        data-dismiss="alert">&times;</button></h6>
                 @endif
                 <div class="card">
                     <div class="card-header pb-0">
+                        <a href="{{ route('sanpham.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                        </a>
                         <h4 class="card-title">Chỉnh sửa thông tin bánh</h4>
                     </div>
                     <div class="card-content">
@@ -89,8 +92,8 @@
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Mô Tả</label>
-                                            <textarea maxlength="255" minlength="50" required name="mota" class="form-control"
-                                                id="exampleFormControlTextarea1"
+                                            <textarea maxlength="255" minlength="50" required name="mota"
+                                                class="form-control" id="exampleFormControlTextarea1"
                                                 rows="3">{{ old('mota')? old('mota'):$sanpham->mota }}</textarea>
                                             @if ($errors->has('mota'))
 
@@ -103,9 +106,10 @@
                                 </div>
                                 <hr />
                                 <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                    <a onclick="location.reload();" type="reset"
-                                        class="btn btn-light-secondary me-1 mb-1">Reset</a>
+                                    <button type="submit" class="btn btn-primary me-1 mb-1"
+                                        onclick="return checkUpdate()">Xác nhận</button>
+                                    <button onclick="location.reload();" type="reset"
+                                        class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</button>
                                 </div>
 
                         </div>
@@ -116,7 +120,13 @@
         </div>
 </div>
 </section>
-<a href="{{ route('sanpham.index') }}" type="button" class="btn btn-secondary"> Back to list
-</a>
 </div>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdate() {
+            return confirm('Bạn có chắc chắn muốn cập nhật?');
+        }
+
+    </script>
+</header>
 @endsection

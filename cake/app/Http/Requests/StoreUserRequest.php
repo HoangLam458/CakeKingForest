@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
         return [
             'email'=>['required','unique:users,email'],
             'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
-            'name'=>['required','min:7','max:50'],
+            'name'=>['required','max:50'],
             'address'=>['required','min:10','max:255'],
             'password' => ['required', 'min:6','max:16'],
         ];
@@ -41,7 +41,6 @@ class StoreUserRequest extends FormRequest
             'phone.min'=>'Sổ điện thoại phải 10 số',
             'phone.max'=>'Sổ điện thoại phải 10 số',
             'name.required'=>'Họ tên không được bỏ trống',
-            'name.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
             'name.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'address.required'=>'Địa chỉ không được bỏ trống',
             'address.min'=>'Độ dài địa chỉ tối thiểu 10 kí tự',

@@ -106,6 +106,7 @@
                     <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Liên Hệ</a></li>
                     <li class="nav-item"><a href="{{ route('donhang') }}" class="nav-link">Đơn Hàng</a></li>
                     <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}"
+                        data-toggle="tooltip" data-placement="top" title="Giỏ hàng"
                             class="nav-link"><span class="icon-shopping_cart"></span>
                             [@php
                             echo Session::has('cate')? count(Session::get('cate')) :0;
@@ -118,7 +119,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{ auth()->user()->tenkhachhang }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @if (auth()->user()->loai == 1)
+                            @if (auth()->user()->loai == 1 || auth()->user()->loai == 2 )
                             <a class="dropdown-item" href="{{ route('home') }}">Trang admin</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('trang-ca-nhan',auth()->user()->id) }}">Trang cá

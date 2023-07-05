@@ -2,13 +2,15 @@
     'class' => '',
     'elementActive' => 'index'
 ])
-<title>Cake KingForest - Phản hồi</title>
+<title>Cake King Forest - Phản hồi</title>
 @section('content')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+                <a href="{{ route('contact.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                </a>
                     <h4 class="card-title"> Chi tiết thư phản hồi</h4>
                 </div>
                 <div class="card-body">

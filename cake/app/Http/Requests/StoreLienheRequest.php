@@ -23,9 +23,9 @@ class StoreLienheRequest extends FormRequest
     {
         return [
             'em'=>['required'],
-            'ht'=>['required','min:7','max:50'],
+            'ht'=>['required','max:50'],
             'td'=>['required','min:15','max:50'],
-            'nd' => ['required', 'min:80'],
+            'nd' => ['required', 'min:50'],
         ];
         
     }
@@ -33,13 +33,12 @@ class StoreLienheRequest extends FormRequest
         return [
             'em.required'=>'Email không được bỏ trống',
             'ht.required'=>'Họ tên không được bỏ trống',
-            'ht.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
             'ht.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'nd.required'=>'Nội dung không được bỏ trống',
-            'nd.min'=>'Độ dài nội dung tối thiểu 80 kí tự',
-            'td.required' => 'Tiêu đề  không được bỏ trống',
+            'nd.min'=>'Độ dài nội dung tối thiểu 50 kí tự',
+            'td.required' => 'Tiêu đề không được bỏ trống',
             'td.min' => 'Độ dài tiêu đề tối thiểu 15 kí tự',
-            'td.max' => 'Độ dài tiêu đề  tối đa 50 kí tự',
+            'td.max' => 'Độ dài tiêu đề tối đa 50 kí tự',
         ];
     }
 }

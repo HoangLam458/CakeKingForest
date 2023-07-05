@@ -22,7 +22,7 @@ class StoresanphamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tensp'=>['required','unique:sanphams,deleted_at,NULL','max:255','min:15',],
+            'tensp'=>['required','unique:sanphams,tensp','max:255','min:15',],
             'mota'=>['required','max:255','min:50'],
             'giatien'=> 'required|numeric|between:100000,2000000',
             'image'=>['required']

@@ -7,7 +7,7 @@
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Trang chủ</a></span><span>Liên
                         hệ với chúng tôi</span></p>
-                <h1 class="mb-0 bread">Liên hệ với chúng tôi</h1>
+                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Liên hệ với chúng tôi</h1>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                 <form action="{{ route('Storecontact')}}" class="bg-white p-5 contact-form" method="post">
                     @csrf
                     <div class="form-group{{ $errors->has('ht') ? ' has-danger' : '' }}">
-                        <input type="text" name="ht" value="{{old('ht')}}" class="form-control" placeholder="Họ và tên" required>
+                        <input type="text" name="ht" value="{{old('ht')}}" class="form-control" placeholder="Họ và tên" maxlength="50" required>
                         @if ($errors->has('ht'))
                         <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">
                             {{ $errors->first('ht') }}
@@ -65,7 +65,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('nd') ? ' has-danger' : '' }}">
-                        <textarea name="nd" id="" cols="30" rows="7" class="form-control" placeholder="Nội dung"
+                        <textarea name="nd" id="" cols="30" rows="7" class="form-control" minlength="50" placeholder="Nội dung"
                             required>{{old('nd')}}</textarea>
                         @if ($errors->has('nd'))
                         <span class="invalid-feedback" style="display: block;font-size:15px" role="alert">

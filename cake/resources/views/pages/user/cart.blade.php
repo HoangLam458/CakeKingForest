@@ -31,7 +31,7 @@
                 <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('cake') }}">Trang chủ</a></span>
                     <span>Giỏ hàng</span>
                 </p>
-                <h1 class="mb-0 bread">Giỏ hàng</h1>
+                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Giỏ hàng</h1>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
                                         </a>
                                     </td>
                                     <td class="price">
-                                        {{ number_format($lsCart->giaban + $lsCart->giaban * $lsCart->phantram / 100) }}
+                                        {{ number_format($lsCart->giabanh) }}
                                         VND</td>
 
                                     <td class="col-md-2">
@@ -216,7 +216,6 @@
             todayHighlight: true
         }).datepicker('update', new Date());
     });
-
 </script>
 <script type="text/javascript">
     $(function () {

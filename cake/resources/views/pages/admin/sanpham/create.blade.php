@@ -2,7 +2,7 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
-<title>Cake KingForest - Sản phẩm</title>
+<title>Cake King Forest - Thêm Bánh</title>
 
 @section('content')
 <div class="content">
@@ -11,6 +11,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
+                        <a href="{{ route('sanpham.index') }}" type="button" class="btn btn-secondary"> Trở lại
+                        </a>
                         <h4 class="card-title">Thêm bánh mới</h4>
                     </div>
                     <div class="card-content">
@@ -83,8 +85,9 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Giá Tiền</label>
-                                            <input required value="{{old('giatien')?old('giatien'):100000}}" min="100000" step="10000" type="number"
-                                                id="last-name-column" class="form-control" name="giatien">
+                                            <input required value="{{old('giatien')?old('giatien'):100000}}"
+                                                min="100000" step="10000" type="number" id="last-name-column"
+                                                class="form-control" name="giatien">
                                             @if ($errors->has('giatien'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('giatien') }}</strong>
@@ -108,9 +111,10 @@
                                 </div> -->
                                     <hr />
                                     <div class="col-12 d-flex justify-content-end mt-2">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <a onclick="location.reload();" type="reset"
-                                            class="btn btn-light-secondary me-1 mb-1">Reset</a>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1"
+                                            onclick="return checkAdd()">Xác nhận</button>
+                                        <button onclick="location.reload();" type="reset"
+                                            class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</button>
                                     </div>
                                 </div>
                             </form>
@@ -121,4 +125,12 @@
         </div>
     </section>
 </div>
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkAdd() {
+            return confirm('Bạn có chắc chắn muốn thêm bánh?');
+        }
+
+    </script>
+</header>
 @endsection

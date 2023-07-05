@@ -1,17 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
-use App\Models\loaisanpham;
-use App\Models\sanpham;
-use App\Models\size;
 use Carbon\Carbon;
-
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -49,9 +42,9 @@ class HomeController extends Controller
     }
     public function index()
     {
-       
-        $time = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->format('Y/m/d');
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
+
+        $time = Carbon::now()->subDays(30)->format('Y/m/d');
+        $now = Carbon::now()->format('Y/m/d');
         $doanhthu = 0;
         $hoadonall = hoadon::all();
         $hoadonmomo = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','MoMo')->get();
@@ -59,6 +52,7 @@ class HomeController extends Controller
         $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
         $hoadon_choduyet = hoadon::where('trangthai',1)->get();
         $hoadon_danggiao = hoadon::where('trangthai',3)->get();
+        $hoadon_tienmat = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','Tiền Mặt')->get();
         if($hoadon_hoanthanh != null)
         {
             foreach($hoadon_hoanthanh as $hd)
@@ -69,14 +63,8 @@ class HomeController extends Controller
                     $doanhthu = $doanhthu + $item->giatien;
                 }
             }
-            $test = DB::table('chitiethoadons')
-            ->join('hoadons','hoadon_id','=','hoadons.id')
-            ->where('hoadons.trangthai',4)->whereBetween('ngaylaphd',[$time,$now])
-            ->select(DB::raw('SUM(giatien) as thanhtien'),'hoadons.ngaylaphd as ngaylaphd')
-            ->groupBy('hoadons.ngaylaphd')->orderBy('hoadons.ngaylaphd','ASC')
-            ->get();
+            $test = $this->data_chart($time,$now);
         }
-        $count=$hoadonmomo->count()+$hoadonvnpay->count()+$hoadon_choduyet->count();
         return view('pages.admin.dashboard',[
             'product'=>$this->product_replate(),
             'countCate'=>$this->product_chart(),
@@ -86,8 +74,7 @@ class HomeController extends Controller
             'hd_pending'=>count($hoadon_choduyet),
             'hd_shipping'=>count($hoadon_danggiao),
             'hoadonall'=>$hoadonall,
-            'dem'=>$count,
-            'choduyet'=>$hoadon_choduyet->count(),
+            'choduyet'=>$hoadon_tienmat->count(),
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
         ]);
     }

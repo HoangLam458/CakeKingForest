@@ -2,7 +2,7 @@
     'class' => '',
     'elementActive' => 'contact',
 ])
-<title>Cake KingForest - Phản hồi</title>
+<title>Cake King Forest - Phản hồi</title>
 {{-- <header>
     <style>
         .pagination {
@@ -50,7 +50,7 @@
                                         <td>{{ $item->email }}</td>
                                         <td>
                                             <a href="{{ route('contact.details', $item->id) }}" type="button"
-                                                class="btn btn-secondary">
+                                                class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Xem chi tiết thư phản hồi">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                                     fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                                     <path

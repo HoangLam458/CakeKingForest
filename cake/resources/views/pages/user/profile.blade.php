@@ -221,7 +221,7 @@
                         <div class="col-md col-12">
                             <div class="form-group{{ $errors->has('fullname') ? ' has-danger' : '' }}">
                                 <label class="mb-2" for="first-name-column">Tên khách hàng</label>
-                                <input value="{{old('fullname')? old('fullname'):$user->tenkhachhang }}" required minlength="7" maxlength="50" type="text"
+                                <input value="{{old('fullname')? old('fullname'):$user->tenkhachhang }}" required  maxlength="50" type="text"
                                     id="first-name-column" class="form-control" name="fullname">
 
                                 @if ($errors->has('fullname'))

@@ -29,6 +29,13 @@ class SanphamController extends Controller
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
+    public function trash()
+    {
+        $loaisanpham = loaisanpham::all();
+        $lsSanpham = Sanpham::where('trangthai',0)->withTrashed()->Paginate(10);
+        return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -43,26 +50,7 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
-        $pro = sanpham::where('tensp',$request->get('tensp'))->withTrashed()->first();
-        if($pro)
-        {
-            $pro->mota = $request->input('mota');
-            $pro->giatien = $request->input('giatien');
-            $pro->loaisanpham_id = $request->input('loaisanpham_id');
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
-                $file->move('images/', $filename);
-                $pro->hinhanh = $filename;
-            }
-            if ($request->hasFile('image') == null) {
-                $pro->hinhanh = 'Default.jpg';
-            }
-            $pro->deleted_at = Null;
-            $pro->save();
-            return redirect()->route('sanpham.index');
-        }
+
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
         $sanphams->mota = $request->input('mota');
@@ -80,7 +68,7 @@ class SanphamController extends Controller
             $sanphams->hinhanh = 'Default.jpg';
         }
         $sanphams->save();
-        return redirect()->route('sanpham.index');
+        return redirect()->route('sanpham.index')->with('status','Thêm bánh thành công');
     }
 
     /**
@@ -156,9 +144,10 @@ class SanphamController extends Controller
     {
         $sanpham = sanpham::find($id);
         if ($sanpham) {
+            $sanpham->trangthai= 0;
+            $sanpham->save();
             $sanpham->delete();
-            Session::put('success','Xóa thành công!');
-            return redirect()->back();
+            return redirect()->back()->with('status', 'Xóa thành công');;
         }
     }
 
@@ -244,5 +233,41 @@ class SanphamController extends Controller
         $loaisanpham = loaisanpham::all();
         $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(10)->withQueryString();
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    }
+
+        //lọc sản phẩm admin ngưng bán
+        public function locloaisptrash()
+        {
+            if($_GET['loaibanh']==null){
+                Session::put('select','Bạn chưa chọn loại bánh!');
+                return redirect()->back();
+            }
+            $loaisanpham = loaisanpham::all();
+            $loc = $_GET['loaibanh'];
+            $lsSanpham = sanpham::where('loaisanpham_id', $loc)->where('trangthai',0)->withTrashed()->Paginate(2)->withQueryString();
+            return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+        }
+
+            //tìm sản phẩm admin ngưng bán
+    public function searchprtrash()
+    {
+        $key = $_GET['key'];
+        $loaisanpham = loaisanpham::all();
+        $lsSanpham = sanpham::where('trangthai', 0)->where(function ($query) use ($key) {
+            $query->where('tensp','LIKE',"%$key%")
+                ->orWhere('mota','LIKE',"%$key%");
+        })->withTrashed()->Paginate(10)->withQueryString();
+        return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    }
+//khôi phục bánh thành trạng thái đang bán
+    public function restore($id)
+    {
+        $sanpham =sanpham::where('id',$id)->withTrashed()->first();
+        if ($sanpham) {
+            $sanpham->trangthai= 1;
+            $sanpham->deleted_at = null;
+            $sanpham->save();
+            return redirect()->back()->with('status', 'Khôi phục thành công');;
+        }
     }
 }

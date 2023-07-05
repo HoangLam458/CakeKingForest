@@ -2,15 +2,16 @@
 'class' => '',
 'elementActive' => 'sanpham'
 ])
-<title>Cake KingForest - Sản phẩm</title>
-
+<title>Cake King Forest - Chi Tiết Bánh</title>
 @section('content')
 <div class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Chi tiết sản phẩm</h4>
+                <a href="{{ route('sanpham.index') }}" type="button" class="btn btn-secondary"> Trở lại
+</a>
+                    <h4 class="card-title"> Chi tiết bánh</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">

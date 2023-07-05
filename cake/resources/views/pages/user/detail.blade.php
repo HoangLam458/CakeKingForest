@@ -7,7 +7,7 @@
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a
                             href="index.html">Product</a></span> <span>Product Single</span></p>
-                <h1 class="mb-0 bread">Product Single</h1>
+                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Product Single</h1>
             </div>
         </div>
     </div>
