@@ -11,7 +11,7 @@
                 data-dismiss="alert">&times;</button></h6>
         @endif
     <div class="row col-md-12">
-       
+
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
@@ -75,7 +75,7 @@
                                 </span>
                                 @endif
                                 </div>
-                             
+
                             </div>
                         </div>
                         <div class="row">
@@ -90,7 +90,7 @@
                                     {{ $errors->first('password') }}
                                 </span>
                                 @endif
-                                </div>  
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -106,14 +106,14 @@
                                 </span>
                                 @endif
                                 </div>
-                               
+
                             </div>
                         </div>
 
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
+                                <button type="submit" onclick="return checkUpdate()" class="btn btn-info btn-round">{{ __('Xác nhận') }}</button>
                             </div>
                         </div>
 
@@ -257,7 +257,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                            <button type="submit"  onclick="return checkUpdate()" class="btn btn-primary">Xác nhận</button>
                         </div>
                     </div>
                 </div>
@@ -266,3 +266,18 @@
     </form>
 </header>
 @endsection
+<header>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdate() {
+            return confirm('Bạn có chắc chắn muốn cập nhật mật khẩu?');
+        }
+    </script>
+    <script language="JavaScript" type="text/javascript">
+        function checkUpdateInfo() {
+            return confirm('Bạn có chắc chắn muốn cập nhật?');
+        }
+        function checkDelete() {
+            return confirm('Bạn có chắc chắn muốn hủy đơn hàng?');
+        }
+    </script>
+</header>

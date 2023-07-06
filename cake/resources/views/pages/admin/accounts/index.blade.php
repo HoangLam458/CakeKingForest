@@ -121,7 +121,7 @@
                                         </svg>
                                         </a> --}}
                                                 @if (auth()->user()->loai == 2)
-                                                    @if ($item->loai != 2)
+                                                    @if ($item->loai != 2 || $item->id == auth()->user()->id)
                                                         <a href="{{ route('user.edit.form', $item->id) }}" type="button"
                                                             class="btn btn-primary" data-toggle="tooltip"
                                                             data-placement="top" title="Sửa thông tin tài khoản">

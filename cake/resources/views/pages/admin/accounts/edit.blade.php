@@ -201,7 +201,7 @@
                             <div class="card-footer ">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-info btn-round"
+                                        <button type="submit" class="btn btn-info"
                                             onclick="return checkUpdate()">{{ __('Xác nhận') }}</button>
                                     </div>
                                 </div>
