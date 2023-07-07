@@ -24,7 +24,8 @@ class CartController extends Controller
     public function cart(Request $request)
     {
 
-        if(Session::has('data')) Session::forget('data');
+        if (Session::has('data'))
+            Session::forget('data');
         if (auth()->user()) {
             $sizes = size::all();
             $category = loaisanpham::all();
@@ -120,7 +121,7 @@ class CartController extends Controller
     }
     public function add_to_cart(Request $request)
     {
-        if(Session::has('urlback')!=null){
+        if (Session::has('urlback') != null) {
             $backUrl = Session::pull('urlback');
         }
 
@@ -128,21 +129,17 @@ class CartController extends Controller
             Session::put('cate');
         }
 
-        if (auth()->user())
-        {
+        if (auth()->user()) {
             $user = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
             $taikhoan = User::find(auth()->user()->id);
             $sanpham = sanpham::find($request->get('id'));
             $phantram = size::find($request->get('size'));
-            if ($user != null)
-            {
+            if ($user != null) {
                 $chitiethoadon = chitiethoadon::where('hoadon_id', $user->id)->get();
-                foreach ($chitiethoadon as $chitiet)
-                {
-                    if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size'])
-                    {
+                foreach ($chitiethoadon as $chitiet) {
+                    if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
                         if ($chitiet->soluong + $request['quantity'] > 10) {
-                            Session::put('maxbanh','Bánh này đã đạt giới hạn số lượng!');
+                            Session::put('maxbanh', 'Bánh này đã đạt giới hạn số lượng!');
                             return redirect()->back();
                         } else {
                             $chitiet->soluong = $chitiet->soluong + $request['quantity'];
@@ -153,14 +150,12 @@ class CartController extends Controller
                         }
                     }
                 }
-                foreach ($chitiethoadon as $chitiet)
-                {
-                    if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id != $request->get('size'))
-                    {
+                foreach ($chitiethoadon as $chitiet) {
+                    if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id != $request->get('size')) {
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
                             'ghichu' => "",
-                            'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                            'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                             'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                             'hoadon_id' => $user->id,
                             'size_id' => $request['size'],
@@ -176,14 +171,12 @@ class CartController extends Controller
                                 Session::push('cate', $item);
                             }
                         return redirect()->back();
-                    }
-                    else
-                    {
+                    } else {
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
                             'ghichu' => "",
                             'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
-                            'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                            'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                             'hoadon_id' => $user->id,
                             'size_id' => $request['size'],
                             'sanpham_id' => $request['id']
@@ -200,8 +193,7 @@ class CartController extends Controller
                         return redirect()->back();
                     }
                 }
-            } else
-            {
+            } else {
                 $hoadon = hoadon::orderBy('id', 'DESC')->first();
                 $codetest = $this->randHD();
                 $code = 'HD' . '' . (string) ($hoadon->id + 1) . $codetest;
@@ -224,7 +216,7 @@ class CartController extends Controller
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",
-                    'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                    'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                     'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                     'hoadon_id' => $user2->id,
                     'size_id' => $request['size'],
@@ -239,11 +231,10 @@ class CartController extends Controller
                     foreach ($chitiet as $item) {
                         Session::push('cate', $item);
                     }
-                    $test = Cookie::forever('code', $code);
-                    return response()->redirectTo($backUrl)->withCookie($test);
+                $test = Cookie::forever('code', $code);
+                return response()->redirectTo($backUrl)->withCookie($test);
             }
-        }
-        else {
+        } else {
             $sanpham = sanpham::find($request->get('id'));
             $phantram = size::find($request->get('size'));
             $code_cookie = $request->cookie('code');
@@ -255,24 +246,24 @@ class CartController extends Controller
                 foreach ($chitiethoadon as $chitiet) {
                     if ($chitiet->sanpham_id == $request->get('id') && $chitiet->size_id == $request['size']) {
                         if ($chitiet->soluong + $request['quantity'] > 10) {
-                            Session::put('maxbanh','Bánh này đã đạt giới hạn số lượng!');
+                            Session::put('maxbanh', 'Bánh này đã đạt giới hạn số lượng!');
                             return redirect()->back();
                         } else {
                             $chitiet->soluong = $chitiet->soluong + $request['quantity'];
                             $total = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100);
                             $chitiet->giatien = $chitiet->giatien + $total;
-                            $chitiet->giabanh = $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100);
+                            $chitiet->giabanh = $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100);
                             $chitiet->save();
                             return redirect()->back();
                         }
                     }
                 }
                 foreach ($chitiethoadon as $chitiet) {
-                    if ($chitiet->sanpham_id != $request->get('id')&& $chitiet->size_id != $request->get('size')) {
+                    if ($chitiet->sanpham_id != $request->get('id') && $chitiet->size_id != $request->get('size')) {
                         $request = $request->all();
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
-                            'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                            'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                             'ghichu' => "",
                             'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                             'hoadon_id' => $user->id,
@@ -293,11 +284,11 @@ class CartController extends Controller
                                 }
                         }
                         return redirect()->back();
-                    } else{
+                    } else {
                         Chitiethoadon::create([
                             'soluong' => $request['quantity'],
                             'ghichu' => "",
-                            'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                            'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                             'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                             'hoadon_id' => $user->id,
                             'size_id' => $request['size'],
@@ -335,7 +326,7 @@ class CartController extends Controller
                 chitiethoadon::create([
                     'soluong' => $request['quantity'],
                     'ghichu' => "",
-                    'giabanh' => $sanpham->giatien + $sanpham->giatien*($phantram->phantram / 100),
+                    'giabanh' => $sanpham->giatien + $sanpham->giatien * ($phantram->phantram / 100),
                     'giatien' => ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantram->phantram / 100),
                     'hoadon_id' => $hoadon_id2->id,
                     'size_id' => $request['size'],
@@ -359,10 +350,12 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        $email = (string)Session::get('data')['email'];
+        $email = (string) Session::get('data')['email'];
         $currentTime = Carbon::now();
-        if(Session::has('email')) Session::forget('email');
-        if(Session::has('mahd')) Session::forget('mahd');
+        if (Session::has('email'))
+            Session::forget('email');
+        if (Session::has('mahd'))
+            Session::forget('mahd');
         if (auth()->user()) {
             $user = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
             if ($user != Null) {
@@ -375,19 +368,18 @@ class CartController extends Controller
                 $user->phuongthucthanhtoan = 'Tiền Mặt';
                 $user->trangthai = 1;
                 $user->save();
-                if(Session::has('info'))
-                {
+                if (Session::has('info')) {
                     Session::forget('info');
                     Session::forget('total');
                 }
-                Session::put('info',$user);
-                Session::put('total',Session::get('data')['total']);
+                Session::put('info', $user);
+                Session::put('total', Session::get('data')['total']);
                 Cookie::forget('code');
                 Session::forget('cate');
-                Session::put('mahd',$user->id);
-                Session::put('hd_ma',$user->mahd);
-                Session::put('pttt','Tiền Mặt');
-                return redirect()->route('sendemailpay',$email);
+                Session::put('mahd', $user->id);
+                Session::put('hd_ma', $user->mahd);
+                Session::put('pttt', 'Tiền Mặt');
+                return redirect()->route('sendemailpay', $email);
             }
         } else {
             $code_cookie = $request->cookie('code');
@@ -404,24 +396,112 @@ class CartController extends Controller
                 $user->trangthai = 1;
                 $user->save();
                 $request->cookie('code');
-                if(Session::has('info'))
-                {
+                if (Session::has('info')) {
                     Session::forget('info');
                     Session::forget('total');
                 }
-                Session::put('info',$user);
-                Session::put('total',Session::get('data')['total']);
+                Session::put('info', $user);
+                Session::put('total', Session::get('data')['total']);
                 Cookie::forget('code');
                 Session::forget('cate');
-                Session::put('mahd',$user->id);
-                Session::put('hd_ma',$user->mahd);
-                Session::put('pttt','Tiền Mặt');
-                return redirect()->route('sendemailpay',$email);
+                Session::put('mahd', $user->id);
+                Session::put('hd_ma', $user->mahd);
+                Session::put('pttt', 'Tiền Mặt');
+                return redirect()->route('sendemailpay', $email);
             }
         }
 
     }
 
+    // public function updateqty($id, Request $request)
+    // {
+    //     if (auth()->user() == null) {
+    //         $code_cookie = $request->cookie('code');
+    //         $hoadon = hoadon::where('mahd', $code_cookie)->first();
+
+    //     } else {
+    //         $hoadon = hoadon::where('users_id', auth()->user()->id)->where('trangthai', 0)->first();
+
+    //     }
+    //     // chi tiết của hóa đơn
+    //     $chitiettrung = chitiethoadon::where('hoadon_id', $hoadon->id)->get();
+    //     // chi tiết từ giỏ hàng
+    //     $chitiet = chitiethoadon::find($id);
+
+    //     $sanpham = sanpham::find($chitiet->sanpham_id);
+    //     $phantrams = size::find($request->get('size_id'));
+
+    //     foreach ($chitiettrung as $key => $value)
+    //     {
+    //         if($chitiet->sanpham_id == $value->sanpham_id && $request->get('size_id') == $value->size_id)
+    //         {
+    //             if ($request->get('quantity') + $value->soluong > 10)
+    //             {
+    //                 Session::put('maxcart','Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
+    //                 return redirect()->back();
+    //             }
+    //             else
+    //                     {
+    //                         $giusl = $request->get('quantity');
+    //                         $giughichu = $request->get('ghichu');
+    //                         $idsp = $chitiet->sanpham_id;
+    //                         $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
+    //                             ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
+    //                         $timchitiet->soluong = $timchitiet->soluong + $giusl;
+    //                         $timchitiet->giabanh = $sanpham->giatien+ $sanpham->giatien*($phantrams->phantram / 100);
+    //                         $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
+    //                         $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
+    //                         $timchitiet->save();
+    //                         $chitiet->delete();
+    //                     }
+    //         }
+    //     }
+    //         if ($chitiet->size_id != $request->get('size_id'))
+    //         {
+    //             foreach ($chitiettrung as $trung)
+    //             {
+    //                 if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id'))
+    //                 {
+
+    //                     if ($request->get('quantity') + $trung->soluong > 10)
+    //                     {
+    //                         Session::put('maxcart','Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
+    //                         return redirect()->back();
+    //                     }
+    //                     else
+    //                     {
+    //                         $giusl = $request->get('quantity');
+    //                         $giughichu = $request->get('ghichu');
+    //                         $idsp = $chitiet->sanpham_id;
+    //                         $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
+    //                             ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
+    //                         $timchitiet->soluong = $timchitiet->soluong + $giusl;
+    //                         $timchitiet->giabanh = $sanpham->giatien+ $sanpham->giatien*($phantrams->phantram / 100);
+    //                         $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
+    //                         $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
+    //                         $timchitiet->save();
+    //                         $chitiet->delete();
+    //                     }
+    //                 }
+    //             }
+    //             Session::forget('cate');
+    //             $chitiet2 =
+    //                 chitiethoadon::where('hoadon_id', $hoadon->id)
+    //                     ->get();
+    //             if ($chitiet2 != null)
+    //                 foreach ($chitiet2 as $item) {
+    //                     Session::push('cate', $item);
+    //                 }
+    //                 return redirect()->back();
+    //         }
+    //         $chitiet->soluong = $request->get('quantity');
+    //         $chitiet->size_id = $request->get('size_id');
+    //         $chitiet->giabanh = $sanpham->giatien+ $sanpham->giatien*($phantrams->phantram / 100);
+    //         $chitiet->giatien = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantrams->phantram / 100);
+    //         $chitiet->ghichu = $request->get('ghichu');
+    //         $chitiet->save();
+    //         return redirect()->back();
+    // }
     public function updateqty($id, Request $request)
     {
         if (auth()->user() == null) {
@@ -435,48 +515,44 @@ class CartController extends Controller
         $chitiet = chitiethoadon::find($id);
         $sanpham = sanpham::find($chitiet->sanpham_id);
         $phantrams = size::find($request->get('size_id'));
-        if ($chitiet != null)
-        {
-
+        // dd($chitiet->size_id,$request->get('size_id'));
+        if ($chitiet != null) {
             if ($chitiet->size_id != $request->get('size_id'))
             {
-                foreach ($chitiettrung as $trung)
-                {
-
+                foreach ($chitiettrung as $trung) {
                     if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id'))
                     {
-
-                        if ($request->get('quantity') + $trung->soluong > 10)
-                        {
-                            Session::put('maxcart','Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
+                        if ($request->get('quantity') + $trung->soluong > 10) {
+                            Session::put('maxcart', 'Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
                             return redirect()->back();
-                        } else {
+                        }
+                        else
+                        {
                             $giusl = $request->get('quantity');
                             $giughichu = $request->get('ghichu');
                             $idsp = $chitiet->sanpham_id;
                             $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
                                 ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
                             $timchitiet->soluong = $timchitiet->soluong + $giusl;
-                            $timchitiet->giabanh = $sanpham->giatien+ $sanpham->giatien*($phantrams->phantram / 100);
                             $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
                             $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
                             $timchitiet->save();
                             $chitiet->delete();
+                            Session::forget('cate');
+                            $chitiet =
+                                chitiethoadon::where('hoadon_id', $hoadon->id)
+                                    ->get();
+                            if ($chitiet != null)
+                                foreach ($chitiet as $item) {
+                                    Session::push('cate', $item);
+                                }
+                            return redirect()->back();
                         }
                     }
                 }
-                Session::forget('cate');
-                $chitiet2 =
-                    chitiethoadon::where('hoadon_id', $hoadon->id)
-                        ->get();
-                if ($chitiet2 != null)
-                    foreach ($chitiet2 as $item) {
-                        Session::push('cate', $item);
-                    }
             }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');
-            $chitiet->giabanh = $sanpham->giatien+ $sanpham->giatien*($phantrams->phantram / 100);
             $chitiet->giatien = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantrams->phantram / 100);
             $chitiet->ghichu = $request->get('ghichu');
             $chitiet->save();

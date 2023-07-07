@@ -21,25 +21,25 @@ class LoaisanphamSeeder extends Seeder
         );
         Loaisanpham::create(
             [
-                'tenloaisp' => 'Bánh Kem Doraemon',
+                'tenloaisp' => 'Bánh Kem Hình Doraemon',
                 'trangthai' => 1
             ]
         );
         Loaisanpham::create(
             [
-                'tenloaisp' => 'Bánh Kem Socola',
+                'tenloaisp' => 'Bánh Kem Hương Socola',
                 'trangthai' => 1
             ]
         );
         Loaisanpham::create(
             [
-                'tenloaisp' => 'Bánh Kem Sữa Tươi Vani',
+                'tenloaisp' => 'Bánh Kem Hương Sữa Tươi Vani',
                 'trangthai' => 1
             ]
         );
         Loaisanpham::create(
             [
-                'tenloaisp' => 'Bánh Kem Hũ Vàng',
+                'tenloaisp' => 'Bánh Kem Hình Hũ Vàng',
                 'trangthai' => 1
             ]
         );

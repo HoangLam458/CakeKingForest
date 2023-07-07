@@ -19,11 +19,15 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <h4 class="card-title col-md-8"> Danh sách bánh đang bán</h4>
+                    <div class="row justify-content-between">
+                        <div class="col-5">
+                            <h4 class="card-title"> Danh sách bánh đang bán</h4>
+                        </div>
+                        <div class="col-auto">
                         <a href="{{ route('sanpham.create') }}" type="button" class="btn btn-primary"> Thêm bánh
                             mới</a>
                         <a href="{{ route('sanpham.trash') }}" type="button" class="btn btn-danger"> Bánh ngưng bán</a>
+                        </div>
                     </div>
                 </div>
                 <form class="col-md-3" action="{{ route('searchad')}}" method="GET">
@@ -101,7 +105,7 @@
                                         @endif
                                         @endforeach
                                     </td>
-                                    <td class="text-bold-500">{{ $item->mota }}</td>
+                                    <td class="text-bold-500">{!! $item->mota !!}</td>
                                     <td class="text-bold-500"> {{ number_format($item->giatien) }} VNĐ</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">

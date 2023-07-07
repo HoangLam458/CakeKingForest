@@ -41,7 +41,7 @@
                             <label style="font-size:15px">Mô Tả</label>
                         </div>
                         <div class="col-md-9 form-group mb-3">
-                            <label style="font-size:15px">{{ $sanpham->mota }}</label>
+                            <label style="font-size:15px">{!! $sanpham->mota !!}</label>
                         </div>
 
                         <div class="col-md-3">

@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'index'
+    'elementActive' => 'contact'
 ])
 <title>Cake King Forest - Phản hồi</title>
 @section('content')

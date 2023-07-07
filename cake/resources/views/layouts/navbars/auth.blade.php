@@ -54,7 +54,7 @@
                 </a>
             </li>
             <div class="h-25"></div>
-            <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
+            <li class="{{ $elementActive == 'logout' ? 'active' : '' }}">
                 <a href="{{ route('logout2') }}">
                     <i class="nc-icon nc-button-power"></i>
                     <p>{{ __('Đăng xuất') }}</p>

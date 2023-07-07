@@ -20,10 +20,15 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <h4 class="card-title col-md-9"> Danh sách tài khoản</h4>
-                            <a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary">Thêm tài khoản
+                        <div class="row justify-content-between">
+                        <div class="col-5">
+                            <h4 class="card-title"> Danh sách tài khoản</h4>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{ route('user.create.form') }}" type="button" class="btn btn-primary col-auto">Thêm tài khoản
                                 mới</a>
+                        </div>
+
                         </div>
                         <form action="{{ route('searchuser') }}" method="GET">
                             <div class="input-group no-border">
@@ -98,6 +103,7 @@
                             <tbody>
                                 @foreach ($lsUsers as $item)
                                     <tr>
+                                        @if(auth()->user()->id != $item->id)
                                         <td class="text-bold-500">{{ $item->tenkhachhang }} </br>
                                             @if ($item->loai == 0)
                                                 (Khách hàng)
@@ -107,6 +113,17 @@
                                                 (Quản trị viên)
                                             @endif
                                         </td>
+                                        @else
+                                        <td class="text-bold-500" style="color: red">{{ $item->tenkhachhang }} </br>
+                                            @if ($item->loai == 0)
+                                                (Khách hàng)
+                                            @elseif ($item->loai == 1)
+                                                (Nhân viên)
+                                            @elseif ($item->loai == 2)
+                                                (Quản trị viên)
+                                            @endif
+                                        </td>
+                                        @endif
                                         <td>{{ $item->email }}</td>
                                         <td class="text-bold-500">{{ $item->sdt }}</td>
                                         <td>{{ explode(', ', $item->diachi)[0] }}</td>
@@ -121,7 +138,8 @@
                                         </svg>
                                         </a> --}}
                                                 @if (auth()->user()->loai == 2)
-                                                    @if ($item->loai != 2 || $item->id == auth()->user()->id)
+                                                {{-- $item->loai != 2 ||  --}}
+                                                    {{-- @if ($item->id == auth()->user()->id) --}}
                                                         <a href="{{ route('user.edit.form', $item->id) }}" type="button"
                                                             class="btn btn-primary" data-toggle="tooltip"
                                                             data-placement="top" title="Sửa thông tin tài khoản">
@@ -134,6 +152,7 @@
                                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                             </svg>
                                                         </a>
+                                                        {{-- @endif --}}
                                                         @if ($item->id != auth()->user()->id)
                                                             <a href="{{ route('user.delete', $item->id) }}" type="button"
                                                                 class="btn btn-danger" onclick="return checkDelete()"
@@ -147,7 +166,7 @@
                                                                 </svg>
                                                             </a>
                                                         @endif
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 @endif
                                                 {{-- --}}
                                                 @if (auth()->user()->loai == 1)

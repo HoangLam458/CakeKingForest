@@ -17,11 +17,16 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <h4 class="card-title col-md-9"> Danh sách các loại bánh</h4>
-                        <a href="{{ route('category.create.form') }}" type="button" class="btn btn-primary"> Thêm loại
+                    <div class="row justify-content-between">
+                    <div class="col-5">
+                        <h4 class="card-title"> Danh sách các loại bánh</h4>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ route('category.create.form') }}" type="button" class="btn btn-primary col-auto"> Thêm loại
                             bánh
                             mới</a>
+                    </div>
+
                     </div>
                 </div>
                 <div class="card-body">

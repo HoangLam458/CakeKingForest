@@ -17,7 +17,13 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <label style="margin-top: 10px;"> Xin chào {{Session::get('is_admin')["tenkhachhang"]}} !</label>
+            <label style="margin-top: 10px;"> Xin chào {{Session::get('is_admin')["tenkhachhang"]}}!</br>
+                                            @if (Session::get('is_admin')["loai"] == 2)
+                                            &emsp;&emsp;&emsp;&emsp;&emsp;(Quản trị viên)
+                                            @else
+                                            &emsp;&emsp;&emsp;&emsp;&emsp;(Nhân viên)
+                                            @endif
+            </label>
             <ul class="navbar-nav">
 
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('loai');
             $table->string('tenkhachhang',50);
-            $table->string('diachi',255);
+            $table->text('diachi');
             $table->string('sdt',10);
             $table->integer('trangthai');
             $table->softDeletes();

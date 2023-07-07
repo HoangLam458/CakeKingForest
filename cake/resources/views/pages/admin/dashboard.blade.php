@@ -360,7 +360,7 @@
                     '#00838F',
                     '#006064'
                 ],
-                labelColor: "#cccccc", // text color
+                labelColor: "#0c0d0d", // text color
                 backgroundColor: '#333333', // border color
                 data: [
                     @foreach ($countCate as $sale)

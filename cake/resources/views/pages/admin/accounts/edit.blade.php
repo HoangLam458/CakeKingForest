@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'index',
+    'elementActive' => 'user',
 ])
 <title>Cake King Forest - Tài khoản</title>
 
@@ -80,10 +80,10 @@
                                                 <label for="country" style="font-size:15px">Chức vụ</label>
                                                 <select name="admin" id="ship" class="form-control">
                                                     @if (auth()->user()->loai == 2)
-                                                        @if (auth()->user()->loai == $staff->loai)
-                                                            <option required value="2">
-                                                                Quản trị viên
-                                                            </option>
+                                                        @if(auth()->user()->id == $staff->id)
+                                                        <option required value="2" selected>
+                                                            Quản trị viên
+                                                        </option>
                                                         @else
                                                             @if ($staff->loai == 2)
                                                                 <option required value="2" selected>
@@ -112,7 +112,7 @@
                                                                     Khách hàng
                                                                 </option>
                                                             @endif
-                                                        @endif
+                                                            @endif
                                                     @else
                                                         @if (auth()->user()->loai == $staff->loai)
                                                             <option required value="1" selected>

@@ -112,7 +112,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
         else
         {
             $info->trangthai = 1;
-            $info->trans_id = explode('-', $_GET['orderId'])[0];
+            $info->magiaodich = explode('-', $_GET['orderId'])[0];
             $info->save();
             Session::forget('cate');
             Session::forget('data');
@@ -150,7 +150,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
         return redirect()->route('paymant_fails');
     } else {
         $info->trangthai = 1;
-        $info->trans_id = explode('-', $_GET['vnp_TxnRef'])[0];
+        $info->magiaodich = explode('-', $_GET['vnp_TxnRef'])[0];
         $info->save();
         Session::forget('cate');
         Session::forget('data');

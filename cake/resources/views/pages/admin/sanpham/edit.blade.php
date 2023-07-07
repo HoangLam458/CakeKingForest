@@ -93,7 +93,7 @@
                                         <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Mô Tả</label>
                                             <textarea maxlength="255" minlength="50" required name="mota"
-                                                class="form-control" id="exampleFormControlTextarea1"
+                                                class="form-control" id="editor"
                                                 rows="3">{{ old('mota')? old('mota'):$sanpham->mota }}</textarea>
                                             @if ($errors->has('mota'))
 
@@ -129,4 +129,7 @@
 
     </script>
 </header>
+<script>
+    CKEDITOR.replace('editor');
+</script>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app', [
 'class' => '',
-'elementActive' => 'index',
+'elementActive' => 'invoice',
 ])
 <title>Cake King Forest - Hóa đơn</title>
 @section('content')
@@ -257,7 +257,7 @@
                                 <span style="font-size:15px">Mã giao dịch</span>
                             </div>
                             <div class="col-md-7 form-group mb-3">
-                                <span style="font-size:15px"> {{ $u->trans_id}}</span>
+                                <span style="font-size:15px"> {{ $u->magiaodich}}</span>
                             </div>
                         </div>
                         @endif

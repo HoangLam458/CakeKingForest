@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('hinhthucnhanhang',50)->nullable();
             $table->date('ngaynhanhang')->nullable();
             $table->string('phuongthucthanhtoan',20)->nullable();
-            $table->string('trans_id')->nullable();
+            $table->string('magiaodich')->nullable();
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();

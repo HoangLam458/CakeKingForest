@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a
-                            href="index.html">Product</a></span> <span>Product Single</span></p>
-                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Product Single</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="{{route('cake')}}">Trang chủ</a></span> <span class="mr-2"><a
+                            href="{{route('shop')}}">Sản phẩm</a></span> <span>Chi tiết sản phẩm</span></p>
+                <h1 class="breadcrumbs" style="font-size:40px; font-weight:700; color:white ">Chi tiết sản phẩm</h1>
             </div>
         </div>
     </div>
@@ -27,18 +27,21 @@
             <div class="row">
                 <div class="col-lg-6 mb-5 ftco-animate">
                     <a href="{{ asset('/images/' . $sanpham->hinhanh) }}" class="image-popup"><img
-                            src="{{ asset('/images/' . $sanpham->hinhanh) }}" class="img-fluid"
+                            src="{{ asset('/images/' . $sanpham->hinhanh) }}" width="450" height="400"
                             alt="Colorlib Template"></a>
                 </div>
                 <input name="id" value="{{ $sanpham->id }}" type="text" hidden required>
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3>{{ $sanpham->tensp }}</h3>
                     <p class="price"><span>{{ number_format($sanpham->giatien) }} VND</span></p>
-                    <p>{{ $sanpham->mota }}
-                    </p>
-                    <div class="row mt-4">
-                        <div class="col-md-6">
+                    <div class="row mt-4 col-md-12">
+                        {{-- <p>{!! $sanpham->mota !!}
+                        </p> --}}
+                        <label for="size" style="font-size: 18px">Kích thước: </label>
+                        <div class="col-md-8">
+
                             <div class="form-group d-flex">
+
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                     <select name="size" id="size" class="form-control">
@@ -51,7 +54,9 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="w-100"></div>
+                        <label for="quantity" style="font-size: 18px">Số lượng: </label>
                         <div class="form-group col-md-6 d-flex mb-6">
                             <span class="form-group-btn mr-2">
                                 <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
@@ -68,7 +73,10 @@
                         </div>
                         <div class="w-100"></div>
                     </div>
-                    <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Add to Cart</a></p>
+                    <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thêm vào giỏ hàng</a></p>
+                </div>
+                <div>
+                {!! $sanpham->mota !!}
                 </div>
             </div>
         </div>
@@ -79,9 +87,8 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Products</span>
-                <h2 class="mb-4">Related Products</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+
+                <h2 class="mb-4">Sản phẩm tương tự</h2>
             </div>
         </div>
     </div>
@@ -128,26 +135,10 @@
             @endforeach
         </div>
     </div>
+
 </section>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-        <div class="container py-4">
-            <div class="row d-flex justify-content-center py-5">
-                <div class="col-md-6">
-                    <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                    <span>Get e-mail updates about our latest shops and special offers</span>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                    <form action="#" class="subscribe-form">
-                        <div class="form-group d-flex">
-                            <input type="text" class="form-control" placeholder="Enter email address">
-                            <input type="submit" value="Subscribe" class="submit px-3">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <!-- loader -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script>

@@ -1,6 +1,6 @@
 @extends('layouts.app', [
 'class' => '',
-'elementActive' => 'index'
+'elementActive' => 'category'
 ])
 <title>Cake King Forest - Loại Bánh</title>
 @section('content')
