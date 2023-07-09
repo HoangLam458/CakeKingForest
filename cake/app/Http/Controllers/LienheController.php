@@ -49,6 +49,7 @@ class LienheController extends Controller
             'tieude'=> $request['td'],
             'noidung'=>$request['nd'],
             'email'=>$request['em'],
+            'trangthai'=>0
         ]);
         Session::put('contact',$request->all());
         return redirect()->route('sendcontact');
@@ -59,7 +60,12 @@ class LienheController extends Controller
      */
     public function show($id)
     {
-        $contact = Lienhe::find($id);
+        $contact = Lienhe::where('id',$id)->first();
+        if($contact->trangthai == 0)
+        {
+            $contact->trangthai = 1;
+            $contact->save();
+        }
         return view('pages.admin.contacts.details',[
          'contact'=>$contact
         ]);
@@ -84,8 +90,10 @@ class LienheController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lienhe $lienhe)
+    public function destroy($id)
     {
-        //
+        $item = Lienhe::find($id)->first();
+        $item->delete();
+        return redirect()->back();
     }
 }

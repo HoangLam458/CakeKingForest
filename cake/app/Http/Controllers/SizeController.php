@@ -14,7 +14,7 @@ class SizeController extends Controller
      */
     public function index()
     {
-        $lsSize = Size::all();
+        $lsSize = Size::withTrashed()->get();
         return view('pages.admin.size.index', ['lsSize'=> $lsSize]);
     }
 
@@ -52,7 +52,7 @@ class SizeController extends Controller
     public function edit($id)
     {
         if($id){
-            $size = size::find($id);
+            $size = Size::where('id',$id)->withTrashed()->first();
             if($size){
                 return view('pages.admin.size.edit',['size'=> $size,
                 ]);
@@ -67,7 +67,7 @@ class SizeController extends Controller
      */
     public function update(UpdatesizeRequest $request, $id)
     {
-        $size = Size::find($id);
+        $size = Size::where('id',$id)->withTrashed()->first();
         $size->tensize = $request->get('tensize');
         $size->phantram= $request->get('phantram');
         $size->save();
@@ -84,5 +84,12 @@ class SizeController extends Controller
             $size->delete();
             return redirect()->back()->with('status','Xóa kích thước thành công');
          }
+    }
+    public function restore($id)
+    {
+            $size = Size::where('id',$id)->withTrashed()->first();
+            $size->deleted_at = null;
+            $size->save();
+            return redirect()->back()->with('status','Khôi phục thành công');
     }
 }

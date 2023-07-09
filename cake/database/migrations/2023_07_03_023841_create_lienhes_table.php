@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tenkhachhang',50);
             $table->string('tieude',50);
             $table->text('noidung');
+            $table->integer('trangthai');
             $table->timestamps();
         });
     }

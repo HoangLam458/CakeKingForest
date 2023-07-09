@@ -141,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 ml-auto mr-auto">
+            <div class="row col-md-8 mr-auto ml-auto">
                 <div class="card-body ">
                     <form class="col-md-12" action="{{ route('profile.password') }}" method="POST">
                         @csrf

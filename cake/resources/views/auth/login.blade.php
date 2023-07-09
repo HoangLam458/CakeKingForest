@@ -34,7 +34,7 @@
                             </span>
                             @endif
                         </div>
-                
+
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -49,11 +49,11 @@
                             </span>
                             @endif
                         </div>
-                  
+
 
                     <div class="card-footer">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Đăng nhập') }}</button>
+                            <button type="submit" class="btn btn-info btn-round mb-3">{{ __('Đăng nhập') }}</button>
                         </div>
                         <div class="row">
                             <a href="{{ route('password.request') }}" class="btn btn-link col-sm-6">

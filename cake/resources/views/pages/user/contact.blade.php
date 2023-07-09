@@ -19,7 +19,7 @@
             <div class="w-100"></div>
             <div class="col-md-4 d-flex">
                 <div class="info bg-white p-4">
-                    <p><span>Địa chỉ:</span> 65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
+                    <p><span>Địa chỉ:</span> <a>65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</a></p>
                 </div>
             </div>
             <div class="col-md-4 d-flex">

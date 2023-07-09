@@ -15,18 +15,10 @@ class LoaisanphamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    protected function data()
-    {
-       return DB::table('loaisanphams')
-        ->leftJoin('sanphams','loaisanphams.id','=','sanphams.loaisanpham_id')
-        ->whereNull('sanphams.deleted_at')->whereNull('loaisanphams.deleted_at')
-        ->select('tenloaisp',DB::raw('COUNT(sanphams.id) as count'),'loaisanphams.id as id')
-        ->groupBy('loaisanphams.tenloaisp','loaisanphams.id')->orderBy('loaisanphams.id')
-        ->get();
-    }
+
     public function index()
     {
-        $lsUsers = $this->data();
+        $lsUsers = loaisanpham::withTrashed()->get();
         return view('pages.admin.category.index', ['lsUsers'=> $lsUsers]);
     }
 
@@ -64,10 +56,10 @@ class LoaisanphamController extends Controller
     public function edit($id)
     {
         if($id){
-            $user = Loaisanpham::find($id);
-            if($user){
+            $category = loaisanpham::where('id',$id)->withTrashed()->first();
+            if($category){
                 return view('pages.admin.category.edit',[
-                    'staff'=>$user
+                    'staff'=>$category
                 ]);
             }
             return redirect()->back();
@@ -80,10 +72,17 @@ class LoaisanphamController extends Controller
      */
     public function update(UpdateloaisanphamRequest $request, $id)
     {
-        $category = loaisanpham::find($id);
+        $category = loaisanpham::where('id',$id)->withTrashed()->first();
         $category->tenloaisp = $request->get('tenloaisp');
         $category->save();
         return redirect()->back()->with('status','Cập nhật thành công');
+    }
+    public function restore($id)
+    {
+        $category = loaisanpham::where('id',$id)->withTrashed()->first();
+        $category->deleted_at = null;
+        $category->save();
+        return redirect()->back()->with('status','Khôi phục thành công');
     }
 
     /**

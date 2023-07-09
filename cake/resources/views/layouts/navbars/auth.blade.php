@@ -23,22 +23,18 @@
                     <p>{{ __('Tài Khoản') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
-                <a href="{{ route('category.index', 'index') }}">
-                    <i class="nc-icon nc-bullet-list-67"></i>
-                    <p>{{ __('Loại sản phẩm') }}</p>
-                </a>
-            </li>
-            <li class="{{ $elementActive == 'invoice' ? 'active' : '' }}">
-                <a href="{{ route('invoice.index', 'index') }}">
-                    <i class="nc-icon nc-paper"></i>
-                    <p>{{ __('Hóa đơn') }}</p>
-                </a>
-            </li>
+
+
             <li class="{{ $elementActive == 'sanpham' ? 'active' : '' }}">
                 <a href="{{ route('sanpham.index', 'index') }}">
                     <i class="nc-icon nc-basket"></i>
                     <p>{{ __('Sản Phẩm') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
+                <a href="{{ route('category.index', 'index') }}">
+                    <i class="nc-icon nc-bullet-list-67"></i>
+                    <p>{{ __('Loại sản phẩm') }}</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'size' ? 'active' : '' }}">
@@ -47,13 +43,19 @@
                     <p>{{ __('Kích Thước Bánh') }}</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'invoice' ? 'active' : '' }}">
+                <a href="{{ route('invoice.index', 'index') }}">
+                    <i class="nc-icon nc-paper"></i>
+                    <p>{{ __('Hóa đơn') }}</p>
+                </a>
+            </li>
             <li class="{{ $elementActive == 'contact' ? 'active' : '' }}">
                 <a href="{{ route('contact.index', 'admin_index') }}">
                     <i class="nc-icon nc-support-17"></i>
-                    <p>{{ __('Phản hồi') }}</p>
+                    <p>{{ __('Liên hệ') }}</p>
                 </a>
             </li>
-            <div class="h-25"></div>
+            <div class="h-20"></div>
             <li class="{{ $elementActive == 'logout' ? 'active' : '' }}">
                 <a href="{{ route('logout2') }}">
                     <i class="nc-icon nc-button-power"></i>

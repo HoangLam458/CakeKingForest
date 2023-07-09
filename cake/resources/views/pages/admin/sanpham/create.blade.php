@@ -33,9 +33,8 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 col-10">
+
+                                        <div class="col-md-6 col-12">
                                             <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
                                                 <label class="mb-2" for="first-name-column">Tên Bánh</label>
                                                 <input name="tensp" value="{{ old('tensp') }}" required maxlength="255"
@@ -67,6 +66,19 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
+                                                <label class="mb-2" for="city-column">Giá Tiền</label>
+                                                <input required value="{{ old('giatien') ? old('giatien') : 100000 }}"
+                                                    min="100000" step="10000" type="number" id="last-name-column"
+                                                    class="form-control" name="giatien">
+                                                @if ($errors->has('giatien'))
+                                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                                        <strong>{{ $errors->first('giatien') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row ">
                                         <div class="col-md-12 col-12">
@@ -81,19 +93,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
-                                                <label class="mb-2" for="city-column">Giá Tiền</label>
-                                                <input required value="{{ old('giatien') ? old('giatien') : 100000 }}"
-                                                    min="100000" step="10000" type="number" id="last-name-column"
-                                                    class="form-control" name="giatien">
-                                                @if ($errors->has('giatien'))
-                                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                                        <strong>{{ $errors->first('giatien') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
+
                                         <!-- <div class="col-md-6 col-12">
                                         <div class="mb-3">
                     <label class="form-label" for="inputImage">Hình Ảnh</label>

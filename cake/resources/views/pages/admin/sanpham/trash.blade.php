@@ -76,9 +76,7 @@
                                 <th>
                                     Loại Bánh
                                 </th>
-                                <th>
-                                    Mô Tả
-                                </th>
+
                                 <th>
                                     Giá Tiền
                                 </th>
@@ -101,19 +99,23 @@
                                         @endif
                                         @endforeach
                                     </td>
-                                    <td class="text-bold-500">{{ $item->mota }}</td>
                                     <td class="text-bold-500"> {{ number_format($item->giatien) }} VNĐ</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route('sanpham.detail', $item->id) }}" type="button"
+                                                class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                                                title="Xem chi tiết sản phẩm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                                  </svg>
+                                            </a>
                                             <a href="{{ route('sanpham.restore', $item->id) }}" type="button"
                                                 class="btn btn-success" onclick="return checkDelete()" data-toggle="tooltip" data-placement="top" title="Khôi phục sản phẩm">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-house-add" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h4a.5.5 0 1 0 0-1h-4a.5.5 0 0 1-.5-.5V7.207l5-5 6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
-                                                    <path
-                                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 1 0 1 0v-1h1a.5.5 0 1 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                                                  </svg>
                                             </a>
                                         </div>
                                     </td>

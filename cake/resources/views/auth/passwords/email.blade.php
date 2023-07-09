@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => 'login-page',
-    'backgroundImagePath' => 'img/bg/fabio-mangione.jpg'
+    'backgroundImagePath' => 'img/bg/muffins-candles-aalaw-sprinkles-corner-pink-background.jpg'
 ])
 
 @section('content')
@@ -38,7 +38,7 @@
                                 @endif
                             <!-- </div> -->
                             <div class="text-center">
-                                <button type="submit" class="btn btn-warning btn-round mb-3">{{ __('Gửi link tạo mới mật khẩu') }}</button>
+                                <button type="submit" class="btn btn-info btn-round mb-3">{{ __('Gửi link tạo mới mật khẩu') }}</button>
                             </div>
                         </form>
                     </div>

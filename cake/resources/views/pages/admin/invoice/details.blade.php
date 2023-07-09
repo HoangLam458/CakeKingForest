@@ -312,8 +312,8 @@
                                     <th class="col-1">Giá bán</th>
                                     <th class="col-1">Kích cỡ</th>
                                     <th class="col-1">Số Lượng</th>
-                                    <th class="col-1">Thành tiền</th>
                                     <th class="col-2">Ghi Chú</th>
+                                    <th class="col-1">Thành tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -330,8 +330,9 @@
                                         ({{ $item->phantram }}%)
                                     </td>
                                     <td class="col-1">{{ $item->soluong }}</td>
-                                    <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
                                     <td class="col-2">{{ $item->ghichu }}</td>
+                                    <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
+
                                 </tr>
                                 @endforeach
                             </tbody>

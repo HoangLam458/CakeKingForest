@@ -235,6 +235,7 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::post('/manages/size/edit/{id?}', [SizeController::class, 'update'])->name('size.edit');
         Route::get('/manages/size/create', [SizeController::class, 'create'])->name('size.create');
         Route::post('/manages/size/store', [SizeController::class, 'store'])->name('size.store');
+        Route::get('/manages/size/restore/{id?}', [SizeController::class, 'restore'])->name('size.restore');
         Route::get('/manages/size/delete/{id?}', [SizeController::class, 'destroy'])->name('size.delete');
         //route admin hoadon
         Route::get('/manages/invoices', [HoadonController::class, 'index'])->name('invoice.index');
@@ -253,9 +254,12 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/category/edit/{id?}', [LoaisanphamController::class, 'edit'])->name('category.edit.form');
         Route::post('/manages/category/edit/{id?}', [LoaisanphamController::class, 'update'])->name('category.edit');
         Route::get('/manages/category/delete/{id?}', [LoaisanphamController::class, 'destroy'])->name('category.delete');
+        Route::get('/manages/category/restore/{id?}', [LoaisanphamController::class, 'restore'])->name('category.restore');
+
         // route admin contact
         Route::get('/manages/contact', [LienheController::class, 'admin_index'])->name('contact.index');
         Route::get('/manages/contact/{id?}', [LienheController::class, 'show'])->name('contact.details');
+        Route::get('/manages/contact/delete/{id?}', [LienheController::class, 'destroy'])->name('contact.delete');
         //route admin seach loc
 
         Route::get('/manages/invoice/search', [HoadonController::class, 'searchhd'])->name('searchhd');

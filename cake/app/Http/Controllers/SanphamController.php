@@ -32,7 +32,7 @@ class SanphamController extends Controller
     public function trash()
     {
         $loaisanpham = loaisanpham::all();
-        $lsSanpham = Sanpham::where('trangthai',0)->withTrashed()->Paginate(10);
+        $lsSanpham = Sanpham::where('trangthai',0)->onlyTrashed()->Paginate(10);
         return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
@@ -78,7 +78,7 @@ class SanphamController extends Controller
     {
         if ($id) {
             $loaisanpham = loaisanpham::all();
-            $sanpham = Sanpham::find($id);
+            $sanpham = Sanpham::where('id',$id)->withTrashed()->first();
             if ($sanpham) {
                 return view('pages.admin.sanpham.detail', [
                     'loaisanpham' => $loaisanpham,
@@ -87,7 +87,6 @@ class SanphamController extends Controller
             }
             return redirect()->back();
         }
-
         return redirect()->back();
     }
 
@@ -262,7 +261,7 @@ class SanphamController extends Controller
 //khôi phục bánh thành trạng thái đang bán
     public function restore($id)
     {
-        $sanpham =sanpham::where('id',$id)->withTrashed()->first();
+        $sanpham =sanpham::where('id',$id)->onlyTrashed()->first();
         if ($sanpham) {
             $sanpham->trangthai= 1;
             $sanpham->deleted_at = null;

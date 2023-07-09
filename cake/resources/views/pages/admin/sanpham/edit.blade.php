@@ -26,7 +26,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
-                                        <label class="form-label" for="inputImage">Ảnh Bánh</label>
+                                        <label class="form-label" for="inputImage" style="font-size: 15px">Ảnh Bánh</label>
                                         <br>
                                         <img width="150px" height="120px" class=""
                                             src="{{asset('/images/'.$sanpham->hinhanh)}}" alt="">
@@ -42,7 +42,7 @@
                                     <div class="column col-md-6">
                                         <div class="col-md ">
                                             <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
-                                                <label class="mb-2" for="first-name-column">Tên Bánh</label>
+                                                <label class="mb-2" for="first-name-column" style="font-size: 15px">Tên Bánh</label>
                                                 <input value="{{old('tensp')? old('tensp'):$sanpham->tensp }}" required
                                                     maxlength="255" type="text" id="first-name-column"
                                                     class="form-control" name="tensp">
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="col-md">
                                             <div class="form-group">
-                                                <label class="mb-2" for="city-column">Loại Bánh</label>
+                                                <label class="mb-2" for="city-column" style="font-size: 15px">Loại Bánh</label>
                                                 <select class="form-control" name="loaisanpham_id" id="basicSelect">
                                                     @foreach ($loaisanpham as $lsanpham)
                                                     @if (old('loaisanpham_id'))
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md">
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
-                                                <label class="mb-2" for="last-name-column">Giá Tiền</label>
+                                                <label class="mb-2" for="last-name-column" style="font-size: 15px">Giá Tiền</label>
                                                 <input value="{{old('giatien')? old('giatien'):$sanpham->giatien }}"
                                                     required value="100000" min="100000" max="2000000" step="10000"
                                                     type="number" id="last-name-column" class="form-control"
@@ -91,7 +91,7 @@
 
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">
-                                            <label class="mb-2" for="first-name-column">Mô Tả</label>
+                                            <label class="mb-2" for="first-name-column" style="font-size: 15px">Mô Tả</label>
                                             <textarea maxlength="255" minlength="50" required name="mota"
                                                 class="form-control" id="editor"
                                                 rows="3">{{ old('mota')? old('mota'):$sanpham->mota }}</textarea>

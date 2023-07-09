@@ -19,25 +19,25 @@
                             <label>Tên khách hàng</label>
                         </div>
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
-                            <label>{{ $contact->tenkhachhang }}</label>
+                            <span>{{ $contact->tenkhachhang }}</span>
                         </div>
                         <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Email</label>
                         </div>
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
-                            <label>{{ $contact->email }}</label>
+                            <span>{{ $contact->email }}</span>
                         </div>
                         <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Tiêu đề</label>
                         </div>
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
-                            <label>{{ $contact->tieude }}</label>
+                            <span>{{ $contact->tieude }}</span>
                         </div>
                         <div class="col-md-3" style="font-size:20px; font-weight: bold;">
                             <label>Nội dung</label>
                         </div>
                         <div class="col-md-9 form-group mb-3" style="font-size:20px">
-                            <label>{{ $contact->noidung }}</label>
+                           <span> {{ $contact->noidung }}</span>
                         </div>
                     </div>
                 </div>

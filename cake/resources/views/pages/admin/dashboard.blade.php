@@ -361,7 +361,6 @@
                     '#006064'
                 ],
                 labelColor: "#0c0d0d", // text color
-                backgroundColor: '#333333', // border color
                 data: [
                     @foreach ($countCate as $sale)
                         {

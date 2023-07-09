@@ -35,8 +35,6 @@
                     <h3>{{ $sanpham->tensp }}</h3>
                     <p class="price"><span>{{ number_format($sanpham->giatien) }} VND</span></p>
                     <div class="row mt-4 col-md-12">
-                        {{-- <p>{!! $sanpham->mota !!}
-                        </p> --}}
                         <label for="size" style="font-size: 18px">Kích thước: </label>
                         <div class="col-md-8">
 
@@ -87,8 +85,7 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-
-                <h2 class="mb-4">Sản phẩm tương tự</h2>
+                <h2 class="subheading" style="font-size: 40px">Sản phẩm tương tự</h2>
             </div>
         </div>
     </div>

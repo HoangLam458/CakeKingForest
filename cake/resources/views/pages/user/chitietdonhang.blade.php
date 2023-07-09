@@ -109,11 +109,6 @@
                                 <th>Số Lượng</th>
                                 <th>Ghi Chú</th>
                                 <th>Thành tiền</th>
-                                @if($mahd->trangthai !=1 )
-                                <!-- nothing -->
-                                @else
-                                <th>Chức năng</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -136,15 +131,10 @@
                                 </td>
                                 <td class="">
                                     <div>
-                                        <textarea type="text" name="ghichu" value="">{{$item->ghichu}}</textarea>
+                                      <span>{{$item->ghichu}}</span>
                                     </div>
                                 </td>
                                 <td class="total">{{ number_format($item->thanhtien) }} VND</td>
-                                {{-- @if($item->trangthai !=1 )
-
-                                @else
-                                <td><button type="submit"><span>Update</span></button></td>
-                                @endif --}}
                             </tr>
                             </form>
                             @endforeach
