@@ -56,9 +56,13 @@ class ChitiethoadonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatechitiethoadonRequest $request, chitiethoadon $chitiethoadon)
+    public function update(Request $request, $id)
     {
-        //
+
+        $item = chitiethoadon::where('id',$id)->first();
+        $item->ghichu = $request->get('ghichu');
+        $item->save();
+        return redirect()->back();
     }
 
     /**

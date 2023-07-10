@@ -155,19 +155,19 @@
                                     </td>
                                     @switch($item->trangthai)
                                     @case(1)
-                                    <td class="col-1"><span class="badge bg-warning">Chờ duyệt</span></td>
+                                    <td class="col-1"><span class="badge bg-warning" style="color: white">Chờ duyệt</span></td>
                                     @break
                                     @case(2)
-                                    <td class="col-1"><span class=" badge bg-primary">Đã duyệt</span></td>
+                                    <td class="col-1"><span class=" badge bg-primary"style="color: white">Đã duyệt</span></td>
                                     @break
                                     @case(3)
-                                    <td class="col-1"><span class=" badge badge-info">Đang giao</span></td>
+                                    <td class="col-1"><span class=" badge badge-info"style="color: white">Đang giao</span></td>
                                     @break
                                     @case(4)
-                                    <td class="col-1"><span class=" badge bg-success">Đã hoàn thành</span></td>
+                                    <td class="col-1"><span class=" badge bg-success"style="color: white">Đã hoàn thành</span></td>
                                     @break
                                     @case(5)
-                                    <td class="col-1"><span class=" badge badge-danger">Đã hủy</span></td>
+                                    <td class="col-1"><span class=" badge badge-danger"style="color: white">Đã hủy</span></td>
                                     @break
                                     @endswitch
                                     <td class="col-2">

@@ -74,7 +74,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                        <input type="submit" value="Gửi thư liên hệ" class="btn btn-primary py-3 px-5">
                     </div>
                 </form>
             </div>

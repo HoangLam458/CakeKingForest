@@ -38,7 +38,7 @@
                         </div>
                         <div class="container">
                             <h3 class="heading ">Miễn phí vận chuyển</h3>
-                            <span>Cho đơn hàng trên 300,000 VNĐ</span>
+                            <span>Miễn phí cho mọi đơn hàng</span>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="container">
                             <h3 class="heading">Hỗ trợ</h3>
-                            <span>Hỗ trợ 24/7</span>
+                            <span>Hỗ trợ nhiệt tình 24/7</span>
                         </div>
                     </div>
                 </div>

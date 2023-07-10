@@ -68,6 +68,7 @@
                                 Tổng tiền:   {{ number_format(Session::get('total')) }} VNĐ <br/>
                                 Ngày nhận: {{Carbon\Carbon::createFromFormat('Y-m-d', Session::get('info')['ngaynhanhang'])->format('d-m-Y')}} <br/>
                                 Hình thức nhận hàng: {{Session::get('info')['hinhthucnhanhang']}} <br/>
+                                Phương thức thanh toán: {{Session::get('info')['phuongthucthanhtoan']}}
                                 </p>
                                     <br>
                             </td>

@@ -93,7 +93,6 @@ class PaymentController extends Controller
     public function momo_payment_qr(Request $request)
     {
         $email = (string)Session::get('data')['email'];
-        if(Session::has('path')) Session::forget('path');
         if(auth()->user() == null)
         {
             $code_cart = $request->cookie('code');
@@ -105,7 +104,6 @@ class PaymentController extends Controller
         }
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $partnerCode = 'MOMOBKUN20180529';
-        Session::put('path',$partnerCode);
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "-".$hd;

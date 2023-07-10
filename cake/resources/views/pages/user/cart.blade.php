@@ -169,7 +169,7 @@
                     <span>Phí vận chuyển</span>
                     Miễn phí
                     <p class="d-flex total-price">
-                        <span>Total</span>
+                        <span>Tổng tiền</span>
                         {{ number_format($total) }} VND
             </div>
             <div class="row justify-content-center">

@@ -314,26 +314,37 @@
                                     <th class="col-1">Số Lượng</th>
                                     <th class="col-2">Ghi Chú</th>
                                     <th class="col-1">Thành tiền</th>
+                                    <th class="col-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($lsInD as $item)
-                                <tr>
-                                    <td class="col-2">
-                                        <img width="150px" height="150px" src="{{ asset('/images/' . $item->img) }}"
-                                            alt="">
-                                    </td>
-                                    <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
-                                    <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
-                                    </td>
-                                    <td style="width:30%" class="col-1">{{ $item->s_name }}
-                                        ({{ $item->phantram }}%)
-                                    </td>
-                                    <td class="col-1">{{ $item->soluong }}</td>
-                                    <td class="col-2">{{ $item->ghichu }}</td>
-                                    <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
+                                <form action="{{route('invoice.details.update',$item->details_id)}}"method="POST" class="form"
+                                enctype="multipart/form-data">
+                                    @csrf
+                                    <tr>
+                                        <td class="col-2">
+                                            <img width="150px" height="150px" src="{{ asset('/images/' . $item->img) }}"
+                                                alt="">
+                                        </td>
+                                        <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
+                                        <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
+                                        </td>
+                                        <td style="width:30%" class="col-1">{{ $item->s_name }}
+                                            ({{ $item->phantram }}%)
+                                        </td>
+                                        <td class="col-1">{{ $item->soluong }}</td>
+                                        <td class="col-2">
+                                            <textarea name="ghichu" id="" cols="20" rows="5">{{ $item->ghichu }}</textarea></td>
+                                        <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
+                                            @if ($u->trangthai == 1)
+                                            <td>
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </td>
+                                            @endif
+                                    </tr>
+                                </form>
 
-                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

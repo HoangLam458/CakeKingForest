@@ -553,6 +553,7 @@ class CartController extends Controller
             }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');
+            $chitiet->giabanh = $sanpham->giatien + ($sanpham->giatien * $phantrams->phantram / 100);
             $chitiet->giatien = ($sanpham->giatien * $request['quantity']) + ($sanpham->giatien * $request['quantity']) * ($phantrams->phantram / 100);
             $chitiet->ghichu = $request->get('ghichu');
             $chitiet->save();

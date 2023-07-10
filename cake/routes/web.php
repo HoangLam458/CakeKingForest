@@ -247,6 +247,8 @@ Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () 
         Route::get('/manages/invoice/status1/{id?}', [HoadonController::class, 'update_status_ship'])->name('invoice.status.ship');
         Route::get('/manages/invoice/status2/{id?}', [HoadonController::class, 'update_status_cancel'])->name('invoice.status.cancel');
         Route::get('/manages/invoice/status3/{id?}', [HoadonController::class, 'update_status_approved'])->name('invoice.status.approved');
+        Route::post('/manages/invoice/update/{id?}', [ChitiethoadonController::class, 'update'])->name('invoice.details.update');
+
         //route admin loai san pham
         Route::get('/manages/category', [LoaisanphamController::class, 'index'])->name('category.index');
         Route::get('/manages/category/create', [LoaisanphamController::class, 'create'])->name('category.create.form');
