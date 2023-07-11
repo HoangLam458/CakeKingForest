@@ -1,6 +1,5 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #464646; margin: 0; padding: 0;">
+<html style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;  max-height:auto">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,25 +9,21 @@
         <link sizes="76x76" href="{{ asset('paper') }}/img/final_logo.png">
         <link rel="icon" type="image/png" href="{{ asset('paper') }}/img/final_logo.png">
     </head>
-    <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0;">
-        <!-- Content Start -->
-        <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px;">
+    <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0; ">
+
+        <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: auto;max-height:auto">
             <tr bgcolor="#d7d7d7">
                 <td height="50" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
             </tr>
 
-            <!-- This encapsulation is required to ensure correct rendering on Windows 10 Mail app. -->
             <tr bgcolor="#d7d7d7">
                 <td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
-                    <!-- Seperator Start -->
                     <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px; width: 100%;">
                         <tr bgcolor="#d7d7d7">
                             <td height="30" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                         </tr>
                     </table>
-                    <!-- Seperator End -->
 
-    <!-- Generic Pod Left Aligned with Price breakdown Start -->
                     <table align="center" cellpadding="0" cellspacing="0" cols="3" bgcolor="white" class="bordered-left-right" style="border-left: 10px solid #d7d7d7; border-right: 10px solid #d7d7d7; max-width: 600px; width: 100%;">
                         <tr height="50"><td colspan="3" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td></tr>
                         <tr align="center">
@@ -94,15 +89,12 @@
                         </tr>
 
                     </table>
-                    <!-- Generic Pod Left Aligned with Price breakdown End -->
 
-                    <!-- Seperator Start -->
                     <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px; width: 100%;">
                         <tr bgcolor="#d7d7d7">
                             <td height="50" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                         </tr>
                     </table>
-                    <!-- Seperator End -->
 
                 </td>
             </tr>

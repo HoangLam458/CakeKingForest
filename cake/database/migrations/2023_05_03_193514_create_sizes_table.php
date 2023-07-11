@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('tensize',25);
             $table->integer('phantram');
+            $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();
         });

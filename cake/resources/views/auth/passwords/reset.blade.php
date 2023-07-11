@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'class' => 'register-page'
+    'class' => 'register-page',
     'backgroundImagePath' => 'img/bg/muffins-candles-aalaw-sprinkles-corner-pink-background.jpg'
 ])
 

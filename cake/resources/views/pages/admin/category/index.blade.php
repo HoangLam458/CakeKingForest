@@ -37,6 +37,9 @@
                                     Tên loại bánh
                                 </th>
                                 <th>
+                                    Trạng thái
+                                </th>
+                                <th>
                                     Chức năng
                                 </th>
                             </thead>
@@ -44,6 +47,11 @@
                                 @foreach ($lsUsers as $item)
                                 <tr>
                                     <td class="col-md-4">{{ $item->tenloaisp }}</td>
+                                    @if ($item->trangthai == 1)
+                                    <td class="col-md-4"><span class="badge bg-success" style="color: white">Đang sử dụng</span></td>
+                                    @else
+                                    <td class="col-md-4"><span class="badge bg-warning"style="color: white">Ngưng sử dụng</span></td>
+                                    @endif
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('category.edit.form', $item->id) }}" type="button"

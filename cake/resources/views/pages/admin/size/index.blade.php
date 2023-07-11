@@ -38,6 +38,9 @@
                                     Phần Trăm tăng
                                 </th>
                                 <th>
+                                    Trạng thái
+                                </th>
+                                <th>
                                     Chức năng
                             </thead>
                             <tbody>
@@ -45,6 +48,11 @@
                                 <tr>
                                     <td class="text-bold-500">{{ $item->tensize }}</td>
                                     <td class="text-bold-500">{{ $item->phantram }} %</td>
+                                    @if ($item->deleted_at == null)
+                                    <td class="col-md-4"><span class="badge bg-success" style="color: white">Đang sử dụng</span></td>
+                                    @else
+                                    <td class="col-md-4"><span class="badge bg-warning"style="color: white">Ngưng sử dụng</span></td>
+                                    @endif
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('size.edit.form', $item->id) }}" type="button"

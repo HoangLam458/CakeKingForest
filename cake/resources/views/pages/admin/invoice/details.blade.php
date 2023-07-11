@@ -116,7 +116,7 @@
                                         <div class="form-group{{ $errors->has('fullname') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên khách hàng</label>
                                             <input value="{{ $u->tenkhachhang }}" type="text" id="first-name-column"
-                                                class="form-control" name="fullname" required maxlength="50">
+                                                class="form-control" name="fullname" required minlength="7" maxlength="50">
                                             @if ($errors->has('fullname'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('fullname') }}</strong>
@@ -124,7 +124,6 @@
                                             @endif
                                         </div>
                                     </div>
-
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="city-column">Số điện thoại</label>
@@ -339,7 +338,7 @@
                                         <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
                                             @if ($u->trangthai == 1)
                                             <td>
-                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                                <button type="submit" onclick="return checkUpdateGhichu()" class="btn btn-primary">Cập nhật</button>
                                             </td>
                                             @endif
                                     </tr>
@@ -358,6 +357,9 @@
     <script language="JavaScript" type="text/javascript">
         function check() {
             return confirm('Xác nhận chỉnh sửa thông tin hóa đơn?');
+        }
+        function checkUpdateGhichu() {
+            return confirm('Xác nhận chỉnh sửa ghi chú?');
         }
 
     </script>

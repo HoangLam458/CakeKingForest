@@ -110,7 +110,7 @@
                                     <div class="col-12 d-flex justify-content-end mt-2">
                                         <button type="submit"  onclick="return checkDelete() " class="btn btn-primary me-1 mb-1">Xác nhận</button>
                                         <button onclick="location.reload();" type="reset"
-                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                            class="btn btn-light-secondary me-1 mb-1">Nhập lại thông tin</button>
                                     </div>
                             </div>
                             </form>

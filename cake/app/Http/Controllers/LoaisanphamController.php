@@ -95,8 +95,10 @@ class LoaisanphamController extends Controller
         {
             return redirect()->back()->with('fail','Không thể xóa loại bánh này vì đang được sử dụng');
         }
-        $category = loaisanpham::find($id);
+        $category = loaisanpham::where('id',$id)->withTrashed()->first();
         if($category){
+            $category->trangthai = 0;
+            $category->save();
             $category->delete();
             return redirect()->back()->with('status','Xóa thành công');
         }

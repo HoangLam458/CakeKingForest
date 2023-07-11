@@ -61,6 +61,10 @@ class LienheController extends Controller
     public function show($id)
     {
         $contact = Lienhe::where('id',$id)->first();
+        if($contact == null)
+        {
+            return redirect()->route('contact.index');
+        }
         if($contact->trangthai == 0)
         {
             $contact->trangthai = 1;
