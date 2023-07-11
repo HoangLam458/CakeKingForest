@@ -534,7 +534,7 @@ class CartController extends Controller
                             $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
                                 ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
                             $timchitiet->soluong = $timchitiet->soluong + $giusl;
-                            $timchitiet->giatien = ($sanpham->giatien * ($timchitiet->soluong + $giusl)) + ($sanpham->giatien * ($timchitiet->soluong + $giusl)) * ($phantrams->phantram / 100);
+                            $timchitiet->giatien = ($timchitiet->giabanh * ($timchitiet->soluong)) + ($timchitiet->giabanh * ($timchitiet->soluong )) * ($phantrams->phantram / 100);
                             $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
                             $timchitiet->save();
                             $chitiet->delete();
