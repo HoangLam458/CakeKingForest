@@ -114,7 +114,7 @@ class UserController extends Controller
                 $item->save();
             }
             $user->delete();
-            return redirect()->back();
+            return redirect()->back()->with('status','Xóa tài khoản thành công');
         }
     }
     public function logout(Request $request)

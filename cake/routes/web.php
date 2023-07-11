@@ -171,7 +171,6 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
 });
 
 Route::get('send-mail/{emailpay?}', function ($emailpay) {
-
     $details = [
         'title' => 'Mail from Cake King Forest Thanh Toan' . Session::get('mahd'),
         'body' => Session::pull('hd_ma'),
@@ -203,10 +202,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'user.auth.check', 'prefix' => null], function () {
-
     Route::group(['middleware' => 'bulkhead.check', 'prefix' => "admin"], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
-
         // route admin account
         Route::get('/manages/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/manages/user/filter', [UserController::class, 'show_admin'])->name('user.index.admin');

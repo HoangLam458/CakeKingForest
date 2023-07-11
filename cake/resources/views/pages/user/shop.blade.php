@@ -1,5 +1,6 @@
 @extends('pages.layout')
 @section('body')
+@include('sweetalert::alert')
 <header>
     <style>
         .button {

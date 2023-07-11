@@ -98,6 +98,6 @@ class LienheController extends Controller
     {
         $item = Lienhe::find($id)->first();
         $item->delete();
-        return redirect()->back();
+        return redirect()->back()->with('status','Xóa thư liên hệ thành công');
     }
 }
