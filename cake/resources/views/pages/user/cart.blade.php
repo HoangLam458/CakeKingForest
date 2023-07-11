@@ -148,7 +148,7 @@
                                     <td class="total">
                                         <div>
                                             <textarea rows="3" maxlength="255" type="text" name="ghichu"
-                                                value="">{{ $lsCart->ghichu }}</textarea>
+                                            placeholder="Họ tên hoặc ngày tháng năm sinh,......">{{ $lsCart->ghichu }}</textarea>
                                         </div>
                                     </td>
                                     <td><button type="submit" class="btn btn-primary">

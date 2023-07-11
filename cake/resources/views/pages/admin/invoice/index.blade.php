@@ -18,6 +18,10 @@
         <section id="multiple-column-form">
             <div class="row match-height">
                 <div class="col-md col-12">
+                @if(session('status'))
+        <h6 class="alert alert-success">{{session('status')}} <button class="close"
+                data-dismiss="alert">&times;</button></h6>
+        @endif
                     <div class="card">
                         <div class="card-header pb-0">
                             <h4 class="card-title">Danh sách hóa đơn</h4>
@@ -210,7 +214,7 @@
     <header>
         <script language="JavaScript" type="text/javascript">
             function checkDelete() {
-                return confirm('Bạn có chắc chắn hủy hóa đơn?');
+                return confirm('Bạn có chắc chắn hủy đơn hàng?');
             }
         </script>
     </header>

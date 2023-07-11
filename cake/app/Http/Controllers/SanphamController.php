@@ -182,14 +182,18 @@ class SanphamController extends Controller
         $act = 0;
         $key = $_GET['key'];
         $category = loaisanpham::all();
-        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
+        $lsSanpham = sanpham::Where('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString(); 
         $lsloaisp = loaisanpham::all();
         $size = size::all();
+        if($lsSanpham->count()<=0){
+            alert()->error('Thông báo', 'Không tìm thấy sản phẩm!');
+        }
         return response()->view('pages.user.shop',
          ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
          'act'=>$act,'category'=>$category,
         ]);
     }
+    
     public function detail($id)
     {
         if ($id) {

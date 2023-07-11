@@ -58,11 +58,10 @@ class ChitiethoadonController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $item = chitiethoadon::where('id',$id)->first();
         $item->ghichu = $request->get('ghichu');
         $item->save();
-        return redirect()->back();
+        return redirect()->back()->with('status','Cập nhật ghi chú thành công');
     }
 
     /**

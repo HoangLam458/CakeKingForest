@@ -120,11 +120,10 @@ class HoadonController extends Controller
     public function update_status_success($id, Request $request)
     {
         $request = $request->all();
-
         $hd = Hoadon::find($id);
         $hd->trangthai = 4;
         $hd->save();
-        return redirect()->back();
+        return redirect()->back()->with('status','Đơn hàng đã được giao thành công và hoàn thành!!');;
     }
     public function update_status_ship($id, Request $request)
     {
@@ -133,7 +132,7 @@ class HoadonController extends Controller
         $hd = Hoadon::find($id);
         $hd->trangthai = 3;
         $hd->save();
-        return redirect()->back();
+        return redirect()->back()->with('status','Đơn hàng đang trên đường giao!!');
 
 
     }
@@ -144,7 +143,7 @@ class HoadonController extends Controller
         $hd = Hoadon::find($id);
         $hd->trangthai = 5;
         $hd->save();
-        return redirect()->back();
+        return redirect()->back()->with('status','Hủy đơn hàng thành công!!');;
 
 
     }
@@ -154,7 +153,7 @@ class HoadonController extends Controller
         $hd = Hoadon::find($id);
         $hd->trangthai = 2;
         $hd->save();
-        return redirect()->back();
+        return redirect()->back()->with('status','Duyệt đơn hàng thành công!!');;
 
 
     }
