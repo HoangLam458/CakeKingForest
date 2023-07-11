@@ -112,7 +112,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
         else
         {
             $info->trangthai = 1;
-            $info->magiaodich = explode('-', $_GET['orderId'])[0];
+            $info->magiaodich = $_GET['transId'];
             $info->save();
             Session::forget('cate');
             Session::forget('data');
@@ -134,6 +134,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
 
 });
 Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
+
     $currentTime = Carbon::now();
     $code = explode('-', $_GET['vnp_TxnRef'])[1];
     $info = hoadon::find($code);
@@ -150,7 +151,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
         return redirect()->route('paymant_fails');
     } else {
         $info->trangthai = 1;
-        $info->magiaodich = explode('-', $_GET['vnp_TxnRef'])[0];
+        $info->magiaodich = $_GET['vnp_TransactionNo'];
         $info->save();
         Session::forget('cate');
         Session::forget('data');

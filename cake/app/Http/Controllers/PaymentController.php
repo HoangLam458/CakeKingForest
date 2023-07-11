@@ -41,9 +41,10 @@ class PaymentController extends Controller
     public function momo_payment(Request $request)
     {
         $email = (string)Session::get('data')['email'];
+        $code_cart = $request->cookie('code');
         if(auth()->user() == null)
         {
-            $code_cart = $request->cookie('code');
+
             $hd = hoadon::where('mahd',$code_cart)->value('id');
         }
         else
@@ -54,7 +55,7 @@ class PaymentController extends Controller
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderInfo = "Thanh toán qua ATM MoMo";
+        $orderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $amount = Session::get('data')['total'];
         $orderId = time() . "-".$hd;
         $redirectUrl = "http://127.0.0.1:8000/send-mail-momo/$email";
@@ -69,7 +70,7 @@ class PaymentController extends Controller
         $data = array(
             'partnerCode' => $partnerCode,
             'partnerName' => "Test",
-            "storeId" => "MomoTestStore",
+            "storeId" => "CakeKingForest Store",
             'requestId' => $requestId,
             'amount' => $amount,
             'orderId' => $orderId,
@@ -93,9 +94,10 @@ class PaymentController extends Controller
     public function momo_payment_qr(Request $request)
     {
         $email = (string)Session::get('data')['email'];
+        $code_cart = $request->cookie('code');
         if(auth()->user() == null)
         {
-            $code_cart = $request->cookie('code');
+
             $hd = hoadon::where('mahd',$code_cart)->value('id');
         }
         else
@@ -107,7 +109,7 @@ class PaymentController extends Controller
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderId = time() . "-".$hd;
-        $orderInfo = "Thanh toán qua QR MoMo". "" ;
+        $orderInfo = 'Thanh toán đơn hàng' . ' ' . (string) $code_cart;
         $amount = Session::get('data')['total'];
         $redirectUrl = "http://127.0.0.1:8000/send-mail-momo/$email";
         $ipnUrl = "http://127.0.0.1:8000/send-mail-momo/$email";
@@ -124,7 +126,7 @@ class PaymentController extends Controller
         $data = array(
             'partnerCode' => $partnerCode,
             'partnerName' => "Test",
-            "storeId" => "MomoTestStore",
+            "storeId" => "CakeKingForest Store",
             'requestId' => $requestId,
             'amount' => $amount,
             'orderId' => $orderId,
