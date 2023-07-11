@@ -193,6 +193,7 @@ class SanphamController extends Controller
          'act'=>$act,'category'=>$category,
         ]);
     }
+    
     public function detail($id)
     {
         if ($id) {
