@@ -167,7 +167,7 @@ class SanphamController extends Controller
     {
         $category = loaisanpham::all();
          $act = $id;
-        $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(2);
+        $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(12);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         return response()->view('pages.user.shop',
@@ -182,7 +182,7 @@ class SanphamController extends Controller
         $act = 0;
         $key = $_GET['key'];
         $category = loaisanpham::all();
-        $lsSanpham = sanpham::Where('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString(); 
+        $lsSanpham = sanpham::Where('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         if($lsSanpham->count()<=0){
@@ -193,7 +193,7 @@ class SanphamController extends Controller
          'act'=>$act,'category'=>$category,
         ]);
     }
-    
+
     public function detail($id)
     {
         if ($id) {
@@ -226,7 +226,7 @@ class SanphamController extends Controller
         }
         $loaisanpham = loaisanpham::all();
         $loc = $_GET['loaibanh'];
-        $lsSanpham = sanpham::where('loaisanpham_id', $loc)->Paginate(2)->withQueryString();
+        $lsSanpham = sanpham::where('loaisanpham_id', $loc)->Paginate(10)->withQueryString();
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
     //tìm sản phẩm admin
@@ -247,7 +247,7 @@ class SanphamController extends Controller
             }
             $loaisanpham = loaisanpham::all();
             $loc = $_GET['loaibanh'];
-            $lsSanpham = sanpham::where('loaisanpham_id', $loc)->where('trangthai',0)->withTrashed()->Paginate(2)->withQueryString();
+            $lsSanpham = sanpham::where('loaisanpham_id', $loc)->where('trangthai',0)->withTrashed()->Paginate(10)->withQueryString();
             return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\chitiethoadon;
 use App\Models\hoadon;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-
+        if(Session::has('chart')) Session::forget('chart');
         $time = Carbon::now()->subDays(30)->format('Y/m/d');
         $now = Carbon::now()->format('Y/m/d');
         $doanhthu = 0;
@@ -63,19 +64,22 @@ class HomeController extends Controller
                     $doanhthu = $doanhthu + $item->giatien;
                 }
             }
-            $test = $this->data_chart($time,$now);
+            $get = $this->data_chart($time,$now);
         }
-        return view('pages.admin.dashboard',[
-            'product'=>$this->product_replate(),
-            'countCate'=>$this->product_chart(),
-            'chart_data'=>$test,
+        $data = array([
             'doanhthu'=>$doanhthu,
             'hd_success'=>count($hoadon_hoanthanh),
             'hd_pending'=>count($hoadon_choduyet),
             'hd_shipping'=>count($hoadon_danggiao),
-            'hoadonall'=>$hoadonall,
             'choduyet'=>$hoadon_tienmat->count(),
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
+        ]);
+        Session::put('chart',$data);
+        return view('pages.admin.dashboard',[
+            'hoadonall'=>$hoadonall,
+            'chart_data'=>$get,
+            'product'=>$this->product_replate(),
+            'countCate'=>$this->product_chart(),
         ]);
     }
 
@@ -99,6 +103,7 @@ class HomeController extends Controller
         $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
         $hoadon_choduyet = hoadon::where('trangthai',1)->get();
         $hoadon_danggiao = hoadon::where('trangthai',3)->get();
+        $hoadon_tienmat = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','Tiền Mặt')->get();
         if($hoadon_hoanthanh != null)
         {
             foreach($hoadon_hoanthanh as $hd)
@@ -140,18 +145,21 @@ class HomeController extends Controller
             $get = $this->data_chart($time,$time2);
         }
         $count=$hoadonmomo->count()+$hoadonvnpay->count()+$hoadon_choduyet->count();
-        return view('pages.admin.dashboard',[
-            'product'=>$this->product_replate(),
-            'countCate'=>$this->product_chart(),
-            'chart_data'=>$get,
+        $data = array([
             'doanhthu'=>$doanhthu,
             'hd_success'=>count($hoadon_hoanthanh),
             'hd_pending'=>count($hoadon_choduyet),
             'hd_shipping'=>count($hoadon_danggiao),
-            'hoadonall'=>$hoadonall,
-            'dem'=>$count,
-            'choduyet'=>$hoadon_choduyet->count(),
+            'choduyet'=>$hoadon_tienmat->count(),
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
+        ]);
+        Session::put('chart',$data);
+
+        return view('pages.admin.dashboard',[
+            'hoadonall'=>$hoadonall,
+            'chart_data'=>$get,
+            'product'=>$this->product_replate(),
+            'countCate'=>$this->product_chart(),
         ]);
 
     }
