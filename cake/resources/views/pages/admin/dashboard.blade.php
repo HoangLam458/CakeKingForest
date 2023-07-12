@@ -39,7 +39,7 @@
                             <div class="col-7 col-md-12">
                                 <div class="numbers">
                                     <p class="card-category">đơn hoàn thành</p>
-                                    <p class="card-title"> {{ $hd_success }}
+                                    <p class="card-title"> {{ Session::get('chart')[0]['hd_success'] }}
                                     <p>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="numbers">
                                     <p class="card-category">Tổng doanh thu (VND)</p>
                                     <p class="card-title">
-                                        {{ number_format($doanhthu) }}
+                                        {{ number_format(Session::get('chart')[0]['doanhthu']) }}
                                     <p>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             <div class="col-7 col-md-12">
                                 <div class="numbers">
                                     <p class="card-category">Đơn chờ duyệt</p>
-                                    <p class="card-title">{{ $hd_pending }}
+                                    <p class="card-title">{{ Session::get('chart')[0]['hd_pending']}}
                                     </p>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             <div class="col-7 col-md-12">
                                 <div class="numbers">
                                     <p class="card-category">Đơn đang giao</p>
-                                    <p class="card-title">{{ $hd_shipping }}
+                                    <p class="card-title">{{ Session::get('chart')[0]['hd_shipping'] }}
                                     <p>
                                 </div>
                             </div>
@@ -133,8 +133,6 @@
                                     <div class="card card-body">
                                         <div class="alert alert-info">
                                             <h5 class="card-title">Đơn chờ duyệt </h5>
-                                            <!-- <span
-                                                    style="color:#ff0000; font-size:20px"> {{ $choduyet }}</span> -->
                                             @foreach ($hoadonall as $hoadon)
                                                 @if ($hoadon->trangthai == 1 && $hoadon->phuongthucthanhtoan == 'Tiền Mặt')
                                                     <a href="{{ route('invoice.detail', $hoadon->id) }}"><span
@@ -152,8 +150,7 @@
                                     <div class="card card-body">
                                         <div class="alert alert-info">
                                             <h5 class="card-title">Đơn đã thanh toán</h5>
-                                            <!-- <span
-                                                    style="color:#ff0000; font-size:20px"> {{ $thanhtoan }}</span> -->
+
                                             @foreach ($hoadonall as $hoadon)
                                                 @if ($hoadon->trangthai == 1 && $hoadon->phuongthucthanhtoan == 'MoMo')
                                                     <a href="{{ route('invoice.detail', $hoadon->id) }}"><span
@@ -296,7 +293,7 @@
                     </div>
                 </div>
                 <div class="card-body ">
-                    <div id="donut-example" class="morris-donut-inverse" style="height: 400px;"></div>
+                    <div id="donut-example" class="" style="height: 400px;"></div>
                 </div>
             </div>
         </div>
@@ -315,7 +312,7 @@
     </div>
 @endsection
 
-@push('scripts')
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
@@ -428,4 +425,4 @@
             form.submit();
         }
     </script>
-@endpush
+

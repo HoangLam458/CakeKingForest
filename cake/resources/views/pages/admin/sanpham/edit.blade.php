@@ -76,8 +76,8 @@
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">Giá Tiền</label>
                                                 <input value="{{old('giatien')? old('giatien'):$sanpham->giatien }}"
-                                                    required value="100000" min="100000" max="2000000" step="10000"
-                                                    type="number" id="last-name-column" class="form-control"
+                                                    required value="100000" min="100000" max="2000000" type="text"
+                                                    onKeyPress="return isNumberKey(event)" id="last-name-column" class="form-control"
                                                     name="giatien">
                                                 @if ($errors->has('giatien'))
 
@@ -128,6 +128,17 @@
         }
 
     </script>
+     <script language='javascript'>
+
+        function isNumberKey(evt)
+        {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+        return true;
+        }
+
+        </script>
 </header>
 <script>
     CKEDITOR.replace('editor');

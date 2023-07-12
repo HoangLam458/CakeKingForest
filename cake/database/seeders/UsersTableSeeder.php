@@ -14,6 +14,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        //Admin
         DB::table('users')->insert([
             'email' => 'lamhoangtruong202@gmail.com',
             'password' => Hash::make('123456'),
@@ -24,39 +26,58 @@ class UsersTableSeeder extends Seeder
             'trangthai' => 1
         ]);
         DB::table('users')->insert([
-            'email' => 'huynhngochao@gmail.com',
+            'email' => 'shirosaki7902@gmail.com',
             'password' => Hash::make('123456'),
-            'loai' => 1,
+            'loai' => 2,
             'tenkhachhang' => 'Huỳnh Ngọc Hào',
             'diachi' => '43 An Bình phường 6 quận 7',
             'sdt' => '0348563898',
             'trangthai' => 1
         ]);
+        //nhân viên
         DB::table('users')->insert([
-            'email' => 'usertest01@gmail.com',
+            'email' => '0306201432@caothang.edu.vn',
             'password' => Hash::make('123456'),
             'loai' => 1,
-            'tenkhachhang' => 'Nguyễn Ngân',
+            'tenkhachhang' => 'Huỳnh Hào',
             'diachi' => '110 trần hưng đạo Quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1
         ]);
 
         DB::table('users')->insert([
-            'email' => 'usertest02@gmail.com',
+            'email' => '0306201458@caothang.edu.vn',
             'password' => Hash::make('123456'),
-            'loai' => 0,
-            'tenkhachhang' => 'Hải',
+            'loai' => 1,
+            'tenkhachhang' => 'Trương Lâm',
             'diachi' => '210 Huỳnh Mẫn Đạt Quận 5',
             'sdt' => '0348575810',
             'trangthai' => 1
         ]);
-
+        //khách hàng
         DB::table('users')->insert([
-            'email' => 'usertest03@gmail.com',
+            'email' => 'huynhhao792002@gmail.com',
             'password' => Hash::make('123456'),
             'loai' => 0,
-            'tenkhachhang' => 'Trần Bình',
+            'tenkhachhang' => 'Huỳnh Ánh Ngọc',
+            'diachi' => '65 huỳnh thúc kháng quận 1',
+            'sdt' => '0348575810',
+            'trangthai' => 1
+        ]);
+        DB::table('users')->insert([
+            'email' => 'huynhngockhoa1009@gmail.com',
+            'password' => Hash::make('123456'),
+            'loai' => 0,
+            'tenkhachhang' => 'Huỳnh Ngọc Khoa',
+            'diachi' => '65 huỳnh thúc kháng quận 1',
+            'sdt' => '0348575810',
+            'trangthai' => 1
+        ]);
+        DB::table('users')->insert([
+            'email' => 'huynhtuyetnhu1802@gmail.com',
+            'password' => Hash::make('123456'),
+            'loai' => 0,
+            'tenkhachhang' => 'Huỳnh Ngọc Tuyết Như',
             'diachi' => '65 huỳnh thúc kháng quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1

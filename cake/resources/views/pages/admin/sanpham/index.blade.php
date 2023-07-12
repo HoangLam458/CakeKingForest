@@ -52,7 +52,6 @@
                                 </div>
                                 <span style="font-size:16px;">Lọc Theo Loại Bánh: </span>
                                 <button type="submit" class="btn btn-primary">Lọc</button>
-
                                 <select name="loaibanh" id="basicSelect" style="height:40px" class="col-md-3 form-control">
                                     <option value="" selected hidden> Chọn Loại Bánh</option>
                                     @foreach ($loaisanpham as $category)
