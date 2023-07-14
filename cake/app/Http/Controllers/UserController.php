@@ -146,6 +146,8 @@ class UserController extends Controller
     public function searchuser()
     {
         $key = $_GET['key'];
+        if(preg_match('/^\s*$/u', $key) == true)
+        return redirect()->route('user.index');
         $lsUsers= User::orWhere('sdt','LIKE',"%$key%")->orWhere('email','LIKE',"%$key%")->orWhere('tenkhachhang','LIKE',"%$key%")->Paginate(10)->withQueryString();
         return view('pages.admin.accounts.index', ['lsUsers' => $lsUsers]);
     }

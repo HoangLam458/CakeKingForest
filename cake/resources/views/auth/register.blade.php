@@ -2,6 +2,7 @@
 'class' => 'register-page',
 'backgroundImagePath' => 'img/bg/muffins-candles-aalaw-sprinkles-corner-pink-background.jpg'
 ])
+<title>Đăng kí</title>
 @section('content')
 <div class="content2">
     <div class="container">

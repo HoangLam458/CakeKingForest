@@ -181,6 +181,8 @@ class SanphamController extends Controller
     {
         $act = 0;
         $key = $_GET['key'];
+        if(preg_match('/^\s*$/u', $key) == true)
+        return redirect()->route('shop');
         $category = loaisanpham::all();
         $lsSanpham = sanpham::Where('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
         $lsloaisp = loaisanpham::all();
@@ -234,6 +236,8 @@ class SanphamController extends Controller
     public function searchprad()
     {
         $key = $_GET['key'];
+        if(preg_match('/^\s*$/u', $key) == true)
+        return redirect()->route('sanpham.index');
         $loaisanpham = loaisanpham::all();
         $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(10)->withQueryString();
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
@@ -256,6 +260,7 @@ class SanphamController extends Controller
     public function searchprtrash()
     {
         $key = $_GET['key'];
+        if(preg_match('/^\s*$/u', $key) == true) return redirect()->route('sanpham.trash');
         $loaisanpham = loaisanpham::all();
         $lsSanpham = sanpham::where('trangthai', 0)->where(function ($query) use ($key) {
             $query->where('tensp','LIKE',"%$key%")

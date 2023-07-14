@@ -126,12 +126,12 @@
                 @foreach ($product as $Sanpham)
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="{{ route('shop.detail', $Sanpham->id) }}" class="img-prod"><img class="img-fluid"
+                        <a href="{{ route('shop.detail', $Sanpham->product_id) }}" class="img-prod"><img class="img-fluid"
                             src="{{ asset('/images/' . $Sanpham->hinhanh) }}" alt="Colorlib Template" width="250"
                             height="200">
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <label style="font-size: 13px"><a href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></label>
+                        <label style="font-size: 13px"><a href="{{ route('shop.detail', $Sanpham->product_id) }}">{{ $Sanpham->tensanpham }}</a></label>
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price"><span>{{ number_format($Sanpham->giatien) }} VND</span></p>
@@ -139,7 +139,7 @@
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
 
-                                    <a type="button" href="{{ route('shop.detail', $Sanpham->id) }}"
+                                    <a type="button" href="{{ route('shop.detail', $Sanpham->product_id) }}"
                                         class="d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
@@ -147,7 +147,7 @@
                                         <form id="form__submit" action="{{ route('add_to_cart')}}" method="POST"
                                             class="form" enctype="multipart/form-data">
                                             @csrf
-                                            <input name="id" value="{{ $Sanpham->id }}" type="text" hidden
+                                            <input name="id" value="{{ $Sanpham->product_id }}" type="text" hidden
                                                 required>
                                             <input name="quantity" value="1" type="number" hidden required>
                                             <input name="size" value="1" type="number" hidden required>

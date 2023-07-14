@@ -2,7 +2,7 @@
 'class' => 'login-page',
 'backgroundImagePath' =>'img/bg/muffins-candles-aalaw-sprinkles-corner-pink-background.jpg'
 ])
-
+<title>Đăng nhập</title>
 @section('content')
 @include('sweetalert::alert')
 <div class="content-login">

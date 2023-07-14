@@ -232,6 +232,8 @@ class HoadonController extends Controller
     public function searchhd()
     {
         $search = $_GET['hoadon'];
+        if(preg_match('/^\s*$/u', $search) == true)
+        return redirect()->route('invoice.index');
         $lsHoaDon = hoadon::where('trangthai', '<>', 0)->where(function ($query) use ($search) {
             $query->where('tenkhachhang', 'LIKE', "%{$search}%")
                 ->orWhere('mahd', 'LIKE', "%{$search}%")->orWhere('sdtkhachhang', 'LIKE', "%{$search}%");
