@@ -197,11 +197,11 @@ class SanphamController extends Controller
     public function detail($id)
     {
         if ($id) {
-
             $size = size::all();
             $loaisanpham = loaisanpham::all();
             $sanpham = Sanpham::find($id);
             if ($sanpham) {
+                $cate = loaisanpham::where('id',$sanpham->loaisanpham_id)->first();
                 $getrelate = Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get();
                 $count = $getrelate->count();
                 $relate= Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get()->random($count>4?4:$count);
@@ -210,7 +210,8 @@ class SanphamController extends Controller
                     'sanpham' => $sanpham,
                     'size' => $size,
                     'relate' =>$relate,
-                    'category'=>$loaisanpham
+                    'category'=>$loaisanpham,
+                    'cate'=>$cate
                 ]);
             }
             return redirect()->back();

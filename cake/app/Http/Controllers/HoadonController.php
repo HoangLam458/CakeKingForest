@@ -128,7 +128,6 @@ class HoadonController extends Controller
     public function update_status_ship($id, Request $request)
     {
         $request = $request->all();
-
         $hd = Hoadon::find($id);
         $hd->trangthai = 3;
         $hd->save();
@@ -139,13 +138,10 @@ class HoadonController extends Controller
     public function update_status_cancel($id, Request $request)
     {
         $request = $request->all();
-
         $hd = Hoadon::find($id);
         $hd->trangthai = 5;
         $hd->save();
         return redirect()->back()->with('status','Hủy đơn hàng thành công!!');;
-
-
     }
     public function update_status_approved($id, Request $request)
     {

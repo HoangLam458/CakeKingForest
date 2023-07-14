@@ -15,9 +15,6 @@ class HomeUserController extends Controller
 {
     public function homepage(Request $request)
     {
-
-
-
         $product = sanpham::all()->random(8);
         Session::put('cate');
         $category = loaisanpham::all();

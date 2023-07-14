@@ -335,6 +335,36 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
+                'tensp' => 'BÁNH KEM DOREAMON DR05',
+                'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
+
+                <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
+                - B&aacute;nh su kem (b&aacute;nh b&ocirc;ng lan) c&oacute; k&iacute;ch thước ph&ugrave; hợp với khu&ocirc;n mặt Doraemon. Bạn c&oacute; thể mua sẵn hoặc tự l&agrave;m theo c&ocirc;ng thức b&aacute;nh su kem.<br />
+                - Kem tươi (whipping cream) để phủ v&agrave; trang tr&iacute; b&aacute;nh. Bạn cần khoảng 500ml kem tươi, đ&aacute;nh b&ocirc;ng v&agrave; chia th&agrave;nh 3 phần: 1 phần để phủ to&agrave;n bộ b&aacute;nh, 1 phần để nhuộm m&agrave;u xanh l&aacute; c&acirc;y cho mũi v&agrave; cổ &aacute;o Doraemon, 1 phần để nhuộm m&agrave;u đỏ cho miệng v&agrave; chu&ocirc;ng Doraemon.<br />
+                - M&agrave;u thực phẩm xanh l&aacute; c&acirc;y v&agrave; đỏ để nhuộm kem tươi.<br />
+                - Socola trắng để l&agrave;m mắt v&agrave; r&acirc;u Doraemon. Bạn cần khoảng 100g socola trắng, nấu chảy v&agrave; cho v&agrave;o t&uacute;i nhỏ, cắt lỗ nhỏ ở đầu để vẽ.<br />
+                - Kẹo dẻo m&agrave;u v&agrave;ng để l&agrave;m chu&ocirc;ng Doraemon. Bạn cần khoảng 50g kẹo dẻo m&agrave;u v&agrave;ng, nặn th&agrave;nh h&igrave;nh tr&ograve;n rỗng ở giữa.<br />
+                - Dao, k&eacute;o, th&igrave;a, dĩa, khu&ocirc;n tr&ograve;n để cắt b&aacute;nh.</span></p>
+
+                <p><span style="font-size:16px">Bước 2: Cắt v&agrave; phủ b&aacute;nh<br />
+                - Lấy khu&ocirc;n tr&ograve;n để cắt b&aacute;nh su kem th&agrave;nh h&igrave;nh tr&ograve;n, k&iacute;ch thước ph&ugrave; hợp với khu&ocirc;n mặt Doraemon. Bạn c&oacute; thể d&ugrave;ng dao để chỉnh sửa cho đều v&agrave; mịn.<br />
+                - Lấy kem tươi trắng để phủ to&agrave;n bộ bề mặt b&aacute;nh, d&ugrave;ng th&igrave;a để l&agrave;m cho kem phẳng v&agrave; đều.<br />
+                - Đặt b&aacute;nh l&ecirc;n dĩa, để trong tủ lạnh khoảng 15 ph&uacute;t cho kem đ&ocirc;ng lại.</span></p>
+
+                <p><span style="font-size:16px">Bước 3: Trang tr&iacute; b&aacute;nh<br />
+                - Lấy kem tươi xanh l&aacute; c&acirc;y để vẽ mũi v&agrave; cổ &aacute;o Doraemon. Bạn c&oacute; thể d&ugrave;ng t&uacute;i nhỏ để vẽ cho dễ.<br />
+                - Lấy kem tươi đỏ để vẽ miệng v&agrave; chu&ocirc;ng Doraemon. Bạn c&oacute; thể d&ugrave;ng dao để cắt miệng theo h&igrave;nh chữ nhật cong, sau đ&oacute; d&ugrave;ng kem tươi đỏ để phủ l&ecirc;n. Để chu&ocirc;ng Doraemon v&agrave;o giữa cổ &aacute;o, d&ugrave;ng kem tươi đỏ để vẽ chi tiết.<br />
+                - Lấy socola trắng để vẽ mắt v&agrave; r&acirc;u Doraemon. Bạn c&oacute; thể d&ugrave;ng khu&ocirc;n tr&ograve;n nhỏ để cắt socola trắng th&agrave;nh h&igrave;nh tr&ograve;n, sau đ&oacute; d&ugrave;ng socola chảy để vẽ đồng tử. D&ugrave;ng socola chảy để vẽ r&acirc;u Doraemon theo &yacute; th&iacute;ch.<br />
+                - Đặt b&aacute;nh v&agrave;o tủ lạnh khoảng 15 ph&uacute;t cho kem v&agrave; socola đ&ocirc;ng lại.</span></p>
+                ',
+                'hinhanh' => 'DOREMON-36.png',
+                'loaisanpham_id' => 2,
+                'giatien' => 600000,
+                'trangthai' => 1
+            ]
+        );
+        Sanpham::create(
+            [
                 'tensp' => 'Bánh Kem Sữa Tươi Vani STV01',
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
@@ -455,6 +485,36 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV05',
+                'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
+
+                <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
+
+                <p>- B&aacute;nh b&ocirc;ng lan: bạn c&oacute; thể mua sẵn hoặc tự l&agrave;m theo c&ocirc;ng thức của ch&uacute;ng t&ocirc;i.<br />
+                - Sữa tươi: n&ecirc;n chọn loại sữa tươi c&oacute; độ b&eacute;o cao để kem c&oacute; độ đặc v&agrave; b&eacute;o hơn.<br />
+                - Kem tươi: n&ecirc;n chọn loại kem tươi kh&ocirc;ng đường để c&oacute; thể điều chỉnh độ ngọt theo &yacute; th&iacute;ch.<br />
+                - Đường: để l&agrave;m kem v&agrave; phết l&ecirc;n b&aacute;nh b&ocirc;ng lan.<br />
+                - Vani: để tạo hương vị cho kem. Bạn c&oacute; thể d&ugrave;ng vani tinh khiết hoặc vani hạt.<br />
+                - Trang tr&iacute;: bạn c&oacute; thể d&ugrave;ng c&aacute;c loại tr&aacute;i c&acirc;y, kẹo, socola... để trang tr&iacute; b&aacute;nh theo sở th&iacute;ch.</p>
+
+                <p>C&aacute;c bước l&agrave;m b&aacute;nh kem sữa tươi vani như sau:</p>
+
+                <p>- Bước 1: Cắt b&aacute;nh b&ocirc;ng lan th&agrave;nh 3 lớp mỏng, phết đường nước l&ecirc;n mỗi lớp để b&aacute;nh ẩm v&agrave; ngọt hơn.<br />
+                - Bước 2: Đ&aacute;nh kem tươi c&ugrave;ng với đường v&agrave; vani cho đến khi kem đặc v&agrave; c&oacute; độ cứng vừa phải. Bạn c&oacute; thể kiểm tra bằng c&aacute;ch lấy một muỗng kem v&agrave; &uacute;p ngược, nếu kem kh&ocirc;ng rơi xuống l&agrave; được.<br />
+                - Bước 3: Lấy một lớp b&aacute;nh b&ocirc;ng lan, phết một lớp kem l&ecirc;n tr&ecirc;n, rồi đặt lớp b&aacute;nh tiếp theo l&ecirc;n. Lặp lại qu&aacute; tr&igrave;nh n&agrave;y cho đến khi hết b&aacute;nh. Phết kem l&ecirc;n to&agrave;n bộ bề mặt v&agrave; cạnh của b&aacute;nh.<br />
+                - Bước 4: Trang tr&iacute; b&aacute;nh theo &yacute; th&iacute;ch. Bạn c&oacute; thể d&ugrave;ng c&aacute;c loại tr&aacute;i c&acirc;y như d&acirc;u, kiwi, xo&agrave;i... để tạo m&agrave;u sắc v&agrave; hương vị cho b&aacute;nh. Hoặc bạn c&oacute; thể d&ugrave;ng kẹo, socola, hạt... để tạo điểm nhấn cho b&aacute;nh. Để b&aacute;nh v&agrave;o tủ lạnh khoảng 2 tiếng để kem cứng lại v&agrave; b&aacute;nh ngấm kem.<br />
+                - Bước 5: Thưởng thức b&aacute;nh kem sữa tươi vani ngon l&agrave;nh c&ugrave;ng gia đ&igrave;nh v&agrave; bạn b&egrave;.</p>
+
+                <p>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngon v&agrave; dễ l&agrave;m. Bạn c&oacute; thể tự tay l&agrave;m cho những người th&acirc;n y&ecirc;u của m&igrave;nh để thể hiện t&igrave;nh cảm v&agrave; sự quan t&acirc;m. Ch&uacute;c bạn th&agrave;nh c&ocirc;ng v&agrave; vui vẻ với b&aacute;nh kem sữa tươi vani nh&eacute;!</p>
+                ',
+                'hinhanh' => 'KEMTUOI-352.png',
+                'loaisanpham_id' => 4,
+                'giatien' => 455000,
+                'trangthai' => 1
+            ]
+        );
+        Sanpham::create(
+            [
                 'tensp' => 'Bánh Kem SOCOLA SC01',
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
@@ -532,6 +592,27 @@ class SanphamSeeder extends Seeder
                 <p><span style="font-size:16px">B&aacute;nh kem hương socola đ&atilde; ho&agrave;n th&agrave;nh! Bạn c&oacute; thể thưởng thức ngay hoặc để trong tủ lạnh cho đến khi d&ugrave;ng. B&aacute;nh kem hương socola l&agrave; m&oacute;n tr&aacute;ng miệng l&yacute; tưởng cho c&aacute;c dịp sinh nhật, tiệc t&ugrave;ng hay chỉ đơn giản l&agrave; để chi&ecirc;u đ&atilde;i gia đ&igrave;nh v&agrave; bạn b&egrave;. Ch&uacute;c bạn th&agrave;nh c&ocirc;ng v&agrave; ngon miệng với b&aacute;nh kem hương socola!</span></p>
                 ',
                 'hinhanh' => 'SOCOLA-S04.png',
+                'loaisanpham_id' => 3,
+                'giatien' => 425000,
+                'trangthai' => 1
+            ]
+        );
+        Sanpham::create(
+            [
+                'tensp' => 'Bánh Kem SOCOLA SC05',
+                'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
+
+                <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
+                - Bước 2: Đ&aacute;nh trứng trong một b&aacute;t nhỏ. Th&ecirc;m bơ n&oacute;ng chảy v&agrave; sữa v&agrave;o trứng v&agrave; khuấy đều.<br />
+                - Bước 3: Cho hỗn hợp trứng v&agrave;o b&aacute;t bột m&igrave; v&agrave; khuấy nhẹ cho đến khi hỗn hợp đồng nhất. Kh&ocirc;ng n&ecirc;n khuấy qu&aacute; nhiều để b&aacute;nh kh&ocirc;ng bị cứng.<br />
+                - Bước 4: Đổ hỗn hợp b&aacute;nh v&agrave;o một khu&ocirc;n nướng đ&atilde; được b&ocirc;i dầu hoặc l&oacute;t giấy nến. Phẳng mặt b&aacute;nh v&agrave; rắc &iacute;t socola l&ecirc;n tr&ecirc;n.<br />
+                - Bước 5: Nướng b&aacute;nh trong l&ograve; n&oacute;ng 180 độ C trong khoảng 25-30 ph&uacute;t hoặc cho đến khi b&aacute;nh ch&iacute;n v&agrave;ng. Kiểm tra bằng c&aacute;ch chọc một que gỗ v&agrave;o giữa b&aacute;nh, nếu que kh&ocirc;ng d&iacute;nh th&igrave; b&aacute;nh đ&atilde; ch&iacute;n.<br />
+                - Bước 6: Lấy b&aacute;nh ra khỏi l&ograve; v&agrave; để nguội ho&agrave;n to&agrave;n tr&ecirc;n một gi&aacute;. Cắt b&aacute;nh th&agrave;nh c&aacute;c miếng vừa ăn.<br />
+                - Bước 7: Đ&aacute;nh kem tươi với &iacute;t đường cho đến khi kem d&agrave;y v&agrave; c&oacute; độ cứng vừa phải. B&ocirc;i kem l&ecirc;n mặt v&agrave; viền của c&aacute;c miếng b&aacute;nh. Trang tr&iacute; th&ecirc;m với socola hoặc c&aacute;c loại hạt kh&aacute;c theo &yacute; th&iacute;ch.</span></p>
+
+                <p><span style="font-size:16px">B&aacute;nh kem hương socola đ&atilde; ho&agrave;n th&agrave;nh! Bạn c&oacute; thể thưởng thức ngay hoặc để trong tủ lạnh cho đến khi d&ugrave;ng. B&aacute;nh kem hương socola l&agrave; m&oacute;n tr&aacute;ng miệng l&yacute; tưởng cho c&aacute;c dịp sinh nhật, tiệc t&ugrave;ng hay chỉ đơn giản l&agrave; để chi&ecirc;u đ&atilde;i gia đ&igrave;nh v&agrave; bạn b&egrave;. Ch&uacute;c bạn th&agrave;nh c&ocirc;ng v&agrave; ngon miệng với b&aacute;nh kem hương socola!</span></p>
+                ',
+                'hinhanh' => 'SOCOLA-120.png',
                 'loaisanpham_id' => 3,
                 'giatien' => 425000,
                 'trangthai' => 1

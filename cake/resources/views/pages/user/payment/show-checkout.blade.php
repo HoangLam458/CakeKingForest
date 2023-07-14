@@ -162,7 +162,7 @@
                                         <br> {{ $item->s_name }}
                                     </div>
                                     <div class="col-md-3">
-                                        {{ number_format($item->giaban) }} VND
+                                        {{ number_format($item->giabanh) }} VND
                                     </div>
                                     <div class="col-md-3 text-center">
                                         {{ $item->soluong }}

@@ -232,7 +232,7 @@
     <header>
         <script language="JavaScript" type="text/javascript">
             function checkDelete() {
-                return confirm('Bạn có chắc chắn muốn xóa?');
+                return confirm('Bạn có chắc chắn muốn ngưng bán sản phẩm này ?');
             }
         </script>
     </header>

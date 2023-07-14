@@ -16,7 +16,7 @@ class SizeSeeder extends Seeder
             [
                 'tensize' => '17cm x 7cm',
                 'phantram' => 0,
-                'trangthai'=> 1,
+                
             ]
         );
 
@@ -24,7 +24,7 @@ class SizeSeeder extends Seeder
             [
                 'tensize' => '29cm x 7cm',
                 'phantram' => 5,
-                'trangthai'=> 1,
+
             ]
         );
 
@@ -32,7 +32,6 @@ class SizeSeeder extends Seeder
             [
                 'tensize' => '39cm x 7cm',
                 'phantram' => 10,
-                'trangthai'=> 1,
             ]
         );
     }

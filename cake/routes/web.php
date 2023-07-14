@@ -20,6 +20,7 @@ use App\Models\hoadon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -54,7 +55,7 @@ Route::get("/sendcontact", function(Illuminate\Http\Request $request){
         'tieude' =>trim(strip_tags( $arr['td'] )),
     ];
     $adminEmail = 'lamhoangtruong202@gmail.com'; //Gửi thư đến ban quản trị
-    \Illuminate\Support\Facades\Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
+    Mail::mailer('smtp')->to( $adminEmail )->send(new Contact($lienhe));
     Session::put('sendct',1);
     return redirect()->route('contact');
   })->name('sendcontact');
@@ -90,6 +91,7 @@ Route::post('/momoQR_payment', [PaymentController::class, 'momo_payment_qr'])->n
 Route::post('/momoATM_payment', [PaymentController::class, 'momo_payment'])->name('momoATM');
 
 Route::post('/show-checkout', [PaymentController::class, 'getdata'])->name('getdata');
+Route::get('/cancel/{id?}', [HoadonController::class, 'update_status_cancel'])->name('cancel');
 
 Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
     $currentTime = Carbon::now();
@@ -127,7 +129,7 @@ Route::get('send-mail-momo/{emailpay?}', function ($emailpay) {
                 'phuongthuc' => "MoMo",
                 'total' => $_GET['amount']
             ];
-            \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+            Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
             Session::put('resultCode', $_GET["resultCode"]);
             return redirect()->route('paymant_success');
         }
@@ -166,7 +168,7 @@ Route::get('send-mail-vnp/{emailpay?}', function ($emailpay) {
             'phuongthuc' => "VNPAY",
             'total' => $_GET['vnp_Amount'] / 100
         ];
-        \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+        Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
         return redirect()->route('paymant_success');
     }
 });
@@ -183,7 +185,7 @@ Route::get('send-mail/{emailpay?}', function ($emailpay) {
         'phuongthuc' => Session::pull('pttt'),
         'total' => Session::get('data')['total']
     ];
-    \Illuminate\Support\Facades\Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
+    Mail::to((string) $emailpay)->send(new \App\Mail\SendEmailPay($details));
     return redirect()->route('paymant_success');
 
 })->name('sendemailpay');

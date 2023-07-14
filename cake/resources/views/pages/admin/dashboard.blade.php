@@ -87,7 +87,7 @@
                             <div class="col-7 col-md-12">
                                 <div class="numbers">
                                     <p class="card-category">Đơn chờ duyệt</p>
-                                    <p class="card-title">{{ Session::get('chart')[0]['hd_pending']}}
+                                    <p class="card-title">{{ Session::get('chart')[0]['hd_pending'] }}
                                     </p>
                                 </div>
                             </div>
@@ -185,9 +185,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="dropdown dropright">
-                                    <button style="margin-top: 14;" class="btn btn-primary  dropdown-toggle" type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
+                                    <button style="margin-top: 14;" class="btn btn-primary  dropdown-toggle"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
                                         Lọc theo
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -311,118 +311,117 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
 
+        new Morris.Area({
+            element: 'myfirstchart',
+            hideHover: 'auto',
+            fillOpacity: 0.3,
+            parseTime: false,
+            data: [
+                @foreach ($chart_data as $sale)
+                    {
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+                        'date': '{{ \Carbon\Carbon::parse($sale->ngaylaphd)->format('d/m/Y') }} ',
+                        'amount': '{{ $sale->thanhtien }}'
+                    },
+                @endforeach
+            ],
+            xkey: 'date',
+            ykeys: ['amount'],
+            behaveLikeLine: true,
+            labels: ['Doanh thu'],
 
-            new Morris.Area({
-                element: 'myfirstchart',
-                hideHover: 'auto',
-                fillOpacity: 0.3,
-                parseTime: false,
-                data: [
-                    @foreach ($chart_data as $sale)
-                        {
-
-                            'date': '{{ \Carbon\Carbon::parse($sale->ngaylaphd)->format('d/m/Y') }} ',
-                            'amount': '{{ $sale->thanhtien }}'
-                        },
-                    @endforeach
-                ],
-                xkey: 'date',
-                ykeys: ['amount'],
-                behaveLikeLine: true,
-                labels: ['Doanh thu'],
-
-            });
-            var colorDanger = "#FF1744";
-            Morris.Donut({
-                element: 'donut-example',
-                resize: true,
-                colors: [
-                    '#E0F7FA',
-                    '#B2EBF2',
-                    '#80DEEA',
-                    '#4DD0E1',
-                    '#26C6DA',
-                    '#00BCD4',
-                    '#00ACC1',
-                    '#0097A7',
-                    '#00838F',
-                    '#006064'
-                ],
-                labelColor: "#0c0d0d", // text color
-                data: [
-                    @foreach ($countCate as $sale)
-                        {
-                            'label': '{{ $sale->tenlsp }} ',
-                            'value': '{{ $sale->count }}'
-                        },
-                    @endforeach
-                ],
-            });
-            Morris.Bar({
-                element: 'bar-example',
-                data: [
-                    @foreach ($product as $sale)
-                        {
-                            'label': '{{ $sale->tensanpham }} ',
-                            'value': '{{ $sale->count }}'
-                        },
-                    @endforeach
-                ],
-                xkey: 'label',
-                ykeys: ['value'],
-                labels: ['Số lượng']
-            });
-        })
-    </script>
-    <script>
-        $(function() {
-            $("#datepicker").datepicker({
-                prevText: "Tháng trước",
-                nextText: "Tháng trước",
-                dateFormat: "dd-mm-yy",
-                dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
-                duration: 'slow'
-            });
-            $("#datepicker2").datepicker({
-                prevText: "Tháng trước",
-                nextText: "Tháng trước",
-                dateFormat: "dd-mm-yy",
-                dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
-                duration: 'slow'
-            });
         });
-    </script>
-    <script>
-        function submitForm2() {
-            let form = document.getElementById("form__submit2");
-            form.submit();
-        }
-    </script>
-    <script>
-        function submitForm3() {
-            let form = document.getElementById("form__submit3");
-            form.submit();
-        }
-    </script>
-    <script>
-        function submitForm4() {
-            let form = document.getElementById("form__submit4");
-            form.submit();
-        }
-    </script>
-    <script>
-        function submitForm5() {
-            let form = document.getElementById("form__submit5");
-            form.submit();
-        }
-    </script>
-
+        var colorDanger = "#FF1744";
+        Morris.Donut({
+            element: 'donut-example',
+            resize: true,
+            colors: [
+                '#E0F7FA',
+                '#B2EBF2',
+                '#80DEEA',
+                '#4DD0E1',
+                '#26C6DA',
+                '#00BCD4',
+                '#00ACC1',
+                '#0097A7',
+                '#00838F',
+                '#006064'
+            ],
+            labelColor: "#0c0d0d", // text color
+            data: [
+                @foreach ($countCate as $sale)
+                    {
+                        'label': '{{ $sale->tenlsp }} ',
+                        'value': '{{ $sale->count }}'
+                    },
+                @endforeach
+            ],
+        });
+        Morris.Bar({
+            element: 'bar-example',
+            data: [
+                @foreach ($product as $sale)
+                    {
+                        'label': '{{ $sale->tensanpham }} ',
+                        'value': '{{ $sale->count }}'
+                    },
+                @endforeach
+            ],
+            xkey: 'label',
+            ykeys: ['value'],
+            labels: ['Số lượng']
+        });
+    })
+</script>
+<script>
+    $(function() {
+        $("#datepicker").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng trước",
+            dateFormat: "dd-mm-yy",
+            dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
+            duration: 'slow'
+        });
+        $("#datepicker2").datepicker({
+            prevText: "Tháng trước",
+            nextText: "Tháng trước",
+            dateFormat: "dd-mm-yy",
+            dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"],
+            duration: 'slow'
+        });
+    });
+</script>
+<script>
+    function submitForm2() {
+        let form = document.getElementById("form__submit2");
+        form.submit();
+    }
+</script>
+<script>
+    function submitForm3() {
+        let form = document.getElementById("form__submit3");
+        form.submit();
+    }
+</script>
+<script>
+    function submitForm4() {
+        let form = document.getElementById("form__submit4");
+        form.submit();
+    }
+</script>
+<script>
+    function submitForm5() {
+        let form = document.getElementById("form__submit5");
+        form.submit();
+    }
+</script>
+@endpush

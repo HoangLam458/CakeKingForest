@@ -34,6 +34,7 @@ class SizeController extends Controller
         Size::create([
             'tensize'=> $request['tensize'],
             'phantram'=> $request['phantram'],
+          
         ]);
         return redirect()->route('size.index')->with('status','Thêm kích thước thành công');
     }

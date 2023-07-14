@@ -43,7 +43,7 @@
                                     <button type="submit" class="btn btn-primary me-1 mb-1"
                                         onclick="return checkUpdate()">Xác nhận</button>
                                     <button onclick="location.reload();" type="reset"
-                                        class="btn btn-secondary me-1 mb-1">Reset</button>
+                                        class="btn btn-secondary me-1 mb-1">Nhập lại</button>
                                 </div>
                         </div>
                         </form>

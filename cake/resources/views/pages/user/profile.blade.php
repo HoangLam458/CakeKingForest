@@ -181,7 +181,7 @@
                                             </svg>
                                         </a>
                                         @if($item->trangthai == 1)
-                                        <a href="{{ route('invoice.status.cancel', $item->id) }}" type="button"
+                                        <a href="{{ route('cancel', $item->id) }}" type="button"
                                             class="btn btn-danger" onclick="return checkDelete()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
