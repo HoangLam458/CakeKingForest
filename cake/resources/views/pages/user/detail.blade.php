@@ -34,16 +34,15 @@
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3>{{ $sanpham->tensp }}</h3>
                     <p class="price"><span>{{ number_format($sanpham->giatien) }} VND</span></p>
-                    @if ($cate->tenloaisp == 'Bánh Kem In Hình')
+                    {{-- @if ($cate->tenloaisp == 'Bánh Kem In Hình')
                      <a class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#Modal3"
                     style="color: rgb(8, 8, 8);">
-                    Liên hệ với admin
+                    Liên hệ với admin --}}
+
                 </a>
-                    @else
                     <div class="row mt-4 col-md-12">
                         <label for="size" style="font-size: 18px">Kích thước: </label>
                         <div class="col-md-8">
-
                             <div class="form-group d-flex">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -57,7 +56,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="w-100"></div>
                         <label for="quantity" style="font-size: 18px">Số lượng: </label>
                         <div class="form-group col-md-6 d-flex mb-6">
@@ -77,7 +75,7 @@
                         <div class="w-100"></div>
                     </div>
                     <p><a href="#" class="btn btn-black py-3 px-5" onclick="submitForm()">Thêm vào giỏ hàng</a></p>
-                    @endif
+
 
                 </div>
                 <div>

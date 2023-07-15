@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -46,6 +47,8 @@ class CartController extends Controller
                 ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
                 ->select(
                     '*',
+                    'sanphams.inanh as custom',
+                    'chitiethoadons.inanh as inanhct',
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
@@ -92,6 +95,7 @@ class CartController extends Controller
                 ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
                 ->select(
                     '*',
+                    'sanphams.inanh as custom',
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
@@ -550,6 +554,13 @@ class CartController extends Controller
                         }
                     }
                 }
+            }
+            if ($request->hasFile('cat_image')) {
+                $file = $request->file('cat_image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('inanh/', $filename);
+                $chitiet->inanh = $filename;
             }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');

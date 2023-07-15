@@ -155,14 +155,23 @@
                                         </div>
                                     </td>
                                     <td>
+                                        @if ($lsCart->custom == 0)
+                                        <span>Không hỗ trợ</span>
+                                        @else
                                         <div class="col">
-                                            <img src="#" id="category-img-tag" width="70px" />
+                                            <img src="{{ asset('/inanh/' . $lsCart->inanhct) }}" id="category-img-tag" width="70px" />
                                             <!--for preview purpose -->
-                                            <input id="cat_image" type="file" class="form-control" id="inputpic" name="cat_image" hidden>
-                                            <button id="selectpic">Select File</button>
+                                            <input id="cat_image" type="file" class="form-control inputpic" name="cat_image" hidden>
+                                            <a id="" class="selectpic">
+                                                <span style="color: red">
+                                                    <u>Chọn ảnh</u>
+                                                </span>
+                                            </a>
                                         </div>
+                                        @endif
                                     </td>
-                                    <td><button id="submit" type="submit" class="btn btn-primary">
+                                    <td>
+                                        <button id="submit" type="submit" class="btn btn-primary">
                                             <span style="font-size: 15px">Cập nhật</span>
                                     </td>
                                 </tr>
@@ -210,6 +219,7 @@
     </div>
     @endif
     </div>
+
 </section>
 
 
@@ -275,8 +285,8 @@
     }
 </script>
 <script>
-$('#selectpic').on('click', function(){
-    $('#inputpic').trigger('click');
+    $('.selectpic').on('click', function(){
+    $('.inputpic').trigger('click');
 });
 </script>
 <script>
@@ -292,6 +302,7 @@ $('#selectpic').on('click', function(){
     }
 
     $("#cat_image").change(function () {
+
         readURL(this);
     });
 

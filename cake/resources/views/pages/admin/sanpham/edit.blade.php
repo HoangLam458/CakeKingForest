@@ -91,8 +91,21 @@
                                                 </span>
                                                 @endif
                                             </div>
+                                            <div class="form-group">
+                                                <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
+                                                <select name="ship" id="ship" class="form-control">
+                                                    <option required value="1">
+                                                        Có thể in ảnh trên bánh
+                                                    </option>
+                                                    <option required value="0">
+                                                       Không thể in ảnh trên bánh
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
+
 
                                     <div class="col-md col-12">
                                         <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">

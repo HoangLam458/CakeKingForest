@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('mota');
             $table->string('hinhanh',255);
             $table->unsignedInteger('giatien');
+            $table->integer('inanh');
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();
