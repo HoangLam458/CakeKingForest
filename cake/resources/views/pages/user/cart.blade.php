@@ -20,7 +20,9 @@
         margin-right: -120px;
         margin-left: -120px;
     }
-
+    input {
+    display: none;
+}
 </style>
 @section('body')
 @include('sweetalert::alert')
@@ -84,6 +86,7 @@
                                 <th class="col-mr-6">Số lượng</th>
                                 <th>Thành tiền</th>
                                 <th>Ghi chú</th>
+                                <th>In ảnh</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -110,8 +113,8 @@
                                         </div>
                                     </td>
                                     <td class="product-name">
-                                        <a  href="{{ route('shop.detail', $lsCart->id_sp) }}">
-                                        <h3>{{ $lsCart->tensanpham }}</h3>
+                                        <a href="{{ route('shop.detail', $lsCart->id_sp) }}">
+                                            <h3>{{ $lsCart->tensanpham }}</h3>
                                         </a>
                                     </td>
                                     <td class="price">
@@ -148,10 +151,18 @@
                                     <td class="total">
                                         <div>
                                             <textarea rows="3" maxlength="255" type="text" name="ghichu"
-                                            placeholder="Họ tên hoặc ngày tháng năm sinh,......">{{ $lsCart->ghichu }}</textarea>
+                                                placeholder="Họ tên hoặc ngày tháng năm sinh,......">{{ $lsCart->ghichu }}</textarea>
                                         </div>
                                     </td>
-                                    <td><button type="submit" class="btn btn-primary">
+                                    <td>
+                                        <div class="col">
+                                            <img src="#" id="category-img-tag" width="70px" />
+                                            <!--for preview purpose -->
+                                            <input id="cat_image" type="file" class="form-control" id="inputpic" name="cat_image" hidden>
+                                            <button id="selectpic">Select File</button>
+                                        </div>
+                                    </td>
+                                    <td><button id="submit" type="submit" class="btn btn-primary">
                                             <span style="font-size: 15px">Cập nhật</span>
                                     </td>
                                 </tr>
@@ -216,6 +227,7 @@
             todayHighlight: true
         }).datepicker('update', new Date());
     });
+
 </script>
 <script type="text/javascript">
     $(function () {
@@ -261,6 +273,27 @@
         let form = document.getElementById("form__submit");
         form.submit();
     }
+</script>
+<script>
+$('#selectpic').on('click', function(){
+    $('#inputpic').trigger('click');
+});
+</script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#category-img-tag').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#cat_image").change(function () {
+        readURL(this);
+    });
 
 </script>
 <header>

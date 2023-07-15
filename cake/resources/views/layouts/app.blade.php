@@ -54,8 +54,8 @@ The above copyright notice and this permission notice shall be included in all c
     @endguest
 
     <!--   Core JS Files   -->
-
     <script src="{{ asset('paper') }}/js/core/jquery.min.js"></script>
+    <script src="{{ asset('paper') }}/js/core/jquery-2.1.3.js"></script>
     <script src="{{ asset('paper') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('paper') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('paper') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>

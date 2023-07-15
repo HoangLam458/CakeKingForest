@@ -12,10 +12,12 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Symfony\Component\HttpFoundation\Request;
 use Termwind\Components\BreakLine;
 use RealRashid\SweetAlert\Facades\Alert;
+use TheSeer\Tokenizer\Exception;
 
 class SanphamController extends Controller
 {
@@ -121,10 +123,10 @@ class SanphamController extends Controller
         $sanpham->giatien = $request->get('giatien');
         $sanpham->loaisanpham_id = $request->get('loaisanpham_id');
         if ($request->hasFile('image')) {
-            $destination = 'images/' . $sanpham->hinhanh;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
+                $destination = 'images/'.$sanpham->hinhanh;
+                if (file_exists($destination)) {
+                    File::delete($destination);
+                }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;

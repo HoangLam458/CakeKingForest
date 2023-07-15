@@ -26,19 +26,24 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
+                                    <div class="mb-3 {{ $errors->has('image') ? ' has-danger' : '' }}">
                                         <label class="form-label" for="inputImage" style="font-size: 15px">Ảnh Bánh</label>
                                         <br>
-                                        <img width="150px" height="120px" class=""
-                                            src="{{asset('/images/'.$sanpham->hinhanh)}}" alt="">
+                                        <div style="text-align:center">
+                                            <img id="img-preview" src="{{asset('/images/'.$sanpham->hinhanh)}}" width="150px" height="120px"/>
+                                            </div>
                                         <div class="mb-3">
                                             <br>
-                                            <input type="file" name="image" id="inputImage"
-                                                class="form-control @error('image') is-invalid @enderror">
-                                            @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            <input accept="image/*" type="file" id="file-input" name="image"
+                                                class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}"/>
+                                            @if ($errors->has('image'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('image') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
+</div>
                                     <div class="column col-md-6">
                                         <div class="col-md ">
                                             <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
@@ -128,6 +133,18 @@
         }
 
     </script>
+    <script>
+    const input = document.getElementById('file-input');
+    const image = document.getElementById('img-preview');
+
+    input.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            const src = URL.createObjectURL(e.target.files[0]);
+            image.src = src;
+        }
+    });
+
+</script>
      <script language='javascript'>
 
         function isNumberKey(evt)

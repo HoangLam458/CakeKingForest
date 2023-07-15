@@ -25,6 +25,7 @@ class UpdatesanphamRequest extends FormRequest
             'tensp'=>'required|min:15|max:255|unique:sanphams,tensp,'.$this->id,
             'mota'=>['required','min:50'],
             'giatien'=> 'required|numeric|between:100000,2000000',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
         ];
     }
     public function messages(){
@@ -37,6 +38,9 @@ class UpdatesanphamRequest extends FormRequest
             'mota.min'=>'Độ dài mô tả tối thiểu 50 kí tự',
             'giatien.required'=>'Giá tiền không được bỏ trống',
             'giatien.between'=>'Giá tiền phải tối thiểu 100.000 và tối đa 2.000.000',
+            'image.image'=>'Định dạng hình ảnh phải là jpg,png,jpeg,gif,svg',
+            'image.dimensions'=>'Kích thước hình ảnh không hợp lệ.',
+            'image.max'=>'Hình ảnh không được lớn hơn 2048 kilobyte.'
         ];
     }
 }

@@ -25,7 +25,7 @@ class StoresanphamRequest extends FormRequest
             'tensp'=>['required','unique:sanphams,tensp','max:255','min:15',],
             'mota'=>['required','min:50'],
             'giatien'=> 'required|numeric|between:100000,2000000',
-            'image'=>['required']
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
         ];
     }
     public function messages(){
@@ -38,7 +38,10 @@ class StoresanphamRequest extends FormRequest
             'mota.min'=>'Độ dài mô tả tối thiểu 50 kí tự',
             'giatien.required'=>'Giá tiền không được bỏ trống',
             'giatien.between'=>'Giá tiền phải tối thiểu 100.000 và tối đa 2.000.000',
-            'image.required'=>'Chưa chọn ảnh bánh'
+            'image.required'=>'Chưa chọn ảnh bánh',
+            'image.image'=>'Định dạng hình ảnh phải là jpg,png,jpeg,gif,svg',
+            'image.dimensions'=>'Kích thước hình ảnh không hợp lệ.',
+            'image.max'=>'Hình ảnh không được lớn hơn 2048 kilobyte.'
         ];
     }
 }
