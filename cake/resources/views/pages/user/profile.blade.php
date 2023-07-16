@@ -172,7 +172,7 @@
                                     @endswitch
                                     <td class="col-2">
 
-                                        <a href="{{route('ctdonhang', $item->id)}}" type="button"
+                                        <a href="{{route('ctdonhang', $item->slug)}}" type="button"
                                             class="btn btn-secondary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">

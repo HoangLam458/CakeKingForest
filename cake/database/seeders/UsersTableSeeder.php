@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 2,
             'tenkhachhang' => 'Trương Hoàng Lâm',
+            'slug'=>'Trương Hoàng Lâm',
             'diachi' => '43 An Bình Phường 6 quận 5',
             'sdt' => '0348575810',
             'trangthai' => 1
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 2,
             'tenkhachhang' => 'Huỳnh Ngọc Hào',
+            'slug'=>'Huỳnh Ngọc Hào',
             'diachi' => '43 An Bình phường 6 quận 7',
             'sdt' => '0348563898',
             'trangthai' => 1
@@ -40,6 +42,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 1,
             'tenkhachhang' => 'Huỳnh Hào',
+            'slug'=>'Huỳnh Hào',
             'diachi' => '110 trần hưng đạo Quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1
@@ -49,6 +52,7 @@ class UsersTableSeeder extends Seeder
             'email' => '0306201458@caothang.edu.vn',
             'password' => Hash::make('123456'),
             'loai' => 1,
+            'slug'=>'Trương Lâm',
             'tenkhachhang' => 'Trương Lâm',
             'diachi' => '210 Huỳnh Mẫn Đạt Quận 5',
             'sdt' => '0348575810',
@@ -60,6 +64,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 0,
             'tenkhachhang' => 'Huỳnh Ánh Ngọc',
+            'slug'=>'Huỳnh Ánh Ngọc',
             'diachi' => '65 huỳnh thúc kháng quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1
@@ -69,6 +74,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 0,
             'tenkhachhang' => 'Huỳnh Ngọc Khoa',
+            'slug'=>'Huỳnh Ngọc Khoa',
             'diachi' => '65 huỳnh thúc kháng quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1
@@ -78,6 +84,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'loai' => 0,
             'tenkhachhang' => 'Huỳnh Ngọc Tuyết Như',
+            'slug'=>'Huỳnh Ngọc Tuyết Như',
             'diachi' => '65 huỳnh thúc kháng quận 1',
             'sdt' => '0348575810',
             'trangthai' => 1

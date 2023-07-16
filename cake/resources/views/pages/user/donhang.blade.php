@@ -80,7 +80,7 @@
                                 @break
                                 @endswitch
                                 <td>
-                                    <a href="{{route('ctdonhang', $hdf->id)}}" type="button" class="btn btn-secondary">
+                                    <a href="{{route('ctdonhang', $hdf->slug)}}" type="button" class="btn btn-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
@@ -96,7 +96,7 @@
                         </tbody>
                     </table>
                     <div class="pagination">
-                        {{  $hd->onEachSide(1)->links() }} 
+                        {{  $hd->onEachSide(1)->links() }}
                     </div>
                 </div>
             </div>

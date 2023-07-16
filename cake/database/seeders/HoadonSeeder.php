@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\hoadon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class HoadonSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class HoadonSeeder extends Seeder
         Hoadon::create(
             [
                 'mahd' => 'HD1XKF4',
+                'slug' => Str::slug('HD1XKF4'),
                 'ngaylaphd' => '2022-07-25',
                 'tenkhachhang' => 'Huỳnh Hào',
                 'diachigiaohang' => '64 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -29,7 +31,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD2PODA',
+                'mahd' => 'HD2PODA','slug' => Str::slug('HD2PODA'),
                 'ngaylaphd' => '2023-07-07',
                 'tenkhachhang' => 'Hoàng Lâm',
                 'diachigiaohang' => '43 An Bình P6, Quận 5, TP HCM',
@@ -44,7 +46,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD3KHCA',
+                'mahd' => 'HD3KHCA','slug' => Str::slug('HD3KHCA'),
                 'ngaylaphd' => '2023-07-07',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -59,7 +61,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD4KHF4',
+                'mahd' => 'HD4KHF4','slug' => Str::slug('HD4KHF4'),
                 'ngaylaphd' => '2023-07-07',
                 'tenkhachhang' => 'Hải',
                 'diachigiaohang' => '210 Huỳnh Mẫn Đạt Quận 5',
@@ -73,7 +75,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD5FD45',
+                'mahd' => 'HD5FD45','slug' => Str::slug('HD5FD45'),
                 'ngaylaphd' => '2023-07-01',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -88,7 +90,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD6GH55',
+                'mahd' => 'HD6GH55','slug' => Str::slug('HD6GH55'),
                 'ngaylaphd' => '2023-07-02',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -103,7 +105,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD7GHG5',
+                'mahd' => 'HD7GHG5','slug' => Str::slug('HD7GHG5'),
                 'ngaylaphd' => '2023-07-03',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -118,7 +120,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD8JHFD',
+                'mahd' => 'HD8JHFD','slug' => Str::slug('HD8JHFD'),
                 'ngaylaphd' => '2023-07-04',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -133,7 +135,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD9JFFD',
+                'mahd' => 'HD9JFFD','slug' => Str::slug('HD9JFFD'),
                 'ngaylaphd' => '2023-07-05',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -148,7 +150,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD10JFFD',
+                'mahd' => 'HD10JFFD','slug' => Str::slug('HD10JFFD'),
                 'ngaylaphd' => '2023-07-06',
                 'tenkhachhang' => 'Trần Bình',
                 'diachigiaohang' => '65 Huỳnh Thúc Kháng Quận 1, TP HCM',
@@ -163,7 +165,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD11KHCA',
+                'mahd' => 'HD11KHCA','slug' => Str::slug('HD11KHCA'),
                 'ngaylaphd' => '2023-07-07',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -178,7 +180,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD12KHCA',
+                'mahd' => 'HD12KHCA','slug' => Str::slug('HD12KHCA'),
                 'ngaylaphd' => '2023-06-29',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -193,7 +195,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD13KHCA',
+                'mahd' => 'HD13KHCA','slug' => Str::slug('HD13KHCA'),
                 'ngaylaphd' => '2023-06-30',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -208,7 +210,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD14K6GA',
+                'mahd' => 'HD14K6GA','slug' => Str::slug('HD14K6GA'),
                 'ngaylaphd' => '2023-06-28',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -223,7 +225,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD15K78A',
+                'mahd' => 'HD15K78A','slug' => Str::slug('HD15K78A'),
                 'ngaylaphd' => '2023-06-04',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',
@@ -238,7 +240,7 @@ class HoadonSeeder extends Seeder
         );
         Hoadon::create(
             [
-                'mahd' => 'HD16KHAA',
+                'mahd' => 'HD16KHAA','slug' => Str::slug('HD16KHAA'),
                 'ngaylaphd' => '2022-07-24',
                 'tenkhachhang' => 'Nguyễn Ngân',
                 'diachigiaohang' => '110 trần hưng đạo Quận 1',

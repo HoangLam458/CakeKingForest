@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phuongthucthanhtoan',20)->nullable();
             $table->string('magiaodich')->nullable();
             $table->integer('trangthai');
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
         });
