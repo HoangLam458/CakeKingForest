@@ -512,6 +512,12 @@ class CartController extends Controller
     // }
     public function updateqty($id, Request $request)
     {
+        $this->validate($request,[
+            'cat_image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+        ],
+        [
+            'cat_image'=>'Định dạng hình ảnh phải là jpg,png,jpeg,gif,svg',
+        ]);
         if (auth()->user() == null) {
             $code_cookie = $request->cookie('code');
             $hoadon = hoadon::where('mahd', $code_cookie)->first();

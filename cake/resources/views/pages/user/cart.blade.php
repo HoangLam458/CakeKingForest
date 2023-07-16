@@ -1,4 +1,5 @@
 @extends('pages.layout')
+
 <style>
     #datepicker {
         width: 100%;
@@ -42,6 +43,10 @@
     <div class="container">
         @if($errors->has('email')||$errors->has('tenkhachhang')||$errors->has('diachigiaohang')||$errors->has('sdtkhachhang')||$errors->has('date'))
       <h6 class="alert alert-warning"><span>Thông tin giao hàng không hợp lệ vui lòng kiểm tra lại  </span> <a class="close"
+                data-dismiss="alert">&times;</a></h6>
+        @endif
+        @if($errors->has('cat_image'))
+      <h6 class="alert alert-warning"><span>{{ $errors->first('cat_image') }}</span> <a class="close"
                 data-dismiss="alert">&times;</a></h6>
         @endif
         @if ($ls == null)
@@ -165,7 +170,7 @@
                                             <img src="{{ asset('/inanh/' . $lsCart->inanhct) }}" id="category-img-tag" width="70px" />
                                             <!--for preview purpose -->
                                         </br>
-                                            <input id="cat_image" type="file" class="form-control inputpic" name="cat_image" >
+                                            <input id="cat_image" accept="image/*" type="file" class="form-control inputpic" name="cat_image">
                                         </div>
                                         @endif
                                     </td>

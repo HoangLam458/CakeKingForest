@@ -3,6 +3,8 @@
     'elementActive' => 'user',
 ])
 <title>Cake King Forest - Tài khoản</title>
+
+@section('content')
 <header>
     <style>
         .pagination {
@@ -10,7 +12,6 @@
         }
     </style>
 </header>
-@section('content')
     <div class="content">
         <div class="row">
             <div class="col-md-12">
