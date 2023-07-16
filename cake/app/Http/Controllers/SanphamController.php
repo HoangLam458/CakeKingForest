@@ -28,7 +28,7 @@ class SanphamController extends Controller
     public function index()
     {
         $loaisanpham = loaisanpham::all();
-        $lsSanpham = Sanpham::Paginate(10);
+        $lsSanpham = Sanpham::orderBy('created_at','DESC')->Paginate(10);
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 

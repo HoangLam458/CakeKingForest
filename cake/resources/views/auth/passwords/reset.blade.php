@@ -23,7 +23,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="nc-icon nc-single-02"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus>
+                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus readonly>
                                 </div>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">

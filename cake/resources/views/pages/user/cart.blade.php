@@ -41,7 +41,7 @@
 <section class="ftco-section ftco-cart">
     <div class="container">
         @if($errors->has('email')||$errors->has('tenkhachhang')||$errors->has('diachigiaohang')||$errors->has('sdtkhachhang')||$errors->has('date'))
-        <h6 class="alert alert-warning">Thông tin giao hàng không hợp lệ vui lòng kiểm tra lại <a class="close"
+      <h6 class="alert alert-warning"><span>Thông tin giao hàng không hợp lệ vui lòng kiểm tra lại  </span> <a class="close"
                 data-dismiss="alert">&times;</a></h6>
         @endif
         @if ($ls == null)
@@ -170,8 +170,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button id="submit" type="submit" class="btn btn-primary">
-                                            <span style="font-size: 15px">Cập nhật</span>
+                                        <button id="submit" type="submit" class="btn btn-success">
+                                            <span style="font-size: 14px; color:white">Cập nhật</span>
                                     </td>
                                 </tr>
                             </form>
@@ -209,7 +209,7 @@
                 </div>
                 <div class="col-md-3 text-center">
                     <a class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#Modal3"
-                        style="color: rgb(8, 8, 8);">
+                        style="color: white">
                         Đặt hàng
                     </a>
                 </div>
