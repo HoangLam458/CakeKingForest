@@ -337,15 +337,16 @@
                                         <td class="col-1">
                                             <textarea name="ghichu" id="" cols="20" rows="5">{{ $item->ghichu }}</textarea></td>
                                             @if ($item->inanh == NULL)
-                                            <td class="col-2">
+                                            <td class="col-1">
                                             <span>Không hỗ trợ</span>
                                             </td>
                                             @else
 
-                                                <td class="col-2">
+                                                <td class="col-1" style="text-align: center">
                                                     <img width="150px" height="150px" src="{{ asset('/inanh/' . $item->inanh) }}"
                                                         alt="">
-                                                        <a href="{{ asset('inanh/' . $item->inanh)}}" target="_blank" download>Tải ảnh</a>
+                                                </br>
+                                                        <a  href="{{ asset('inanh/' . $item->inanh)}}" target="_blank" download>Tải ảnh</a>
                                                 </td>
 
                                             @endif

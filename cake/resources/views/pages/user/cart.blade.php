@@ -72,6 +72,9 @@
         </div>
         @else
         @include('pages.user.checkout')
+        <span style="color: red; font-size:18px">
+           <u> *Vui lòng nhấn cập nhật sau mỗi lần chỉnh sửa tại mỗi bánh!</u>
+        </span>
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="cart-list">
