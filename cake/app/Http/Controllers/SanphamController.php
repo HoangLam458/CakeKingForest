@@ -53,7 +53,7 @@ class SanphamController extends Controller
      */
     public function store(StoresanphamRequest $request)
     {
-
+        $count= sanpham::all()->count();
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
         $ex = sanpham::where('slug', Str::slug($request->input('tensp'), '-'))->exists();
