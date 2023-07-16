@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tenkhachhang',50);
             $table->text('diachi');
             $table->string('sdt',10);
+            $table->string('slug')->nullable();
             $table->integer('trangthai');
             $table->softDeletes();
             $table->timestamps();

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Symfony\Component\HttpFoundation\Request;
 use Termwind\Components\BreakLine;
@@ -34,7 +35,7 @@ class SanphamController extends Controller
     public function trash()
     {
         $loaisanpham = loaisanpham::all();
-        $lsSanpham = Sanpham::where('trangthai',0)->onlyTrashed()->Paginate(10);
+        $lsSanpham = Sanpham::where('trangthai', 0)->onlyTrashed()->Paginate(10);
         return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
@@ -55,6 +56,12 @@ class SanphamController extends Controller
 
         $sanphams = new sanpham;
         $sanphams->tensp = $request->input('tensp');
+        $ex = sanpham::where('slug', Str::slug($request->input('tensp'), '-'))->exists();
+        if (!$ex) {
+            $sanphams->slug = Str::slug($request->input('tensp'), '-');
+        } else {
+            $sanphams->slug = Str::slug($request->input('tensp'), '-') . $count;
+        }
         $sanphams->mota = $request->input('mota');
         $sanphams->giatien = $request->input('giatien');
         $sanphams->loaisanpham_id = $request->input('loaisanpham_id');
@@ -71,7 +78,7 @@ class SanphamController extends Controller
             $sanphams->hinhanh = 'Default.jpg';
         }
         $sanphams->save();
-        return redirect()->route('sanpham.index')->with('status','Thêm bánh thành công');
+        return redirect()->route('sanpham.index')->with('status', 'Thêm bánh thành công');
     }
 
     /**
@@ -81,7 +88,7 @@ class SanphamController extends Controller
     {
         if ($id) {
             $loaisanpham = loaisanpham::all();
-            $sanpham = Sanpham::where('id',$id)->withTrashed()->first();
+            $sanpham = Sanpham::where('id', $id)->withTrashed()->first();
             if ($sanpham) {
                 return view('pages.admin.sanpham.detail', [
                     'loaisanpham' => $loaisanpham,
@@ -118,16 +125,23 @@ class SanphamController extends Controller
      */
     public function update(UpdatesanphamRequest $request, $id)
     {
+        $count = sanpham::all()->count();
         $sanpham = Sanpham::find($id);
         $sanpham->tensp = $request->get('tensp');
+        $ex = sanpham::where('slug', Str::slug($request->input('tensp'), '-'))->exists();
+        if (!$ex) {
+            $sanpham->slug = Str::slug($request->input('tensp'), '-');
+        } else {
+            $sanpham->slug = Str::slug($request->input('tensp'), '-') . $count;
+        }
         $sanpham->mota = $request->get('mota');
         $sanpham->giatien = $request->get('giatien');
         $sanpham->loaisanpham_id = $request->get('loaisanpham_id');
         if ($request->hasFile('image')) {
-                $destination = 'images/'.$sanpham->hinhanh;
-                if (file_exists($destination)) {
-                    File::delete($destination);
-                }
+            $destination = 'images/' . $sanpham->hinhanh;
+            if (file_exists($destination)) {
+                File::delete($destination);
+            }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -147,10 +161,11 @@ class SanphamController extends Controller
     {
         $sanpham = sanpham::find($id);
         if ($sanpham) {
-            $sanpham->trangthai= 0;
+            $sanpham->trangthai = 0;
             $sanpham->save();
             $sanpham->delete();
-            return redirect()->back()->with('status', 'Xóa thành công');;
+            return redirect()->back()->with('status', 'Xóa thành công');
+            ;
         }
     }
 
@@ -162,22 +177,34 @@ class SanphamController extends Controller
         $lsloaisp = loaisanpham::all();
         $size = size::all();
         $lsSanpham = Sanpham::Paginate(12);
-        return response()->view('pages.user.shop',
-         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
-         'act'=>$act,'category'=>$category
-        ]);
+        return response()->view(
+            'pages.user.shop',
+            [
+                'lsSanpham' => $lsSanpham,
+                'lsloaisp' => $lsloaisp,
+                'size' => $size,
+                'act' => $act,
+                'category' => $category
+            ]
+        );
     }
     public function shop_category($id)
     {
         $category = loaisanpham::all();
-         $act = $id;
+        $act = $id;
         $lsSanpham = sanpham::where('loaisanpham_id', $id)->Paginate(12);
         $lsloaisp = loaisanpham::all();
         $size = size::all();
-        return response()->view('pages.user.shop',
-         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
-         'act'=>$act,'category'=>$category
-        ]);
+        return response()->view(
+            'pages.user.shop',
+            [
+                'lsSanpham' => $lsSanpham,
+                'lsloaisp' => $lsloaisp,
+                'size' => $size,
+                'act' => $act,
+                'category' => $category
+            ]
+        );
     }
 
     //tìm sản phẩm user
@@ -185,39 +212,46 @@ class SanphamController extends Controller
     {
         $act = 0;
         $key = $_GET['key'];
-        if(preg_match('/^\s*$/u', $key) == true)
-        return redirect()->route('shop');
+        if (preg_match('/^\s*$/u', $key) == true)
+            return redirect()->route('shop');
         $category = loaisanpham::all();
-        $lsSanpham = sanpham::Where('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(12)->withQueryString();
+        $lsSanpham = sanpham::Where('tensp', 'LIKE', "%$key%")->orWhere('mota', 'LIKE', "%$key%")->Paginate(12)->withQueryString();
         $lsloaisp = loaisanpham::all();
         $size = size::all();
-        if($lsSanpham->count()<=0){
+        if ($lsSanpham->count() <= 0) {
             alert()->error('Thông báo', 'Không tìm thấy sản phẩm!');
         }
-        return response()->view('pages.user.shop',
-         ['lsSanpham' => $lsSanpham, 'lsloaisp' => $lsloaisp, 'size' => $size,
-         'act'=>$act,'category'=>$category,
-        ]);
+        return response()->view(
+            'pages.user.shop',
+            [
+                'lsSanpham' => $lsSanpham,
+                'lsloaisp' => $lsloaisp,
+                'size' => $size,
+                'act' => $act,
+                'category' => $category,
+            ]
+        );
     }
 
-    public function detail($id)
+    public function detail($slug)
     {
+        $id = sanpham::where('slug', $slug)->value('id');
         if ($id) {
             $size = size::all();
             $loaisanpham = loaisanpham::all();
             $sanpham = Sanpham::find($id);
             if ($sanpham) {
-                $cate = loaisanpham::where('id',$sanpham->loaisanpham_id)->first();
-                $getrelate = Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get();
+                $cate = loaisanpham::where('id', $sanpham->loaisanpham_id)->first();
+                $getrelate = Sanpham::where('loaisanpham_id', $sanpham->loaisanpham_id)->where('id', '<>', $id)->get();
                 $count = $getrelate->count();
-                $relate= Sanpham::where('loaisanpham_id',$sanpham->loaisanpham_id)->where('id','<>',$id)->get()->random($count>4?4:$count);
+                $relate = Sanpham::where('loaisanpham_id', $sanpham->loaisanpham_id)->where('id', '<>', $id)->get()->random($count > 4 ? 4 : $count);
                 return view('pages.user.detail', [
                     'loaisanpham' => $loaisanpham,
                     'sanpham' => $sanpham,
                     'size' => $size,
-                    'relate' =>$relate,
-                    'category'=>$loaisanpham,
-                    'cate'=>$cate
+                    'relate' => $relate,
+                    'category' => $loaisanpham,
+                    'cate' => $cate
                 ]);
             }
             return redirect()->back();
@@ -227,8 +261,8 @@ class SanphamController extends Controller
     //lọc sản phẩm admin
     public function locloaisp()
     {
-        if($_GET['loaibanh']==null){
-            Session::put('select','Bạn chưa chọn loại bánh!');
+        if ($_GET['loaibanh'] == null) {
+            Session::put('select', 'Bạn chưa chọn loại bánh!');
             return redirect()->back();
         }
         $loaisanpham = loaisanpham::all();
@@ -240,47 +274,49 @@ class SanphamController extends Controller
     public function searchprad()
     {
         $key = $_GET['key'];
-        if(preg_match('/^\s*$/u', $key) == true)
-        return redirect()->route('sanpham.index');
+        if (preg_match('/^\s*$/u', $key) == true)
+            return redirect()->route('sanpham.index');
         $loaisanpham = loaisanpham::all();
-        $lsSanpham = sanpham::orWhere('tensp','LIKE',"%$key%")->orWhere('mota','LIKE',"%$key%")->Paginate(10)->withQueryString();
+        $lsSanpham = sanpham::orWhere('tensp', 'LIKE', "%$key%")->orWhere('mota', 'LIKE', "%$key%")->Paginate(10)->withQueryString();
         return view('pages.admin.sanpham.index', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
 
-        //lọc sản phẩm admin ngưng bán
-        public function locloaisptrash()
-        {
-            if($_GET['loaibanh']==null){
-                Session::put('select','Bạn chưa chọn loại bánh!');
-                return redirect()->back();
-            }
-            $loaisanpham = loaisanpham::all();
-            $loc = $_GET['loaibanh'];
-            $lsSanpham = sanpham::where('loaisanpham_id', $loc)->where('trangthai',0)->withTrashed()->Paginate(10)->withQueryString();
-            return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    //lọc sản phẩm admin ngưng bán
+    public function locloaisptrash()
+    {
+        if ($_GET['loaibanh'] == null) {
+            Session::put('select', 'Bạn chưa chọn loại bánh!');
+            return redirect()->back();
         }
+        $loaisanpham = loaisanpham::all();
+        $loc = $_GET['loaibanh'];
+        $lsSanpham = sanpham::where('loaisanpham_id', $loc)->where('trangthai', 0)->withTrashed()->Paginate(10)->withQueryString();
+        return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
+    }
 
-            //tìm sản phẩm admin ngưng bán
+    //tìm sản phẩm admin ngưng bán
     public function searchprtrash()
     {
         $key = $_GET['key'];
-        if(preg_match('/^\s*$/u', $key) == true) return redirect()->route('sanpham.trash');
+        if (preg_match('/^\s*$/u', $key) == true)
+            return redirect()->route('sanpham.trash');
         $loaisanpham = loaisanpham::all();
         $lsSanpham = sanpham::where('trangthai', 0)->where(function ($query) use ($key) {
-            $query->where('tensp','LIKE',"%$key%")
-                ->orWhere('mota','LIKE',"%$key%");
+            $query->where('tensp', 'LIKE', "%$key%")
+                ->orWhere('mota', 'LIKE', "%$key%");
         })->withTrashed()->Paginate(10)->withQueryString();
         return view('pages.admin.sanpham.trash', ['loaisanpham' => $loaisanpham, 'lsSanpham' => $lsSanpham]);
     }
-//khôi phục bánh thành trạng thái đang bán
+    //khôi phục bánh thành trạng thái đang bán
     public function restore($id)
     {
-        $sanpham =sanpham::where('id',$id)->onlyTrashed()->first();
+        $sanpham = sanpham::where('id', $id)->onlyTrashed()->first();
         if ($sanpham) {
-            $sanpham->trangthai= 1;
+            $sanpham->trangthai = 1;
             $sanpham->deleted_at = null;
             $sanpham->save();
-            return redirect()->back()->with('status', 'Khôi phục thành công');;
+            return redirect()->back()->with('status', 'Khôi phục thành công');
+            ;
         }
     }
 }

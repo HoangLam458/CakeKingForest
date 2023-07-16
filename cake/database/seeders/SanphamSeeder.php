@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Illuminate\Support\Str;
 
 use App\Models\sanpham;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -51,6 +52,7 @@ class SanphamSeeder extends Seeder
                 'loaisanpham_id' => 1,
                 'giatien' => 400000,
                 'inanh' => 1,
+                'slug' => Str::slug('Bánh Kem Bắp KB01', '-'),
                 'trangthai' => 1
             ]
         );
@@ -92,6 +94,7 @@ class SanphamSeeder extends Seeder
                 'loaisanpham_id' => 1,
                 'giatien' => 390000,
                 'inanh' => 1,
+                'slug' => Str::slug('Bánh Kem Bắp KB02', '-'),
                 'trangthai' => 1
             ]
         );
@@ -133,6 +136,7 @@ class SanphamSeeder extends Seeder
                 'loaisanpham_id' => 1,
                 'giatien' => 450000,
                 'inanh' => 1,
+                'slug' => Str::slug('Bánh Kem Bắp KB03', '-'),
                 'trangthai' => 1
             ]
         );
@@ -174,6 +178,8 @@ class SanphamSeeder extends Seeder
                 'loaisanpham_id' => 1,
                 'giatien' => 350000,
                 'inanh' => 1,
+                'slug' => Str::slug('Bánh Kem Bắp KB04', '-'),
+
                 'trangthai' => 1
             ]
         );
@@ -214,12 +220,16 @@ class SanphamSeeder extends Seeder
                 'hinhanh' => 'KEMBAP-BT79.png',
                 'loaisanpham_id' => 1,
                 'giatien' => 420000, 'inanh' => 1,
+                'slug' => Str::slug('Bánh Kem Bắp KB05', '-'),
+
                 'trangthai' => 1
             ]
         );
         Sanpham::create(
             [
                 'tensp' => 'BÁNH KEM DOREAMON DR01',
+                'slug' => Str::slug('BÁNH KEM DOREAMON DR01', '-'),
+
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
 
                 <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
@@ -249,7 +259,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'BÁNH KEM DOREAMON DR02',
+                'tensp' => 'BÁNH KEM DOREAMON DR02','slug' => Str::slug('BÁNH KEM DOREAMON DR02', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
 
                 <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
@@ -279,7 +289,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'BÁNH KEM DOREAMON DR03',
+                'tensp' => 'BÁNH KEM DOREAMON DR03','slug' => Str::slug('BÁNH KEM DOREAMON DR03', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
 
                 <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
@@ -309,7 +319,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'BÁNH KEM DOREAMON DR04',
+                'tensp' => 'BÁNH KEM DOREAMON DR04','slug' => Str::slug('BÁNH KEM DOREAMON DR04', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
 
                 <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
@@ -339,7 +349,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'BÁNH KEM DOREAMON DR05',
+                'tensp' => 'BÁNH KEM DOREAMON DR05','slug' => Str::slug('BÁNH KEM DOREAMON DR05', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem h&igrave;nh Doraemon l&agrave; một m&oacute;n qu&agrave; tuyệt vời cho những người y&ecirc;u th&iacute;ch nh&acirc;n vật hoạt h&igrave;nh nổi tiếng n&agrave;y. Bạn c&oacute; thể l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon tại nh&agrave; với những nguy&ecirc;n liệu đơn giản v&agrave; c&aacute;ch trang tr&iacute; dễ d&agrave;ng. Sau đ&acirc;y l&agrave; hướng dẫn chi tiết c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh Doraemon.</strong></span></p>
 
                 <p><span style="font-size:16px">Bước 1: Chuẩn bị nguy&ecirc;n liệu<br />
@@ -369,7 +379,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Sữa Tươi Vani STV01',
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV01','slug' => Str::slug('Bánh Kem Sữa Tươi Vani STV01', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
                 <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
@@ -399,7 +409,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Sữa Tươi Vani STV02',
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV02','slug' => Str::slug('Bánh Kem Sữa Tươi Vani STV02', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
                 <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
@@ -429,7 +439,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Sữa Tươi Vani STV03',
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV03','slug' => Str::slug('Bánh Kem Sữa Tươi Vani STV03', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
                 <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
@@ -459,7 +469,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Sữa Tươi Vani STV04',
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV04','slug' => Str::slug('Bánh Kem Sữa Tươi Vani STV04', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
                 <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
@@ -489,7 +499,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Sữa Tươi Vani STV05',
+                'tensp' => 'Bánh Kem Sữa Tươi Vani STV05','slug' => Str::slug('Bánh Kem Sữa Tươi Vani STV05', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem sữa tươi vani l&agrave; một loại b&aacute;nh ngọt rất phổ biến v&agrave; được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh c&oacute; lớp kem b&eacute;o ngậy, mềm mịn, thơm lừng m&ugrave;i vani, kết hợp với b&aacute;nh b&ocirc;ng lan xốp nhẹ, ẩm ướt. B&aacute;nh kem sữa tươi vani kh&ocirc;ng chỉ l&agrave; m&oacute;n tr&aacute;ng miệng ngon miệng, m&agrave; c&ograve;n l&agrave; m&oacute;n qu&agrave; &yacute; nghĩa cho những dịp đặc biệt như sinh nhật, kỷ niệm, lễ tết...</strong></span></p>
 
                 <p>Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem sữa tươi vani đơn giản v&agrave; dễ d&agrave;ng tại nh&agrave;. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</p>
@@ -520,7 +530,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem SOCOLA SC01',
+                'tensp' => 'Bánh Kem SOCOLA SC01','slug' => Str::slug('Bánh Kem SOCOLA SC01', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
                 <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
@@ -541,7 +551,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem SOCOLA SC02',
+                'tensp' => 'Bánh Kem SOCOLA SC02','slug' => Str::slug('Bánh Kem SOCOLA SC02', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
                 <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
@@ -562,7 +572,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem SOCOLA SC03',
+                'tensp' => 'Bánh Kem SOCOLA SC03','slug' => Str::slug('Bánh Kem SOCOLA SC03', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
                 <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
@@ -583,7 +593,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem SOCOLA SC04',
+                'tensp' => 'Bánh Kem SOCOLA SC04','slug' => Str::slug('Bánh Kem SOCOLA SC04', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
                 <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
@@ -604,7 +614,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem SOCOLA SC05',
+                'tensp' => 'Bánh Kem SOCOLA SC05','slug' => Str::slug('Bánh Kem SOCOLA SC05', '-'),
                 'mota' => '<p><span style="font-size:16px"><strong>B&aacute;nh kem hương socola l&agrave; một m&oacute;n tr&aacute;ng miệng ngon miệng v&agrave; dễ l&agrave;m. Bạn chỉ cần một số nguy&ecirc;n liệu đơn giản như bột m&igrave;, đường, trứng, bơ, sữa, socola v&agrave; kem tươi. Sau đ&acirc;y l&agrave; c&aacute;c bước để l&agrave;m b&aacute;nh kem hương socola:</strong></span></p>
 
                 <p><span style="font-size:16px">- Bước 1: Trộn bột m&igrave;, đường v&agrave; bột nở trong một b&aacute;t lớn. Đặt b&aacute;t sang một b&ecirc;n.<br />
@@ -625,7 +635,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Hũ Vàng HV01',
+                'tensp' => 'Bánh Kem Hũ Vàng HV01','slug' => Str::slug('Bánh Kem Hũ Vàng HV01', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem h&igrave;nh hũ v&agrave;ng l&agrave; một m&oacute;n ăn ngọt độc đ&aacute;o v&agrave; hấp dẫn, được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh kem h&igrave;nh hũ v&agrave;ng kh&ocirc;ng chỉ c&oacute; vị ngon, m&agrave; c&ograve;n mang &yacute; nghĩa phong thủy tốt, mang lại may mắn v&agrave; t&agrave;i lộc cho người thưởng thức. B&agrave;i viết n&agrave;y sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh hũ v&agrave;ng đơn giản v&agrave; nhanh ch&oacute;ng tại nh&agrave;.</span></strong></p>
 
                 <p><span style="font-size:16px">Nguy&ecirc;n liệu cần chuẩn bị:</span></p>
@@ -678,7 +688,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Hũ Vàng HV02',
+                'tensp' => 'Bánh Kem Hũ Vàng HV02','slug' => Str::slug('Bánh Kem Hũ Vàng HV02', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem h&igrave;nh hũ v&agrave;ng l&agrave; một m&oacute;n ăn ngọt độc đ&aacute;o v&agrave; hấp dẫn, được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh kem h&igrave;nh hũ v&agrave;ng kh&ocirc;ng chỉ c&oacute; vị ngon, m&agrave; c&ograve;n mang &yacute; nghĩa phong thủy tốt, mang lại may mắn v&agrave; t&agrave;i lộc cho người thưởng thức. B&agrave;i viết n&agrave;y sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh hũ v&agrave;ng đơn giản v&agrave; nhanh ch&oacute;ng tại nh&agrave;.</span></strong></p>
 
                 <p><span style="font-size:16px">Nguy&ecirc;n liệu cần chuẩn bị:</span></p>
@@ -731,7 +741,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Hũ Vàng HV03',
+                'tensp' => 'Bánh Kem Hũ Vàng HV03','slug' => Str::slug('Bánh Kem Hũ Vàng HV03', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem h&igrave;nh hũ v&agrave;ng l&agrave; một m&oacute;n ăn ngọt độc đ&aacute;o v&agrave; hấp dẫn, được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh kem h&igrave;nh hũ v&agrave;ng kh&ocirc;ng chỉ c&oacute; vị ngon, m&agrave; c&ograve;n mang &yacute; nghĩa phong thủy tốt, mang lại may mắn v&agrave; t&agrave;i lộc cho người thưởng thức. B&agrave;i viết n&agrave;y sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh hũ v&agrave;ng đơn giản v&agrave; nhanh ch&oacute;ng tại nh&agrave;.</span></strong></p>
 
                 <p><span style="font-size:16px">Nguy&ecirc;n liệu cần chuẩn bị:</span></p>
@@ -784,7 +794,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Hũ Vàng HV04',
+                'tensp' => 'Bánh Kem Hũ Vàng HV04','slug' => Str::slug('Bánh Kem Hũ Vàng HV04', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem h&igrave;nh hũ v&agrave;ng l&agrave; một m&oacute;n ăn ngọt độc đ&aacute;o v&agrave; hấp dẫn, được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh kem h&igrave;nh hũ v&agrave;ng kh&ocirc;ng chỉ c&oacute; vị ngon, m&agrave; c&ograve;n mang &yacute; nghĩa phong thủy tốt, mang lại may mắn v&agrave; t&agrave;i lộc cho người thưởng thức. B&agrave;i viết n&agrave;y sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh hũ v&agrave;ng đơn giản v&agrave; nhanh ch&oacute;ng tại nh&agrave;.</span></strong></p>
 
                 <p><span style="font-size:16px">Nguy&ecirc;n liệu cần chuẩn bị:</span></p>
@@ -837,7 +847,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Hũ Vàng HV05',
+                'tensp' => 'Bánh Kem Hũ Vàng HV05','slug' => Str::slug('Bánh Kem Hũ Vàng HV05', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem h&igrave;nh hũ v&agrave;ng l&agrave; một m&oacute;n ăn ngọt độc đ&aacute;o v&agrave; hấp dẫn, được nhiều người y&ecirc;u th&iacute;ch. B&aacute;nh kem h&igrave;nh hũ v&agrave;ng kh&ocirc;ng chỉ c&oacute; vị ngon, m&agrave; c&ograve;n mang &yacute; nghĩa phong thủy tốt, mang lại may mắn v&agrave; t&agrave;i lộc cho người thưởng thức. B&agrave;i viết n&agrave;y sẽ hướng dẫn bạn c&aacute;ch l&agrave;m b&aacute;nh kem h&igrave;nh hũ v&agrave;ng đơn giản v&agrave; nhanh ch&oacute;ng tại nh&agrave;.</span></strong></p>
 
                 <p><span style="font-size:16px">Nguy&ecirc;n liệu cần chuẩn bị:</span></p>
@@ -890,7 +900,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Nhiều Tầng NT01',
+                'tensp' => 'Bánh Kem Nhiều Tầng NT01','slug' => Str::slug('Bánh Kem Nhiều Tầng NT01', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem nhiều tầng l&agrave; một loại b&aacute;nh ngọt được l&agrave;m từ nhiều lớp b&aacute;nh xốp v&agrave; kem, thường được trang tr&iacute; bằng hoa quả, kẹo, s&ocirc; c&ocirc; la hoặc c&aacute;c loại nguy&ecirc;n liệu kh&aacute;c. B&aacute;nh kem nhiều tầng c&oacute; thể c&oacute; nhiều h&igrave;nh dạng, k&iacute;ch thước v&agrave; m&agrave;u sắc kh&aacute;c nhau, t&ugrave;y thuộc v&agrave;o sở th&iacute;ch v&agrave; dịp của người l&agrave;m b&aacute;nh. B&aacute;nh kem nhiều tầng thường được d&ugrave;ng để ăn mừng c&aacute;c sự kiện đặc biệt như sinh nhật, đ&aacute;m cưới, lễ kỷ niệm hoặc c&aacute;c ng&agrave;y lễ.</span></strong></p>
 
                 <p><span style="font-size:16px">Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m một chiếc b&aacute;nh kem nhiều tầng đơn giản m&agrave; vẫn ngon v&agrave; đẹp mắt. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</span></p>
@@ -927,7 +937,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Nhiều Tầng NT02',
+                'tensp' => 'Bánh Kem Nhiều Tầng NT02','slug' => Str::slug('Bánh Kem Nhiều Tầng NT02', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem nhiều tầng l&agrave; một loại b&aacute;nh ngọt được l&agrave;m từ nhiều lớp b&aacute;nh xốp v&agrave; kem, thường được trang tr&iacute; bằng hoa quả, kẹo, s&ocirc; c&ocirc; la hoặc c&aacute;c loại nguy&ecirc;n liệu kh&aacute;c. B&aacute;nh kem nhiều tầng c&oacute; thể c&oacute; nhiều h&igrave;nh dạng, k&iacute;ch thước v&agrave; m&agrave;u sắc kh&aacute;c nhau, t&ugrave;y thuộc v&agrave;o sở th&iacute;ch v&agrave; dịp của người l&agrave;m b&aacute;nh. B&aacute;nh kem nhiều tầng thường được d&ugrave;ng để ăn mừng c&aacute;c sự kiện đặc biệt như sinh nhật, đ&aacute;m cưới, lễ kỷ niệm hoặc c&aacute;c ng&agrave;y lễ.</span></strong></p>
 
                 <p><span style="font-size:16px">Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m một chiếc b&aacute;nh kem nhiều tầng đơn giản m&agrave; vẫn ngon v&agrave; đẹp mắt. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</span></p>
@@ -964,7 +974,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Nhiều Tầng NT03',
+                'tensp' => 'Bánh Kem Nhiều Tầng NT03','slug' => Str::slug('Bánh Kem Nhiều Tầng NT03', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem nhiều tầng l&agrave; một loại b&aacute;nh ngọt được l&agrave;m từ nhiều lớp b&aacute;nh xốp v&agrave; kem, thường được trang tr&iacute; bằng hoa quả, kẹo, s&ocirc; c&ocirc; la hoặc c&aacute;c loại nguy&ecirc;n liệu kh&aacute;c. B&aacute;nh kem nhiều tầng c&oacute; thể c&oacute; nhiều h&igrave;nh dạng, k&iacute;ch thước v&agrave; m&agrave;u sắc kh&aacute;c nhau, t&ugrave;y thuộc v&agrave;o sở th&iacute;ch v&agrave; dịp của người l&agrave;m b&aacute;nh. B&aacute;nh kem nhiều tầng thường được d&ugrave;ng để ăn mừng c&aacute;c sự kiện đặc biệt như sinh nhật, đ&aacute;m cưới, lễ kỷ niệm hoặc c&aacute;c ng&agrave;y lễ.</span></strong></p>
 
                 <p><span style="font-size:16px">Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m một chiếc b&aacute;nh kem nhiều tầng đơn giản m&agrave; vẫn ngon v&agrave; đẹp mắt. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</span></p>
@@ -1001,7 +1011,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Nhiều Tầng NT04',
+                'tensp' => 'Bánh Kem Nhiều Tầng NT04','slug' => Str::slug('Bánh Kem Nhiều Tầng NT04', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem nhiều tầng l&agrave; một loại b&aacute;nh ngọt được l&agrave;m từ nhiều lớp b&aacute;nh xốp v&agrave; kem, thường được trang tr&iacute; bằng hoa quả, kẹo, s&ocirc; c&ocirc; la hoặc c&aacute;c loại nguy&ecirc;n liệu kh&aacute;c. B&aacute;nh kem nhiều tầng c&oacute; thể c&oacute; nhiều h&igrave;nh dạng, k&iacute;ch thước v&agrave; m&agrave;u sắc kh&aacute;c nhau, t&ugrave;y thuộc v&agrave;o sở th&iacute;ch v&agrave; dịp của người l&agrave;m b&aacute;nh. B&aacute;nh kem nhiều tầng thường được d&ugrave;ng để ăn mừng c&aacute;c sự kiện đặc biệt như sinh nhật, đ&aacute;m cưới, lễ kỷ niệm hoặc c&aacute;c ng&agrave;y lễ.</span></strong></p>
 
                 <p><span style="font-size:16px">Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m một chiếc b&aacute;nh kem nhiều tầng đơn giản m&agrave; vẫn ngon v&agrave; đẹp mắt. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</span></p>
@@ -1038,7 +1048,7 @@ class SanphamSeeder extends Seeder
         );
         Sanpham::create(
             [
-                'tensp' => 'Bánh Kem Nhiều Tầng NT05',
+                'tensp' => 'Bánh Kem Nhiều Tầng NT05','slug' => Str::slug('Bánh Kem Nhiều Tầng NT05', '-'),
                 'mota' => '<p><strong><span style="font-size:16px">B&aacute;nh kem nhiều tầng l&agrave; một loại b&aacute;nh ngọt được l&agrave;m từ nhiều lớp b&aacute;nh xốp v&agrave; kem, thường được trang tr&iacute; bằng hoa quả, kẹo, s&ocirc; c&ocirc; la hoặc c&aacute;c loại nguy&ecirc;n liệu kh&aacute;c. B&aacute;nh kem nhiều tầng c&oacute; thể c&oacute; nhiều h&igrave;nh dạng, k&iacute;ch thước v&agrave; m&agrave;u sắc kh&aacute;c nhau, t&ugrave;y thuộc v&agrave;o sở th&iacute;ch v&agrave; dịp của người l&agrave;m b&aacute;nh. B&aacute;nh kem nhiều tầng thường được d&ugrave;ng để ăn mừng c&aacute;c sự kiện đặc biệt như sinh nhật, đ&aacute;m cưới, lễ kỷ niệm hoặc c&aacute;c ng&agrave;y lễ.</span></strong></p>
 
                 <p><span style="font-size:16px">Trong b&agrave;i viết n&agrave;y, ch&uacute;ng t&ocirc;i sẽ hướng dẫn bạn c&aacute;ch l&agrave;m một chiếc b&aacute;nh kem nhiều tầng đơn giản m&agrave; vẫn ngon v&agrave; đẹp mắt. Bạn chỉ cần chuẩn bị những nguy&ecirc;n liệu sau:</span></p>

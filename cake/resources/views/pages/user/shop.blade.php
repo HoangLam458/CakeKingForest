@@ -74,15 +74,17 @@
         </div>
         <div class="row">
             @foreach ($lsSanpham as $Sanpham)
+
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="{{ route('shop.detail', $Sanpham->id) }}" class="img-prod"><img class="img-fluid"
+                    <a href="{{ route('shop.detail', $Sanpham->slug) }}" class="img-prod"><img class="img-fluid"
                             src="{{ asset('/images/' . $Sanpham->hinhanh) }}" style="text-align: center" alt="Colorlib Template" width="250"
                             height="200">
                     </a>
+
                     <div class="text py-3 pb-4 px-3 text-center">
                         <label style="font-size: 13px"><a
-                                href="{{ route('shop.detail', $Sanpham->id) }}">{{ $Sanpham->tensp }}</a></label>
+                                href="{{ route('shop.detail', $Sanpham->slug) }}">{{ $Sanpham->tensp }}</a></label>
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price"><span>{{ number_format($Sanpham->giatien) }} VND</span></p>
@@ -91,7 +93,7 @@
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
 
-                                <a type="button" href="{{ route('shop.detail', $Sanpham->id) }}" data-toggle="tooltip" data-placement="top" title="Nhấn để xem chi tiết"
+                                <a type="button" href="{{ route('shop.detail', $Sanpham->slug) }}" data-toggle="tooltip" data-placement="top" title="Nhấn để xem chi tiết"
                                     class="d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>

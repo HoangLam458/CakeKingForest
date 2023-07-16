@@ -48,7 +48,6 @@ class HoadonController extends Controller
      */
     public function show($id)
     {
-
         $total = 0;
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
@@ -188,16 +187,19 @@ class HoadonController extends Controller
             'category' => $category
         ]);
     }
-    public function chitietdonhang($idhd, Request $request)
+    public function chitietdonhang($slug, Request $request)
     {
+        $slug = strtoupper($slug);
+        $idhd = hoadon::where('slug', $slug)->where('trangthai', '<>', 0)->first();
         $category = loaisanpham::all();
         $total = 0;
         $size = size::all();
         $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
             ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
-            ->where('hoadon_id', $idhd)
+            ->where('hoadon_id', $idhd->id)
             ->select(
                 '*',
+                'hoadons.slug as slug',
                 'chitiethoadons.id as idchitiet',
                 'chitiethoadons.inanh as inanh',
                 'chitiethoadons.giatien as thanhtien',
@@ -208,8 +210,8 @@ class HoadonController extends Controller
                 'sanphams.hinhanh as img'
             )
             ->get();
-        $lstCart = hoadon::where('id', $idhd)->where('trangthai', '<>', 0)->first();
-        $mahd = Hoadon::where('id', $idhd)->first();
+        $lstCart = hoadon::where('id', $idhd->id)->where('trangthai', '<>', 0)->first();
+        $mahd = Hoadon::where('id', $idhd->id)->first();
         foreach ($lsInD as $in) {
             $total = $total + $in->thanhtien;
         }

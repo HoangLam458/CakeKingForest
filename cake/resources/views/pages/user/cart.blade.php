@@ -111,12 +111,12 @@
                                         <div>
                                             <a class="img"
                                                 style="background-image:url({{ asset('/images/' . $lsCart->img) }});"
-                                                href="{{ route('shop.detail', $lsCart->id_sp) }}">
+                                                href="{{ route('shop.detail', $lsCart->slug) }}">
                                             </a>
                                         </div>
                                     </td>
                                     <td class="product-name">
-                                        <a href="{{ route('shop.detail', $lsCart->id_sp) }}">
+                                        <a href="{{ route('shop.detail', $lsCart->slug) }}">
                                             <h3>{{ $lsCart->tensanpham }}</h3>
                                         </a>
                                     </td>

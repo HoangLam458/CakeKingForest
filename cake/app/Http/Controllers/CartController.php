@@ -48,6 +48,7 @@ class CartController extends Controller
                 ->select(
                     '*',
                     'sanphams.inanh as custom',
+                    'sanphams.slug as slug',
                     'chitiethoadons.inanh as inanhct',
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
@@ -205,6 +206,7 @@ class CartController extends Controller
                 $currentTime = Carbon::now();
                 hoadon::create([
                     'mahd' => $code,
+                    'slug'=>$code,
                     'ngaylaphd' => $currentTime,
                     'tenkhachhang' => $taikhoan->tenkhachhang,
                     'diachigiaohang' => $taikhoan->diachi,
@@ -317,6 +319,7 @@ class CartController extends Controller
                 $code = 'HD' . '' . (string) ($hoadon->id + 1) . $codetest;
                 hoadon::create([
                     'mahd' => $code,
+                    'slug'=>$code,
                     'ngaylaphd' => $currentTime,
                     'tenkhachhang' => "",
                     'diachigiaohang' => "",

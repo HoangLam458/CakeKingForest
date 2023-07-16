@@ -43,6 +43,8 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $time_start = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->format('Y/m/d');
+        $time_end = Carbon::now('Asia/Ho_Chi_Minh')->endOfMonth()->format('Y/m/d');
         if(Session::has('chart')) Session::forget('chart');
         $time = Carbon::now()->subDays(30)->format('Y/m/d');
         $now = Carbon::now()->format('Y/m/d');
@@ -50,9 +52,9 @@ class HomeController extends Controller
         $hoadonall = hoadon::all();
         $hoadonmomo = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','MoMo')->get();
         $hoadonvnpay = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','VnPay')->get();
-        $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
-        $hoadon_choduyet = hoadon::where('trangthai',1)->get();
-        $hoadon_danggiao = hoadon::where('trangthai',3)->get();
+        $hoadon_hoanthanh = hoadon::where('trangthai',4)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        $hoadon_choduyet = hoadon::where('trangthai',1)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        $hoadon_danggiao = hoadon::where('trangthai',3)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
         $hoadon_tienmat = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','Tiền Mặt')->get();
         if($hoadon_hoanthanh != null)
         {
