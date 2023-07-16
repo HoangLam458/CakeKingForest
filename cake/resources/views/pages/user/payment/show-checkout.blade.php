@@ -182,7 +182,7 @@
                                     {{ number_format((string) Session::get('data')['total']) }} VND
                             </div>
                             <div class="form-group text-center">
-                                <a style="color: rgb(8, 8, 8);" type="button" data-target="#Modal"
+                                <a style="color: white;" type="button" data-target="#Modal"
                                     class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
                                     Thanh toán</a>
                             </div>

@@ -546,9 +546,11 @@ class CartController extends Controller
                                 $file = $request->file('cat_image');
                                 $extension = $file->getClientOriginalExtension();
                                 $filename = time() . '.' . $extension;
-                                dd($filename);
                                 $file->move('inanh/', $filename);
                                 $timchitiet->inanh = $filename;
+                            }
+                            if($chitiet->inanh !=null){
+                                $timchitiet->inanh = $chitiet->inanh;
                             }
                             $timchitiet->save();
                             $chitiet->delete();

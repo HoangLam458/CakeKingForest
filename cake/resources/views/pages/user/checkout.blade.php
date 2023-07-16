@@ -177,7 +177,7 @@
                 @endif
                 <div class="modal-footer">
                     <input name="total" value="{{ $total }}" hidden>
-                    <button type="submit" name="redirect" class="btn btn-primary py-3 px-5">Xác nhận</button>
+                    <button type="submit" name="redirect" class="btn btn-warning py-3 px-5">Xác nhận</button>
                 </div>
             </div>
         </div>
