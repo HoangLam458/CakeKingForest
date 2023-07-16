@@ -307,12 +307,13 @@
                             <thead>
                                 <tr>
                                     <th class="col-2">Hình Ảnh</th>
-                                    <th class="col-2">Tên Sản Phẩm</th>
-                                    <th class="col-1">Giá bán</th>
-                                    <th class="col-1">Kích cỡ</th>
+                                    <th class="col-1">Tên Sản Phẩm</th>
+                                    <th class="col-1">Giá Bán</th>
+                                    <th class="col-1">Kích Cỡ</th>
                                     <th class="col-1">Số Lượng</th>
-                                    <th class="col-2">Ghi Chú</th>
-                                    <th class="col-1">Thành tiền</th>
+                                    <th class="col-1">Ghi Chú</th>
+                                    <th class="col-1">In Ảnh</th>
+                                    <th class="col-1">Thành Tiền</th>
                                     <th class="col-1"></th>
                                 </tr>
                             </thead>
@@ -326,16 +327,30 @@
                                             <img width="150px" height="150px" src="{{ asset('/images/' . $item->img) }}"
                                                 alt="">
                                         </td>
-                                        <td style="width:10%" class="col-2">{{ $item->tensanpham }}</td>
+                                        <td style="width:10%" class="col-1">{{ $item->tensanpham }}</td>
                                         <td style="width:10%" class="col-1">{{ number_format($item->giaban) }} VNĐ
                                         </td>
                                         <td style="width:30%" class="col-1">{{ $item->s_name }}
                                             ({{ $item->phantram }}%)
                                         </td>
-                                        <td class="col-1">{{ $item->soluong }}</td>
-                                        <td class="col-2">
+                                        <td class="col-1" style="text-align: center">{{ $item->soluong }}</td>
+                                        <td class="col-1">
                                             <textarea name="ghichu" id="" cols="20" rows="5">{{ $item->ghichu }}</textarea></td>
-                                        <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
+                                            @if ($item->inanh == NULL)
+                                            <td class="col-2">
+                                            <span>Không hỗ trợ</span>
+                                            </td>
+                                            @else
+
+                                                <td class="col-2">
+                                                    <img width="150px" height="150px" src="{{ asset('/inanh/' . $item->inanh) }}"
+                                                        alt="">
+                                                        <a href="{{ asset('inanh/' . $item->inanh)}}" target="_blank" download>Tải ảnh</a>
+                                                </td>
+
+                                            @endif
+
+                                            <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
                                             @if ($u->trangthai == 1)
                                             <td>
                                                 <button type="submit" onclick="return checkUpdateGhichu()" class="btn btn-primary">Cập nhật</button>
@@ -359,7 +374,7 @@
             return confirm('Xác nhận chỉnh sửa thông tin hóa đơn?');
         }
         function checkUpdateGhichu() {
-            return confirm('Xác nhận chỉnh sửa ghi chú?');
+            return confirm('Xác nhận chỉnh sửa?');
         }
 
     </script>

@@ -97,6 +97,7 @@ class CartController extends Controller
                     '*',
                     'sanphams.inanh as custom',
                     'chitiethoadons.id as idchitiet',
+                    'chitiethoadons.inanh as inanhct',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
                     'sanphams.id as id_sp',

@@ -77,7 +77,7 @@
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
                     <a href="{{ route('shop.detail', $Sanpham->id) }}" class="img-prod"><img class="img-fluid"
-                            src="{{ asset('/images/' . $Sanpham->hinhanh) }}" alt="Colorlib Template" width="250"
+                            src="{{ asset('/images/' . $Sanpham->hinhanh) }}" style="text-align: center" alt="Colorlib Template" width="250"
                             height="200">
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">

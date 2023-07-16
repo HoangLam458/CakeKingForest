@@ -24,12 +24,9 @@
                                         <div class="mb-3 {{ $errors->has('image') ? ' has-danger' : '' }}">
                                             <label class="form-label" for="inputImage">Hình ảnh</label>
                                             <br>
-                                            <!--  <img src="#" id="category-img-tag" width="70px" />
-                                            <input type="file" name="image" id="inputImage"
-                                                class="form-control @error('image') is-invalid @enderror"> -->
                                                 <div style="text-align:center">
-                                            <img id="img-preview" src="./img.jpg" width="150px" height="120px"/>
-</div>
+                                            <img id="img-preview" src="{{asset('/images/Default.jpg')}}" width="150px" height="120px"/>
+                                                </div>
                                             <br>
                                             <input accept="image/*" type="file" id="file-input" name="image"
                                                 class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}"/>
@@ -74,10 +71,10 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
-                                                <label class="mb-2" for="city-column">Giá Tiền</label>
+                                                <label class="mb-2" for="city-column">Giá Tiền (VNĐ)</label>
                                                 <input required value="{{ old('giatien') ? old('giatien') : 100000 }}"
-                                                    min="100000" step="10000" type="number" id="last-name-column"
-                                                    class="form-control" name="giatien">
+                                                required value="100000" min="100000" max="2000000" type="text"
+                                                onKeyPress="return isNumberKey(event)" id="last-name-column" class="form-control"name="giatien">
                                                 @if ($errors->has('giatien'))
                                                     <span class="invalid-feedback" style="display: block;" role="alert">
                                                         <strong>{{ $errors->first('giatien') }}</strong>
@@ -85,7 +82,7 @@
                                                 @endif
                                             </div><div class="form-group">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
-                                                <select name="ship" id="ship" class="form-control">
+                                                <select name="inanh" id="ship" class="form-control">
                                                     <option required value="1">
                                                         Có thể in ảnh trên bánh
                                                     </option>
@@ -109,21 +106,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
-                                    <!-- <div class="col-md-6 col-12">
-                                        <div class="mb-3">
-                    <label class="form-label" for="inputImage">Hình Ảnh</label>
-                    <input
-                        type="file"
-                        name="image"
-                        id="inputImage"
-                        class="form-control @error('image') is-invalid @enderror">
-                                   @error('image')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-                </div>
-                                        </div>
-                                    </div> -->
                                     <hr />
                                     <div class="col-12 d-flex justify-content-end mt-2">
                                         <button type="submit" class="btn btn-primary me-1 mb-1"
@@ -161,6 +143,17 @@
         }
 
     </script>
+     <script language='javascript'>
+
+        function isNumberKey(evt)
+        {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+        return true;
+        }
+
+        </script>
 </header>
 <script>
     CKEDITOR.replace('editor');

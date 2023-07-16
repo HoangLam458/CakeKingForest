@@ -45,6 +45,17 @@
                                 <span style="font-size:15px">{{ number_format($sanpham->giatien) }} VNĐ</span>
                             </div>
                             <div class="col-md-3">
+                                <label style="font-size:15px">In Ảnh</label>
+                            </div>
+                            <div class="col-md-9 form-group mb-3">
+                                @if ($sanpham->inanh == 1)
+                                <span style="font-size:15px">Có thể in ảnh</span>
+                                @else
+                                <span style="font-size:15px">Không thể in ảnh</span>
+                                @endif
+
+                            </div>
+                            <div class="col-md-3">
                                 <label style="font-size:15px">Mô Tả</label>
                             </div>
                             <div class="col-md-9 form-group mb-3">

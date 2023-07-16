@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="col-md">
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
-                                                <label class="mb-2" for="last-name-column" style="font-size: 15px">Giá Tiền</label>
+                                                <label class="mb-2" for="last-name-column" style="font-size: 15px">Giá Tiền (VNĐ)</label>
                                                 <input value="{{old('giatien')? old('giatien'):$sanpham->giatien }}"
                                                     required value="100000" min="100000" max="2000000" type="text"
                                                     onKeyPress="return isNumberKey(event)" id="last-name-column" class="form-control"
@@ -93,13 +93,22 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
-                                                <select name="ship" id="ship" class="form-control">
-                                                    <option required value="1">
+                                                <select name="inanh" id="ship" class="form-control">
+                                                    @if ($sanpham->inanh == 1)
+                                                    <option required value="1" selected>
                                                         Có thể in ảnh trên bánh
                                                     </option>
                                                     <option required value="0">
                                                        Không thể in ảnh trên bánh
                                                     </option>
+                                                    @else
+                                                    <option required value="1" >
+                                                        Có thể in ảnh trên bánh
+                                                    </option>
+                                                    <option required value="0" selected>
+                                                       Không thể in ảnh trên bánh
+                                                    @endif
+
                                                 </select>
                                             </div>
                                         </div>

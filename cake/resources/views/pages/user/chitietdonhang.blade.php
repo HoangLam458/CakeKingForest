@@ -104,9 +104,10 @@
                             <tr class="text-center">
                                 <th>Hình Ảnh</th>
                                 <th>Tên Sản Phẩm</th>
-                                <th>Giá bán</th>
-                                <th>Kích cỡ</th>
+                                <th>Giá Bán</th>
+                                <th>Kích Cỡ</th>
                                 <th>Số Lượng</th>
+                                <th>In Ảnh</th>
                                 <th>Ghi Chú</th>
                                 <th>Thành tiền</th>
                             </tr>
@@ -129,6 +130,17 @@
                                 <td class="cart-product-quantity" width="130px">
                                     {{$item->soluong}}
                                 </td>
+                                @if ($item->inanh == NULL)
+                                            <td class="col-2">
+                                            <span>Không hỗ trợ</span>
+                                            </td>
+                                            @else
+
+                                                <td class="col-2">
+                                                    <img width="150px" height="150px" src="{{ asset('/inanh/' . $item->inanh) }}"
+                                                        alt="">
+                                                </td>
+                                            @endif
                                 <td class="">
                                     <div>
                                       <span>{{$item->ghichu}}</span>
