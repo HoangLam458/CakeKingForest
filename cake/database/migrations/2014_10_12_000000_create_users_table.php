@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('sdt',10);
             $table->string('slug')->nullable();
             $table->integer('trangthai');
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
