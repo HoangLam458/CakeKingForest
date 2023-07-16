@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'min:7','max:50'],
+            'name' => ['required','max:50'],
             'phone'=>'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10|max:10',
             'email'=>['required','unique:users'],
             'password' => ['required', 'min:6','max:16','confirmed'],
@@ -60,7 +60,6 @@ class RegisterController extends Controller
             ],
         [
             'name.required'=>'Họ tên không được bỏ trống',
-            'name.min'=>'Độ dài họ tên tối thiểu 7 kí tự',
             'name.max'=>'Độ dài họ tên tối đa 50 kí tự',
             'email.unique' =>'Email này đã được sử dụng',
             'email.required' => 'Email không được bỏ trống',
