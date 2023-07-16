@@ -25,7 +25,7 @@
                                             <label class="form-label" for="inputImage">Hình ảnh</label>
                                             <br>
                                                 <div style="text-align:center">
-                                            <img id="img-preview" src="{{asset('/images/Default.jpg')}}" width="150px" height="120px"/>
+                                            <img id="img-preview" src="{{asset('/images/white.png')}}" width="150px" height="120px"/>
                                                 </div>
                                             <br>
                                             <input accept="image/*" type="file" id="file-input" name="image"
@@ -37,7 +37,8 @@
                                             @endif
                                         </div>
                                     </div>
-
+                                    </div>
+                                    <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group{{ $errors->has('tensp') ? ' has-danger' : '' }}">
                                             <label class="mb-2" for="first-name-column">Tên Bánh</label>
@@ -51,6 +52,7 @@
                                             @endif
                                         </div>
                                     </div>
+                                    
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label class="mb-2">Loại Bánh</label>
@@ -69,6 +71,8 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="row">
                                         <div class="col-md-6 col-12">
                                             <div class="form-group{{ $errors->has('giatien') ? ' has-danger' : '' }}">
                                                 <label class="mb-2" for="city-column">Giá Tiền (VNĐ)</label>
@@ -80,7 +84,9 @@
                                                         <strong>{{ $errors->first('giatien') }}</strong>
                                                     </span>
                                                 @endif
-                                            </div><div class="form-group">
+                                            </div>
+</div>
+                                            <div class="col-md-6 col-12">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
                                                 <select name="inanh" id="ship" class="form-control">
                                                     <option required value="1">
@@ -92,7 +98,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                   
+                                    
                                     <div class="row ">
                                         <div class="col-md-12 col-12">
                                             <div class="form-group{{ $errors->has('mota') ? ' has-danger' : '' }}">
