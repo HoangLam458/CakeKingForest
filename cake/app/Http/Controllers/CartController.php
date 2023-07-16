@@ -522,25 +522,34 @@ class CartController extends Controller
         $phantrams = size::find($request->get('size_id'));
         // dd($chitiet->size_id,$request->get('size_id'));
         if ($chitiet != null) {
-            if ($chitiet->size_id != $request->get('size_id'))
-            {
+            if ($chitiet->size_id != $request->get('size_id')) {
                 foreach ($chitiettrung as $trung) {
-                    if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id'))
-                    {
+                    if ($trung->sanpham_id == $chitiet->sanpham_id && $trung->size_id == $request->get('size_id')) {
                         if ($request->get('quantity') + $trung->soluong > 10) {
                             Session::put('maxcart', 'Bánh này đã vượt quá giới hạn số lượng 10 cái, vui lòng điều chỉnh lại số lượng!');
                             return redirect()->back();
-                        }
-                        else
-                        {
+                        } else {
+
                             $giusl = $request->get('quantity');
                             $giughichu = $request->get('ghichu');
                             $idsp = $chitiet->sanpham_id;
                             $timchitiet = chitiethoadon::where('sanpham_id', $idsp)
                                 ->where('hoadon_id', $hoadon->id)->where('size_id', $request->get('size_id'))->first();
                             $timchitiet->soluong = $timchitiet->soluong + $giusl;
-                            $timchitiet->giatien = ($timchitiet->giabanh * ($timchitiet->soluong)) + ($timchitiet->giabanh * ($timchitiet->soluong )) * ($phantrams->phantram / 100);
+                            $timchitiet->giatien = ($timchitiet->giabanh * ($timchitiet->soluong)) + ($timchitiet->giabanh * ($timchitiet->soluong)) * ($phantrams->phantram / 100);
                             $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
+                            if ($request->hasFile('cat_image')) {
+                                $destination = 'inanh/' . $timchitiet->inanh;
+                                if (file_exists($destination)) {
+                                    File::delete($destination);
+                                }
+                                $file = $request->file('cat_image');
+                                $extension = $file->getClientOriginalExtension();
+                                $filename = time() . '.' . $extension;
+                                dd($filename);
+                                $file->move('inanh/', $filename);
+                                $timchitiet->inanh = $filename;
+                            }
                             $timchitiet->save();
                             $chitiet->delete();
                             Session::forget('cate');

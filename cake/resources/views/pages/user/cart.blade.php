@@ -164,12 +164,8 @@
                                         <div class="col">
                                             <img src="{{ asset('/inanh/' . $lsCart->inanhct) }}" id="category-img-tag" width="70px" />
                                             <!--for preview purpose -->
-                                            <input id="cat_image" type="file" class="form-control inputpic" name="cat_image" hidden>
-                                            <a id="" class="selectpic">
-                                                <span style="color: red">
-                                                    <u>Chọn ảnh</u>
-                                                </span>
-                                            </a>
+                                        </br>
+                                            <input id="cat_image" type="file" class="form-control inputpic" name="cat_image" >
                                         </div>
                                         @endif
                                     </td>
@@ -287,7 +283,7 @@
         form.submit();
     }
 </script>
-<script>
+{{-- <script>
     $('.selectpic').on('click', function(){
     $('.inputpic').trigger('click');
 });
@@ -309,7 +305,7 @@
         readURL(this);
     });
 
-</script>
+</script> --}}
 <header>
     <style>
         .button {
