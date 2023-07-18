@@ -189,41 +189,48 @@ class HoadonController extends Controller
     }
     public function chitietdonhang($slug, Request $request)
     {
+        $category = loaisanpham::all();
         $slug = strtoupper($slug);
         $idhd = hoadon::where('slug', $slug)->where('trangthai', '<>', 0)->first();
-        $category = loaisanpham::all();
-        $total = 0;
-        $size = size::all();
-        $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
-            ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
-            ->where('hoadon_id', $idhd->id)
-            ->select(
-                '*',
-                'hoadons.slug as slug',
-                'chitiethoadons.id as idchitiet',
-                'chitiethoadons.inanh as inanh',
-                'chitiethoadons.giatien as thanhtien',
-                'sizes.id as idsize',
-                'sanphams.tensp as tensanpham',
-                'sanphams.giatien as giaban',
-                'sizes.tensize as s_name',
-                'sanphams.hinhanh as img'
-            )
-            ->get();
-        $lstCart = hoadon::where('id', $idhd->id)->where('trangthai', '<>', 0)->first();
-        $mahd = Hoadon::where('id', $idhd->id)->first();
-        foreach ($lsInD as $in) {
-            $total = $total + $in->thanhtien;
+        if($idhd){
+            $total = 0;
+            $size = size::all();
+            $lsInD = DB::table('chitiethoadons')->join('sanphams', 'sanpham_id', '=', 'sanphams.id')
+                ->join('hoadons', 'hoadon_id', '=', 'hoadons.id')->join('sizes', 'size_id', '=', 'sizes.id')
+                ->where('hoadon_id', $idhd->id)
+                ->select(
+                    '*',
+                    'hoadons.slug as slug',
+                    'chitiethoadons.id as idchitiet',
+                    'chitiethoadons.inanh as inanh',
+                    'chitiethoadons.giatien as thanhtien',
+                    'sizes.id as idsize',
+                    'sanphams.tensp as tensanpham',
+                    'sanphams.giatien as giaban',
+                    'sizes.tensize as s_name',
+                    'sanphams.hinhanh as img'
+                )->get();
+            $lstCart = hoadon::where('id', $idhd->id)->where('trangthai', '<>', 0)->first();
+            $mahd = Hoadon::where('id', $idhd->id)->first();
+            foreach ($lsInD as $in) {
+                $total = $total + $in->thanhtien;
+            }
+            return view('pages.user.chitietdonhang',
+                [
+                    'size' => $size,
+                    'mahd' => $mahd,
+                    'total' => $total,
+                    'ls' => $lsInD,
+                    'category' => $category,
+                    'cart' => $lstCart]
+            );
         }
-        return view('pages.user.chitietdonhang',
-            [
-                'size' => $size,
-                'mahd' => $mahd,
-                'total' => $total,
-                'ls' => $lsInD,
-                'category' => $category,
-                'cart' => $lstCart]
-        );
+        return view('layouts.404',
+                [
+
+                    'category' => $category,
+                    ]
+            );
     }
     public function updateghichu($id, Request $request)
     {

@@ -159,7 +159,7 @@
                                     <td class="total">
                                         <div>
                                             <textarea rows="3" maxlength="255" type="text" name="ghichu"
-                                                placeholder="Họ tên hoặc ngày tháng năm sinh,......">{{ $lsCart->ghichu }}</textarea>
+                                                placeholder="Họ tên, ngày tháng năm sinh hoặc trang trí,...">{{ $lsCart->ghichu }}</textarea>
                                         </div>
                                     </td>
                                     <td>
