@@ -90,7 +90,7 @@
                             <td width="36" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                             <td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
                                <a href="{{route('cake')}}" class="btn btn-info" target="_blank"> Trở về trang chủ</a>
-                               <a href="{{route('ctdonhang',Session::get('info')['mahd'])}}" target="_blank"> Theo dõi đơn hàng</a>
+                               <a href="{{route('ctdonhang',Session::get('info')['mahd'])}}" target="_blank" >Theo dõi đơn hàng</a>
                             </td>
                             <td width="36" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                         </tr>
