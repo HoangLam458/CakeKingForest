@@ -54,7 +54,7 @@ class HoadonController extends Controller
             ->where('hoadon_id', $id)
             ->select('*','chitiethoadons.id as details_id', 'chitiethoadons.giatien as thanhtien',
              'sanphams.tensp as tensanpham', 'sanphams.giatien as giaban', 'sizes.tensize as s_name',
-              'sanphams.hinhanh as img','chitiethoadons.inanh as inanh')
+              'sanphams.hinhanh as img')
               ->get();
         $user = Hoadon::where('id', $id)->get();
         foreach ($lsInD as $in) {
@@ -202,7 +202,7 @@ class HoadonController extends Controller
                     '*',
                     'hoadons.slug as slug',
                     'chitiethoadons.id as idchitiet',
-                    'chitiethoadons.inanh as inanh',
+                    // 'chitiethoadons.inanh as inanh',
                     'chitiethoadons.giatien as thanhtien',
                     'sizes.id as idsize',
                     'sanphams.tensp as tensanpham',

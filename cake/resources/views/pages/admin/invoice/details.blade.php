@@ -305,7 +305,7 @@
                                     <th class="col-1">Kích Cỡ</th>
                                     <th class="col-1">Số Lượng</th>
                                     <th class="col-1">Ghi Chú</th>
-                                    <th class="col-1">In Ảnh</th>
+                                    <!-- <th class="col-1">In Ảnh</th> -->
                                     <th class="col-1">Thành Tiền</th>
                                     <th class="col-1"></th>
                                 </tr>
@@ -329,20 +329,7 @@
                                         <td class="col-1" style="text-align: center">{{ $item->soluong }}</td>
                                         <td class="col-1">
                                             <textarea name="ghichu" id="" cols="20" rows="5">{{ $item->ghichu }}</textarea></td>
-                                            @if ($item->inanh == NULL)
-                                            <td class="col-1">
-                                            <span>Không hỗ trợ</span>
-                                            </td>
-                                            @else
-
-                                                <td class="col-1" style="text-align: center">
-                                                    <img width="150px" height="150px" src="{{ asset('/inanh/' . $item->inanh) }}"
-                                                        alt="">
-                                                </br>
-                                                        <a  href="{{ asset('inanh/' . $item->inanh)}}" target="_blank" download>Tải ảnh</a>
-                                                </td>
-
-                                            @endif
+                                      
 
                                             <td class="col-1"> {{ number_format($item->thanhtien) }} VNĐ</td>
                                             @if ($u->trangthai == 1)

@@ -91,7 +91,7 @@
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
                                                 <select name="inanh" id="ship" class="form-control">
                                                     @if ($sanpham->inanh == 1)
@@ -110,7 +110,7 @@
                                                     @endif
 
                                                 </select>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         </div>
                                     </div>

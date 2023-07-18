@@ -34,13 +34,6 @@
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3>{{ $sanpham->tensp }}</h3>
                     <p class="price"><span>{{ number_format($sanpham->giatien) }} VND</span></p>
-                    @if ($sanpham->inanh == 1)
-                    <span  style="color: red;font-size:18px">Bánh có thể in ảnh!</span><br/>
-                    <span  style="color: red;font-size:18px">(Bạn có thể chọn ảnh sau khi thêm bánh vào giỏ hàng) </span><br/>
-                    @else
-                    <span style="color: red; font-size:18px">Bánh không thể in ảnh! </span>
-                    @endif
-
                 </a>
                     <div class="row mt-4 col-md-12">
                         <label for="size" style="font-size: 18px">Kích thước: </label>

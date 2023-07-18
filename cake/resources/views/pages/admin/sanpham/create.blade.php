@@ -86,7 +86,7 @@
                                                 @endif
                                             </div>
 </div>
-                                            <div class="col-md-6 col-12">
+                                            <!-- <div class="col-md-6 col-12">
                                                 <label class="mb-2" for="last-name-column" style="font-size: 15px">In ảnh</label>
                                                 <select name="inanh" id="ship" class="form-control">
                                                     <option required value="1">
@@ -96,7 +96,7 @@
                                                        Không thể in ảnh trên bánh
                                                     </option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                         </div>
                                    
                                     

@@ -66,7 +66,7 @@ class SanphamController extends Controller
         $sanphams->giatien = $request->input('giatien');
         $sanphams->loaisanpham_id = $request->input('loaisanpham_id');
         $sanphams->trangthai = 1;
-        $sanphams->inanh = $request->get('inanh');
+        // $sanphams->inanh = $request->get('inanh');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -148,7 +148,7 @@ class SanphamController extends Controller
             $file->move('images/', $filename);
             $sanpham->hinhanh = $filename;
         }
-        $sanpham->inanh = $request->get('inanh');
+        // $sanpham->inanh = $request->get('inanh');
         $sanpham->save();
         return redirect()->back()->with('status', 'Cập nhật thành công');
 

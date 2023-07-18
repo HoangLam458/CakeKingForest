@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('soluong');
             $table->unsignedInteger('giabanh');
             $table->text('ghichu')->nullable();
-            $table->string('inanh',255)->nullable();
+            // $table->string('inanh',255)->nullable();
             $table->unsignedInteger('giatien');
             $table->softDeletes();
             $table->timestamps();

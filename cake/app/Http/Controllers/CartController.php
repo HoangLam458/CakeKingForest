@@ -47,9 +47,9 @@ class CartController extends Controller
                 ->where('hoadon_id', $lstCart->id)->where('hoadons.trangthai', 0)
                 ->select(
                     '*',
-                    'sanphams.inanh as custom',
+                    // 'sanphams.inanh as custom',
                     'sanphams.slug as slug',
-                    'chitiethoadons.inanh as inanhct',
+                    // 'chitiethoadons.inanh as inanhct',
                     'chitiethoadons.id as idchitiet',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
@@ -96,9 +96,9 @@ class CartController extends Controller
                 ->where('hoadon_id', $user1->id)->where('hoadons.trangthai', 0)
                 ->select(
                     '*',
-                    'sanphams.inanh as custom',
+                    // 'sanphams.inanh as custom',
                     'chitiethoadons.id as idchitiet',
-                    'chitiethoadons.inanh as inanhct',
+                    // 'chitiethoadons.inanh as inanhct',
                     'chitiethoadons.giatien as thanhtien',
                     'sanphams.tensp as tensanpham',
                     'sanphams.id as id_sp',
@@ -512,12 +512,12 @@ class CartController extends Controller
     // }
     public function updateqty($id, Request $request)
     {
-        $this->validate($request,[
-            'cat_image' => 'image|mimes:jpg,png,jpeg,gif,svg',
-        ],
-        [
-            'cat_image'=>'Định dạng hình ảnh phải là jpg,png,jpeg,gif,svg',
-        ]);
+        // $this->validate($request,[
+        //     'cat_image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+        // ],
+        // [
+        //     'cat_image'=>'Định dạng hình ảnh phải là jpg,png,jpeg,gif,svg',
+        // ]);
         if (auth()->user() == null) {
             $code_cookie = $request->cookie('code');
             $hoadon = hoadon::where('mahd', $code_cookie)->first();
@@ -547,20 +547,20 @@ class CartController extends Controller
                             $timchitiet->soluong = $timchitiet->soluong + $giusl;
                             $timchitiet->giatien = ($timchitiet->giabanh * ($timchitiet->soluong)) + ($timchitiet->giabanh * ($timchitiet->soluong)) * ($phantrams->phantram / 100);
                             $timchitiet->ghichu = $timchitiet->ghichu . "\n" . (string) $giughichu;
-                            if ($request->hasFile('cat_image')) {
-                                $destination = 'inanh/' . $timchitiet->inanh;
-                                if (file_exists($destination)) {
-                                    File::delete($destination);
-                                }
-                                $file = $request->file('cat_image');
-                                $extension = $file->getClientOriginalExtension();
-                                $filename = time() . '.' . $extension;
-                                $file->move('inanh/', $filename);
-                                $timchitiet->inanh = $filename;
-                            }
-                            if($chitiet->inanh !=null){
-                                $timchitiet->inanh = $chitiet->inanh;
-                            }
+                            // if ($request->hasFile('cat_image')) {
+                            //     $destination = 'inanh/' . $timchitiet->inanh;
+                            //     if (file_exists($destination)) {
+                            //         File::delete($destination);
+                            //     }
+                            //     $file = $request->file('cat_image');
+                            //     $extension = $file->getClientOriginalExtension();
+                            //     $filename = time() . '.' . $extension;
+                            //     $file->move('inanh/', $filename);
+                            //     $timchitiet->inanh = $filename;
+                            // }
+                            // if($chitiet->inanh !=null){
+                            //     $timchitiet->inanh = $chitiet->inanh;
+                            // }
                             $timchitiet->save();
                             $chitiet->delete();
                             Session::forget('cate');
@@ -576,13 +576,13 @@ class CartController extends Controller
                     }
                 }
             }
-            if ($request->hasFile('cat_image')) {
-                $file = $request->file('cat_image');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
-                $file->move('inanh/', $filename);
-                $chitiet->inanh = $filename;
-            }
+            // if ($request->hasFile('cat_image')) {
+            //     $file = $request->file('cat_image');
+            //     $extension = $file->getClientOriginalExtension();
+            //     $filename = time() . '.' . $extension;
+            //     $file->move('inanh/', $filename);
+            //     $chitiet->inanh = $filename;
+            // }
             $chitiet->soluong = $request->get('quantity');
             $chitiet->size_id = $request->get('size_id');
             $chitiet->giabanh = $sanpham->giatien + ($sanpham->giatien * $phantrams->phantram / 100);

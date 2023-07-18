@@ -94,7 +94,7 @@
                                 <th class="col-mr-6">Số lượng</th>
                                 <th>Thành tiền</th>
                                 <th>Ghi chú</th>
-                                <th>In ảnh</th>
+                                <!-- <th>In ảnh</th> -->
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -162,19 +162,7 @@
                                                 placeholder="Họ tên, ngày tháng năm sinh hoặc trang trí,...">{{ $lsCart->ghichu }}</textarea>
                                         </div>
                                     </td>
-                                    <td>
-                                        @if ($lsCart->custom == 0)
-                                        <span>Không hỗ trợ</span>
-                                        @else
-                                        <div class="col">
-                                            <img src="{{ asset('/inanh/' . $lsCart->inanhct) }}" id="category-img-tag" width="70px" />
-                                            <!--for preview purpose -->
-                                        </br>
-                                            <input id="cat_image" accept="image/*" type="file" class="form-control inputpic" name="cat_image">
-                                        </div>
-                                        @endif
-                                    </td>
-                                    <td>
+                                                                      <td>
                                         <button id="submit" type="submit" class="btn btn-success">
                                             <span style="font-size: 14px; color:white">Cập nhật</span>
                                     </td>
