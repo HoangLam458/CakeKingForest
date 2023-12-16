@@ -52,9 +52,12 @@ class HomeController extends Controller
         $hoadonall = hoadon::all();
         $hoadonmomo = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','MoMo')->get();
         $hoadonvnpay = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','VnPay')->get();
-        $hoadon_hoanthanh = hoadon::where('trangthai',4)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
-        $hoadon_choduyet = hoadon::where('trangthai',1)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
-        $hoadon_danggiao = hoadon::where('trangthai',3)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        // $hoadon_hoanthanh = hoadon::where('trangthai',4)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        // $hoadon_choduyet = hoadon::where('trangthai',1)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        // $hoadon_danggiao = hoadon::where('trangthai',3)->whereBetween('ngaylaphd',[$time_start,$time_end])->get();
+        $hoadon_hoanthanh = hoadon::where('trangthai',4)->get();
+        $hoadon_choduyet = hoadon::where('trangthai',1)->get();
+        $hoadon_danggiao = hoadon::where('trangthai',3)->get();
         $hoadon_tienmat = hoadon::where('trangthai',1)->where('phuongthucthanhtoan','Tiền Mặt')->get();
         if($hoadon_hoanthanh != null)
         {
@@ -76,12 +79,11 @@ class HomeController extends Controller
             'choduyet'=>$hoadon_tienmat->count(),
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
         ]);
+        
         Session::put('chart',$data);
         return view('pages.admin.dashboard',[
             'hoadonall'=>$hoadonall,
             'chart_data'=>$get,
-            'product'=>$this->product_replate(),
-            'countCate'=>$this->product_chart(),
         ]);
     }
 
@@ -156,12 +158,9 @@ class HomeController extends Controller
             'thanhtoan'=>$hoadonmomo->count()+$hoadonvnpay->count(),
         ]);
         Session::put('chart',$data);
-
         return view('pages.admin.dashboard',[
             'hoadonall'=>$hoadonall,
             'chart_data'=>$get,
-            'product'=>$this->product_replate(),
-            'countCate'=>$this->product_chart(),
         ]);
 
     }

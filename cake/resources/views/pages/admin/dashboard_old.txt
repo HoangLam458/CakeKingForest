@@ -1,5 +1,4 @@
-
-@extends('layouts.app', [
+<!-- @extends('layouts.app', [
     'class' => '',
     'elementActive' => 'dashboard',
 ])
@@ -285,7 +284,31 @@
             </div>
         </div>
     </div>
-    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card ">
+                <div class="card-header">
+                    <div class="row col">
+                        <h5 class="card-title">Số lượng sản phẩm</h5>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div id="donut-example" class="" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header">
+                    <div class="row col">
+                        <h5 class="card-title">Sản phẩm bán chạy</h5>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div id="bar-example" class="" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @push('scripts')
@@ -318,7 +341,45 @@
 
         });
         var colorDanger = "#FF1744";
-        
+        Morris.Donut({
+            element: 'donut-example',
+            resize: true,
+            colors: [
+                '#E0F7FA',
+                '#B2EBF2',
+                '#80DEEA',
+                '#4DD0E1',
+                '#26C6DA',
+                '#00BCD4',
+                '#00ACC1',
+                '#0097A7',
+                '#00838F',
+                '#006064'
+            ],
+            labelColor: "#0c0d0d", // text color
+            data: [
+                @foreach ($countCate as $sale)
+                    {
+                        'label': '{{ $sale->tenlsp }} ',
+                        'value': '{{ $sale->count }}'
+                    },
+                @endforeach
+            ],
+        });
+        Morris.Bar({
+            element: 'bar-example',
+            data: [
+                @foreach ($product as $sale)
+                    {
+                        'label': '{{ $sale->tensanpham }} ',
+                        'value': '{{ $sale->count }}'
+                    },
+                @endforeach
+            ],
+            xkey: 'label',
+            ykeys: ['value'],
+            labels: ['Số lượng']
+        });
     })
 </script>
 <script>
@@ -363,4 +424,4 @@
         form.submit();
     }
 </script>
-@endpush
+@endpush -->
